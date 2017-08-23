@@ -1,0 +1,21 @@
+# GOOGLE SAMPLE PACKAGING DATA
+#
+# This file is used by Google as part of our samples packaging process.
+# End users may safely ignore this file. It has no relevance to other systems.
+---
+status:       DRAFT
+technologies: [Android]
+categories:   [Getting Started]
+languages:    [Java, Kotlin]
+solutions:    [Mobile]
+
+github:       googlesamples/android-sunflower
+
+level:        INTERMEDIATE
+
+icon: screenshots/icon.png
+
+apiRefs:
+    - android:com.android.ui.ActionBar
+
+license: apache2
