@@ -14,8 +14,14 @@
   limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">Sunflower</string>
-    <string name="title_plant_list">Plants</string>
-    <string name="title_plant_detail">Plant Detail</string>
-</resources>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/plant_detail"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:textIsSelectable="true"
+        tools:context="com.google.samples.apps.sunflower.PlantDetailFragment" />
+</layout>

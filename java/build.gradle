@@ -1,11 +1,10 @@
 buildscript {
-    
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta2'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
     }
 }
 
@@ -18,4 +17,20 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// Define versions in a single place
+ext {
+    // Sdk and tools
+    buildToolsVersion = '26.0.1'
+    compileSdkVersion = 26
+    minSdkVersion = 19
+    targetSdkVersion = 26
+
+    // App dependencies
+    constraintLayoutVersion = '1.0.2'
+    espressoVersion = '3.0.1'
+    junitVersion = '4.12'
+    runnerVersion = '1.0.1'
+    supportLibraryVersion = '26.1.0'
 }
