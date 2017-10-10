@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower;
 
-import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
