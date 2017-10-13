@@ -15,22 +15,39 @@
   limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/id_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_marginBottom="@dimen/text_margin"
+        android:layout_marginStart="@dimen/text_margin"
+        android:layout_marginTop="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
 
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+        android:layout_marginBottom="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/text_margin"
+        android:layout_marginStart="@dimen/text_margin"
+        android:layout_marginTop="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/id_text"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tomato" />
+</android.support.constraint.ConstraintLayout>
