@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta7'
+        classpath 'com.android.tools.build:gradle:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -24,7 +24,6 @@ task clean(type: Delete) {
 // Define versions in a single place
 ext {
     // Sdk and tools
-    buildToolsVersion = '26.0.1'
     compileSdkVersion = 26
     minSdkVersion = 19
     targetSdkVersion = 26
@@ -34,5 +33,5 @@ ext {
     espressoVersion = '3.0.1'
     junitVersion = '4.12'
     runnerVersion = '1.0.1'
-    supportLibraryVersion = '26.1.0'
+    supportLibraryVersion = '27.0.0'
 }

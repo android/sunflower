@@ -23,5 +23,6 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:textIsSelectable="true"
-        tools:context="com.google.samples.apps.sunflower.PlantDetailFragment" />
+        tools:context="com.google.samples.apps.sunflower.PlantDetailFragment"
+        tools:text="Tomato" />
 </layout>

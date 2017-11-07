@@ -18,6 +18,7 @@ package com.google.samples.apps.sunflower;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -50,7 +51,7 @@ public class PlantDetailFragment extends Fragment {
     /**
      * Data binding for this fragment
      */
-    FragmentPlantDetailBinding mBinding;
+    private FragmentPlantDetailBinding mBinding;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -68,26 +69,29 @@ public class PlantDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = PlantContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
-            CollapsingToolbarLayout appBarLayout = getActivity().findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.name);
-            }
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_plant_detail, container,false);
 
-        // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            mBinding.plantDetail.setText(mItem.details);
+            updateUi();
         }
 
         return mBinding.getRoot();
+    }
+
+    private void updateUi() {
+        mBinding.plantDetail.setText(mItem.details);
+
+        CollapsingToolbarLayout appBarLayout = getActivity().findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(mItem.name);
+        }
     }
 }
