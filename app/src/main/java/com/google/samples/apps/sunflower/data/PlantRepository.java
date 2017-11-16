@@ -16,23 +16,26 @@
 
 package com.google.samples.apps.sunflower.data;
 
-import org.junit.Before;
-import org.junit.Test;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+/**
+ * Repository module for handling data operations.
+ */
+public class PlantRepository {
 
-public class PlantTest {
+    private static final PlantRepository INSTANCE = new PlantRepository();
 
-    private Plant plant;
+    private PlantRepository() {}
 
-    @Before
-    public void setUp() throws Exception {
-        plant = new Plant("1", "Tomato", "A red vegetable");
+    public static PlantRepository getInstance() {
+        return INSTANCE;
     }
 
-    @Test
-    public void test_toString() throws Exception {
-        assertEquals("Tomato", plant.toString());
+    public List<Plant> getPlants() {
+        return PlantContent.ITEMS;
     }
 
+    public Plant getPlant(String plantId) {
+        return PlantContent.ITEM_MAP.get(plantId);
+    }
 }

@@ -16,9 +16,11 @@
 
 package com.google.samples.apps.sunflower;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,8 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.samples.apps.sunflower.data.Plant;
-import com.google.samples.apps.sunflower.data.PlantContent;
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding;
+import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel;
 
 /**
  * A fragment representing a single {@link Plant} detail screen.
@@ -44,14 +46,9 @@ public class PlantDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
-     * The dummy content this fragment is presenting.
-     */
-    private Plant mItem;
-
-    /**
      * Data binding for this fragment
      */
-    private FragmentPlantDetailBinding mBinding;
+    private FragmentPlantDetailBinding binding;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -60,38 +57,51 @@ public class PlantDetailFragment extends Fragment {
     public PlantDetailFragment() {
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    /**
+     * Create a new instance of PlantDetailFragment, initialized with a plant ID.
+     */
+    public static PlantDetailFragment newInstance(String plantId) {
+        PlantDetailFragment fragment = new PlantDetailFragment();
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = PlantContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-        }
+        // Supply plant ID as an argument.
+        Bundle args = new Bundle();
+        args.putString(ARG_ITEM_ID, plantId);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        String plantId = getArguments().getString(ARG_ITEM_ID);
+
+        PlantDetailViewModel.Factory factory = new PlantDetailViewModel.Factory(plantId);
+        PlantDetailViewModel viewModel = ViewModelProviders.of(this, factory)
+                .get(PlantDetailViewModel.class);
+        subscribeToModel(viewModel);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_plant_detail, container,false);
 
-        if (mItem != null) {
-            updateUi();
-        }
-
-        return mBinding.getRoot();
+        return binding.getRoot();
     }
 
-    private void updateUi() {
-        mBinding.plantDetail.setText(mItem.details);
+    private void subscribeToModel(PlantDetailViewModel viewModel) {
+        viewModel.getPlant().observe(this, this::updateUi);
+    }
+
+    private void updateUi(Plant plant) {
+        binding.plantDetail.setText(plant.getDescription());
 
         CollapsingToolbarLayout appBarLayout = getActivity().findViewById(R.id.toolbar_layout);
         if (appBarLayout != null) {
-            appBarLayout.setTitle(mItem.name);
+            appBarLayout.setTitle(plant.getName());
         }
     }
 }

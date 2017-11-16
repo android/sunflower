@@ -19,25 +19,37 @@ package com.google.samples.apps.sunflower.data;
 import android.support.annotation.NonNull;
 
 /**
- * A class that represents a Plant along with its name and details.
+ * A class that represents a Plant along with its name and description.
  */
 public class Plant {
 
-    public final String id;
-    public final String name;
-    public final String details;
+    private String plantId;
+    private String name;
+    private String description;
 
     /**
      * Use this constructor to create a new Plant.
      *
-     * @param id      id of the plant
-     * @param name    name of the plant
-     * @param details details of the plant
+     * @param plantId     id of the plant
+     * @param name        name of the plant
+     * @param description description of the plant
      */
-    Plant(@NonNull String id, @NonNull String name, @NonNull String details) {
-        this.id = id;
+    Plant(@NonNull String plantId, @NonNull String name, @NonNull String description) {
+        this.plantId = plantId;
         this.name = name;
-        this.details = details;
+        this.description = description;
+    }
+
+    public String getPlantId() {
+        return plantId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

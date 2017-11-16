@@ -53,8 +53,8 @@ public class PlantListActivityTest {
         onView(ViewMatchers.withId(R.id.plant_list_frame))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        String title = testPlant.name;
-        String description = testPlant.details;
+        String title = testPlant.getName();
+        String description = testPlant.getDescription();
         onView(withId(R.id.toolbar_layout)).check(matches(withCollapsingToolbarTitle(title)));
         onView(withId(R.id.plant_detail)).check(matches(withText(description)));
     }

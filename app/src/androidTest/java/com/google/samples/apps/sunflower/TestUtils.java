@@ -21,7 +21,7 @@ import android.support.test.espresso.matcher.BoundedMatcher;
 import android.view.View;
 
 import com.google.samples.apps.sunflower.data.Plant;
-import com.google.samples.apps.sunflower.data.PlantContent;
+import com.google.samples.apps.sunflower.data.PlantRepository;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -31,7 +31,7 @@ class TestUtils {
     /**
      * {@link Plant} object used for tests.
      */
-    static Plant testPlant = PlantContent.ITEM_MAP.get("1");
+    static Plant testPlant = PlantRepository.getInstance().getPlants().get(0);
 
     /**
      * Matches the toolbar title with a specific string.

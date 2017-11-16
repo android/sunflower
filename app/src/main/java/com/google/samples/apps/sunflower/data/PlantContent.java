@@ -27,19 +27,19 @@ import java.util.Map;
  * <p>
  * TODO: Replace this with a Content Provider.
  */
-public class PlantContent {
+class PlantContent {
 
     private static final int NUM_ITEMS = 4;
 
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<Plant> ITEMS = new ArrayList<>(NUM_ITEMS);
+    static final List<Plant> ITEMS = new ArrayList<>(NUM_ITEMS);
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, Plant> ITEM_MAP = new HashMap<>(NUM_ITEMS);
+    static final Map<String, Plant> ITEM_MAP = new HashMap<>(NUM_ITEMS);
 
     static {
         addItem(new Plant("1", "Apple", "A red fruit"));
@@ -50,6 +50,6 @@ public class PlantContent {
 
     private static void addItem(Plant item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.getPlantId(), item);
     }
 }

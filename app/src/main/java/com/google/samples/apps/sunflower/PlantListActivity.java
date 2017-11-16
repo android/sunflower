@@ -16,17 +16,15 @@
 
 package com.google.samples.apps.sunflower;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.google.samples.apps.sunflower.adapters.PlantAdapter;
-import com.google.samples.apps.sunflower.data.PlantContent;
 import com.google.samples.apps.sunflower.databinding.ActivityPlantListBinding;
+import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel;
 
 /**
  * An activity representing a list of Plants. This activity
@@ -39,40 +37,44 @@ import com.google.samples.apps.sunflower.databinding.ActivityPlantListBinding;
 public class PlantListActivity extends AppCompatActivity {
 
     /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
      */
-    private boolean mTwoPane;
+    private boolean isTwoPane;
+
+    private ActivityPlantListBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityPlantListBinding binding = DataBindingUtil.setContentView(
-                this, R.layout.activity_plant_list);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_plant_list);
 
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setTitle(getTitle());
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.fab.setOnClickListener(view ->
                 Snackbar.make(view, "TODO: Add new plant to plant list", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+                        .setAction("Action", null).show());
 
         if (binding.plantListFrame.plantDetailContainer != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
             // activity should be in two-pane mode.
-            mTwoPane = true;
+            isTwoPane = true;
         }
 
-        setupRecyclerView(binding.plantListFrame.plantList);
+        PlantListViewModel viewModel = ViewModelProviders.of(this)
+                .get(PlantListViewModel.class);
+        subscribeUi(viewModel);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new PlantAdapter(this, PlantContent.ITEMS, mTwoPane));
+    private void subscribeUi(PlantListViewModel viewModel) {
+        viewModel.getPlants().observe(this, plants -> {
+            if (plants != null) {
+                PlantAdapter adapter = new PlantAdapter(this, plants, isTwoPane);
+                binding.plantListFrame.plantList.setAdapter(adapter);
+            }
+        });
     }
+
 }

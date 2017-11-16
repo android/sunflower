@@ -36,25 +36,22 @@ import java.util.List;
 
 public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> {
 
-    private final PlantListActivity mParentActivity;
-    private final List<Plant> mValues;
-    private final boolean mTwoPane;
-    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+    private final PlantListActivity parentActivity;
+    private final List<Plant> values;
+    private final boolean isTwoPane;
+    private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Plant item = (Plant) view.getTag();
-            if (mTwoPane) {
-                Bundle arguments = new Bundle();
-                arguments.putString(PlantDetailFragment.ARG_ITEM_ID, item.id);
-                PlantDetailFragment fragment = new PlantDetailFragment();
-                fragment.setArguments(arguments);
-                mParentActivity.getSupportFragmentManager().beginTransaction()
+            if (isTwoPane) {
+                PlantDetailFragment fragment = PlantDetailFragment.newInstance(item.getPlantId());
+                parentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.plant_detail_container, fragment)
                         .commit();
             } else {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, PlantDetailActivity.class);
-                intent.putExtra(PlantDetailFragment.ARG_ITEM_ID, item.id);
+                intent.putExtra(PlantDetailFragment.ARG_ITEM_ID, item.getPlantId());
 
                 context.startActivity(intent);
             }
@@ -71,9 +68,9 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
     public PlantAdapter(@NonNull PlantListActivity parent,
                         @NonNull List<Plant> items,
                         boolean isMasterDetail) {
-        mValues = items;
-        mParentActivity = parent;
-        mTwoPane = isMasterDetail;
+        values = items;
+        parentActivity = parent;
+        isTwoPane = isMasterDetail;
     }
 
     @Override
@@ -85,21 +82,21 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).name);
-        holder.itemView.setTag(mValues.get(position));
-        holder.itemView.setOnClickListener(mOnClickListener);
+        holder.idView.setText(values.get(position).getPlantId());
+        holder.contentView.setText(values.get(position).getName());
+        holder.itemView.setTag(values.get(position));
+        holder.itemView.setOnClickListener(onClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return values.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        final TextView mIdView;
-        final TextView mContentView;
+        final TextView idView;
+        final TextView contentView;
 
         /**
          * Use this constructor to create a new ViewHolder.
@@ -108,8 +105,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
          */
         ViewHolder(View view) {
             super(view);
-            mIdView = view.findViewById(R.id.id_text);
-            mContentView = view.findViewById(R.id.content);
+            idView = view.findViewById(R.id.id_text);
+            contentView = view.findViewById(R.id.content);
         }
     }
 }
