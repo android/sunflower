@@ -24,7 +24,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.samples.apps.sunflower.adapters.PlantAdapter;
 import com.google.samples.apps.sunflower.databinding.ActivityPlantListBinding;
+import com.google.samples.apps.sunflower.utilities.InjectorUtils;
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel;
+import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory;
 
 /**
  * An activity representing a list of Plants. This activity
@@ -63,7 +65,9 @@ public class PlantListActivity extends AppCompatActivity {
             isTwoPane = true;
         }
 
-        PlantListViewModel viewModel = ViewModelProviders.of(this)
+        PlantListViewModelFactory factory = InjectorUtils.providePlantListViewModelFactory(
+                getApplication());
+        PlantListViewModel viewModel = ViewModelProviders.of(this, factory)
                 .get(PlantListViewModel.class);
         subscribeUi(viewModel);
     }

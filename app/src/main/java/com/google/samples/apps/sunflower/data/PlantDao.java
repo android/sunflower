@@ -14,32 +14,27 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels;
+package com.google.samples.apps.sunflower.data;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-
-import com.google.samples.apps.sunflower.data.Plant;
-import com.google.samples.apps.sunflower.data.PlantRepository;
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
+import android.arch.persistence.room.Query;
 
 import java.util.List;
 
 /**
- * The ViewModel for PlantListActivity
+ * The Data Access Object for the Plant class.
  */
-public class PlantListViewModel extends ViewModel {
+@Dao
+public interface PlantDao {
+    @Query("SELECT * FROM plants")
+    LiveData<List<Plant>> getPlants();
 
-    private MutableLiveData<List<Plant>> mPlants;
+    @Query("SELECT * FROM plants where id = :plantId")
+    LiveData<Plant> getPlant(String plantId);
 
-    public PlantListViewModel () {
-        if (mPlants == null) {
-            mPlants = new MutableLiveData<>();
-            mPlants.setValue(PlantRepository.getInstance().getPlants());
-        }
-    }
-
-    public LiveData<List<Plant>> getPlants() {
-        return mPlants;
-    }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Plant> plants);
 }

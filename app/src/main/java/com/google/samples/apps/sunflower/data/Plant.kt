@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels;
+package com.google.samples.apps.sunflower.data
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-import com.google.samples.apps.sunflower.data.Plant;
-import com.google.samples.apps.sunflower.data.PlantRepository;
+@Entity(tableName = "plants")
+data class Plant(
+        @PrimaryKey @ColumnInfo(name = "id") val plantId: String,
+        val name: String,
+        val description: String
+) {
 
-/**
- * The ViewModel for PlantDetailFragment
- */
-public class PlantDetailViewModel extends ViewModel {
-
-    private LiveData<Plant> plant;
-
-    PlantDetailViewModel(PlantRepository plantRepository, String plantId) {
-        plant = plantRepository.getPlant(plantId);
-    }
-
-    public LiveData<Plant> getPlant() {
-        return plant;
-    }
+    override fun toString() = name
 
 }

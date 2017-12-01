@@ -14,27 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels;
+@file:JvmName("AppExecutors")
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
+package com.google.samples.apps.sunflower.utilities
 
-import com.google.samples.apps.sunflower.data.Plant;
-import com.google.samples.apps.sunflower.data.PlantRepository;
+import java.util.concurrent.Executors
+
+private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
 
 /**
- * The ViewModel for PlantDetailFragment
+ * Utility method to run blocks on a dedicated background thread, used for io/database work.
  */
-public class PlantDetailViewModel extends ViewModel {
-
-    private LiveData<Plant> plant;
-
-    PlantDetailViewModel(PlantRepository plantRepository, String plantId) {
-        plant = plantRepository.getPlant(plantId);
-    }
-
-    public LiveData<Plant> getPlant() {
-        return plant;
-    }
-
+fun runOnIoThread(f : Runnable) {
+    IO_EXECUTOR.execute(f)
 }

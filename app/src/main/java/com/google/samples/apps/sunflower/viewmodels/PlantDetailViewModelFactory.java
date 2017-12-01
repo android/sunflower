@@ -16,25 +16,36 @@
 
 package com.google.samples.apps.sunflower.viewmodels;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
 
 import com.google.samples.apps.sunflower.data.Plant;
 import com.google.samples.apps.sunflower.data.PlantRepository;
 
 /**
- * The ViewModel for PlantDetailFragment
+ * Factory for creating a {@link PlantDetailViewModel} with a constructor that takes a
+ * {@link PlantRepository} and an ID for the current {@link Plant}.
  */
-public class PlantDetailViewModel extends ViewModel {
+public class PlantDetailViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private LiveData<Plant> plant;
+    @NonNull
+    private final PlantRepository repository;
 
-    PlantDetailViewModel(PlantRepository plantRepository, String plantId) {
-        plant = plantRepository.getPlant(plantId);
+    @NonNull
+    private final String plantId;
+
+    public PlantDetailViewModelFactory(@NonNull PlantRepository repository,
+            @NonNull String plantId) {
+        this.repository = repository;
+        this.plantId = plantId;
     }
 
-    public LiveData<Plant> getPlant() {
-        return plant;
+    @NonNull
+    @Override
+    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+        //noinspection unchecked
+        return (T) new PlantDetailViewModel(repository, plantId);
     }
 
 }

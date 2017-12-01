@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.data;
 
+import android.arch.lifecycle.LiveData;
+
 import java.util.List;
 
 /**
@@ -23,19 +25,35 @@ import java.util.List;
  */
 public class PlantRepository {
 
-    private static final PlantRepository INSTANCE = new PlantRepository();
+    private final AppDatabase database;
 
-    private PlantRepository() {}
+    // For Singleton instantiation
+    private static final Object LOCK = new Object();
+    private static volatile PlantRepository instance;
 
-    public static PlantRepository getInstance() {
-        return INSTANCE;
+    private PlantRepository(AppDatabase database) {
+        this.database = database;
     }
 
-    public List<Plant> getPlants() {
-        return PlantContent.ITEMS;
+    public synchronized static PlantRepository getInstance(AppDatabase database) {
+        PlantRepository result = instance;
+        if (result == null) {
+            synchronized (LOCK) {
+                result = instance;
+                if (result == null) {
+                    instance = result = new PlantRepository(database);
+                }
+            }
+        }
+        return result;
     }
 
-    public Plant getPlant(String plantId) {
-        return PlantContent.ITEM_MAP.get(plantId);
+    public LiveData<Plant> getPlant(String plantId) {
+        return database.plantDao().getPlant(plantId);
     }
+
+    public LiveData<List<Plant>> getPlants() {
+        return database.plantDao().getPlants();
+    }
+
 }

@@ -14,27 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels;
+@file:JvmName("Constants")
+@file:Suppress("PropertyName")
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
-import com.google.samples.apps.sunflower.data.Plant;
-import com.google.samples.apps.sunflower.data.PlantRepository;
+package com.google.samples.apps.sunflower.utilities
 
 /**
- * The ViewModel for PlantDetailFragment
+ * Constants used throughout the app.
  */
-public class PlantDetailViewModel extends ViewModel {
-
-    private LiveData<Plant> plant;
-
-    PlantDetailViewModel(PlantRepository plantRepository, String plantId) {
-        plant = plantRepository.getPlant(plantId);
-    }
-
-    public LiveData<Plant> getPlant() {
-        return plant;
-    }
-
-}
+@JvmField val DATABASE_NAME = "sunflower-db"

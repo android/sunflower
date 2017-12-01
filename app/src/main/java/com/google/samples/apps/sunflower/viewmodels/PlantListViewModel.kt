@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels;
+package com.google.samples.apps.sunflower.viewmodels
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.ViewModel
 
-import com.google.samples.apps.sunflower.data.Plant;
-import com.google.samples.apps.sunflower.data.PlantRepository;
+import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.PlantRepository
 
 /**
- * The ViewModel for PlantDetailFragment
+ * The ViewModel for PlantListActivity.
  */
-public class PlantDetailViewModel extends ViewModel {
+class PlantListViewModel internal constructor(plantRepository: PlantRepository) : ViewModel() {
 
-    private LiveData<Plant> plant;
-
-    PlantDetailViewModel(PlantRepository plantRepository, String plantId) {
-        plant = plantRepository.getPlant(plantId);
-    }
-
-    public LiveData<Plant> getPlant() {
-        return plant;
-    }
+    val plants: LiveData<List<Plant>> = plantRepository.plants
 
 }

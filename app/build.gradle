@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -28,13 +29,16 @@ android {
 }
 
 dependencies {
+    kapt "android.arch.persistence.room:compiler:$rootProject.archVersion"
+    kapt "com.android.databinding:compiler:$rootProject.dataBindingVersion"
     implementation "android.arch.lifecycle:extensions:$rootProject.archVersion"
+    implementation "android.arch.persistence.room:runtime:$rootProject.archVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
     // Testing dependencies
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"

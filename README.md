@@ -3,6 +3,9 @@ Android Sunflower
 
 A gardening app illustrating Android development best practices.
 
+The app is written in both the Java and Kotlin programming languages to illustrate interoperability
+between these two languages.
+
 Introduction
 ------------
 
@@ -11,6 +14,23 @@ Getting Started
 
 Screenshots
 -----------
+
+Libraries Used
+--------------
+
+* [Architecture Components][1]
+  * [LiveData][2]
+  * [ViewModel][3]
+  * [Room Persistence Library][4]
+* [Constraint Layout][5]
+* [Data Binding][6]
+
+[1]: https://developer.android.com/topic/libraries/architecture/index.html
+[2]: https://developer.android.com/topic/libraries/architecture/livedata.html
+[3]: https://developer.android.com/topic/libraries/architecture/viewmodel.html
+[4]: https://developer.android.com/topic/libraries/architecture/room.html
+[5]: https://developer.android.com/training/constraint-layout/index.html
+[6]: https://developer.android.com/topic/libraries/data-binding/index.html
 
 Support
 -------

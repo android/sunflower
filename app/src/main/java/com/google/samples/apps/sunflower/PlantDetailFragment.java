@@ -29,7 +29,9 @@ import android.view.ViewGroup;
 
 import com.google.samples.apps.sunflower.data.Plant;
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding;
+import com.google.samples.apps.sunflower.utilities.InjectorUtils;
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel;
+import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory;
 
 /**
  * A fragment representing a single {@link Plant} detail screen.
@@ -76,7 +78,8 @@ public class PlantDetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         String plantId = getArguments().getString(ARG_ITEM_ID);
 
-        PlantDetailViewModel.Factory factory = new PlantDetailViewModel.Factory(plantId);
+        PlantDetailViewModelFactory factory = InjectorUtils.providePlantDetailViewModelFactory(
+                getActivity().getApplication(), plantId);
         PlantDetailViewModel viewModel = ViewModelProviders.of(this, factory)
                 .get(PlantDetailViewModel.class);
         subscribeToModel(viewModel);
@@ -97,6 +100,10 @@ public class PlantDetailFragment extends Fragment {
     }
 
     private void updateUi(Plant plant) {
+        if (plant == null) {
+            return;
+        }
+
         binding.plantDetail.setText(plant.getDescription());
 
         CollapsingToolbarLayout appBarLayout = getActivity().findViewById(R.id.toolbar_layout);
