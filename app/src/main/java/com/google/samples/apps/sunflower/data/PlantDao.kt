@@ -14,27 +14,28 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data;
+package com.google.samples.apps.sunflower.data
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
-
-import java.util.List;
+import android.arch.lifecycle.LiveData
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.Query
 
 /**
  * The Data Access Object for the Plant class.
  */
 @Dao
-public interface PlantDao {
+interface PlantDao {
     @Query("SELECT * FROM plants")
-    LiveData<List<Plant>> getPlants();
+    fun getPlants(): LiveData<List<Plant>>
 
-    @Query("SELECT * FROM plants where id = :plantId")
-    LiveData<Plant> getPlant(String plantId);
+    @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber")
+    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): LiveData<List<Plant>>
+
+    @Query("SELECT * FROM plants WHERE id = :plantId")
+    fun getPlant(plantId: String): LiveData<Plant>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Plant> plants);
+    fun insertAll(plants: List<Plant>)
 }

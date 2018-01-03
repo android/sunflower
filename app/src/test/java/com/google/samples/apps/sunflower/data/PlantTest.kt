@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data;
+package com.google.samples.apps.sunflower.data
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
 
-import static org.junit.Assert.assertEquals;
+class PlantTest {
 
-public class PlantTest {
-
-    private Plant plant;
+    private lateinit var plant: Plant
 
     @Before
-    public void setUp() throws Exception {
-        plant = new Plant("1", "Tomato", "A red vegetable");
+    fun setUp() {
+        plant = Plant("1", "Tomato", "A red vegetable", 1)
     }
 
     @Test
-    public void test_toString() throws Exception {
-        assertEquals("Tomato", plant.toString());
+    fun test_toString() {
+        assertEquals("Tomato", plant.toString())
     }
 
 }

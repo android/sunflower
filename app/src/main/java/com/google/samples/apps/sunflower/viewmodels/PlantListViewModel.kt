@@ -17,8 +17,9 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 
@@ -27,6 +28,27 @@ import com.google.samples.apps.sunflower.data.PlantRepository
  */
 class PlantListViewModel internal constructor(plantRepository: PlantRepository) : ViewModel() {
 
-    val plants: LiveData<List<Plant>> = plantRepository.plants
+    private val NO_GROW_ZONE = -1
+    private val plantRepo: PlantRepository = plantRepository
+    private val growZoneNumber: MutableLiveData<Int> = MutableLiveData()
 
+    init {
+        growZoneNumber.value = NO_GROW_ZONE
+    }
+
+    fun getPlants(): LiveData<List<Plant>> = Transformations.switchMap(growZoneNumber) {
+        if (it == NO_GROW_ZONE) {
+            plantRepo.getPlants()
+        } else {
+            plantRepo.getPlantsWithGrowZoneNumber(it)
+        }
+    }
+
+    fun setGrowZoneNumber(num: Int) {
+        growZoneNumber.value = num
+    }
+
+    fun clearGrowZoneNumber() {
+        growZoneNumber.value = NO_GROW_ZONE
+    }
 }

@@ -28,7 +28,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
 object InjectorUtils {
 
     private fun provideRepository(application: Application): PlantRepository {
-        return PlantRepository.getInstance(AppDatabase.getInstance(application))
+        return PlantRepository.getInstance(AppDatabase.getInstance(application).plantDao())
     }
 
     @JvmStatic fun providePlantListViewModelFactory(

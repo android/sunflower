@@ -24,7 +24,8 @@ import android.arch.persistence.room.PrimaryKey
 data class Plant(
         @PrimaryKey @ColumnInfo(name = "id") val plantId: String,
         val name: String,
-        val description: String
+        val description: String,
+        val growZoneNumber: Int
 ) {
 
     override fun toString() = name

@@ -32,8 +32,8 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.google.samples.apps.sunflower.TestUtils.testPlant;
-import static com.google.samples.apps.sunflower.TestUtils.withCollapsingToolbarTitle;
+import static com.google.samples.apps.sunflower.utilities.TestUtils.testPlant;
+import static com.google.samples.apps.sunflower.utilities.TestUtils.withCollapsingToolbarTitle;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -54,14 +54,14 @@ public class PlantDetailActivityTest {
 
     @Test
     public void viewTextPersistAfterOrientationChange() {
-        String title = testPlant.getName();
-        String description = testPlant.getDescription();
-        onView(withId(R.id.toolbar_layout)).check(matches(withCollapsingToolbarTitle(title)));
-        onView(withId(R.id.plant_detail)).check(matches(withText(description)));
+        onView(withId(R.id.toolbar_layout))
+                .check(matches(withCollapsingToolbarTitle(testPlant.getName())));
+        onView(withId(R.id.plant_detail)).check(matches(withText(testPlant.getDescription())));
 
         activityTestRule.getActivity().setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
-        onView(withId(R.id.toolbar_layout)).check(matches(withCollapsingToolbarTitle(title)));
-        onView(withId(R.id.plant_detail)).check(matches(withText(description)));
+        onView(withId(R.id.toolbar_layout))
+                .check(matches(withCollapsingToolbarTitle(testPlant.getName())));
+        onView(withId(R.id.plant_detail)).check(matches(withText(testPlant.getDescription())));
     }
 
 }
