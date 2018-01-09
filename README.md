@@ -24,6 +24,7 @@ Libraries Used
   * [Room Persistence Library][4]
 * [Constraint Layout][5]
 * [Data Binding][6]
+* [Glide][7] for image loading
 
 [1]: https://developer.android.com/topic/libraries/architecture/index.html
 [2]: https://developer.android.com/topic/libraries/architecture/livedata.html
@@ -31,6 +32,7 @@ Libraries Used
 [4]: https://developer.android.com/topic/libraries/architecture/room.html
 [5]: https://developer.android.com/training/constraint-layout/index.html
 [6]: https://developer.android.com/topic/libraries/data-binding/index.html
+[7]: https://bumptech.github.io/glide/
 
 Support
 -------

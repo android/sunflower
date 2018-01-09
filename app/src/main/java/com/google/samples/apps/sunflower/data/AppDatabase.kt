@@ -64,10 +64,17 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun seedDatabase(database: AppDatabase) {
             database.plantDao().insertAll(ArrayList<Plant>(4).apply {
-                add(Plant("1", "Apple", "A red fruit", 1))
-                add(Plant("2", "Beet", "A red root vegetable", 1))
-                add(Plant("3", "Celery", "A green vegetable", 2))
-                add(Plant("4", "Tomato", "A red vegetable", 3))
+                add(Plant("1", "Apple", "A red fruit", 1,
+                        "https://upload.wikimedia.org/wikipedia/commons/5/55" +
+                                "/Apple_orchard_in_Tasmania.jpg"))
+                add(Plant("2", "Beet", "A red root vegetable", 1,
+                        "https://static.pexels.com/photos/264101/pexels-photo-264101.jpeg"))
+                add(Plant("3", "Celery", "A green vegetable", 2,
+                        "https://upload.wikimedia.org/wikipedia/commons/5/51" +
+                                "/A_scene_of_Coriander_leaves.JPG"))
+                add(Plant("4", "Tomato", "A red vegetable", 3,
+                        "https://upload.wikimedia.org/wikipedia/commons/1/17" +
+                                "/Cherry_tomatoes_red_and_green_2009_16x9.jpg"))
             })
         }
     }

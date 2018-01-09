@@ -26,7 +26,7 @@ class PlantTest {
 
     @Before
     fun setUp() {
-        plant = Plant("1", "Tomato", "A red vegetable", 1)
+        plant = Plant("1", "Tomato", "A red vegetable", 1, "")
     }
 
     @Test
