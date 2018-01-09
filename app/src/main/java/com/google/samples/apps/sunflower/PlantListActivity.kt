@@ -20,7 +20,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -55,10 +54,6 @@ class PlantListActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         binding.run {
             toolbar.title = title
-            fab.setOnClickListener { view ->
-                Snackbar.make(view, "TODO: Add new plant to plant list", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
-            }
         }
 
         if (binding.plantListFrame?.plantDetailContainer != null) {
