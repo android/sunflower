@@ -26,7 +26,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.samples.apps.sunflower.data.Plant;
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding;
 import com.google.samples.apps.sunflower.utilities.InjectorUtils;
@@ -109,6 +112,15 @@ public class PlantDetailFragment extends Fragment {
         CollapsingToolbarLayout appBarLayout = getActivity().findViewById(R.id.toolbar_layout);
         if (appBarLayout != null) {
             appBarLayout.setTitle(plant.getName());
+        }
+
+        ImageView imageView = getActivity().findViewById(R.id.detail_image);
+        if (imageView != null && !plant.getImageUrl().isEmpty()) {
+            // Glide automatically clears the load and recycles resources on fragment destruction.
+            Glide.with(this)
+                    .load(plant.getImageUrl())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(imageView);
         }
     }
 }
