@@ -14,7 +14,7 @@ buildscript {
         glideVersion = '4.4.0'
         gradleVersion = '3.0.1'
         junitVersion = '4.12'
-        kotlinVersion = '1.2.10'
+        kotlinVersion = '1.2.20'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '27.0.2'
     }
