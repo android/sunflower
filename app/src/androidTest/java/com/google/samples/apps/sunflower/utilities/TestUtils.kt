@@ -28,7 +28,7 @@ import org.hamcrest.Matcher
 /**
  * [Plant] object used for tests.
  */
-@JvmField val testPlant = Plant("1", "Apple", "A red fruit", 1, "")
+@JvmField val testPlant = Plant("1", "Apple", "A red fruit", 1, 1, "")
 
 /**
  * Matches the toolbar title with a specific string.

@@ -34,7 +34,7 @@ import org.junit.runner.RunWith
 class PlantDaoTest {
     private lateinit var database: AppDatabase
     private lateinit var plantDao: PlantDao
-    private val plant = Plant("1", "A", "", 1, "")
+    private val plant = Plant("1", "A", "", 1, 1, "")
 
     @Before fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
@@ -43,8 +43,8 @@ class PlantDaoTest {
 
         plantDao.insertAll(ArrayList<Plant>(3).apply {
             add(plant)
-            add(Plant("2", "B", "", 1, ""))
-            add(Plant("3", "C", "", 2, ""))
+            add(Plant("2", "B", "", 1, 1, ""))
+            add(Plant("3", "C", "", 2, 2, ""))
         })
     }
 
