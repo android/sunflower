@@ -20,4 +20,13 @@
     <string name="plant_detail_image_content_description">Image of plant</string>
     <string name="title_plant_list">Plants</string>
     <string name="title_plant_detail">Plant Detail</string>
+    <string name="my_garden">My Garden</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="my_garden_title">My Garden</string>
+    <string name="plant_list_title">Plant list</string>
+    <string name="navigation_drawer_header_title">Sunflower</string>
+    <string name="navigation_drawer_header_content_description">
+        Navigation drawer header logo
+    </string>
 </resources>

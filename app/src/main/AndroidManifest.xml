@@ -29,14 +29,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PlantListActivity"
-            android:label="@string/title_plant_list"
+            android:name=".GardenActivity"
+            android:label="@string/my_garden"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".PlantListActivity"
+            android:label="@string/title_plant_list"
+            android:parentActivityName=".GardenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".PlantDetailActivity"
