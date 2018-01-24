@@ -29,11 +29,11 @@ android {
 }
 
 dependencies {
-    kapt "android.arch.persistence.room:compiler:$rootProject.archVersion"
+    kapt "android.arch.persistence.room:compiler:$rootProject.roomVersion"
     kapt "com.android.databinding:compiler:$rootProject.dataBindingVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
-    implementation "android.arch.lifecycle:extensions:$rootProject.archVersion"
-    implementation "android.arch.persistence.room:runtime:$rootProject.archVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
+    implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
