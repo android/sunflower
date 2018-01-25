@@ -1,0 +1,34 @@
+[
+  {
+    "plantId": "1",
+    "name": "Apple",
+    "description": "A red fruit",
+    "growZoneNumber": 1,
+    "wateringInterval": 30,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Apple_orchard_in_Tasmania.jpg"
+  },
+  {
+    "plantId": "2",
+    "name": "Beet",
+    "description": "A red root vegetable",
+    "growZoneNumber": 2,
+    "wateringInterval": 7,
+    "imageUrl": "https://static.pexels.com/photos/264101/pexels-photo-264101.jpeg"
+  },
+  {
+    "plantId": "3",
+    "name": "Celery",
+    "description": "A red fruit",
+    "growZoneNumber": 2,
+    "wateringInterval": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/51/A_scene_of_Coriander_leaves.JPG"
+  },
+  {
+    "plantId": "4",
+    "name": "Tomato",
+    "description": "A red vegetable",
+    "growZoneNumber": 3,
+    "wateringInterval": 4,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Cherry_tomatoes_red_and_green_2009_16x9.jpg"
+  }
+]
