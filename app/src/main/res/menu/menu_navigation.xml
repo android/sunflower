@@ -13,15 +13,15 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-  -->
+-->
 
-<resources>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="app_bar_height">200dp</dimen>
-    <dimen name="item_width">200dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
-    <dimen name="recyclerview_margin">16dp</dimen>
-    <dimen name="navigation_drawer_header_height">192dp</dimen>
-    <dimen name="navigation_drawer_header_padding">16dp</dimen>
-    <dimen name="navigation_drawer_image_width">100dp</dimen>
-</resources>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/my_garden_navigation_menu_item"
+        android:title="@string/my_garden_title"/>
+    <item
+        android:id="@+id/plant_list_navigation_menu_item"
+        android:title="@string/plant_list_title"/>
+
+</menu>

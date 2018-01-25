@@ -52,6 +52,7 @@ class PlantListActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityPlantListBinding>(this,
                 R.layout.activity_plant_list)
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.run {
             toolbar.title = title
         }
