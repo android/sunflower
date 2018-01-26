@@ -97,7 +97,7 @@ class PlantListActivity : AppCompatActivity() {
             viewModel.clearGrowZoneNumber()
             false
         } else {
-            viewModel.setGrowZoneNumber(1)
+            viewModel.setGrowZoneNumber(9)
             true
         }
     }
