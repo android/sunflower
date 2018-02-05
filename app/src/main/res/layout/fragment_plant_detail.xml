@@ -15,6 +15,7 @@
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -23,14 +24,38 @@
             type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
     </data>
 
-    <TextView
-        android:id="@+id/plant_detail"
-        style="?android:attr/textAppearanceLarge"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:text="@{viewModel.plant.description}"
-        android:textIsSelectable="true"
-        tools:context="com.google.samples.apps.sunflower.PlantDetailFragment"
-        tools:text="Tomato" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/plant_watering"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="TODO: watering text added in future CL"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Watering needs: every 7 days"/>
+
+        <TextView
+            android:id="@+id/plant_detail"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@{viewModel.plant.description}"
+            android:textIsSelectable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plant_watering"
+            tools:text="Details about the plant" />
+
+    </android.support.constraint.ConstraintLayout>
+
 </layout>
