@@ -16,12 +16,20 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
+    </data>
+
     <TextView
         android:id="@+id/plant_detail"
         style="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
+        android:text="@{viewModel.plant.description}"
         android:textIsSelectable="true"
         tools:context="com.google.samples.apps.sunflower.PlantDetailFragment"
         tools:text="Tomato" />

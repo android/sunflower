@@ -23,7 +23,7 @@ Libraries Used
   * [ViewModel][3]
   * [Room Persistence Library][4]
 * [Constraint Layout][5]
-* [Data Binding][6]
+* [Data Binding][6] to ViewModels and LiveData
 * [Glide][7] for image loading
 
 [1]: https://developer.android.com/topic/libraries/architecture/index.html

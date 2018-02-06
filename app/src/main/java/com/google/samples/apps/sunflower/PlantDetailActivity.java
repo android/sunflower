@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -26,6 +28,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.samples.apps.sunflower.databinding.ActivityPlantDetailBinding;
+import com.google.samples.apps.sunflower.utilities.InjectorUtils;
+import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel;
+import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory;
 
 /**
  * An activity representing a single Plant detail screen. This
@@ -38,8 +43,17 @@ public class PlantDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String plantId = getIntent().getStringExtra(PlantDetailFragment.ARG_ITEM_ID);
+        PlantDetailViewModelFactory factory = InjectorUtils.providePlantDetailViewModelFactory(
+                getApplication(), plantId);
+        PlantDetailViewModel viewModel = ViewModelProviders.of(this, factory)
+                .get(PlantDetailViewModel.class);
+
         ActivityPlantDetailBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_plant_detail);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
         setSupportActionBar(binding.detailToolbar);
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +71,6 @@ public class PlantDetailActivity extends AppCompatActivity {
         }
 
         if (savedInstanceState == null) {
-            String plantId = getIntent().getStringExtra(PlantDetailFragment.ARG_ITEM_ID);
             PlantDetailFragment fragment = PlantDetailFragment.newInstance(plantId);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.plant_detail_container, fragment)

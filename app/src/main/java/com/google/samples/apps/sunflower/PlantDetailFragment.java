@@ -20,16 +20,11 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.samples.apps.sunflower.data.Plant;
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding;
 import com.google.samples.apps.sunflower.utilities.InjectorUtils;
@@ -49,11 +44,6 @@ public class PlantDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
-
-    /**
-     * Data binding for this fragment
-     */
-    private FragmentPlantDetailBinding binding;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -77,50 +67,22 @@ public class PlantDetailFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
         String plantId = getArguments().getString(ARG_ITEM_ID);
 
         PlantDetailViewModelFactory factory = InjectorUtils.providePlantDetailViewModelFactory(
                 getActivity().getApplication(), plantId);
         PlantDetailViewModel viewModel = ViewModelProviders.of(this, factory)
                 .get(PlantDetailViewModel.class);
-        subscribeToModel(viewModel);
-    }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_plant_detail, container,false);
+        FragmentPlantDetailBinding binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_plant_detail, container, false);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
 
         return binding.getRoot();
     }
 
-    private void subscribeToModel(PlantDetailViewModel viewModel) {
-        viewModel.getPlant().observe(this, this::updateUi);
-    }
-
-    private void updateUi(Plant plant) {
-        if (plant == null) {
-            return;
-        }
-
-        binding.plantDetail.setText(plant.getDescription());
-
-        CollapsingToolbarLayout appBarLayout = getActivity().findViewById(R.id.toolbar_layout);
-        if (appBarLayout != null) {
-            appBarLayout.setTitle(plant.getName());
-        }
-
-        ImageView imageView = getActivity().findViewById(R.id.detail_image);
-        if (imageView != null && !plant.getImageUrl().isEmpty()) {
-            // Glide automatically clears the load and recycles resources on fragment destruction.
-            Glide.with(this)
-                    .load(plant.getImageUrl())
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imageView);
-        }
-    }
 }
