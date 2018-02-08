@@ -17,21 +17,14 @@
 package com.google.samples.apps.sunflower.data
 
 import android.arch.persistence.room.TypeConverter
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 /**
  * Type converters to allow Room to reference complex data types.
  */
 class Converters {
-    companion object {
-        private val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.US)
+    @TypeConverter fun calendarToDatestamp(calendar: Calendar): Long = calendar.timeInMillis
 
-        @TypeConverter fun calendarToDatestamp(calendar: Calendar): String =
-                dateFormat.format(calendar.time)
-
-        @TypeConverter fun datestampToCalendar(value: String): Calendar =
-                Calendar.getInstance().apply { time = dateFormat.parse(value) }
-    }
+    @TypeConverter fun datestampToCalendar(value: Long): Calendar =
+            Calendar.getInstance().apply { timeInMillis = value }
 }

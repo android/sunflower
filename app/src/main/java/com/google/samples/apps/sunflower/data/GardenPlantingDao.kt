@@ -16,27 +16,22 @@
 
 package com.google.samples.apps.sunflower.data
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
-import java.util.Calendar
-import java.util.Calendar.DAY_OF_MONTH
-import java.util.Calendar.MONTH
-import java.util.Calendar.SEPTEMBER
-import java.util.Calendar.YEAR
+import android.arch.lifecycle.LiveData
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Query
 
-class ConvertersTest {
+/**
+ * The Data Access Object for the [GardenPlanting] class.
+ */
+@Dao
+interface GardenPlantingDao {
+    @Query("SELECT * FROM garden_plantings")
+    fun getGardenPlantings(): LiveData<List<GardenPlanting>>
 
-    private val cal = Calendar.getInstance().apply {
-        set(YEAR, 1998)
-        set(MONTH, SEPTEMBER)
-        set(DAY_OF_MONTH, 4)
-    }
+    @Query("SELECT * FROM garden_plantings WHERE id = :gardenPlantingId")
+    fun getGardenPlanting(gardenPlantingId: String): LiveData<GardenPlanting>
 
-    @Test fun calendarToDatestamp() {
-        assertEquals(cal.timeInMillis, Converters().calendarToDatestamp(cal))
-    }
-
-    @Test fun datestampToCalendar() {
-        assertEquals(Converters().datestampToCalendar(cal.timeInMillis), cal)
-    }
+    @Insert
+    fun insertGardenPlanting(gardenPlanting: GardenPlanting)
 }

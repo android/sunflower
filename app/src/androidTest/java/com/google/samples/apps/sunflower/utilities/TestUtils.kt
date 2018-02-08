@@ -26,11 +26,26 @@ import android.view.View
 import com.google.samples.apps.sunflower.data.Plant
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import java.util.Calendar
 
 /**
- * [Plant] object used for tests.
+ * [Plant] objects used for tests.
  */
-@JvmField val testPlant = Plant("1", "Apple", "A red fruit", 1, 1, "")
+val testPlants = arrayListOf(
+        Plant("1", "Apple", "A red fruit", 1),
+        Plant("2", "B", "Description B", 1),
+        Plant("3", "C", "Description C", 2)
+)
+@JvmField val testPlant = testPlants[0]
+
+/**
+ * [Calendar] object used for tests.
+ */
+val testCalendar: Calendar = Calendar.getInstance().apply {
+    set(Calendar.YEAR, 1998)
+    set(Calendar.MONTH, Calendar.SEPTEMBER)
+    set(Calendar.DAY_OF_MONTH, 4)
+}
 
 /**
  * Matches the toolbar title with a specific string.

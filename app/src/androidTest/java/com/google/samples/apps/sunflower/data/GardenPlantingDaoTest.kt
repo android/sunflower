@@ -14,51 +14,46 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower
+package com.google.samples.apps.sunflower.data
 
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
-import com.google.samples.apps.sunflower.data.AppDatabase
-import com.google.samples.apps.sunflower.data.PlantDao
+import android.support.test.espresso.matcher.ViewMatchers.assertThat
 import com.google.samples.apps.sunflower.utilities.getValue
+import com.google.samples.apps.sunflower.utilities.testCalendar
 import com.google.samples.apps.sunflower.utilities.testPlant
 import com.google.samples.apps.sunflower.utilities.testPlants
-import org.hamcrest.Matchers.equalTo
+import org.hamcrest.CoreMatchers.equalTo
 import org.junit.After
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-class PlantDaoTest {
+class GardenPlantingDaoTest {
     private lateinit var database: AppDatabase
-    private lateinit var plantDao: PlantDao
+    private lateinit var gardenPlantingDao: GardenPlantingDao
+    private val gardenPlanting = GardenPlanting("1", testPlant.plantId, testCalendar, testCalendar)
 
     @Before fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        plantDao = database.plantDao()
+        gardenPlantingDao = database.gardenPlantingDao()
 
-        plantDao.insertAll(testPlants)
+        database.plantDao().insertAll(testPlants)
+        gardenPlantingDao.insertGardenPlanting(gardenPlanting)
     }
 
     @After fun closeDb() {
         database.close()
     }
 
-    @Test fun testGetPlants() {
-        assertThat(getValue(plantDao.getPlants()).size, equalTo(3))
+    @Test fun testGetGardenPlantings() {
+        val gardenPlanting2 = GardenPlanting("2", testPlants[1].plantId, testCalendar, testCalendar)
+        gardenPlantingDao.insertGardenPlanting(gardenPlanting2)
+        assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))
     }
 
-    @Test fun testGetPlantsWithGrowZoneNumber() {
-        assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(1)).size, equalTo(2))
-        assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(2)).size, equalTo(1))
-        assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(3)).size, equalTo(0))
-    }
-
-    @Test fun testGetPlant() {
-        assertThat(getValue(plantDao.getPlant(testPlant.plantId)), equalTo(testPlant))
+    @Test fun testGetGardenPlanting() {
+        assertThat(getValue(gardenPlantingDao.getGardenPlanting(gardenPlanting.gardenPlantingId)),
+                equalTo(gardenPlanting))
     }
 }

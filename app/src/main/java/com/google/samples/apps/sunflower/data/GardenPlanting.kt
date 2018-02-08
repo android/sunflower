@@ -16,27 +16,17 @@
 
 package com.google.samples.apps.sunflower.data
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
+import android.arch.persistence.room.PrimaryKey
 import java.util.Calendar
-import java.util.Calendar.DAY_OF_MONTH
-import java.util.Calendar.MONTH
-import java.util.Calendar.SEPTEMBER
-import java.util.Calendar.YEAR
 
-class ConvertersTest {
-
-    private val cal = Calendar.getInstance().apply {
-        set(YEAR, 1998)
-        set(MONTH, SEPTEMBER)
-        set(DAY_OF_MONTH, 4)
-    }
-
-    @Test fun calendarToDatestamp() {
-        assertEquals(cal.timeInMillis, Converters().calendarToDatestamp(cal))
-    }
-
-    @Test fun datestampToCalendar() {
-        assertEquals(Converters().datestampToCalendar(cal.timeInMillis), cal)
-    }
-}
+@Entity(tableName = "garden_plantings", foreignKeys = [ForeignKey(entity = Plant::class,
+        parentColumns = ["id"], childColumns = ["plant_id"])])
+data class GardenPlanting(
+        @PrimaryKey @ColumnInfo(name = "id") val gardenPlantingId: String,
+        @ColumnInfo(name = "plant_id") val plantId: String,
+        val plantDate: Calendar = Calendar.getInstance(),
+        val lastWateringDate: Calendar = Calendar.getInstance()
+)
