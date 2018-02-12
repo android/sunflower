@@ -10,7 +10,7 @@ import java.util.Calendar.YEAR
 
 class GardenPlantingTest {
 
-    @Test fun test_default_values() {
+    @Test fun testDefaultValues() {
         val gardenPlanting = GardenPlanting("1", "1")
         val cal = Calendar.getInstance()
         assertYMD(cal, gardenPlanting.plantDate)

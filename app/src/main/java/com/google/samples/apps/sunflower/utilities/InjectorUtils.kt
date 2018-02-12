@@ -16,8 +16,9 @@
 
 package com.google.samples.apps.sunflower.utilities
 
-import android.app.Application
+import android.content.Context
 import com.google.samples.apps.sunflower.data.AppDatabase
+import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
@@ -27,23 +28,26 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
  */
 object InjectorUtils {
 
-    private fun provideRepository(application: Application): PlantRepository {
-        return PlantRepository.getInstance(AppDatabase.getInstance(application).plantDao())
+    private fun getPlantRepository(context: Context): PlantRepository {
+        return PlantRepository.getInstance(AppDatabase.getInstance(context).plantDao())
     }
 
-    @JvmStatic fun providePlantListViewModelFactory(
-            application: Application
-    ): PlantListViewModelFactory {
-        val repository = provideRepository(application)
+    private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
+        return GardenPlantingRepository.getInstance(
+                AppDatabase.getInstance(context).gardenPlantingDao())
+    }
+
+    @JvmStatic fun providePlantListViewModelFactory(context: Context): PlantListViewModelFactory {
+        val repository = getPlantRepository(context)
         return PlantListViewModelFactory(repository)
     }
 
     @JvmStatic fun providePlantDetailViewModelFactory(
-            application: Application,
+            context: Context,
             plantId: String
     ): PlantDetailViewModelFactory {
-        val repository = provideRepository(application)
-        return PlantDetailViewModelFactory(repository, plantId)
+        return PlantDetailViewModelFactory(getPlantRepository(context),
+                getGardenPlantingRepository(context), plantId)
     }
 
 }

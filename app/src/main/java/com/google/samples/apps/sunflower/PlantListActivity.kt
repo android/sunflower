@@ -67,7 +67,7 @@ class PlantListActivity : AppCompatActivity() {
         adapter = PlantAdapter(this, isTwoPane)
         binding.plantListFrame?.plantList?.adapter = adapter
 
-        val factory = InjectorUtils.providePlantListViewModelFactory(application)
+        val factory = InjectorUtils.providePlantListViewModelFactory(this)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
         subscribeUi()
     }

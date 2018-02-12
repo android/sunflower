@@ -46,7 +46,7 @@ public class PlantDetailActivity extends AppCompatActivity {
 
         String plantId = getIntent().getStringExtra(PlantDetailFragment.ARG_ITEM_ID);
         PlantDetailViewModelFactory factory = InjectorUtils.providePlantDetailViewModelFactory(
-                getApplication(), plantId);
+                this, plantId);
         PlantDetailViewModel viewModel = ViewModelProviders.of(this, factory)
                 .get(PlantDetailViewModel.class);
 
@@ -56,12 +56,9 @@ public class PlantDetailActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
         setSupportActionBar(binding.detailToolbar);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "TODO: Add plant to my garden", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        binding.fab.setOnClickListener(view -> {
+            viewModel.addPlantToGarden();
+            Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show();
         });
 
         // Show the Up button in the action bar.
