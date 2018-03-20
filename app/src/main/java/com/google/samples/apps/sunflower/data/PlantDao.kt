@@ -27,10 +27,10 @@ import android.arch.persistence.room.Query
  */
 @Dao
 interface PlantDao {
-    @Query("SELECT * FROM plants")
+    @Query("SELECT * FROM plants ORDER BY name")
     fun getPlants(): LiveData<List<Plant>>
 
-    @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber")
+    @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber ORDER BY name")
     fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): LiveData<List<Plant>>
 
     @Query("SELECT * FROM plants WHERE id = :plantId")

@@ -50,7 +50,6 @@ class PlantListActivityTest {
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.toolbar_layout))
                 .check(matches(withCollapsingToolbarTitle(testPlant.name)))
-        onView(withId(R.id.plant_detail)).check(matches(withText(testPlant.description)))
     }
 
 }

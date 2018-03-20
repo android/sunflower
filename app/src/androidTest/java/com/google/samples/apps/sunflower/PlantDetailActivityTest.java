@@ -56,12 +56,10 @@ public class PlantDetailActivityTest {
     public void viewTextPersistAfterOrientationChange() {
         onView(withId(R.id.toolbar_layout))
                 .check(matches(withCollapsingToolbarTitle(testPlant.getName())));
-        onView(withId(R.id.plant_detail)).check(matches(withText(testPlant.getDescription())));
 
         activityTestRule.getActivity().setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
         onView(withId(R.id.toolbar_layout))
                 .check(matches(withCollapsingToolbarTitle(testPlant.getName())));
-        onView(withId(R.id.plant_detail)).check(matches(withText(testPlant.getDescription())));
     }
 
 }

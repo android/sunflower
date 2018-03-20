@@ -20,10 +20,9 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.google.samples.apps.sunflower.data.AppDatabase
+import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantDao
 import com.google.samples.apps.sunflower.utilities.getValue
-import com.google.samples.apps.sunflower.utilities.testPlant
-import com.google.samples.apps.sunflower.utilities.testPlants
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Assert.assertThat
@@ -35,13 +34,17 @@ import org.junit.runner.RunWith
 class PlantDaoTest {
     private lateinit var database: AppDatabase
     private lateinit var plantDao: PlantDao
+    private val plantA = Plant("1", "A", "", 1, 1, "")
+    private val plantB = Plant("2", "B", "", 1, 1, "")
+    private val plantC = Plant("3", "C", "", 2, 2, "")
 
     @Before fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         plantDao = database.plantDao()
 
-        plantDao.insertAll(testPlants)
+        // Insert plants in non-alphabetical order to test that results are sorted by name
+        plantDao.insertAll(listOf(plantB, plantC, plantA))
     }
 
     @After fun closeDb() {
@@ -49,16 +52,27 @@ class PlantDaoTest {
     }
 
     @Test fun testGetPlants() {
-        assertThat(getValue(plantDao.getPlants()).size, equalTo(3))
+        val plantList = getValue(plantDao.getPlants())
+        assertThat(plantList.size, equalTo(3))
+
+        // Ensure plant list is sorted by name
+        assertThat(plantList[0], equalTo(plantA))
+        assertThat(plantList[1], equalTo(plantB))
+        assertThat(plantList[2], equalTo(plantC))
     }
 
     @Test fun testGetPlantsWithGrowZoneNumber() {
-        assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(1)).size, equalTo(2))
+        val plantList = getValue(plantDao.getPlantsWithGrowZoneNumber(1))
+        assertThat(plantList.size, equalTo(2))
         assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(2)).size, equalTo(1))
         assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(3)).size, equalTo(0))
+
+        // Ensure plant list is sorted by name
+        assertThat(plantList[0], equalTo(plantA))
+        assertThat(plantList[1], equalTo(plantB))
     }
 
     @Test fun testGetPlant() {
-        assertThat(getValue(plantDao.getPlant(testPlant.plantId)), equalTo(testPlant))
+        assertThat(getValue(plantDao.getPlant(plantA.plantId)), equalTo(plantA))
     }
 }
