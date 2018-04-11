@@ -32,6 +32,9 @@ interface GardenPlantingDao {
     @Query("SELECT * FROM garden_plantings WHERE id = :gardenPlantingId")
     fun getGardenPlanting(gardenPlantingId: String): LiveData<GardenPlanting>
 
+    @Query("SELECT * FROM garden_plantings WHERE plant_id = :plantId")
+    fun getGardenPlantingForPlant(plantId: String): LiveData<GardenPlanting>
+
     @Insert
     fun insertGardenPlanting(gardenPlanting: GardenPlanting)
 }

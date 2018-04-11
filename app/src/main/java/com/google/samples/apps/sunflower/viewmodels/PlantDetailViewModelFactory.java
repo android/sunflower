@@ -20,6 +20,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
+import com.google.samples.apps.sunflower.data.GardenPlantingRepository;
 import com.google.samples.apps.sunflower.data.Plant;
 import com.google.samples.apps.sunflower.data.PlantRepository;
 
@@ -30,14 +31,18 @@ import com.google.samples.apps.sunflower.data.PlantRepository;
 public class PlantDetailViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     @NonNull
-    private final PlantRepository repository;
+    private final PlantRepository plantRepository;
+
+    @NonNull
+    private final GardenPlantingRepository gardenPlantingRepository;
 
     @NonNull
     private final String plantId;
 
-    public PlantDetailViewModelFactory(@NonNull PlantRepository repository,
-            @NonNull String plantId) {
-        this.repository = repository;
+    public PlantDetailViewModelFactory(@NonNull PlantRepository plantRepository,
+            @NonNull GardenPlantingRepository gardenPlantingRepository, @NonNull String plantId) {
+        this.plantRepository = plantRepository;
+        this.gardenPlantingRepository = gardenPlantingRepository;
         this.plantId = plantId;
     }
 
@@ -45,7 +50,7 @@ public class PlantDetailViewModelFactory extends ViewModelProvider.NewInstanceFa
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         //noinspection unchecked
-        return (T) new PlantDetailViewModel(repository, plantId);
+        return (T) new PlantDetailViewModel(plantRepository, gardenPlantingRepository, plantId);
     }
 
 }

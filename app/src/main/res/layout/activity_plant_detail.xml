@@ -81,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:layout_margin="@dimen/fab_margin"
+            app:goneIf="@{viewModel.isPlanted}"
             app:layout_anchor="@+id/plant_detail_container"
             app:layout_anchorGravity="top|end"
             app:srcCompat="@android:drawable/stat_notify_chat" />

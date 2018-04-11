@@ -73,7 +73,7 @@ public class PlantDetailFragment extends Fragment {
         String plantId = getArguments().getString(ARG_ITEM_ID);
 
         PlantDetailViewModelFactory factory = InjectorUtils.providePlantDetailViewModelFactory(
-                getActivity().getApplication(), plantId);
+                getActivity(), plantId);
         PlantDetailViewModel viewModel = ViewModelProviders.of(this, factory)
                 .get(PlantDetailViewModel.class);
 

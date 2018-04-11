@@ -23,6 +23,7 @@ import android.support.design.widget.CollapsingToolbarLayout
 import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.v7.widget.Toolbar
 import android.view.View
+import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -46,6 +47,12 @@ val testCalendar: Calendar = Calendar.getInstance().apply {
     set(Calendar.MONTH, Calendar.SEPTEMBER)
     set(Calendar.DAY_OF_MONTH, 4)
 }
+
+/**
+ * [GardenPlanting] object used for tests.
+ */
+@JvmField val testGardenPlanting = GardenPlanting(
+        "1", testPlant.plantId, testCalendar, testCalendar)
 
 /**
  * Matches the toolbar title with a specific string.

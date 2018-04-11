@@ -21,17 +21,18 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.matcher.ViewMatchers.assertThat
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testCalendar
+import com.google.samples.apps.sunflower.utilities.testGardenPlanting
 import com.google.samples.apps.sunflower.utilities.testPlant
 import com.google.samples.apps.sunflower.utilities.testPlants
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.After
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 
 class GardenPlantingDaoTest {
     private lateinit var database: AppDatabase
     private lateinit var gardenPlantingDao: GardenPlantingDao
-    private val gardenPlanting = GardenPlanting("1", testPlant.plantId, testCalendar, testCalendar)
 
     @Before fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
@@ -39,7 +40,7 @@ class GardenPlantingDaoTest {
         gardenPlantingDao = database.gardenPlantingDao()
 
         database.plantDao().insertAll(testPlants)
-        gardenPlantingDao.insertGardenPlanting(gardenPlanting)
+        gardenPlantingDao.insertGardenPlanting(testGardenPlanting)
     }
 
     @After fun closeDb() {
@@ -53,7 +54,16 @@ class GardenPlantingDaoTest {
     }
 
     @Test fun testGetGardenPlanting() {
-        assertThat(getValue(gardenPlantingDao.getGardenPlanting(gardenPlanting.gardenPlantingId)),
-                equalTo(gardenPlanting))
+        assertThat(getValue(gardenPlantingDao.getGardenPlanting(
+                testGardenPlanting.gardenPlantingId)), equalTo(testGardenPlanting))
+    }
+
+    @Test fun testGetGardenPlantingForPlant() {
+        assertThat(getValue(gardenPlantingDao.getGardenPlantingForPlant(testPlant.plantId)),
+                equalTo(testGardenPlanting))
+    }
+
+    @Test fun testGetGardenPlantingForPlant_notFound() {
+        assertNull(getValue(gardenPlantingDao.getGardenPlantingForPlant(testPlants[2].plantId)))
     }
 }

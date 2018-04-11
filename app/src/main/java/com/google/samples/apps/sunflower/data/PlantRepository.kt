@@ -33,7 +33,7 @@ class PlantRepository private constructor(private val plantDao: PlantDao) {
         // For Singleton instantiation
         @Volatile private var instance: PlantRepository? = null
 
-        fun getInstance(plantDao: PlantDao) =
+        @JvmStatic fun getInstance(plantDao: PlantDao) =
                 instance ?: synchronized(this) {
                     instance ?: PlantRepository(plantDao).also { instance = it }
                 }

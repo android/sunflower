@@ -29,4 +29,5 @@
     <string name="navigation_drawer_header_content_description">
         Navigation drawer header logo
     </string>
+    <string name="added_plant_to_garden">Added plant to garden</string>
 </resources>

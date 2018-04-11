@@ -17,11 +17,11 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.databinding.BindingAdapter
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-@Suppress("unused")
 @BindingAdapter("app:imageFromUrl")
 fun imageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
@@ -30,4 +30,9 @@ fun imageFromUrl(view: ImageView, imageUrl: String?) {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view)
     }
+}
+
+@BindingAdapter("app:goneIf")
+fun goneIf(view: View, isGone: Boolean) {
+    view.visibility = if (isGone) View.GONE else View.VISIBLE
 }
