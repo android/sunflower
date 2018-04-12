@@ -47,15 +47,8 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
-                instance ?: deleteAndBuildDatabase(context).also { instance = it }
+                instance ?: buildDatabase(context).also { instance = it }
             }
-        }
-
-        // Reset the database to have new data on every app launch
-        // TODO / STOPSHIP: This is only used for development; remove prior to shipping
-        private fun deleteAndBuildDatabase(context: Context): AppDatabase {
-            context.deleteDatabase(DATABASE_NAME)
-            return buildDatabase(context)
         }
 
         // Create and pre-populate the database. See this article for more details:
