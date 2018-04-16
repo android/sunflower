@@ -30,4 +30,10 @@
         Navigation drawer header logo
     </string>
     <string name="added_plant_to_garden">Added plant to garden</string>
+
+    <string name="watering_needs_prefix">Watering needs:</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">every day</item>
+        <item quantity="other">every %d days</item>
+    </plurals>
 </resources>

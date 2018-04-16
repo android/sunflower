@@ -17,10 +17,15 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.databinding.BindingAdapter
+import android.text.SpannableStringBuilder
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.text.bold
+import androidx.core.text.italic
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.samples.apps.sunflower.R
 
 @BindingAdapter("app:imageFromUrl")
 fun imageFromUrl(view: ImageView, imageUrl: String?) {
@@ -35,4 +40,16 @@ fun imageFromUrl(view: ImageView, imageUrl: String?) {
 @BindingAdapter("app:goneIf")
 fun goneIf(view: View, isGone: Boolean) {
     view.visibility = if (isGone) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter("wateringText")
+fun wateringText(textView: TextView, wateringInterval: Int) {
+    val resources = textView.context.resources
+    val quantityString = resources.getQuantityString(R.plurals.watering_needs_suffix,
+        wateringInterval, wateringInterval)
+
+    textView.text = SpannableStringBuilder()
+        .bold { append(resources.getString(R.string.watering_needs_prefix)) }
+        .append(" ")
+        .italic { append(quantityString) }
 }

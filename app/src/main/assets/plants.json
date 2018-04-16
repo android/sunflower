@@ -94,5 +94,13 @@
     "growZoneNumber": 7,
     "wateringInterval": 3,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fc/01266jfWatermelons_Philippines_textures_Apolonio_Samson_Market_Quezon_Cityfvf_02.jpg"
+  },
+  {
+    "plantId": "13",
+    "name": "Hibiscus",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "growZoneNumber": 10,
+    "wateringInterval": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/82/Hibiscus_rosa-sinensis_flower_2.JPG"
   }
 ]

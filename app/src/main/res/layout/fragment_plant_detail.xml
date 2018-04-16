@@ -86,10 +86,10 @@
                     android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:text="TODO: watering text added in future CL"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:wateringText="@{viewModel.plant.wateringInterval}"
                     tools:text="Watering needs: every 7 days"/>
 
                 <TextView
