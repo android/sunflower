@@ -19,8 +19,13 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
     <dimen name="item_width">200dp</dimen>
+
+    <!-- TODO: consolidate these margins -->
     <dimen name="text_margin">16dp</dimen>
     <dimen name="recyclerview_margin">16dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+
     <dimen name="navigation_drawer_header_height">192dp</dimen>
     <dimen name="navigation_drawer_header_padding">16dp</dimen>
     <dimen name="navigation_drawer_image_width">100dp</dimen>
