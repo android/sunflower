@@ -84,7 +84,7 @@
             app:goneIf="@{viewModel.isPlanted}"
             app:layout_anchor="@+id/plant_detail_container"
             app:layout_anchorGravity="top|end"
-            app:srcCompat="@android:drawable/stat_notify_chat" />
+            app:srcCompat="@drawable/ic_plus" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>
