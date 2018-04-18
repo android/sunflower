@@ -20,7 +20,10 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +84,20 @@ public class PlantDetailFragment extends Fragment {
                 inflater, R.layout.fragment_plant_detail, container, false);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
+
+        AppCompatActivity appCompatActivity = (AppCompatActivity) requireActivity();
+        appCompatActivity.setSupportActionBar(binding.detailToolbar);
+
+        binding.fab.setOnClickListener(view -> {
+            viewModel.addPlantToGarden();
+            Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show();
+        });
+
+        // Show the Up button in the action bar.
+        ActionBar actionBar = appCompatActivity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         return binding.getRoot();
     }

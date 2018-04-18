@@ -16,21 +16,10 @@
 
 package com.google.samples.apps.sunflower;
 
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-
-import com.google.samples.apps.sunflower.databinding.ActivityPlantDetailBinding;
-import com.google.samples.apps.sunflower.utilities.InjectorUtils;
-import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel;
-import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory;
 
 /**
  * An activity representing a single Plant detail screen. This
@@ -43,31 +32,10 @@ public class PlantDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        String plantId = getIntent().getStringExtra(PlantDetailFragment.ARG_ITEM_ID);
-        PlantDetailViewModelFactory factory = InjectorUtils.providePlantDetailViewModelFactory(
-                this, plantId);
-        PlantDetailViewModel viewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel.class);
-
-        ActivityPlantDetailBinding binding = DataBindingUtil.setContentView(
-                this, R.layout.activity_plant_detail);
-        binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(this);
-        setSupportActionBar(binding.detailToolbar);
-
-        binding.fab.setOnClickListener(view -> {
-            viewModel.addPlantToGarden();
-            Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show();
-        });
-
-        // Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setContentView(R.layout.activity_plant_detail);
 
         if (savedInstanceState == null) {
+            String plantId = getIntent().getStringExtra(PlantDetailFragment.ARG_ITEM_ID);
             PlantDetailFragment fragment = PlantDetailFragment.newInstance(plantId);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.plant_detail_container, fragment)
