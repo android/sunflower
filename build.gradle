@@ -23,7 +23,7 @@ buildscript {
         targetSdkVersion = 27
 
         // App dependencies
-        constraintLayoutVersion = '1.0.2'
+        constraintLayoutVersion = '1.1.0'
         dataBindingVersion = '3.0.1'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
@@ -32,7 +32,7 @@ buildscript {
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
         navigationVersion = '1.0.0-alpha01@aar'
-        kotlinVersion = '1.2.31'
+        kotlinVersion = '1.2.40'
         ktxVersion = '0.3'
         roomVersion = '1.0.0'
         runnerVersion = '1.0.1'
@@ -54,11 +54,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-
-        // TODO: remove once libs are available publicly.
-        // During development, add the following to ~/.gradle/gradle.properties:
-        // nav_repo_location = /absolute/path/to/repository
-        flatDir { dirs "$nav_repo_location" }
     }
 }
 
