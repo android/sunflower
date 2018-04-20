@@ -31,7 +31,7 @@ buildscript {
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
-        navigationVersion = '1.0.0-alpha01@aar'
+        navigationVersion = '1.0.0-alpha01'
         kotlinVersion = '1.2.40'
         ktxVersion = '0.3'
         roomVersion = '1.0.0'
