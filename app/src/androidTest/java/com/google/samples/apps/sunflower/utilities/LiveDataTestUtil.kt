@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/* This annotation changes the name of the generated Java class, which defaults to
- * LiveDataTestUtilKt. This results in a cleaner class name for consumption by Java code. */
-@file:JvmName("LiveDataTestUtil")
-
 package com.google.samples.apps.sunflower.utilities
 
 import android.arch.lifecycle.LiveData

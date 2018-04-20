@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:JvmName("TestUtils")
-
 package com.google.samples.apps.sunflower.utilities
 
 import android.app.Activity
@@ -37,7 +35,7 @@ val testPlants = arrayListOf(
         Plant("2", "B", "Description B", 1),
         Plant("3", "C", "Description C", 2)
 )
-@JvmField val testPlant = testPlants[0]
+val testPlant = testPlants[0]
 
 /**
  * [Calendar] object used for tests.
@@ -51,8 +49,7 @@ val testCalendar: Calendar = Calendar.getInstance().apply {
 /**
  * [GardenPlanting] object used for tests.
  */
-@JvmField val testGardenPlanting = GardenPlanting(
-        "1", testPlant.plantId, testCalendar, testCalendar)
+val testGardenPlanting = GardenPlanting("1", testPlant.plantId, testCalendar, testCalendar)
 
 /**
  * Matches the toolbar title with a specific string.
