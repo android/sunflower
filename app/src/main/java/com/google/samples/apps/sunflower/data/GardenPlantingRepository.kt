@@ -17,7 +17,6 @@
 package com.google.samples.apps.sunflower.data
 
 import com.google.samples.apps.sunflower.utilities.runOnIoThread
-import java.util.Calendar
 
 class GardenPlantingRepository private constructor(
         private val gardenPlantingDao: GardenPlantingDao
@@ -39,7 +38,7 @@ class GardenPlantingRepository private constructor(
         // For Singleton instantiation
         @Volatile private var instance: GardenPlantingRepository? = null
 
-        @JvmStatic fun getInstance(gardenPlantingDao: GardenPlantingDao) =
+        fun getInstance(gardenPlantingDao: GardenPlantingDao) =
                 instance ?: synchronized(this) {
                     instance ?: GardenPlantingRepository(gardenPlantingDao).also { instance = it }
                 }

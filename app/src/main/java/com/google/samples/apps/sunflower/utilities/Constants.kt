@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-@file:JvmName("Constants")
-@file:Suppress("PropertyName")
-
 package com.google.samples.apps.sunflower.utilities
 
 /**
  * Constants used throughout the app.
  */
-@JvmField val DATABASE_NAME = "sunflower-db"
+const val DATABASE_NAME = "sunflower-db"
