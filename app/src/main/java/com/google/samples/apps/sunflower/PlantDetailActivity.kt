@@ -14,42 +14,40 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower;
+package com.google.samples.apps.sunflower
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.content.Intent
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 
 /**
  * An activity representing a single Plant detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link PlantListActivity}.
+ * in a [PlantListActivity].
  */
-public class PlantDetailActivity extends AppCompatActivity {
+class PlantDetailActivity : AppCompatActivity() {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plant_detail);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_plant_detail)
 
         if (savedInstanceState == null) {
-            String plantId = getIntent().getStringExtra(PlantDetailFragment.ARG_ITEM_ID);
-            PlantDetailFragment fragment = PlantDetailFragment.newInstance(plantId);
-            getSupportFragmentManager().beginTransaction()
+            val plantId = intent.getStringExtra(PlantDetailFragment.ARG_ITEM_ID)
+            val fragment = PlantDetailFragment.newInstance(plantId)
+            supportFragmentManager.beginTransaction()
                     .add(R.id.plant_detail_container, fragment)
-                    .commit();
+                    .commit()
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
         if (id == android.R.id.home) {
-            navigateUpTo(new Intent(this, PlantListActivity.class));
-            return true;
+            navigateUpTo(Intent(this, PlantListActivity::class.java))
+            return true
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item)
     }
 }
