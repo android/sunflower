@@ -36,4 +36,8 @@
         <item quantity="one">every day</item>
         <item quantity="other">every %d days</item>
     </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Picture of plant</string>
+
 </resources>
