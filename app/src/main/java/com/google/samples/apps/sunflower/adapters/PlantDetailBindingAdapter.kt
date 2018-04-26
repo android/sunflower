@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.samples.apps.sunflower.R
 
-@BindingAdapter("app:imageFromUrl")
+@BindingAdapter("imageFromUrl")
 fun imageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
         Glide.with(view.context)
@@ -37,7 +37,7 @@ fun imageFromUrl(view: ImageView, imageUrl: String?) {
     }
 }
 
-@BindingAdapter("app:goneIf")
+@BindingAdapter("goneIf")
 fun goneIf(view: View, isGone: Boolean) {
     view.visibility = if (isGone) View.GONE else View.VISIBLE
 }

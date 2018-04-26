@@ -39,8 +39,8 @@
             android:name="com.google.samples.apps.sunflower.PlantListFragment"
             android:layout_width="@dimen/item_width"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/recyclerview_margin"
-            android:layout_marginRight="@dimen/recyclerview_margin"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             app:layoutManager="LinearLayoutManager"
             tools:context="com.google.samples.apps.sunflower.PlantListActivity"
             tools:listitem="@layout/list_item_plant" />
