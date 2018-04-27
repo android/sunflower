@@ -66,4 +66,20 @@ class GardenPlantingDaoTest {
     @Test fun testGetGardenPlantingForPlant_notFound() {
         assertNull(getValue(gardenPlantingDao.getGardenPlantingForPlant(testPlants[2].plantId)))
     }
+
+    @Test fun testGetPlantAndGardenPlantings() {
+        val plantAndGardenPlantings = getValue(gardenPlantingDao.getPlantAndGardenPlantings())
+        assertThat(plantAndGardenPlantings.size, equalTo(3))
+
+        /**
+         * Only the [testPlant] has been planted, and thus has an associated [GardenPlanting]
+         */
+        assertThat(plantAndGardenPlantings[0].plant, equalTo(testPlant))
+        assertThat(plantAndGardenPlantings[0].gardenPlantings.size, equalTo(1))
+        assertThat(plantAndGardenPlantings[0].gardenPlantings[0], equalTo(testGardenPlanting))
+
+        // The other plants in the database have not been planted and thus have no GardenPlantings
+        assertThat(plantAndGardenPlantings[1].gardenPlantings.size, equalTo(0))
+        assertThat(plantAndGardenPlantings[2].gardenPlantings.size, equalTo(0))
+    }
 }
