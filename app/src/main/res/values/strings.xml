@@ -19,7 +19,6 @@
     <string name="menu_filter_by_grow_zone">Filter by grow zone</string>
     <string name="plant_detail_image_content_description">Image of plant</string>
     <string name="title_plant_list">Plants</string>
-    <string name="title_plant_detail">Plant Detail</string>
     <string name="my_garden">My Garden</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
