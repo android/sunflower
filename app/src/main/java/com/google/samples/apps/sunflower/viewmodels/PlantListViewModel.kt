@@ -26,10 +26,11 @@ import com.google.samples.apps.sunflower.data.PlantRepository
 /**
  * The ViewModel for PlantListActivity.
  */
-class PlantListViewModel internal constructor(plantRepository: PlantRepository) : ViewModel() {
+class PlantListViewModel internal constructor(
+        private val plantRepository: PlantRepository
+) : ViewModel() {
 
     private val NO_GROW_ZONE = -1
-    private val plantRepo: PlantRepository = plantRepository
     private val growZoneNumber: MutableLiveData<Int> = MutableLiveData()
 
     init {
@@ -38,9 +39,9 @@ class PlantListViewModel internal constructor(plantRepository: PlantRepository) 
 
     fun getPlants(): LiveData<List<Plant>> = Transformations.switchMap(growZoneNumber) {
         if (it == NO_GROW_ZONE) {
-            plantRepo.getPlants()
+            plantRepository.getPlants()
         } else {
-            plantRepo.getPlantsWithGrowZoneNumber(it)
+            plantRepository.getPlantsWithGrowZoneNumber(it)
         }
     }
 
