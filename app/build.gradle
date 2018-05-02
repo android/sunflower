@@ -60,14 +60,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
 
     // TODO update when libs are available publicly
-    implementation "androidx.navigation:navigation-common:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-common-ktx:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-fragment:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-runtime:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-runtime-ktx:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-ui:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-common:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-common-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-fragment:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-runtime:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-runtime-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
 
     // Testing dependencies
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
