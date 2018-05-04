@@ -37,6 +37,7 @@ buildscript {
         roomVersion = '1.0.0'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '27.1.1'
+        workVersion = '1.0.0-alpha01'
     }
 
     repositories {

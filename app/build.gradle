@@ -68,6 +68,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-runtime-ktx:$rootProject.navigationVersion"
     implementation "android.arch.navigation:navigation-ui:$rootProject.navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.work:work-runtime:$rootProject.workVersion"
 
     // Testing dependencies
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
