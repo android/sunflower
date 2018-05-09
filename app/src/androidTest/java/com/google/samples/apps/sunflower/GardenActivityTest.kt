@@ -63,7 +63,7 @@ class GardenActivityTest {
 
         // Press on Plant List navigation item
         onView(withId(R.id.navigation_view))
-                .perform(navigateTo(R.id.plant_list_navigation_menu_item))
+                .perform(navigateTo(R.id.plant_list_activity))
 
         // Check that the PlantListActivity is visible
         onView(withId(R.id.plant_list_frame)).check(matches(isDisplayed()))

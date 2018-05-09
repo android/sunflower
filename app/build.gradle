@@ -48,7 +48,10 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
+    implementation "android.arch.work:work-runtime-ktx:$rootProject.workVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
@@ -58,17 +61,6 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
-
-    // TODO update when libs are available publicly
-    implementation "android.arch.navigation:navigation-common:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-common-ktx:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-fragment:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-runtime:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-runtime-ktx:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-ui:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    implementation "android.arch.work:work-runtime:$rootProject.workVersion"
 
     // Testing dependencies
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"

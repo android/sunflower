@@ -57,7 +57,7 @@ class PlantListActivity : AppCompatActivity() {
             toolbar.title = title
         }
 
-        if (binding.plantListFrame?.plantDetailContainer != null) {
+        if (binding.plantListFrame.plantDetailContainer != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -65,7 +65,7 @@ class PlantListActivity : AppCompatActivity() {
             isTwoPane = true
         }
         adapter = PlantAdapter(this, isTwoPane)
-        binding.plantListFrame?.plantList?.adapter = adapter
+        binding.plantListFrame.plantList.adapter = adapter
 
         val factory = InjectorUtils.providePlantListViewModelFactory(this)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
