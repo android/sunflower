@@ -22,14 +22,10 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import android.support.annotation.VisibleForTesting
-import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.google.samples.apps.sunflower.utilities.DATABASE_NAME
-import com.google.samples.apps.sunflower.utilities.runOnIoThread
-import java.io.IOException
-import java.nio.charset.Charset
+import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
 
 /**
  * The Room database for this app
@@ -58,35 +54,13 @@ abstract class AppDatabase : RoomDatabase() {
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            runOnIoThread { seedDatabase(context) }
+                            val seedRequest = OneTimeWorkRequest.Builder(
+                                    SeedDatabaseWorker::class.java).build()
+                            WorkManager.getInstance().enqueue(seedRequest)
                         }
                     })
                     .build()
         }
 
-        private fun seedDatabase(context: Context) {
-            val plantType = object : TypeToken<List<Plant>>() {}.type
-            val plantList: List<Plant> = Gson().fromJson(readJson(context), plantType)
-            val database = getInstance(context)
-            database.plantDao().insertAll(plantList)
-        }
-
-        @VisibleForTesting internal fun readJson(
-            context: Context,
-            fileName: String = "plants.json"
-        ): String {
-            return try {
-                val inputStream = context.assets.open(fileName)
-                val buffer = ByteArray(inputStream.available())
-                inputStream.run {
-                    read(buffer)
-                    close()
-                }
-                String(buffer, Charset.defaultCharset())
-            } catch (ex: IOException) {
-                Log.i("AppDatabase", "Error reading JSON: $ex")
-                ""
-            }
-        }
     }
 }

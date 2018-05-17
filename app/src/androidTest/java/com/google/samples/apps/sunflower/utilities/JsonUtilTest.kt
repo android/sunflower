@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.utilities
 
 import android.support.test.InstrumentationRegistry
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
+import org.junit.Assert
 import org.junit.Test
+import java.io.FileNotFoundException
 
-class AppDatabaseTest {
-
-    @Test fun readJson() {
-        assertNotEquals("", AppDatabase.readJson(InstrumentationRegistry.getTargetContext()))
+class JsonUtilTest {
+    @Test
+    fun readJson() {
+        Assert.assertNotEquals("", readJson(InstrumentationRegistry.getTargetContext()))
     }
 
-    @Test fun readJson_invalidFile_returnsEmptyString() {
-        assertEquals("", AppDatabase.readJson(InstrumentationRegistry.getTargetContext(), "foo"))
+    @Test(expected = FileNotFoundException::class)
+    fun readJson_invalidFile_throwsFileNotFoundException() {
+        readJson(InstrumentationRegistry.getTargetContext(), "foo")
     }
 
 }
