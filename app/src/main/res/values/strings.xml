@@ -30,11 +30,18 @@
     </string>
     <string name="added_plant_to_garden">Added plant to garden</string>
     <string name="garden_empty">Your garden is empty</string>
+    <string name="planted_date">%s planted on %s</string>
 
     <string name="watering_needs_prefix">Watering needs:</string>
     <plurals name="watering_needs_suffix">
         <item quantity="one">every day</item>
         <item quantity="other">every %d days</item>
+    </plurals>
+
+    <string name="watering_next_prefix">Last watered on %s</string>
+    <plurals name="watering_next_suffix">
+        <item quantity="one">water tomorrow.</item>
+        <item quantity="other">water in %d days.</item>
     </plurals>
 
     <!-- Accessibility -->
