@@ -1,10 +1,7 @@
 Android Sunflower
 =================
 
-A gardening app illustrating Android development best practices.
-
-The app is written in both the Java and Kotlin programming languages to illustrate interoperability
-between these two languages.
+A gardening app illustrating Android development best practices with Android Jetpack.
 
 Introduction
 ------------
@@ -17,34 +14,61 @@ Screenshots
 
 Libraries Used
 --------------
+* [Foundation][0] - Components for core system capabilities, Kotlin extensions and support for
+  multidex and automated testing.
+  * [AppCompat][1] - Degrade gracefully on older versions of Android.
+  * [Android KTX][2] - Write more concise, idiomatic Kotlin code.
+  * [Test][4] - An Android testing framework for unit and runtime UI tests.
+* [Architecture][10] - A collection of libraries that help you design robust, testable, and
+  maintainable apps. Start with classes for managing your UI component lifecycle and handling data
+  persistence.
+  * [Data Binding][11] - Declaratively bind observable data to UI elements.
+  * [Lifecycles][12] - Create a UI that automatically responds to lifecycle events.
+  * [LiveData][13] - Build data objects that notify views when the underlying database changes.
+  * [Navigation][14] - Handle everything needed for in-app navigation.
+  * [Room][16] - Access your app's SQLite database with in-app objects and compile-time checks.
+  * [ViewModel][17] - Store UI-related data that isn't destroyed on app rotations.Easily schedule
+     asynchronous tasks for optimal execution.
+  * [WorkManager][18] - Manage your Android background jobs.
+* [UI][30] - Details on why and how to use UI Components in your apps - together or separate
+  * [Fragment][34] - A basic unit of composable UI.
+  * [Layout][35] - Lay out widgets using different algorithms.
+* Third party
+  * [Glide][90] for image loading
 
-* [Architecture Components][1]
-  * [LiveData][2]
-  * [ViewModel][3]
-  * [Room Persistence Library][4]
-* [Constraint Layout][5]
-* [Data Binding][6] to ViewModels and LiveData
-* [Glide][7] for image loading
+[0]: https://developer.android.com/jetpack/foundation/
+[1]: https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
+[2]: https://developer.android.com/kotlin/ktx
+[4]: https://developer.android.com/training/testing/
+[10]: https://developer.android.com/jetpack/arch/
+[11]: https://developer.android.com/topic/libraries/data-binding/
+[12]: https://developer.android.com/topic/libraries/architecture/lifecycle
+[13]: https://developer.android.com/topic/libraries/architecture/livedata
+[14]: https://developer.android.com/topic/libraries/architecture/navigation/
+[16]: https://developer.android.com/topic/libraries/architecture/room
+[17]: https://developer.android.com/topic/libraries/architecture/viewmodel
+[18]: https://developer.android.com/topic/libraries/architecture/workmanager
+[30]: https://developer.android.com/jetpack/ui/
+[34]: https://developer.android.com/guide/components/fragments
+[35]: https://developer.android.com/guide/topics/ui/declaring-layout
+[90]: https://bumptech.github.io/glide/
 
-[1]: https://developer.android.com/topic/libraries/architecture/index.html
-[2]: https://developer.android.com/topic/libraries/architecture/livedata.html
-[3]: https://developer.android.com/topic/libraries/architecture/viewmodel.html
-[4]: https://developer.android.com/topic/libraries/architecture/room.html
-[5]: https://developer.android.com/training/constraint-layout/index.html
-[6]: https://developer.android.com/topic/libraries/data-binding/index.html
-[7]: https://bumptech.github.io/glide/
+Upcoming
+--------
 
 Support
 -------
 
-- Google+ Community: https://plus.google.com/communities/TBD
-- Stack Overflow: http://stackoverflow.com/questions/tagged/TBD
+- Google+ Community: https://plus.google.com/communities/105153134372062985968
+- Stack Overflow:
+  - http://stackoverflow.com/questions/tagged/android
+  - http://stackoverflow.com/questions/tagged/android-jetpack
 
 If you've found an error in this sample, please file an issue:
-https://github.com/googlesamples/TBD/issues
+https://github.com/googlesamples/android-sunflower/issues
 
-Patches are encouraged, and may be submitted by forking this project and
-submitting a pull request through GitHub.
+Patches are encouraged, and may be submitted by forking this project and submitting a pull request
+through GitHub.
 
 License
 -------
