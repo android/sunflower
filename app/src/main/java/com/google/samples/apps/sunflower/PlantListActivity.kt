@@ -36,14 +36,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
  */
 class PlantListActivity : AppCompatActivity() {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
-     */
-    private var isTwoPane: Boolean = false
-
-    private lateinit var adapter: PlantAdapter
     private lateinit var viewModel: PlantListViewModel
-
     private var arePlantsFiltered = false // TODO remove this, used for development
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,19 +50,12 @@ class PlantListActivity : AppCompatActivity() {
             toolbar.title = title
         }
 
-        if (binding.plantListFrame.plantDetailContainer != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
-            isTwoPane = true
-        }
-        adapter = PlantAdapter(this, isTwoPane)
+        val adapter = PlantAdapter()
         binding.plantListFrame.plantList.adapter = adapter
 
         val factory = InjectorUtils.providePlantListViewModelFactory(this)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
-        subscribeUi()
+        subscribeUi(adapter)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,7 +71,7 @@ class PlantListActivity : AppCompatActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
-    private fun subscribeUi() {
+    private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.getPlants().observe(this, Observer { plants ->
             if (plants != null) adapter.values = plants
         })

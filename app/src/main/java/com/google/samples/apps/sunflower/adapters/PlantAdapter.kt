@@ -33,33 +33,21 @@ import com.google.samples.apps.sunflower.data.Plant
 
 /**
  * Adapter for the [RecyclerView] in [PlantListActivity].
- *
- * @param parentActivity the activity that is using this adapter
- * @param isTwoPane if a master/detail layout should be used
  */
-class PlantAdapter(
-    parentActivity: PlantListActivity,
-    isTwoPane: Boolean
-) : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
+class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
 
     var values: List<Plant> = ArrayList(0)
-      set(items) {
-          field = items
-          notifyDataSetChanged()
-      }
+        set(items) {
+            field = items
+            notifyDataSetChanged()
+        }
 
     private val onClickListener = View.OnClickListener { view ->
         val item = view.tag as Plant
-        if (isTwoPane) {
-            val fragment = PlantDetailFragment.newInstance(item.plantId)
-            parentActivity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.plant_detail_container,fragment).commit()
-        } else {
-            val intent = Intent(view.context, PlantDetailActivity::class.java).apply {
-                putExtra(PlantDetailFragment.ARG_ITEM_ID, item.plantId)
-            }
-            view.context.startActivity(intent)
+        val intent = Intent(view.context, PlantDetailActivity::class.java).apply {
+            putExtra(PlantDetailFragment.ARG_ITEM_ID, item.plantId)
         }
+        view.context.startActivity(intent)
     }
 
     override fun getItemCount() = values.size
