@@ -1,16 +1,36 @@
-Android Sunflower
-=================
+Android Sunflower (alpha)
+=========================
 
 A gardening app illustrating Android development best practices with Android Jetpack.
+
+Android Sunflower is currently released as an alpha and is under heavy development.
 
 Introduction
 ------------
 
+Android Jetpack is a set of components, tools and guidance to make great Android apps. They bring
+together the existing Support Library and Architecture Components and arranges them into four
+categories:
+
+![Android Jetpack](screenshots/jetpack_donut.png "Android Jetpack Components")
+
+Android Sunflower demonstrates utilizing these components to create a simple gardening app.
+
 Getting Started
 ---------------
+This project uses the Gradle build system. To build this project, use the
+`gradlew build` command or use "Import Project" in Android Studio.
+
+There are two Gradle tasks for testing the project:
+* `connectedAndroidTest` - for running Espresso on a connected device
+* `test` - for running unit tests
 
 Screenshots
 -----------
+
+![List of plants](screenshots/phone_plant_list.png "A list of plants")
+![Plant details](screenshots/phone_plant_detail.png "Details for a specific plant")
+![My Garden](screenshots/phone_my_garden.png "Plants that have been added to your garden")
 
 Libraries Used
 --------------
@@ -53,8 +73,13 @@ Libraries Used
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
 [90]: https://bumptech.github.io/glide/
 
-Upcoming
---------
+Upcoming features
+-----------------
+Updates will include incorporating additional Jetpack components and updating existing components
+as the component libraries evolve.
+
+Interested in seeing a particular feature of the Android Framework or Jetpack implemented in this
+app? Please open a new [issue](https://github.com/googlesamples/android-sunflower/issues).
 
 Support
 -------
