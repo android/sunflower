@@ -32,9 +32,6 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
  * A fragment representing a single Plant detail screen.
- * This fragment is either contained in a [PlantListActivity]
- * in two-pane mode (on tablets) or a [PlantDetailActivity]
- * on handsets.
  */
 class PlantDetailFragment : Fragment() {
 

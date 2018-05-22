@@ -22,10 +22,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 
 /**
- * An activity representing a single Plant detail screen. This
- * activity is only used on narrow width devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
- * in a [PlantListActivity].
+ * An activity representing a single Plant detail screen.
  */
 class PlantDetailActivity : AppCompatActivity() {
 
@@ -45,7 +42,7 @@ class PlantDetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         if (id == android.R.id.home) {
-            navigateUpTo(Intent(this, PlantListActivity::class.java))
+            navigateUpTo(Intent(this, GardenActivity::class.java))
             return true
         }
         return super.onOptionsItemSelected(item)

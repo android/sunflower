@@ -23,21 +23,17 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 
 class GardenActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerToggle: ActionBarDrawerToggle
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_garden)
-
-        navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
-
         setupToolbar()
         setupNavigationDrawer()
     }
@@ -55,24 +51,8 @@ class GardenActivity : AppCompatActivity() {
         drawerToggle = ActionBarDrawerToggle(
                 this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
         drawerLayout.addDrawerListener(drawerToggle)
-        setupDrawerMenuListener(findViewById(R.id.navigation_view))
-    }
-
-    private fun setupDrawerMenuListener(navigationView: NavigationView) {
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.my_garden_navigation_menu_item -> Unit // Do nothing, we're on this screen
-                R.id.plant_list_activity -> {
-                    navController.navigate(R.id.action_garden_fragment_to_plant_list_activity)
-                }
-                else -> Unit // do nothing
-            }
-
-            // Close the navigation drawer when an item is selected.
-            menuItem.isChecked = true
-            drawerLayout.closeDrawers()
-            true
-        }
+        val navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
+        findViewById<NavigationView>(R.id.navigation_view).setupWithNavController(navController)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

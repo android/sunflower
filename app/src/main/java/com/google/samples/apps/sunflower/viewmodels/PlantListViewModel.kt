@@ -20,11 +20,12 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 
 /**
- * The ViewModel for PlantListActivity.
+ * The ViewModel for [PlantListFragment].
  */
 class PlantListViewModel internal constructor(
         private val plantRepository: PlantRepository

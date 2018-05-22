@@ -39,18 +39,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlantListActivity"
-            android:label="@string/title_plant_list"
-            android:parentActivityName=".GardenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".PlantDetailActivity"
-            android:parentActivityName=".PlantListActivity"
+            android:parentActivityName=".GardenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.google.samples.apps.sunflower.PlantListActivity" />
+                android:value="com.google.samples.apps.sunflower.GardenActivity" />
         </activity>
     </application>
 

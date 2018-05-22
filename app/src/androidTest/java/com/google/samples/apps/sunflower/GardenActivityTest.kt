@@ -63,10 +63,10 @@ class GardenActivityTest {
 
         // Press on Plant List navigation item
         onView(withId(R.id.navigation_view))
-                .perform(navigateTo(R.id.plant_list_activity))
+                .perform(navigateTo(R.id.plant_list_fragment))
 
-        // Check that the PlantListActivity is visible
-        onView(withId(R.id.plant_list_frame)).check(matches(isDisplayed()))
+        // Check that the PlantListFragment is visible
+        onView(withId(R.id.plant_list)).check(matches(isDisplayed()))
     }
 
     private fun clickOnHomeIconToOpenNavigationDrawer() {

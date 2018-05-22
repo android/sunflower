@@ -18,57 +18,55 @@ package com.google.samples.apps.sunflower
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
-import com.google.samples.apps.sunflower.databinding.ActivityPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
-/**
- * An activity representing a list of Plants. This activity has different presentations for handset
- * and tablet-size devices. On handsets, the activity presents a list of items, which when touched,
- * lead to a [PlantDetailActivity] representing item details. On tablets, the activity presents the
- * list of items and item details side-by-side using two vertical panes.
- */
-class PlantListActivity : AppCompatActivity() {
+class PlantListFragment : Fragment() {
 
     private lateinit var viewModel: PlantListViewModel
     private var arePlantsFiltered = false // TODO remove this, used for development
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_plant_list, container, false)
+        val context = context ?: return view
 
-        val binding = DataBindingUtil.setContentView<ActivityPlantListBinding>(this,
-                R.layout.activity_plant_list)
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.run {
-            toolbar.title = title
-        }
+        val factory = InjectorUtils.providePlantListViewModelFactory(context)
+        viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
 
         val adapter = PlantAdapter()
-        binding.plantListFrame.plantList.adapter = adapter
-
-        val factory = InjectorUtils.providePlantListViewModelFactory(this)
-        viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
+        view.findViewById<RecyclerView>(R.id.plant_list).adapter = adapter
         subscribeUi(adapter)
+
+        setHasOptionsMenu(true)
+        return view
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_plant_list, menu)
-        return true
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_plant_list, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.filter_zone -> {
-            updateData()
-            true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.filter_zone -> {
+                updateData()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        else -> super.onOptionsItemSelected(item)
     }
 
     private fun subscribeUi(adapter: PlantAdapter) {
@@ -77,7 +75,6 @@ class PlantListActivity : AppCompatActivity() {
         })
     }
 
-    // TODO add filter selector
     private fun updateData() {
         arePlantsFiltered = if (arePlantsFiltered) {
             viewModel.clearGrowZoneNumber()
@@ -87,5 +84,4 @@ class PlantListActivity : AppCompatActivity() {
             true
         }
     }
-
 }

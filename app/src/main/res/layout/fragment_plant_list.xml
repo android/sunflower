@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="com.google.samples.apps.sunflower.PlantListActivity"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:context="com.google.samples.apps.sunflower.GardenActivity"
         tools:listitem="@layout/list_item_plant" />
 </layout>

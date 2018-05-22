@@ -27,12 +27,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.samples.apps.sunflower.PlantDetailActivity
 import com.google.samples.apps.sunflower.PlantDetailFragment
-import com.google.samples.apps.sunflower.PlantListActivity
+import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 
 /**
- * Adapter for the [RecyclerView] in [PlantListActivity].
+ * Adapter for the [RecyclerView] in [PlantListFragment].
  */
 class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
 

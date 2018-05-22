@@ -20,21 +20,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/garden_fragment">
 
-    <activity
-        android:id="@+id/plant_list_activity"
-        android:name="com.google.samples.apps.sunflower.PlantListActivity"
-        tools:layout="@layout/activity_plant_list" />
-
     <fragment
         android:id="@+id/garden_fragment"
         android:name="com.google.samples.apps.sunflower.GardenFragment"
-        tools:layout="@layout/fragment_garden">
-
-        <action android:id="@+id/action_garden_fragment_to_plant_list_activity"
-            app:destination="@id/plant_list_activity"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_pop_exit_anim"/>
-
-    </fragment>
+        tools:layout="@layout/fragment_garden" />
+    <fragment
+        android:id="@+id/plant_list_fragment"
+        android:name="com.google.samples.apps.sunflower.PlantListFragment"
+        tools:layout="@layout/fragment_plant_list" />
 
 </navigation>
