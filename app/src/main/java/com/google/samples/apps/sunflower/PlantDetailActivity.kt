@@ -16,10 +16,8 @@
 
 package com.google.samples.apps.sunflower
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
 
 /**
  * An activity representing a single Plant detail screen.
@@ -39,12 +37,11 @@ class PlantDetailActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        if (id == android.R.id.home) {
-            navigateUpTo(Intent(this, GardenActivity::class.java))
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    // According to the Principles of Navigation*, Up and Back should function identically when the
+    // back button does not exit the app.
+    // * https://developer.android.com/topic/libraries/architecture/navigation/navigation-principles
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
