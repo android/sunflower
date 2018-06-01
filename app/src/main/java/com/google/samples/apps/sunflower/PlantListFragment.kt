@@ -41,6 +41,7 @@ class PlantListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = FragmentPlantListBinding.inflate(inflater, container, false).run {
+        setLifecycleOwner(this@PlantListFragment)
         val context = context ?: return root
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this@PlantListFragment, factory)

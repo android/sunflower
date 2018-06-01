@@ -35,6 +35,7 @@ class GardenFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = FragmentGardenBinding.inflate(inflater, container, false).run {
+        setLifecycleOwner(this@GardenFragment)
         val context = context ?: return root
         with(GardenPlantingAdapter(context)) {
             gardenList.adapter = this
