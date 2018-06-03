@@ -23,11 +23,11 @@
         android:layout_width="match_parent"
         android:paddingLeft="@dimen/margin_normal"
         android:paddingRight="@dimen/margin_normal"
+        android:name="com.google.samples.apps.sunflower.PlantListFragment"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/plant_list"
-            android:name="com.google.samples.apps.sunflower.PlantListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
