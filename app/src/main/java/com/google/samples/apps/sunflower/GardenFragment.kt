@@ -21,7 +21,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.View.GONE
+import android.view.View
 import android.view.ViewGroup
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
@@ -58,7 +58,7 @@ class GardenFragment : Fragment() {
             if (result != null && result.isNotEmpty())
                 adapter.values = result.filter { it.gardenPlantings.isNotEmpty() }
 
-            databinding.loadingUi.visibility = GONE
+            databinding.loadingUi.visibility = View.GONE
         })
     }
 }
