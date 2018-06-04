@@ -30,7 +30,7 @@ class PlantDetailActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             val plantId = intent.getStringExtra(PlantDetailFragment.ARG_ITEM_ID)
-            val fragment = PlantDetailFragment.newInstance(plantId)
+            val fragment = PlantDetailFragment.newInstance(this, plantId)
             supportFragmentManager.beginTransaction()
                     .add(R.id.plant_detail_container, fragment)
                     .commit()

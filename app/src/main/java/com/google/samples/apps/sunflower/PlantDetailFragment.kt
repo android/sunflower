@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -76,11 +77,11 @@ class PlantDetailFragment : Fragment() {
         /**
          * Create a new instance of PlantDetailFragment, initialized with a plant ID.
          */
-        fun newInstance(plantId: String): PlantDetailFragment {
+        fun newInstance(context: Context, plantId: String): Fragment {
 
             // Supply plant ID as an argument.
             val bundle = Bundle().apply { putString(ARG_ITEM_ID, plantId) }
-            return PlantDetailFragment().apply { arguments = bundle }
+            return Fragment.instantiate(context, PlantDetailFragment::class.java.name, bundle)
         }
     }
 
