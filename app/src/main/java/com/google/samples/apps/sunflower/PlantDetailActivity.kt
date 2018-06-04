@@ -16,7 +16,11 @@
 
 package com.google.samples.apps.sunflower
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Bundle.EMPTY
+import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 
 /**
@@ -43,5 +47,15 @@ class PlantDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    companion object {
+        fun showInstance(cxt: Context, plantId: String) {
+            with(Intent(cxt, PlantDetailActivity::class.java)) {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra(PlantDetailFragment.ARG_ITEM_ID, plantId)
+                ActivityCompat.startActivity(cxt, this, EMPTY)
+            }
+        }
     }
 }
