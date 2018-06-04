@@ -28,27 +28,28 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.samples.apps.sunflower.R
 
 @BindingAdapter("imageFromUrl")
-fun imageFromUrl(view: ImageView, imageUrl: String?) {
+fun ImageView.imageFromUrl(imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
-        Glide.with(view.context)
-                .load(imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(view)
+        Glide.with(context)
+            .load(imageUrl)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
     }
 }
 
 @BindingAdapter("goneIf")
-fun goneIf(view: View, isGone: Boolean) {
-    view.visibility = if (isGone) View.GONE else View.VISIBLE
+fun View.goneIf(isGone: Boolean) {
+    visibility = if (isGone) View.GONE else View.VISIBLE
 }
 
 @BindingAdapter("wateringText")
-fun wateringText(textView: TextView, wateringInterval: Int) {
-    val resources = textView.context.resources
-    val quantityString = resources.getQuantityString(R.plurals.watering_needs_suffix,
-        wateringInterval, wateringInterval)
+fun TextView.wateringText(wateringInterval: Int) {
+    val quantityString = context.resources.getQuantityString(
+        R.plurals.watering_needs_suffix,
+        wateringInterval, wateringInterval
+    )
 
-    textView.text = SpannableStringBuilder()
+    text = SpannableStringBuilder()
         .bold { append(resources.getString(R.string.watering_needs_prefix)) }
         .append(" ")
         .italic { append(quantityString) }
