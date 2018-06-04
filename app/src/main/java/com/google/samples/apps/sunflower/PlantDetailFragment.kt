@@ -72,7 +72,7 @@ class PlantDetailFragment : Fragment() {
          * The fragment argument representing the item ID that this fragment
          * represents.
          */
-        const val ARG_ITEM_ID = "item_id"
+        internal val ARG_ITEM_ID by lazy { "item_id" }
 
         /**
          * Create a new instance of PlantDetailFragment, initialized with a plant ID.
