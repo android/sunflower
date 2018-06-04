@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +25,6 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.samples.apps.sunflower.PlantDetailActivity
-import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
@@ -44,10 +42,7 @@ class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
 
     private val onClickListener = View.OnClickListener { view ->
         val item = view.tag as Plant
-        val intent = Intent(view.context, PlantDetailActivity::class.java).apply {
-            putExtra(PlantDetailFragment.ARG_ITEM_ID, item.plantId)
-        }
-        view.context.startActivity(intent)
+        PlantDetailActivity.showInstance(view.context, item.plantId)
     }
 
     override fun getItemCount() = values.size
@@ -69,6 +64,11 @@ class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(
                 R.layout.list_item_plant, parent, false))
+    }
+
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+        holder.itemView.tag = null
     }
 
     /**
