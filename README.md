@@ -1,6 +1,7 @@
 Android Sunflower (alpha)
 =========================
 [![CircleCI](https://circleci.com/gh/googlesamples/android-sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/googlesamples/android-sunflower/tree/master)
+For this fork [![Build Status](https://travis-ci.org/XinyueZ/android-sunflower.svg?branch=master)](https://travis-ci.org/XinyueZ/android-sunflower)
 
 A gardening app illustrating Android development best practices with Android Jetpack.
 
