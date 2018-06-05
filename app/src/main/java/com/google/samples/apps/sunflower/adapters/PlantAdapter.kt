@@ -16,15 +16,16 @@
 
 package com.google.samples.apps.sunflower.adapters
 
+import android.arch.lifecycle.ViewModel
 import android.content.Intent
+import android.databinding.DataBindingUtil
+import android.databinding.ObservableField
+import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.samples.apps.sunflower.BR
 import com.google.samples.apps.sunflower.PlantDetailActivity
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.PlantListFragment
@@ -53,31 +54,34 @@ class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
     override fun getItemCount() = values.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.apply {
-            Glide.with(imageView.context)
-                    .load(values[position].imageUrl)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imageView)
-            contentView.text = values[position].name
-            with(itemView) {
-                tag = values[position]
-                setOnClickListener(onClickListener)
+        values[position].apply {
+            holder.itemView.tag = this
+            with(holder.binding) {
+                setVariable(BR.vm, ItemViewModel(this@apply, onClickListener))
+                executePendingBindings()
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(
-                R.layout.list_item_plant, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.list_item_plant, parent, false
+        )
+    )
 
     /**
      * Use this constructor to create a new ViewHolder.
      *
      * @param itemView - view to store in the ViewHolder
      */
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.plant_item_image)
-        val contentView: TextView = itemView.findViewById(R.id.plant_item_title)
+    class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
+
+    class ItemViewModel(plant: Plant, val clickHandler: View.OnClickListener) :
+        ViewModel() {  // Actually no need, however, for unified namespace with other [ViewModels]s I consider it.
+
+        val content = ObservableField<String>(plant.name)
+
+        val imageUrl = ObservableField<String>(plant.imageUrl)
     }
 }
