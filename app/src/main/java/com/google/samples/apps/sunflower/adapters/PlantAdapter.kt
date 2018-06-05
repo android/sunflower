@@ -70,11 +70,6 @@ class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
         )
     )
 
-    /**
-     * Use this constructor to create a new ViewHolder.
-     *
-     * @param itemView - view to store in the ViewHolder
-     */
     class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 
     class ItemViewModel(plant: Plant, val clickHandler: View.OnClickListener) :
