@@ -16,23 +16,25 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.annotation.SuppressLint
+import android.arch.lifecycle.ViewModel
 import android.content.Context
+import android.databinding.DataBindingUtil
+import android.databinding.ObservableField
+import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.samples.apps.sunflower.BR
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.data.GardenPlanting
+import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GardenPlantingAdapter(
-        val context: Context
+    val context: Context
 ) : RecyclerView.Adapter<GardenPlantingAdapter.ViewHolder>() {
 
     var values: List<PlantAndGardenPlantings> = ArrayList(0)
@@ -42,39 +44,59 @@ class GardenPlantingAdapter(
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(
-                R.layout.list_item_garden_planting, parent, false))
+        return ViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.list_item_garden_planting, parent, false
+            )
+        )
     }
 
     override fun getItemCount() = values.size
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.US)
+        values[position].apply {
+            val plant = checkNotNull(this.plant)
+            val gardenPlanting = gardenPlantings[0]
+            holder.itemView.tag = this
 
-        val plant = checkNotNull(values[position].plant)
-        val gardenPlanting = values[position].gardenPlantings[0]
-        val plantDateString = dateFormat.format(gardenPlanting.plantDate.time)
-        val waterDateString = dateFormat.format(gardenPlanting.lastWateringDate.time)
-        val wateringPrefix = context.getString(R.string.watering_next_prefix, waterDateString)
-        val wateringSuffix = context.resources.getQuantityString(R.plurals.watering_next_suffix,
-                plant.wateringInterval, plant.wateringInterval)
-
-        holder.apply {
-            Glide.with(context)
-                    .load(plant.imageUrl)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(plantImageView)
-            plantDateView.text = context.getString(R.string.planted_date, plant.name,
-                    plantDateString)
-            waterDateView.text = "$wateringPrefix - $wateringSuffix"
-            itemView.tag = values[position]
+            with(holder.binding) {
+                setVariable(BR.vm, ItemViewModel(context, plant, gardenPlanting))
+                executePendingBindings()
+            }
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val plantImageView: ImageView = itemView.findViewById(R.id.imageView)
-        val plantDateView: TextView = itemView.findViewById(R.id.plant_date)
-        val waterDateView: TextView = itemView.findViewById(R.id.water_date)
+    class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
+
+    class ItemViewModel(
+        context: Context,
+        private val plant: Plant,
+        private val gardenPlanting: GardenPlanting
+    ) : ViewModel() { // Actually no need, however, for unified namespace with other [ViewModels]s I consider it.
+
+        private val dateFormat by lazy { SimpleDateFormat("MMM d, yyyy", Locale.US) }
+        private val plantDateString by lazy { dateFormat.format(gardenPlanting.plantDate.time) }
+        private val waterDateString by lazy { dateFormat.format(gardenPlanting.lastWateringDate.time) }
+        private val wateringPrefix by lazy {
+            context.getString(R.string.watering_next_prefix, waterDateString)
+        }
+        private val wateringSuffix by lazy {
+            context.resources.getQuantityString(
+                R.plurals.watering_next_suffix,
+                plant.wateringInterval, plant.wateringInterval
+            )
+        }
+
+        val imageUrl = ObservableField<String>(plant.imageUrl)
+
+        val plantDate = ObservableField<String>(
+            context.getString(
+                R.string.planted_date, plant.name,
+                plantDateString
+            )
+        )
+
+        val waterDate = ObservableField<String>("$wateringPrefix - $wateringSuffix")
     }
 }
