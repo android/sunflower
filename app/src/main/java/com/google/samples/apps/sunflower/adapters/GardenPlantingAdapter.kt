@@ -71,8 +71,8 @@ class GardenPlantingAdapter(
 
     class ItemViewModel(
         context: Context,
-        private val plant: Plant,
-        private val gardenPlanting: GardenPlanting
+        plant: Plant,
+        gardenPlanting: GardenPlanting
     ) : ViewModel() { // Actually no need, however, for unified namespace with other [ViewModels]s I consider it.
 
         private val dateFormat by lazy { SimpleDateFormat("MMM d, yyyy", Locale.US) }
