@@ -31,22 +31,22 @@ class PlantListViewModel internal constructor(
     private val NO_GROW_ZONE = -1
     private val growZoneNumber: MutableLiveData<Int> = MutableLiveData()
 
-    private val observablePlantList = MediatorLiveData<List<Plant>>()
+    private val plantList = MediatorLiveData<List<Plant>>()
 
     init {
         growZoneNumber.value = NO_GROW_ZONE
 
-        val livePlantList : LiveData<List<Plant>> = Transformations.switchMap(growZoneNumber) {
+        val livePlantList = Transformations.switchMap(growZoneNumber) {
             if (it == NO_GROW_ZONE) {
                 plantRepository.getPlants()
             } else {
                 plantRepository.getPlantsWithGrowZoneNumber(it)
             }
         }
-        observablePlantList.addSource(livePlantList, observablePlantList::setValue)
+        plantList.addSource(livePlantList, plantList::setValue)
     }
 
-    fun getPlants() = observablePlantList
+    fun getPlants() = plantList
 
     fun setGrowZoneNumber(num: Int) {
         growZoneNumber.value = num
