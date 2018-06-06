@@ -16,7 +16,10 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import android.arch.lifecycle.*
+import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
+import android.arch.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -29,7 +32,7 @@ class PlantListViewModel internal constructor(
 ) : ViewModel() {
 
     private val NO_GROW_ZONE = -1
-    private val growZoneNumber: MutableLiveData<Int> = MutableLiveData()
+    private val growZoneNumber = MutableLiveData<Int>()
 
     private val plantList = MediatorLiveData<List<Plant>>()
 

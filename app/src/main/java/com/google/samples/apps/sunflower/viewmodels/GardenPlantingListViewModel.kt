@@ -27,8 +27,8 @@ class GardenPlantingListViewModel internal constructor(
         private val gardenPlantingRepository: GardenPlantingRepository
 ) : ViewModel() {
 
-    private val gardenPlantings: MediatorLiveData<List<GardenPlanting>> = MediatorLiveData()
-    private val plantAndGardenPlantings: MediatorLiveData<List<PlantAndGardenPlantings>> = MediatorLiveData()
+    private val gardenPlantings = MediatorLiveData<List<GardenPlanting>>()
+    private val plantAndGardenPlantings = MediatorLiveData<List<PlantAndGardenPlantings>>()
 
     init {
         val liveGardenPlantings = gardenPlantingRepository.getGardenPlantings()
