@@ -28,7 +28,7 @@ class GardenPlantingListViewModel internal constructor(
 
     fun getGardenPlantings() = gardenPlantingRepository.getGardenPlantings()
 
-    fun getPlantAndGardenPlantings() : LiveData<List<PlantAndGardenPlantings>> {
+    fun getPlantAndGardenPlantings(): LiveData<List<PlantAndGardenPlantings>> {
         return Transformations.map(gardenPlantingRepository.getPlantAndGardenPlantings()) {
             it.filter { it.gardenPlantings.isNotEmpty() }
         }
