@@ -16,8 +16,11 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 
 class GardenPlantingListViewModel internal constructor(
         private val gardenPlantingRepository: GardenPlantingRepository
@@ -25,5 +28,9 @@ class GardenPlantingListViewModel internal constructor(
 
     fun getGardenPlantings() = gardenPlantingRepository.getGardenPlantings()
 
-    fun getPlantAndGardenPlantings() = gardenPlantingRepository.getPlantAndGardenPlantings()
+    fun getPlantAndGardenPlantings(): LiveData<List<PlantAndGardenPlantings>> {
+        return Transformations.map(gardenPlantingRepository.getPlantAndGardenPlantings()) {
+            it.filter { it.gardenPlantings.isNotEmpty() }
+        }
+    }
 }
