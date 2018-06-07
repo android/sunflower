@@ -18,7 +18,7 @@ buildscript {
     // Define versions in a single place
     ext {
         // Sdk and tools
-        compileSdkVersion = "android-P"
+        compileSdkVersion = 28
         minSdkVersion = 19
         targetSdkVersion = 27
 
