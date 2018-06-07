@@ -20,7 +20,7 @@ buildscript {
         // Sdk and tools
         compileSdkVersion = 28
         minSdkVersion = 19
-        targetSdkVersion = 27
+        targetSdkVersion = 28
 
         // App dependencies
         constraintLayoutVersion = '1.1.0'
