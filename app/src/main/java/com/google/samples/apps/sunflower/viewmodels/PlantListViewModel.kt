@@ -59,4 +59,5 @@ class PlantListViewModel internal constructor(
         growZoneNumber.value = NO_GROW_ZONE
     }
 
+    fun isFiltered() = growZoneNumber.value != NO_GROW_ZONE
 }
