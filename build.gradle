@@ -18,9 +18,9 @@ buildscript {
     // Define versions in a single place
     ext {
         // Sdk and tools
-        compileSdkVersion = 27
+        compileSdkVersion = 28
         minSdkVersion = 19
-        targetSdkVersion = 27
+        targetSdkVersion = 28
 
         // App dependencies
         constraintLayoutVersion = '1.1.1'
