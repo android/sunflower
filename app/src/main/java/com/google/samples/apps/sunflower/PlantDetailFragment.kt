@@ -17,15 +17,12 @@
 package com.google.samples.apps.sunflower
 
 import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
@@ -36,33 +33,31 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 class PlantDetailFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = FragmentPlantDetailBinding.inflate(inflater, container, false).run {
+        setLifecycleOwner(this@PlantDetailFragment)
         val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
 
-        val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
-        val plantDetailViewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel::class.java)
+        val factory =
+            InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
+        val plantDetailViewModel = ViewModelProviders.of(this@PlantDetailFragment, factory)
+            .get(PlantDetailViewModel::class.java)
+        viewModel = plantDetailViewModel
 
-        val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-                inflater, R.layout.fragment_plant_detail, container, false).apply {
-            viewModel = plantDetailViewModel
-            setLifecycleOwner(this@PlantDetailFragment)
-            fab.setOnClickListener { view ->
-                plantDetailViewModel.addPlantToGarden()
-                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
-            }
+        fab.setOnClickListener { view ->
+            plantDetailViewModel.addPlantToGarden()
+            Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
         }
 
         val appCompatActivity = requireActivity() as AppCompatActivity
-        appCompatActivity.setSupportActionBar(binding.detailToolbar)
+        appCompatActivity.setSupportActionBar(detailToolbar)
 
         // Show the Up button in the action bar.
         appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        return binding.root
+        root
     }
 
     companion object {
@@ -77,11 +72,9 @@ class PlantDetailFragment : Fragment() {
          * Create a new instance of PlantDetailFragment, initialized with a plant ID.
          */
         fun newInstance(plantId: String): PlantDetailFragment {
-
             // Supply plant ID as an argument.
             val bundle = Bundle().apply { putString(ARG_ITEM_ID, plantId) }
             return PlantDetailFragment().apply { arguments = bundle }
         }
     }
-
 }
