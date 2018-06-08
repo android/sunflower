@@ -52,11 +52,9 @@ class GardenFragment : Fragment() {
             databinding.setVariable(BR.hasPlantings, plantings != null && plantings.isNotEmpty())
         })
 
-        // TODO handle this better - shouldn't need to filter
         viewModel.getPlantAndGardenPlantings().observe(this, Observer { result ->
             if (result != null && result.isNotEmpty())
-                adapter.values = result.filter { it.gardenPlantings.isNotEmpty() }
-
+            adapter.values = result
             databinding.loadingUi.visibility = GONE
         })
     }
