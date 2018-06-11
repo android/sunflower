@@ -21,6 +21,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.ObservableField
 import android.databinding.ViewDataBinding
+import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -35,13 +36,7 @@ import com.google.samples.apps.sunflower.data.Plant
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
-class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
-
-    var values: List<Plant> = ArrayList(0)
-        set(items) {
-            field = items
-            notifyDataSetChanged()
-        }
+class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
 
     private val onClickListener = View.OnClickListener { view ->
         val item = view.tag as Plant
@@ -51,10 +46,8 @@ class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
         view.context.startActivity(intent)
     }
 
-    override fun getItemCount() = values.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        values[position].apply {
+        getItem(position).apply {
             holder.itemView.tag = this
             with(holder.binding) {
                 setVariable(BR.vm, ItemViewModel(this@apply, onClickListener))

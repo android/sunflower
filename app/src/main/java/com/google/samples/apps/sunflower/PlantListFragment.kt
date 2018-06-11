@@ -34,7 +34,6 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 class PlantListFragment : Fragment() {
 
     private lateinit var viewModel: PlantListViewModel
-    private var arePlantsFiltered = false // TODO remove this, used for development
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -71,17 +70,17 @@ class PlantListFragment : Fragment() {
 
     private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.getPlants().observe(this, Observer { plants ->
-            if (plants != null) adapter.values = plants
+            if (plants != null) adapter.submitList(plants)
         })
     }
 
     private fun updateData() {
-        arePlantsFiltered = if (arePlantsFiltered) {
-            viewModel.clearGrowZoneNumber()
-            false
-        } else {
-            viewModel.setGrowZoneNumber(9)
-            true
+        with(viewModel) {
+            if (isFiltered()) {
+                clearGrowZoneNumber()
+            } else {
+                setGrowZoneNumber(9)
+            }
         }
     }
 }
