@@ -30,7 +30,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class GardenPlantingAdapter(
         val context: Context
