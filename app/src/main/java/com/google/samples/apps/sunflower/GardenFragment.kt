@@ -54,7 +54,7 @@ class GardenFragment : Fragment() {
 
         viewModel.getPlantAndGardenPlantings().observe(this, Observer { result ->
             if (result != null && result.isNotEmpty())
-            adapter.values = result
+            adapter.submitList(result)
             databinding.loadingUi.visibility = GONE
         })
     }
