@@ -21,6 +21,7 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ObservableField
 import android.databinding.ViewDataBinding
+import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -30,18 +31,11 @@ import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Locale
 
 class GardenPlantingAdapter(
     val context: Context
-) : RecyclerView.Adapter<GardenPlantingAdapter.ViewHolder>() {
-
-    var values: List<PlantAndGardenPlantings> = ArrayList(0)
-        set(items) {
-            field = items
-            notifyDataSetChanged()
-        }
+) : ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -52,10 +46,8 @@ class GardenPlantingAdapter(
         )
     }
 
-    override fun getItemCount() = values.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        values[position].apply {
+        getItem(position).apply {
             val plant = checkNotNull(this.plant)
             val gardenPlanting = gardenPlantings[0]
             holder.itemView.tag = this
