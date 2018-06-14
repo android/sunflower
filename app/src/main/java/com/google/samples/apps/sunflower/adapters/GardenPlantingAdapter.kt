@@ -27,8 +27,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.samples.apps.sunflower.BR
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.data.GardenPlanting
-import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,34 +45,32 @@ class GardenPlantingAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position).apply {
-            val plant = checkNotNull(this.plant)
-            val gardenPlanting = gardenPlantings[0]
-            holder.itemView.tag = this
-            holder.bind(plant, gardenPlanting)
+        getItem(position).let { plantings ->
+            with(holder) {
+                itemView.tag = plantings
+                bind(plantings)
+            }
         }
     }
 
     class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(
-            plant: Plant,
-            gardenPlanting: GardenPlanting
-        ) {
+
+        fun bind(plantings: PlantAndGardenPlantings) {
             with(binding) {
                 setVariable(
                     BR.vm,
-                    GardenPlantingItemViewModel(itemView.context, plant, gardenPlanting)
+                    GardenPlantingItemViewModel(itemView.context, plantings)
                 )
                 executePendingBindings()
             }
         }
     }
 
-    class GardenPlantingItemViewModel(
-        context: Context,
-        plant: Plant,
-        gardenPlanting: GardenPlanting
-    ) : ViewModel() { // Actually no need, however, for unified namespace with other [ViewModels]s I consider it.
+    class GardenPlantingItemViewModel(context: Context, plantings: PlantAndGardenPlantings) :
+        ViewModel() {
+
+        private val plant = checkNotNull(plantings.plant)
+        private val gardenPlanting = plantings.gardenPlantings[0]
 
         private val dateFormat by lazy { SimpleDateFormat("MMM d, yyyy", Locale.US) }
         private val plantDateString by lazy { dateFormat.format(gardenPlanting.plantDate.time) }
