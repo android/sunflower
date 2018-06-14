@@ -31,7 +31,7 @@ import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 class GardenPlantingAdapter(
     val context: Context
@@ -51,17 +51,26 @@ class GardenPlantingAdapter(
             val plant = checkNotNull(this.plant)
             val gardenPlanting = gardenPlantings[0]
             holder.itemView.tag = this
+            holder.bind(plant, gardenPlanting)
+        }
+    }
 
-            with(holder.binding) {
-                setVariable(BR.vm, ItemViewModel(context, plant, gardenPlanting))
+    class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            plant: Plant,
+            gardenPlanting: GardenPlanting
+        ) {
+            with(binding) {
+                setVariable(
+                    BR.vm,
+                    GardenPlantingItemViewModel(itemView.context, plant, gardenPlanting)
+                )
                 executePendingBindings()
             }
         }
     }
 
-    class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
-
-    class ItemViewModel(
+    class GardenPlantingItemViewModel(
         context: Context,
         plant: Plant,
         gardenPlanting: GardenPlanting

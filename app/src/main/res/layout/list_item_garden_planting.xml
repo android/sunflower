@@ -22,7 +22,7 @@
 
         <variable
             name="vm"
-            type="com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter.ItemViewModel"/>
+            type="com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter.GardenPlantingItemViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
