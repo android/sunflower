@@ -16,10 +16,7 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.arch.lifecycle.ViewModel
 import android.content.Intent
-import android.databinding.DataBindingUtil
-import android.databinding.ObservableField
 import android.databinding.ViewDataBinding
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
@@ -30,8 +27,8 @@ import com.google.samples.apps.sunflower.BR
 import com.google.samples.apps.sunflower.PlantDetailActivity
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
@@ -47,29 +44,23 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position).apply {
-            holder.itemView.tag = this
-            with(holder.binding) {
-                setVariable(BR.vm, ItemViewModel(this@apply, onClickListener))
-                executePendingBindings()
-            }
+        val plant = getItem(position)
+        holder.apply {
+            bind(plant)
+            itemView.tag = plant
+            itemView.setOnClickListener(onClickListener)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            R.layout.list_item_plant, parent, false
-        )
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(ListItemPlantBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false))
+    }
 
-    class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
-
-    class ItemViewModel(plant: Plant, val clickHandler: View.OnClickListener) :
-        ViewModel() {  // Actually no need, however, for unified namespace with other [ViewModels]s I consider it.
-
-        val content = ObservableField<String>(plant.name)
-
-        val imageUrl = ObservableField<String>(plant.imageUrl)
+    class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Plant) {
+            binding.setVariable(BR.plant, item)
+            binding.executePendingBindings()
+        }
     }
 }
