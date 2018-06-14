@@ -46,9 +46,8 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val plant = getItem(position)
         holder.apply {
-            bind(plant)
+            bind(onClickListener, plant)
             itemView.tag = plant
-            itemView.setOnClickListener(onClickListener)
         }
     }
 
@@ -58,9 +57,12 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     }
 
     class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Plant) {
-            binding.setVariable(BR.plant, item)
-            binding.executePendingBindings()
+        fun bind(clickListener: View.OnClickListener, item: Plant) {
+            binding.apply {
+                setVariable(BR.clickListener, clickListener)
+                setVariable(BR.plant, item)
+                executePendingBindings()
+            }
         }
     }
 }
