@@ -32,7 +32,7 @@ buildscript {
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
         navigationVersion = '1.0.0-alpha02'
-        kotlinVersion = '1.2.50'
+        kotlinVersion = '1.2.41'
         ktxVersion = '0.3'
         roomVersion = '1.1.0'
         runnerVersion = '1.0.1'
