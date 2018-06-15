@@ -23,7 +23,7 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        constraintLayoutVersion = '1.1.1'
+        constraintLayoutVersion = '1.1.2'
         dataBindingVersion = '3.0.1'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
@@ -32,7 +32,7 @@ buildscript {
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
         navigationVersion = '1.0.0-alpha02'
-        kotlinVersion = '1.2.41'
+        kotlinVersion = '1.2.50'
         ktxVersion = '0.3'
         roomVersion = '1.1.0'
         runnerVersion = '1.0.1'
