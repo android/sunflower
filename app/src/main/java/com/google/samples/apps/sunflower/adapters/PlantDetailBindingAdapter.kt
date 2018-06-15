@@ -17,8 +17,8 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.databinding.BindingAdapter
+import android.support.design.widget.FloatingActionButton
 import android.text.SpannableStringBuilder
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.bold
@@ -38,8 +38,8 @@ fun imageFromUrl(view: ImageView, imageUrl: String?) {
 }
 
 @BindingAdapter("goneIf")
-fun goneIf(view: View, isGone: Boolean) {
-    view.visibility = if (isGone) View.GONE else View.VISIBLE
+fun goneIf(view: FloatingActionButton, isGone: Boolean?) {
+    if (isGone == null || isGone) view.hide() else view.show()
 }
 
 @BindingAdapter("wateringText")
