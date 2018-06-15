@@ -20,14 +20,13 @@ import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ObservableField
-import android.databinding.ViewDataBinding
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.google.samples.apps.sunflower.BR
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,14 +52,12 @@ class GardenPlantingAdapter(
         }
     }
 
-    class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ListItemGardenPlantingBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(plantings: PlantAndGardenPlantings) {
             with(binding) {
-                setVariable(
-                    BR.vm,
-                    GardenPlantingItemViewModel(itemView.context, plantings)
-                )
+                vm = GardenPlantingItemViewModel(itemView.context, plantings)
                 executePendingBindings()
             }
         }
