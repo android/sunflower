@@ -24,7 +24,7 @@ import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class GardenPlantingItemViewModel(context: Context, plantings: PlantAndGardenPlantings) :
+class PlantAndGardenPlantingsViewModel(context: Context, plantings: PlantAndGardenPlantings) :
     ViewModel() {
 
     private val plant = checkNotNull(plantings.plant)

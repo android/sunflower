@@ -25,7 +25,7 @@ import android.view.ViewGroup
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
-import com.google.samples.apps.sunflower.viewmodels.GardenPlantingItemViewModel
+import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
 class GardenPlantingAdapter(
     val context: Context
@@ -54,7 +54,7 @@ class GardenPlantingAdapter(
 
         fun bind(plantings: PlantAndGardenPlantings) {
             with(binding) {
-                vm = GardenPlantingItemViewModel(
+                vm = PlantAndGardenPlantingsViewModel(
                     itemView.context,
                     plantings
                 )
