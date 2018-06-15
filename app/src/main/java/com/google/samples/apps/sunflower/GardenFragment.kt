@@ -48,7 +48,7 @@ class GardenFragment : Fragment() {
         val viewModel = ViewModelProviders.of(this, factory)
                 .get(GardenPlantingListViewModel::class.java)
 
-        viewModel.getGardenPlantings().observe(this, Observer { plantings ->
+        viewModel.getGardenPlantings().observe(viewLifecycleOwner, Observer { plantings ->
             if (plantings != null && plantings.isNotEmpty()) {
                 activity?.run {
                     findViewById<RecyclerView>(R.id.garden_list).run { visibility = View.VISIBLE }
@@ -62,7 +62,7 @@ class GardenFragment : Fragment() {
             }
         })
 
-        viewModel.getPlantAndGardenPlantings().observe(this, Observer { result ->
+        viewModel.getPlantAndGardenPlantings().observe(viewLifecycleOwner, Observer { result ->
             if (result != null && result.isNotEmpty())
                 adapter.submitList(result)
         })
