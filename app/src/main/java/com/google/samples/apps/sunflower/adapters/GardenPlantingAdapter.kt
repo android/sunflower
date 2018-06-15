@@ -49,12 +49,13 @@ class GardenPlantingAdapter(
         }
     }
 
-    class ViewHolder(private val binding: ListItemGardenPlantingBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: ListItemGardenPlantingBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(plantings: PlantAndGardenPlantings) {
             with(binding) {
-                vm = PlantAndGardenPlantingsViewModel(
+                viewModel = PlantAndGardenPlantingsViewModel(
                     itemView.context,
                     plantings
                 )
