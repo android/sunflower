@@ -17,7 +17,6 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.content.Intent
-import android.databinding.ViewDataBinding
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -56,11 +55,14 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
                 LayoutInflater.from(parent.context), parent, false))
     }
 
-    class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: View.OnClickListener, item: Plant) {
+    class ViewHolder(
+            private val binding: ListItemPlantBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(listener: View.OnClickListener, item: Plant) {
             binding.apply {
-                setVariable(BR.clickListener, clickListener)
-                setVariable(BR.plant, item)
+                clickListener = listener
+                plant = item
                 executePendingBindings()
             }
         }
