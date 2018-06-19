@@ -54,7 +54,12 @@ class GardenActivity : AppCompatActivity() {
     private fun setupNavigationDrawer(binding: ActivityGardenBinding) {
         drawerToggle = ActionBarDrawerToggle(
             this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close
-        ).also { binding.drawerLayout.addDrawerListener(it) }
+        ).also {
+            binding.drawerLayout.addDrawerListener(it)
+            it.isDrawerSlideAnimationEnabled = false
+            binding.drawerLayout.addDrawerListener(it)
+        }
+
         binding.navigationView.setupWithNavController(
             Navigation.findNavController(
                 this,

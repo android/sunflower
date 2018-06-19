@@ -18,25 +18,25 @@ buildscript {
     // Define versions in a single place
     ext {
         // Sdk and tools
-        compileSdkVersion = 27
+        compileSdkVersion = 28
         minSdkVersion = 19
-        targetSdkVersion = 27
+        targetSdkVersion = 28
 
         // App dependencies
-        constraintLayoutVersion = '1.1.0'
+        constraintLayoutVersion = '1.1.2'
         dataBindingVersion = '3.0.1'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
-        gradleVersion = '3.2.0-alpha16'
+        gradleVersion = '3.2.0-alpha18'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
-        navigationVersion = '1.0.0-alpha01'
-        kotlinVersion = '1.2.41'
+        navigationVersion = '1.0.0-alpha02'
+        kotlinVersion = '1.2.50'
         ktxVersion = '0.3'
         roomVersion = '1.1.0'
         runnerVersion = '1.0.1'
-        supportLibraryVersion = '27.1.1'
+        supportLibraryVersion = '28.0.0-alpha3'
         workVersion = '1.0.0-alpha02'
     }
 

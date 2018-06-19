@@ -1,0 +1,34 @@
+version: 2
+
+references:
+  cache_key: &cache_key
+    key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-28-alpha
+    environment:
+      JVM_OPTS: "-Xmx1024m"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+      TERM: dumb
+    steps:
+      - checkout
+      - restore_cache:
+          <<: *cache_key
+      - run:
+          name: Download Dependencies
+          command: ./gradlew dependencies
+      - save_cache:
+          <<: *cache_key
+          paths:
+            - ~/.gradle/caches
+            - ~/.gradle/wrapper
+      - run:
+          name: Run JVM Tests & Lint
+          command: ./gradlew check
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
