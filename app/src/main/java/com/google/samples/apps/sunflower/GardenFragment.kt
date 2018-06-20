@@ -21,7 +21,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.View.GONE
+import android.view.View
 import android.view.ViewGroup
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
@@ -49,13 +49,12 @@ class GardenFragment : Fragment() {
             ViewModelProviders.of(this, factory).get(GardenPlantingListViewModel::class.java)
 
         viewModel.getGardenPlantings().observe(this, Observer { plantings ->
-            databinding.setVariable(BR.hasPlantings, plantings != null && plantings.isNotEmpty())
-        })
-
-        viewModel.getPlantAndGardenPlantings().observe(this, Observer { result ->
-            if (result != null && result.isNotEmpty())
-            adapter.submitList(result)
-            databinding.loadingUi.visibility = GONE
+            databinding.hasPlantings = plantings != null && plantings.isNotEmpty()
+            viewModel.getPlantAndGardenPlantings().observe(viewLifecycleOwner, Observer { result ->
+                if (result != null && result.isNotEmpty())
+                    adapter.submitList(result)
+                databinding.loadingUi.visibility = View.GONE
+            })
         })
     }
 }

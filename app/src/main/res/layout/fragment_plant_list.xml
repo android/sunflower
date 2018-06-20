@@ -21,27 +21,30 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingLeft="@dimen/margin_normal"
-        android:paddingRight="@dimen/margin_normal"
-        android:layout_height="match_parent">
+        android:paddingRight="@dimen/margin_normal">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/plant_list"
-            android:name="com.google.samples.apps.sunflower.PlantListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             tools:context="com.google.samples.apps.sunflower.GardenActivity"
             tools:listitem="@layout/list_item_plant"/>
 
         <ProgressBar
             android:id="@+id/loading_ui"
-            android:layout_gravity="center"
-            android:indeterminate="true"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_gravity="center"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:indeterminate="true"/>
     </FrameLayout>
+
 </layout>

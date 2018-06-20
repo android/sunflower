@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.databinding.BindingAdapter
+import android.support.design.widget.FloatingActionButton
 import android.text.SpannableStringBuilder
 import android.view.View
 import android.widget.ImageView
@@ -37,7 +38,12 @@ fun imageFromUrl(view: ImageView, imageUrl: String?) {
     }
 }
 
-@BindingAdapter("goneIf")
+@BindingAdapter("hiddenIf")
+fun hiddenIf(view: FloatingActionButton, isGone: Boolean?) {
+    if (isGone == null || isGone) view.hide() else view.show()
+}
+
+@BindingAdapter("app:goneIf")
 fun goneIf(view: View, isGone: Boolean) {
     view.visibility = if (isGone) View.GONE else View.VISIBLE
 }

@@ -24,7 +24,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View.GONE
+import android.view.View
 import android.view.ViewGroup
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
@@ -69,10 +69,10 @@ class PlantListFragment : Fragment() {
     }
 
     private fun subscribeUi(databinding: FragmentPlantListBinding, adapter: PlantAdapter) {
-        viewModel.getPlants().observe(this, Observer { plants ->
+        viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) {
                 adapter.submitList(plants)
-                databinding.loadingUi.visibility = GONE
+                databinding.loadingUi.visibility = View.GONE
             }
         })
     }

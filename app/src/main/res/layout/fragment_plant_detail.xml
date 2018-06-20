@@ -113,11 +113,13 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:layout_margin="@dimen/fab_margin"
-            app:goneIf="@{viewModel.isPlanted}"
+            android:tint="@android:color/white"
+            app:hiddenIf="@{viewModel.isPlanted}"
             app:layout_anchor="@+id/plant_detail_scrollview"
             app:layout_anchorGravity="top|end"
             app:srcCompat="@drawable/ic_plus" />

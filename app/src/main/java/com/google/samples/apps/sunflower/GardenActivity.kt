@@ -50,6 +50,7 @@ class GardenActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
         drawerToggle = ActionBarDrawerToggle(
                 this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
+        drawerToggle.isDrawerSlideAnimationEnabled = false
         drawerLayout.addDrawerListener(drawerToggle)
         val navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
         findViewById<NavigationView>(R.id.navigation_view).setupWithNavController(navController)
