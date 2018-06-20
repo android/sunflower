@@ -32,7 +32,6 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.view.Gravity
 import com.google.samples.apps.sunflower.utilities.getToolbarNavigationContentDescription
-import org.hamcrest.Matchers.not
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -91,6 +90,6 @@ class GardenActivityTest {
     }
 
     private fun checkDrawerIsNotOpen() {
-        onView(withId(R.id.drawer_layout)).check(matches(not(isOpen(Gravity.START))))
+        onView(withId(R.id.drawer_layout)).check(matches(isClosed(Gravity.START)))
     }
 }
