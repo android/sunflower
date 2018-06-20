@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -79,5 +80,13 @@ class GardenActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
         // Pass any configuration change to the drawer toggle.
         drawerToggle.onConfigurationChanged(newConfig)
+    }
+
+    override fun onBackPressed() {
+        with(findViewById<DrawerLayout>(R.id.drawer_layout)) {
+            val isDrawerOpen = isDrawerOpen(GravityCompat.START)
+            if (isDrawerOpen) closeDrawer(GravityCompat.START)
+            else super.onBackPressed()
+        }
     }
 }
