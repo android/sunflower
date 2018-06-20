@@ -83,7 +83,7 @@ class GardenActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        with(findViewById<DrawerLayout>(R.id.drawer_layout)) {
+        with(drawerLayout) {
             val isDrawerOpen = isDrawerOpen(GravityCompat.START)
             if (isDrawerOpen) closeDrawer(GravityCompat.START)
             else super.onBackPressed()
