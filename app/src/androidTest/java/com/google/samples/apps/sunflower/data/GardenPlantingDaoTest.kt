@@ -48,14 +48,18 @@ class GardenPlantingDaoTest {
     }
 
     @Test fun testGetGardenPlantings() {
-        val gardenPlanting2 = GardenPlanting("2", testPlants[1].plantId, testCalendar, testCalendar)
+        val gardenPlanting2 = GardenPlanting(
+            testPlants[1].plantId,
+            testCalendar,
+            testCalendar
+        ).also { it.gardenPlantingId = 2 }
         gardenPlantingDao.insertGardenPlanting(gardenPlanting2)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))
     }
 
     @Test fun testGetGardenPlanting() {
         assertThat(getValue(gardenPlantingDao.getGardenPlanting(
-                testGardenPlanting.gardenPlantingId)), equalTo(testGardenPlanting))
+                testGardenPlanting.gardenPlantingId.toString())), equalTo(testGardenPlanting))
     }
 
     @Test fun testGetGardenPlantingForPlant() {

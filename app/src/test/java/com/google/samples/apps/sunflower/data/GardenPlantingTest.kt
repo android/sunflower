@@ -26,8 +26,9 @@ import java.util.Calendar.YEAR
 
 class GardenPlantingTest {
 
-    @Test fun testDefaultValues() {
-        val gardenPlanting = GardenPlanting("1", "1")
+    @Test
+    fun testDefaultValues() {
+        val gardenPlanting = GardenPlanting("1").also { it.gardenPlantingId = 1 }
         val cal = Calendar.getInstance()
         assertYMD(cal, gardenPlanting.plantDate)
         assertYMD(cal, gardenPlanting.lastWateringDate)

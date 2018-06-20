@@ -24,8 +24,7 @@ class GardenPlantingRepository private constructor(
 
     fun createGardenPlanting(plantId: String) {
         runOnIoThread {
-            // TODO remove gardenPlantingId from constructor once ID is auto-generated
-            val gardenPlanting = GardenPlanting("gp$plantId", plantId)
+            val gardenPlanting = GardenPlanting(plantId)
             gardenPlantingDao.insertGardenPlanting(gardenPlanting)
         }
     }
