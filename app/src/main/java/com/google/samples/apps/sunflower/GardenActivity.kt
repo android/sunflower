@@ -60,12 +60,11 @@ class GardenActivity : AppCompatActivity() {
             binding.drawerLayout.addDrawerListener(it)
         }
 
-        binding.navigationView.setupWithNavController(
-            Navigation.findNavController(
-                this,
-                R.id.garden_nav_fragment
-            )
+        val navController = Navigation.findNavController(
+            this,
+            R.id.garden_nav_fragment
         )
+        binding.navigationView.setupWithNavController(navController)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
