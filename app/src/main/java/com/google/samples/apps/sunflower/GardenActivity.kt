@@ -60,10 +60,7 @@ class GardenActivity : AppCompatActivity() {
             binding.drawerLayout.addDrawerListener(it)
         }
 
-        val navController = Navigation.findNavController(
-            this,
-            R.id.garden_nav_fragment
-        )
+        val navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
         binding.navigationView.setupWithNavController(navController)
     }
 
