@@ -17,43 +17,51 @@
 package com.google.samples.apps.sunflower
 
 import android.content.res.Configuration
+import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
 
 class GardenActivity : AppCompatActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_garden)
-        setupToolbar()
-        setupNavigationDrawer()
+        with(
+            DataBindingUtil.setContentView<ActivityGardenBinding>(
+                this,
+                R.layout.activity_garden
+            )
+        ) {
+            setupToolbar(this)
+            setupNavigationDrawer(this)
+        }
     }
 
-    private fun setupToolbar() {
-        setSupportActionBar(findViewById(R.id.toolbar))
+    private fun setupToolbar(binding: ActivityGardenBinding) {
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
     }
 
-    private fun setupNavigationDrawer() {
-        drawerLayout = findViewById(R.id.drawer_layout)
+    private fun setupNavigationDrawer(binding: ActivityGardenBinding) {
         drawerToggle = ActionBarDrawerToggle(
-                this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
-        drawerToggle.isDrawerSlideAnimationEnabled = false
-        drawerLayout.addDrawerListener(drawerToggle)
+            this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close
+        ).also {
+            binding.drawerLayout.addDrawerListener(it)
+            it.isDrawerSlideAnimationEnabled = false
+            binding.drawerLayout.addDrawerListener(it)
+        }
+
         val navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
-        findViewById<NavigationView>(R.id.navigation_view).setupWithNavController(navController)
+        binding.navigationView.setupWithNavController(navController)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
