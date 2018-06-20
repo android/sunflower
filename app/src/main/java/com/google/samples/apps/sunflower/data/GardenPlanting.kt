@@ -33,7 +33,6 @@ import java.util.Calendar
 @Entity(tableName = "garden_plantings", foreignKeys = [ForeignKey(entity = Plant::class,
         parentColumns = ["id"], childColumns = ["plant_id"])])
 data class GardenPlanting(
-        @PrimaryKey @ColumnInfo(name = "id") val gardenPlantingId: String, // TODO auto-generate ID.
         @ColumnInfo(name = "plant_id") val plantId: String,
 
         /**
@@ -48,4 +47,8 @@ data class GardenPlanting(
          */
         @ColumnInfo(name = "last_watering_date")
         val lastWateringDate: Calendar = Calendar.getInstance()
-)
+) {
+        @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = "id")
+        var gardenPlantingId: Long = 0
+}
