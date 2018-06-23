@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower
 import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -29,21 +30,20 @@ import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
 class GardenActivity : AppCompatActivity() {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
+    private lateinit var binding: ActivityGardenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        with(
-            DataBindingUtil.setContentView<ActivityGardenBinding>(
-                this,
-                R.layout.activity_garden
-            )
-        ) {
-            setupToolbar(this)
-            setupNavigationDrawer(this)
-        }
+
+        DataBindingUtil.setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+            .apply {
+                binding = this
+                setupToolbar()
+                setupNavigationDrawer()
+            }.also { it.setLifecycleOwner(this) }
     }
 
-    private fun setupToolbar(binding: ActivityGardenBinding) {
+    private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
@@ -51,7 +51,7 @@ class GardenActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupNavigationDrawer(binding: ActivityGardenBinding) {
+    private fun setupNavigationDrawer() {
         drawerToggle = ActionBarDrawerToggle(
             this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close
         ).also {
@@ -87,5 +87,15 @@ class GardenActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
         // Pass any configuration change to the drawer toggle.
         drawerToggle.onConfigurationChanged(newConfig)
+    }
+
+    override fun onBackPressed() {
+        with(binding.drawerLayout) {
+            if (isDrawerOpen(GravityCompat.START)) {
+                closeDrawer(GravityCompat.START)
+            } else {
+                super.onBackPressed()
+            }
+        }
     }
 }
