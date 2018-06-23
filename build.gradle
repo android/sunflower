@@ -27,7 +27,7 @@ buildscript {
         dataBindingVersion = '3.0.1'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
-        gradleVersion = '3.2.0-alpha18'
+        gradleVersion = '3.2.0-beta01'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
