@@ -31,7 +31,7 @@ interface GardenPlantingDao {
     fun getGardenPlantings(): LiveData<List<GardenPlanting>>
 
     @Query("SELECT * FROM garden_plantings WHERE id = :gardenPlantingId")
-    fun getGardenPlanting(gardenPlantingId: String): LiveData<GardenPlanting>
+    fun getGardenPlanting(gardenPlantingId: Long): LiveData<GardenPlanting>
 
     @Query("SELECT * FROM garden_plantings WHERE plant_id = :plantId")
     fun getGardenPlantingForPlant(plantId: String): LiveData<GardenPlanting>
@@ -45,5 +45,5 @@ interface GardenPlantingDao {
     fun getPlantAndGardenPlantings(): LiveData<List<PlantAndGardenPlantings>>
 
     @Insert
-    fun insertGardenPlanting(gardenPlanting: GardenPlanting)
+    fun insertGardenPlanting(gardenPlanting: GardenPlanting): Long
 }
