@@ -39,19 +39,20 @@ class PlantListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentPlantListBinding.inflate(inflater, container, false).run {
-        val context = context ?: return root
+    ) = FragmentPlantListBinding.inflate(inflater, container, false).let { binding ->
+        val context = context ?: return binding.root
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this@PlantListFragment, factory)
             .get(PlantListViewModel::class.java)
 
         with(PlantAdapter()) {
-            plantList.adapter = this
-            subscribeUi(this@run, this)
-        }
+            binding.plantList.adapter = this
+            binding.setLifecycleOwner(viewLifecycleOwner)
 
+            subscribeUi(binding, this)
+        }
         setHasOptionsMenu(true)
-        root
+        binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -70,8 +71,8 @@ class PlantListFragment : Fragment() {
 
     private fun subscribeUi(databinding: FragmentPlantListBinding, adapter: PlantAdapter) {
         viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
-            if (plants != null) {
-                adapter.submitList(plants)
+            plants?.let {
+                adapter.submitList(it)
                 databinding.loadingUi.visibility = View.GONE
             }
         })

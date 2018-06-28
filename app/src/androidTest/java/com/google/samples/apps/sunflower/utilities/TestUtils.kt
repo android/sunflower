@@ -49,7 +49,7 @@ val testCalendar: Calendar = Calendar.getInstance().apply {
 /**
  * [GardenPlanting] object used for tests.
  */
-val testGardenPlanting = GardenPlanting("1", testPlant.plantId, testCalendar, testCalendar)
+val testGardenPlanting = GardenPlanting(testPlant.plantId, testCalendar, testCalendar)
 
 /**
  * Matches the toolbar title with a specific string.

@@ -34,27 +34,34 @@ class GardenFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentGardenBinding.inflate(inflater, container, false).run {
-        val context = context ?: return root
+    ) = FragmentGardenBinding.inflate(inflater, container, false).let { binding ->
+        val context = context ?: return binding.root
         with(GardenPlantingAdapter(context)) {
-            gardenList.adapter = this
-            subscribeUi(this@run, this)
+            binding.gardenList.adapter = this
+            binding.setLifecycleOwner(viewLifecycleOwner)
+
+            subscribeUi(binding, this)
         }
-        root
+        binding.root
     }
 
     private fun subscribeUi(databinding: FragmentGardenBinding, adapter: GardenPlantingAdapter) {
-        val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
-        val viewModel =
+        InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext()).let { factory ->
             ViewModelProviders.of(this, factory).get(GardenPlantingListViewModel::class.java)
-
-        viewModel.getGardenPlantings().observe(this, Observer { plantings ->
-            databinding.hasPlantings = plantings != null && plantings.isNotEmpty()
-            viewModel.getPlantAndGardenPlantings().observe(viewLifecycleOwner, Observer { result ->
-                if (result != null && result.isNotEmpty())
-                    adapter.submitList(result)
-                databinding.loadingUi.visibility = View.GONE
-            })
-        })
+                .let { viewModel ->
+                    viewModel.gardenPlantings.observe(this, Observer { plantings ->
+                        databinding.hasPlantings = (plantings != null && plantings.isNotEmpty())
+                    })
+                    viewModel.plantAndGardenPlantings.observe(
+                        viewLifecycleOwner,
+                        Observer { result ->
+                            result?.let {
+                                if (result.isNotEmpty())
+                                    adapter.submitList(result)
+                            }
+                            databinding.loadingUi.visibility = View.GONE
+                        })
+                }
+        }
     }
 }
