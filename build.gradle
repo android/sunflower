@@ -24,10 +24,10 @@ buildscript {
 
         // App dependencies
         constraintLayoutVersion = '1.1.2'
-        dataBindingVersion = '3.0.1'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
         gradleVersion = '3.2.0-beta02'
+        dataBindingVersion = gradleVersion
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
