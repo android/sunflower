@@ -20,6 +20,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.Menu
@@ -27,6 +28,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
@@ -42,6 +45,13 @@ class PlantListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_plant_list, container, false)
         val context = context ?: return view
+
+        (requireActivity() as AppCompatActivity).setSupportActionBar(view.findViewById(R.id.toolbar))
+        NavigationUI.setupActionBarWithNavController(
+            requireActivity() as AppCompatActivity,
+            Navigation.findNavController(requireActivity(), R.id.garden_nav_fragment),
+            requireActivity().findViewById(R.id.drawer_layout)
+        )
 
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)

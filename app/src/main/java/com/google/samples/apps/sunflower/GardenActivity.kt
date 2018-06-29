@@ -18,10 +18,8 @@ package com.google.samples.apps.sunflower
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -35,18 +33,15 @@ class GardenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityGardenBinding = DataBindingUtil.setContentView(this,
-                R.layout.activity_garden)
-        drawerLayout = binding.drawerLayout
-
-        val navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
-
-        // Set up ActionBar
-        setSupportActionBar(binding.toolbar)
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
-
-        // Set up navigation menu
-        binding.navigationView.setupWithNavController(navController)
+        DataBindingUtil.setContentView<ActivityGardenBinding>(
+            this,
+            R.layout.activity_garden
+        ).apply {
+            this@GardenActivity.drawerLayout = drawerLayout
+            Navigation.findNavController(this@GardenActivity, R.id.garden_nav_fragment).let {
+                navigationView.setupWithNavController(it)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

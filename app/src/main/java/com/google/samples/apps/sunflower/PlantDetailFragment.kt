@@ -25,6 +25,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
@@ -54,6 +56,12 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
+
+            (requireActivity() as AppCompatActivity).setSupportActionBar(detailToolbar)
+            NavigationUI.setupActionBarWithNavController(
+                requireActivity() as AppCompatActivity,
+                Navigation.findNavController(requireActivity(), R.id.garden_nav_fragment)
+            )
         }
 
         return binding.root
