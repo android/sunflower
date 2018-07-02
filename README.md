@@ -86,11 +86,15 @@ app? Please open a new [issue](https://github.com/googlesamples/android-sunflowe
 
 Android Studio IDE setup
 ------------------------
-Plaid uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
+For development, the latest version of Android Studio 3.2 is required. The latest version can be
+downloaded from [here](https://developer.android.com/studio/preview/).
+
+Sunflower uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
 Here's how to configure it for use with Android Studio (instructions adapted
 from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)):
 
 - Close Android Studio if it's open
+
 - Download ktlint:
 
   `curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.24.0/ktlint && chmod a+x ktlint`
