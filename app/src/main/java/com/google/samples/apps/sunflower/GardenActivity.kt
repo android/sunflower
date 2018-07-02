@@ -34,6 +34,7 @@ class GardenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_garden)
+        binding.setLifecycleOwner(this)
 
         val navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
 
