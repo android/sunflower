@@ -16,16 +16,16 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.content.Intent
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.samples.apps.sunflower.BR
-import com.google.samples.apps.sunflower.PlantDetailActivity
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.PlantListFragment
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 
@@ -34,18 +34,10 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
  */
 class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
 
-    private val onClickListener = View.OnClickListener { view ->
-        val item = view.tag as Plant
-        val intent = Intent(view.context, PlantDetailActivity::class.java).apply {
-            putExtra(PlantDetailFragment.ARG_ITEM_ID, item.plantId)
-        }
-        view.context.startActivity(intent)
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val plant = getItem(position)
         holder.apply {
-            bind(onClickListener, plant)
+            bind(createOnClickListener(plant.plantId), plant)
             itemView.tag = plant
         }
     }
@@ -53,6 +45,12 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ListItemPlantBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false))
+    }
+
+    private fun createOnClickListener(plantId: String): View.OnClickListener {
+        val bundle = bundleOf(PlantDetailFragment.ARG_ITEM_ID to plantId)
+        return Navigation.createNavigateOnClickListener(
+                R.id.action_plant_list_fragment_to_plant_detail_fragment, bundle)
     }
 
     class ViewHolder(

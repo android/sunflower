@@ -56,12 +56,6 @@ class PlantDetailFragment : Fragment() {
             }
         }
 
-        val appCompatActivity = requireActivity() as AppCompatActivity
-        appCompatActivity.setSupportActionBar(binding.detailToolbar)
-
-        // Show the Up button in the action bar.
-        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         return binding.root
     }
 
