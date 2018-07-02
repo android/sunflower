@@ -18,11 +18,10 @@ package com.google.samples.apps.sunflower
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -47,6 +46,14 @@ class GardenActivity : AppCompatActivity() {
 
         // Set up navigation menu
         binding.navigationView.setupWithNavController(navController)
+
+        navController.addOnNavigatedListener { _, destination ->
+            if (destination.id == R.id.plant_detail_fragment) {
+                binding.appbar.fadeOut { visibility = View.GONE }
+            } else {
+                binding.appbar.fadeIn { visibility = View.VISIBLE }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

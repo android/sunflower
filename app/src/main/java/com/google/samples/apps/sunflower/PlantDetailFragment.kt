@@ -21,11 +21,10 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.navigation.Navigation
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
@@ -54,7 +53,10 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
-        }
+        }.also { it.detailToolbar.setNavigationOnClickListener {
+            val navController = Navigation.findNavController(requireActivity(), R.id.garden_nav_fragment)
+            navController.navigateUp()
+        } }
 
         return binding.root
     }

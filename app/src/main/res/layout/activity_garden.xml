@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -52,7 +52,7 @@
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/nav_garden"/>
 
-        </LinearLayout>
+        </FrameLayout>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/navigation_view"

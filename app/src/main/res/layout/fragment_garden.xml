@@ -16,10 +16,11 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:paddingTop="?attr/actionBarSize">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/garden_list"
@@ -29,7 +30,7 @@
         android:paddingLeft="@dimen/margin_normal"
         android:paddingRight="@dimen/margin_normal"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/list_item_garden_planting" />
+        tools:listitem="@layout/list_item_garden_planting"/>
 
     <TextView
         android:id="@+id/empty_garden"
@@ -37,6 +38,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/garden_empty"
-        android:textSize="24sp" />
+        android:textSize="24sp"/>
 
 </FrameLayout>
