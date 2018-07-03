@@ -38,7 +38,7 @@ class GardenActivity : AppCompatActivity() {
             R.layout.activity_garden
         ).apply {
             this@GardenActivity.drawerLayout = drawerLayout
-            Navigation.findNavController(this@GardenActivity, R.id.garden_nav_fragment).let {
+            Navigation.findNavController(this@GardenActivity, R.id.nav_controller).let {
                 navigationView.setupWithNavController(it)
             }
         }
@@ -49,12 +49,12 @@ class GardenActivity : AppCompatActivity() {
         // Otherwise, bubble up to the parent.
 
         return NavigationUI.onNavDestinationSelected(item,
-                Navigation.findNavController(this, R.id.garden_nav_fragment)) ||
+                Navigation.findNavController(this, R.id.nav_controller)) ||
                 super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(drawerLayout,
-                Navigation.findNavController(this, R.id.garden_nav_fragment))
+                Navigation.findNavController(this, R.id.nav_controller))
     }
 }

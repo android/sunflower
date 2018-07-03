@@ -21,14 +21,13 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
-
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.utilities.setUpAppbar
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -55,14 +54,8 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
-
-            (requireActivity() as AppCompatActivity).setSupportActionBar(detailToolbar)
-            NavigationUI.setupActionBarWithNavController(
-                requireActivity() as AppCompatActivity,
-                Navigation.findNavController(requireActivity(), R.id.garden_nav_fragment)
-            )
+            (requireActivity() as AppCompatActivity).setUpAppbar(root, false)
         }
-
         return binding.root
     }
 
@@ -73,15 +66,5 @@ class PlantDetailFragment : Fragment() {
          * represents.
          */
         const val ARG_ITEM_ID = "item_id"
-
-        /**
-         * Create a new instance of PlantDetailFragment, initialized with a plant ID.
-         */
-        fun newInstance(plantId: String): PlantDetailFragment {
-
-            // Supply plant ID as an argument.
-            val bundle = Bundle().apply { putString(ARG_ITEM_ID, plantId) }
-            return PlantDetailFragment().apply { arguments = bundle }
-        }
     }
 }

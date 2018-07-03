@@ -20,13 +20,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+        android:id="@id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
         <fragment
-            android:id="@+id/garden_nav_fragment"
+            android:id="@id/nav_controller"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,7 +34,7 @@
             app:navGraph="@navigation/nav_garden"/>
 
         <android.support.design.widget.NavigationView
-            android:id="@+id/navigation_view"
+            android:id="@id/navigation_view"
             style="@style/Widget.MaterialComponents.NavigationView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
