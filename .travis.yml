@@ -29,7 +29,7 @@ before_install:
       - chmod +x ./gradlew
       - yes | sdkmanager "platforms;android-28"
       - yes | sdkmanager "build-tools;28.0.0"
-      - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+      - echo no | android create avd --force -n test -t android-27 --abi x86
       - emulator -avd test -no-skin -no-audio -no-window &
       - adb wait-for-device
       - adb shell input keyevent 82 &
