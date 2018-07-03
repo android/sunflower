@@ -34,15 +34,15 @@ class GardenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityGardenBinding  = DataBindingUtil.setContentView(this, R.layout.activity_garden)
-        binding.setLifecycleOwner(this)
+        val binding: ActivityGardenBinding = DataBindingUtil.setContentView(this,
+                R.layout.activity_garden)
         drawerLayout = binding.drawerLayout
 
         val navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
 
         // Set up ActionBar
         setSupportActionBar(binding.toolbar)
-        NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
 
         // Set up navigation menu
         binding.navigationView.setupWithNavController(navController)
