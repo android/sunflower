@@ -70,4 +70,4 @@ dependencies {
 }
 
 
-task testAll(dependsOn: ['uninstallAll', 'clean', 'check', 'connectedAndroidTest'])
+task testAll(dependsOn: ['uninstallAll', 'clean', 'check', 'connectedCheck'])

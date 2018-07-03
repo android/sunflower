@@ -26,7 +26,7 @@ before_install:
       - chmod +x ./gradlew
       - yes | sdkmanager "platforms;android-28"
       - yes | sdkmanager "build-tools;28.0.0"
-      - echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a
+      - echo no | android create avd --force -n test -t android-27 --abi armeabi-v7a
       - emulator -avd test -no-skin -no-audio -no-window &
       - android-wait-for-emulator
       - adb shell input keyevent 82 &
