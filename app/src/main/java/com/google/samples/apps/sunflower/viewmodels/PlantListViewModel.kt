@@ -28,7 +28,7 @@ import com.google.samples.apps.sunflower.data.PlantRepository
  * The ViewModel for [PlantListFragment].
  */
 class PlantListViewModel internal constructor(
-        private val plantRepository: PlantRepository
+    private val plantRepository: PlantRepository
 ) : ViewModel() {
 
     private val NO_GROW_ZONE = -1

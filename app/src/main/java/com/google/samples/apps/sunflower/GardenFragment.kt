@@ -32,9 +32,9 @@ import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 class GardenFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_garden, container, false)
         val adapter = GardenPlantingAdapter(view.context)
