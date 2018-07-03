@@ -1,8 +1,9 @@
 language: android
 env:
   - TEST_SUITE=units
-  - ANDROID_TARGET=android-23
-  - ANDROID_ABI=x86
+  global:
+    - ANDROID_TARGET=android-23
+    - ANDROID_ABI=x86
 android:
   components:
     - tools
