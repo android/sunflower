@@ -68,3 +68,6 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
 }
+
+
+task testAll(dependsOn: ['uninstallAll', 'clean', 'check', 'connectedAndroidTest'])
