@@ -18,10 +18,8 @@ package com.google.samples.apps.sunflower
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -54,8 +52,8 @@ class GardenActivity : AppCompatActivity() {
         // Otherwise, bubble up to the parent.
 
         return NavigationUI.onNavDestinationSelected(item,
-                Navigation.findNavController(this, R.id.garden_nav_fragment))
-                || super.onOptionsItemSelected(item)
+                Navigation.findNavController(this, R.id.garden_nav_fragment)) ||
+                super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
