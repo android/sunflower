@@ -84,6 +84,31 @@ as the component libraries evolve.
 Interested in seeing a particular feature of the Android Framework or Jetpack implemented in this
 app? Please open a new [issue](https://github.com/googlesamples/android-sunflower/issues).
 
+Android Studio IDE setup
+------------------------
+For development, the latest version of Android Studio 3.2 is required. The latest version can be
+downloaded from [here](https://developer.android.com/studio/preview/).
+
+Sunflower uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
+Here's how to configure it for use with Android Studio (instructions adapted
+from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)):
+
+- Close Android Studio if it's open
+
+- Download ktlint:
+
+  `curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.24.0/ktlint && chmod a+x ktlint`
+
+- Inside the project root directory run:
+
+  `ktlint --apply-to-idea-project --android`
+
+- Remove ktlint if desired:
+
+  `rm ktlint`
+
+- Start Android Studio
+
 Support
 -------
 

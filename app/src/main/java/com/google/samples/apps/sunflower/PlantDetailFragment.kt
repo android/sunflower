@@ -35,9 +35,9 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 class PlantDetailFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
 
@@ -79,5 +79,4 @@ class PlantDetailFragment : Fragment() {
             return PlantDetailFragment().apply { arguments = bundle }
         }
     }
-
 }
