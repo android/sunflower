@@ -1,6 +1,8 @@
 language: android
 env:
   - TEST_SUITE=units
+  - ANDROID_TARGET=android-23
+  - ANDROID_ABI=x86
 android:
   components:
     - tools
@@ -26,7 +28,7 @@ before_install:
       - chmod +x ./gradlew
       - yes | sdkmanager "platforms;android-28"
       - yes | sdkmanager "build-tools;28.0.0"
-      - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+      - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi x86 -no-accel
       - emulator -avd test -no-skin -no-audio -no-window &
       - android-wait-for-emulator
       - adb shell input keyevent 82 &
