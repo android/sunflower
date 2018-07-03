@@ -51,6 +51,7 @@ class GardenActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Look for an action or destination matching the menu item ID and navigate there is found.
         // Otherwise, bubble up to the parent.
+
         return NavigationUI.onNavDestinationSelected(item,
                 Navigation.findNavController(this, R.id.garden_nav_fragment))
                 || super.onOptionsItemSelected(item)
