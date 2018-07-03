@@ -21,7 +21,6 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,9 +37,9 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 class PlantDetailFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
 
@@ -85,5 +84,4 @@ class PlantDetailFragment : Fragment() {
             return PlantDetailFragment().apply { arguments = bundle }
         }
     }
-
 }

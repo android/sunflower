@@ -49,8 +49,8 @@ class GardenActivity : AppCompatActivity() {
         // Otherwise, bubble up to the parent.
 
         return NavigationUI.onNavDestinationSelected(item,
-                Navigation.findNavController(this, R.id.garden_nav_fragment))
-                || super.onOptionsItemSelected(item)
+                Navigation.findNavController(this, R.id.garden_nav_fragment)) ||
+                super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

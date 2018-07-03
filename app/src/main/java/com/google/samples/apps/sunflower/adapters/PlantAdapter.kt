@@ -54,7 +54,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     }
 
     class ViewHolder(
-            private val binding: ListItemPlantBinding
+        private val binding: ListItemPlantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: View.OnClickListener, item: Plant) {

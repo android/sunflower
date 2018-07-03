@@ -19,7 +19,7 @@ package com.google.samples.apps.sunflower.data
 import com.google.samples.apps.sunflower.utilities.runOnIoThread
 
 class GardenPlantingRepository private constructor(
-        private val gardenPlantingDao: GardenPlantingDao
+    private val gardenPlantingDao: GardenPlantingDao
 ) {
 
     fun createGardenPlanting(plantId: String) {

@@ -39,7 +39,7 @@ object InjectorUtils {
     }
 
     fun provideGardenPlantingListViewModelFactory(
-            context: Context
+        context: Context
     ): GardenPlantingListViewModelFactory {
         val repository = getGardenPlantingRepository(context)
         return GardenPlantingListViewModelFactory(repository)
@@ -51,11 +51,10 @@ object InjectorUtils {
     }
 
     fun providePlantDetailViewModelFactory(
-            context: Context,
-            plantId: String
+        context: Context,
+        plantId: String
     ): PlantDetailViewModelFactory {
         return PlantDetailViewModelFactory(getPlantRepository(context),
                 getGardenPlantingRepository(context), plantId)
     }
-
 }

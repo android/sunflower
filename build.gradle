@@ -24,7 +24,6 @@ buildscript {
 
         // App dependencies
         constraintLayoutVersion = '1.1.2'
-        dataBindingVersion = '3.0.1'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
         gradleVersion = '3.2.0-beta02'
@@ -33,6 +32,7 @@ buildscript {
         lifecycleVersion = '1.1.1'
         navigationVersion = '1.0.0-alpha02'
         kotlinVersion = '1.2.50'
+        ktlintVersion = '0.24.0'
         ktxVersion = '0.3'
         roomVersion = '1.1.1'
         runnerVersion = '1.0.1'
@@ -51,6 +51,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.13.0"
+}
+
 allprojects {
     repositories {
         google()
@@ -58,6 +62,9 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+spotless {
+    kotlin {
+        target "**/*.kt"
+        ktlint(ktlintVersion)
+    }
 }
