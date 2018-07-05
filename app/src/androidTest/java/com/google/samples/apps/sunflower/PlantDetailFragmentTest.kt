@@ -47,7 +47,7 @@ class PlantDetailFragmentTest {
     val activityTestRule = ActivityTestRule(GardenActivity::class.java)
 
     @Before
-    fun clickOnPlantListDrawerMenuItem_StartsPlantListActivity() {
+    fun jumpToPlantDetailFragment() {
         activityTestRule.activity.apply {
             runOnUiThread {
                 val bundle = Bundle().apply { putString(PlantDetailFragment.ARG_ITEM_ID, testPlant.plantId) }
