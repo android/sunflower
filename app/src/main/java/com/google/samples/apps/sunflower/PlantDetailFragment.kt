@@ -50,10 +50,11 @@ class PlantDetailFragment : Fragment() {
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
         plantDetailViewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel::class.java)
+            .get(PlantDetailViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-                inflater, R.layout.fragment_plant_detail, container, false).apply {
+            inflater, R.layout.fragment_plant_detail, container, false
+        ).apply {
             viewModel = plantDetailViewModel
             setLifecycleOwner(this@PlantDetailFragment)
             fab.setOnClickListener { view ->
@@ -75,20 +76,19 @@ class PlantDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_share -> {
-                share()
+                val shareText = getString(R.string.share_text, plantDetailViewModel.plant.value?.name)
+                startActivity(getShareTextIntent(shareText))
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun share() {
-        val shareText = getString(R.string.share_text, plantDetailViewModel.plant.value?.name)
-
+    private fun getShareTextIntent(text: String): Intent {
         val intent = ShareCompat.IntentBuilder.from(activity)
-                .setText(shareText)
-                .setType("text/plain")
-                .createChooserIntent()
+            .setText(text)
+            .setType("text/plain")
+            .createChooserIntent()
 
         // https://android-developers.googleblog.com/2012/02/share-with-intents.html
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -99,7 +99,7 @@ class PlantDetailFragment : Fragment() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
         }
 
-        startActivity(intent)
+        return intent
     }
 
     companion object {
