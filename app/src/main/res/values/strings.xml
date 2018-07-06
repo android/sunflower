@@ -26,6 +26,7 @@
         Navigation drawer header logo
     </string>
     <string name="added_plant_to_garden">Added plant to garden</string>
+    <string name="removed_plant_from_garden">Removed plant from garden</string>
     <string name="garden_empty">Your garden is empty</string>
     <string name="planted_date">%s planted on %s</string>
 

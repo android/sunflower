@@ -51,4 +51,8 @@ class PlantDetailViewModel(
     fun addPlantToGarden() {
         gardenPlantingRepository.createGardenPlanting(plantId)
     }
+
+    fun removePlantFromGarden() {
+        gardenPlantingRepository.removeGardenPlanting(plantId)
+    }
 }

@@ -16,9 +16,11 @@
 
 package com.google.samples.apps.sunflower
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -34,6 +36,8 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
  */
 class PlantDetailFragment : Fragment() {
 
+    private lateinit var plantDetailViewModel: PlantDetailViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,20 +46,40 @@ class PlantDetailFragment : Fragment() {
         val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
-        val plantDetailViewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel::class.java)
+        plantDetailViewModel = ViewModelProviders.of(this, factory)
+            .get(PlantDetailViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
                 inflater, R.layout.fragment_plant_detail, container, false).apply {
             viewModel = plantDetailViewModel
             setLifecycleOwner(this@PlantDetailFragment)
             fab.setOnClickListener { view ->
-                plantDetailViewModel.addPlantToGarden()
-                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+                val isPlanted = plantDetailViewModel.isPlanted.value ?: false
+                if (isPlanted) {
+                    plantDetailViewModel.removePlantFromGarden()
+                    Snackbar.make(view, R.string.removed_plant_from_garden, Snackbar.LENGTH_LONG).show()
+                } else {
+                    plantDetailViewModel.addPlantToGarden()
+                    Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+                }
+
             }
         }
 
+        subscribeUi(binding.root)
+
         return binding.root
+    }
+
+    private fun subscribeUi(view: View) {
+        plantDetailViewModel.isPlanted.observe(viewLifecycleOwner, Observer {
+            val isPlanted = it ?: false
+            if (isPlanted) {
+                view.findViewById<FloatingActionButton>(R.id.fab).setImageResource(R.drawable.ic_minus)
+            } else {
+                view.findViewById<FloatingActionButton>(R.id.fab).setImageResource(R.drawable.ic_plus)
+            }
+        })
     }
 
     companion object {
