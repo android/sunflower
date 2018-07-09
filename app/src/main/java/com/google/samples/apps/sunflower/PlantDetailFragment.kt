@@ -16,11 +16,9 @@
 
 package com.google.samples.apps.sunflower
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -66,20 +64,7 @@ class PlantDetailFragment : Fragment() {
             }
         }
 
-        subscribeUi(binding.root)
-
         return binding.root
-    }
-
-    private fun subscribeUi(view: View) {
-        plantDetailViewModel.isPlanted.observe(viewLifecycleOwner, Observer {
-            val isPlanted = it ?: false
-            if (isPlanted) {
-                view.findViewById<FloatingActionButton>(R.id.fab).setImageResource(R.drawable.ic_minus)
-            } else {
-                view.findViewById<FloatingActionButton>(R.id.fab).setImageResource(R.drawable.ic_plus)
-            }
-        })
     }
 
     companion object {

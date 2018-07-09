@@ -37,9 +37,12 @@ fun imageFromUrl(view: ImageView, imageUrl: String?) {
     }
 }
 
-@BindingAdapter("goneIf")
-fun goneIf(view: FloatingActionButton, isGone: Boolean?) {
-    if (isGone == null || isGone) view.hide() else view.show()
+@BindingAdapter("minusIf")
+fun minusIf(view: FloatingActionButton, isPlanted: Boolean?) {
+    if (isPlanted == null || !isPlanted)
+        view.setImageResource(R.drawable.ic_plus)
+    else
+        view.setImageResource(R.drawable.ic_minus)
 }
 
 @BindingAdapter("wateringText")
