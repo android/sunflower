@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -39,7 +40,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
  */
 class PlantDetailFragment : Fragment() {
 
-    private lateinit var plantDetailViewModel: PlantDetailViewModel
+    private lateinit var shareText: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +50,7 @@ class PlantDetailFragment : Fragment() {
         val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
-        plantDetailViewModel = ViewModelProviders.of(this, factory)
+        val plantDetailViewModel = ViewModelProviders.of(this, factory)
             .get(PlantDetailViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
@@ -61,9 +62,17 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
-
-            setHasOptionsMenu(true)
         }
+
+        plantDetailViewModel.plant.observe(this, Observer { plant ->
+            shareText = if (plant == null) {
+                ""
+            } else {
+                getString(R.string.share_text, plant.name)
+            }
+        })
+
+        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -76,7 +85,6 @@ class PlantDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_share -> {
-                val shareText = getString(R.string.share_text, plantDetailViewModel.plant.value?.name)
                 startActivity(getShareTextIntent(shareText))
                 return true
             }
