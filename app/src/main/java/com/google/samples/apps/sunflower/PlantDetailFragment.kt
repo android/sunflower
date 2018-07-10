@@ -42,7 +42,7 @@ class PlantDetailFragment : Fragment() {
         val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
         val context = context ?: return view
 
-        val factory = InjectorUtils.providePlantDetailViewModelFactory(context, plantId)
+        val factory = InjectorUtils.providePlantDetailViewModelFactory(context.applicationContext, plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
                 .get(PlantDetailViewModel::class.java)
 
