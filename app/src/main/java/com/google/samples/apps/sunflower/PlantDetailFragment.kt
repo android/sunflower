@@ -40,8 +40,9 @@ class PlantDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
+        val context = context ?: return view
 
-        val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
+        val factory = InjectorUtils.providePlantDetailViewModelFactory(context, plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
                 .get(PlantDetailViewModel::class.java)
 
