@@ -37,12 +37,13 @@ fun imageFromUrl(view: ImageView, imageUrl: String?) {
     }
 }
 
-@BindingAdapter("minusIf")
-fun minusIf(view: FloatingActionButton, isPlanted: Boolean?) {
-    if (isPlanted == null || !isPlanted)
+@BindingAdapter("showPlusIf")
+fun showPlusIf(view: FloatingActionButton, isPlus: Boolean?) {
+    if (isPlus == null || !isPlus) {
         view.setImageResource(R.drawable.ic_plus)
-    else
+    } else {
         view.setImageResource(R.drawable.ic_minus)
+    }
 }
 
 @BindingAdapter("wateringText")

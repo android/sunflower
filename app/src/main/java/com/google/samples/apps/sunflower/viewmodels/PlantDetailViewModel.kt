@@ -19,7 +19,10 @@ package com.google.samples.apps.sunflower.viewmodels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.support.design.widget.Snackbar
+import android.view.View
 import com.google.samples.apps.sunflower.PlantDetailFragment
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -54,5 +57,15 @@ class PlantDetailViewModel(
 
     fun removePlantFromGarden() {
         gardenPlantingRepository.removeGardenPlanting(plantId)
+    }
+
+    fun toggleAddOrRemove(view: View) {
+        if (isPlanted.value == true) {
+            removePlantFromGarden()
+            Snackbar.make(view, R.string.removed_plant_from_garden, Snackbar.LENGTH_LONG).show()
+        } else {
+            addPlantToGarden()
+            Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+        }
     }
 }
