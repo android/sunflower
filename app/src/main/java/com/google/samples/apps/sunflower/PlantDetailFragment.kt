@@ -16,9 +16,11 @@
 
 package com.google.samples.apps.sunflower
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +51,14 @@ class PlantDetailFragment : Fragment() {
             viewModel = plantDetailViewModel
             setLifecycleOwner(this@PlantDetailFragment)
         }
+
+        plantDetailViewModel.notifyToggleAddOrRemove.observe(viewLifecycleOwner, Observer { isAdded ->
+            if (isAdded == true) {
+                Snackbar.make(binding.fab, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+            } else {
+                Snackbar.make(binding.fab, R.string.removed_plant_from_garden, Snackbar.LENGTH_LONG).show()
+            }
+        })
 
         return binding.root
     }

@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.support.design.widget.Snackbar
@@ -38,6 +39,7 @@ class PlantDetailViewModel(
 
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>
+    val notifyToggleAddOrRemove: MutableLiveData<Boolean>
 
     init {
 
@@ -49,23 +51,25 @@ class PlantDetailViewModel(
         isPlanted = Transformations.map(gardenPlantingForPlant) { it != null }
 
         plant = plantRepository.getPlant(plantId)
+
+        notifyToggleAddOrRemove = MutableLiveData()
     }
 
-    fun addPlantToGarden() {
+    private fun addPlantToGarden() {
         gardenPlantingRepository.createGardenPlanting(plantId)
     }
 
-    fun removePlantFromGarden() {
+    private fun removePlantFromGarden() {
         gardenPlantingRepository.removeGardenPlanting(plantId)
     }
 
     fun toggleAddOrRemove(view: View) {
         if (isPlanted.value == true) {
             removePlantFromGarden()
-            Snackbar.make(view, R.string.removed_plant_from_garden, Snackbar.LENGTH_LONG).show()
+            notifyToggleAddOrRemove.postValue(false)
         } else {
             addPlantToGarden()
-            Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+            notifyToggleAddOrRemove.postValue(true)
         }
     }
 }
