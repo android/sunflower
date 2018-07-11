@@ -43,7 +43,7 @@ class PlantListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_plant_list, container, false)
         val context = context ?: return view
 
-        val factory = InjectorUtils.providePlantListViewModelFactory(context.applicationContext)
+        val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
 
         val adapter = PlantAdapter()

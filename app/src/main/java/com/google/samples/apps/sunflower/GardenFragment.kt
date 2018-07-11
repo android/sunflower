@@ -44,7 +44,7 @@ class GardenFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter) {
-        val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext().applicationContext)
+        val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
         val viewModel = ViewModelProviders.of(this, factory)
                 .get(GardenPlantingListViewModel::class.java)
 
