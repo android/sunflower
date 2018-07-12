@@ -30,7 +30,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         versionCode 1
-        versionName "0.1.3"
+        versionName "0.1.4"
         vectorDrawables.useSupportLibrary true
     }
     buildTypes {
