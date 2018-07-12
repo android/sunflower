@@ -60,7 +60,6 @@ class PlantDetailFragment : Fragment() {
     }
 
     companion object {
-
         /**
          * The fragment argument representing the item ID that this fragment
          * represents.

@@ -32,7 +32,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.view.Gravity
 import com.google.samples.apps.sunflower.utilities.getToolbarNavigationContentDescription
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
