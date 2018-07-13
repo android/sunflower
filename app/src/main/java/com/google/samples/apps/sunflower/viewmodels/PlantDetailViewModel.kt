@@ -17,12 +17,9 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.view.View
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
@@ -63,7 +60,7 @@ class PlantDetailViewModel(
         gardenPlantingRepository.removeGardenPlanting(plantId)
     }
 
-    fun toggleAddOrRemove(view: View) {
+    fun toggleAddOrRemove() {
         if (isPlanted.value == true) {
             removePlantFromGarden()
             showSnackbarMessage(R.string.removed_plant_from_garden)
