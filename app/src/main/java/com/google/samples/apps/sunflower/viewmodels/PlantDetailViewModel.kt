@@ -20,6 +20,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.view.View
 import com.google.samples.apps.sunflower.PlantDetailFragment
@@ -27,6 +28,7 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
+import com.google.samples.apps.sunflower.utilities.SnackbarMessage
 
 /**
  * The ViewModel used in [PlantDetailFragment].
@@ -39,7 +41,7 @@ class PlantDetailViewModel(
 
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>
-    val notifyToggleAddOrRemove: MutableLiveData<Boolean>
+    val snackbarText = SnackbarMessage()
 
     init {
 
@@ -51,8 +53,6 @@ class PlantDetailViewModel(
         isPlanted = Transformations.map(gardenPlantingForPlant) { it != null }
 
         plant = plantRepository.getPlant(plantId)
-
-        notifyToggleAddOrRemove = MutableLiveData()
     }
 
     private fun addPlantToGarden() {
@@ -66,10 +66,14 @@ class PlantDetailViewModel(
     fun toggleAddOrRemove(view: View) {
         if (isPlanted.value == true) {
             removePlantFromGarden()
-            notifyToggleAddOrRemove.postValue(false)
+            showSnackbarMessage(R.string.removed_plant_from_garden)
         } else {
             addPlantToGarden()
-            notifyToggleAddOrRemove.postValue(true)
+            showSnackbarMessage(R.string.added_plant_to_garden)
         }
+    }
+
+    private fun showSnackbarMessage(@StringRes message: Int?) {
+        snackbarText.value = message
     }
 }
