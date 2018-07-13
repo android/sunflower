@@ -28,9 +28,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
-import com.google.samples.apps.sunflower.utilities.setUpAppbar
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
 class PlantListFragment : Fragment() {
@@ -45,7 +46,14 @@ class PlantListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_plant_list, container, false)
         val context = context ?: return view
 
-        (requireActivity() as AppCompatActivity).setUpAppbar(view, true)
+        (requireActivity() as AppCompatActivity).apply {
+            setSupportActionBar(view.findViewById(R.id.toolbar))
+            NavigationUI.setupActionBarWithNavController(
+                this,
+                Navigation.findNavController(this, R.id.nav_controller),
+                findViewById(R.id.drawer_layout)
+            )
+        }
 
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
