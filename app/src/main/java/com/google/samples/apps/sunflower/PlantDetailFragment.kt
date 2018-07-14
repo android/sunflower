@@ -39,7 +39,7 @@ class PlantDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
+        val plantId = PlantDetailFragmentArgs.fromBundle(requireNotNull(arguments)).plantId
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
@@ -58,11 +58,4 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
 
-    companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
-        const val ARG_ITEM_ID = "item_id"
-    }
 }
