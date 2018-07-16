@@ -38,6 +38,7 @@ buildscript {
         runnerVersion = '1.0.1'
         supportLibraryVersion = '28.0.0-alpha3'
         workVersion = '1.0.0-alpha04'
+        coreTestingVersion = '1.1.1'
     }
 
     repositories {

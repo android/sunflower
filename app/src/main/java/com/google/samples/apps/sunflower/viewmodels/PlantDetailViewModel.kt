@@ -70,7 +70,7 @@ class PlantDetailViewModel(
         }
     }
 
-    private fun showSnackbarMessage(@StringRes message: Int?) {
+    public fun showSnackbarMessage(@StringRes message: Int?) {
         snackbarText.value = message
     }
 }
