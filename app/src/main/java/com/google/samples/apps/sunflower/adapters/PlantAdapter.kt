@@ -42,10 +42,11 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ListItemPlantBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        ListItemPlantBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+    )
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         val bundle = bundleOf(PlantDetailFragment.ARG_ITEM_ID to plantId)
