@@ -31,6 +31,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
@@ -47,15 +48,14 @@ class PlantDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
+        val plantId = PlantDetailFragmentArgs.fromBundle(arguments).plantId
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
-            .get(PlantDetailViewModel::class.java)
+                .get(PlantDetailViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-            inflater, R.layout.fragment_plant_detail, container, false
-        ).apply {
+                inflater, R.layout.fragment_plant_detail, container, false).apply {
             viewModel = plantDetailViewModel
             setLifecycleOwner(this@PlantDetailFragment)
             fab.setOnClickListener { view ->
