@@ -15,8 +15,8 @@
   ~ limitations under the License.
   -->
 
-<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/garden_fragment">
 
@@ -46,6 +46,9 @@
         android:name="com.google.samples.apps.sunflower.PlantDetailFragment"
         android:label="@string/plant_details_title"
         tools:layout="@layout/fragment_plant_detail">
+        <argument
+            android:name="plantId"
+            app:type="string" />
     </fragment>
 
 </navigation>
