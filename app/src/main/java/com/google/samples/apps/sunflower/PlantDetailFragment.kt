@@ -39,7 +39,7 @@ class PlantDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val plantId = PlantDetailFragmentArgs.fromBundle(requireNotNull(arguments)).plantId
+        val plantId = PlantDetailFragmentArgs.fromBundle(arguments).plantId
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
