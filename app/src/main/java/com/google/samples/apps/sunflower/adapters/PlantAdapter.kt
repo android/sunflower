@@ -21,11 +21,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.Navigation
-import com.google.samples.apps.sunflower.PlantDetailFragment
+import androidx.navigation.findNavController
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.PlantListFragmentDirections
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 
@@ -48,9 +46,10 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     }
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
-        val bundle = bundleOf(PlantDetailFragment.ARG_ITEM_ID to plantId)
-        return Navigation.createNavigateOnClickListener(
-                R.id.action_plant_list_fragment_to_plant_detail_fragment, bundle)
+        return View.OnClickListener {
+            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
+            it.findNavController().navigate(direction)
+        }
     }
 
     class ViewHolder(
