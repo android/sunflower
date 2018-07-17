@@ -46,7 +46,10 @@ class PlantDetailViewModelTest {
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getTargetContext()
-        appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
+            // allowing main thread queries, just for testing
+            .allowMainThreadQueries()
+            .build()
 
         val plantRepo = PlantRepository.getInstance(appDatabase.plantDao())
         val gardenPlantingRepo = GardenPlantingRepository.getInstance(
@@ -62,9 +65,7 @@ class PlantDetailViewModelTest {
     @Test
     @Throws(InterruptedException::class)
     fun testDefaultValues() {
-        runOnIoThread {
-            assertFalse(getValue(viewModel.isPlanted))
-        }
+        assertFalse(getValue(viewModel.isPlanted))
     }
 
     @Test
