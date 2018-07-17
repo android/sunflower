@@ -57,5 +57,4 @@ class PlantDetailFragment : Fragment() {
 
         return binding.root
     }
-
 }
