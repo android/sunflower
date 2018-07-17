@@ -27,7 +27,7 @@
     </string>
     <string name="added_plant_to_garden">Added plant to garden</string>
     <string name="garden_empty">Your garden is empty</string>
-    <string name="planted_date">%s planted on %s</string>
+    <string name="planted_date">%1$s planted on %2$s</string>
 
     <string name="watering_needs_prefix">Watering needs:</string>
     <plurals name="watering_needs_suffix">

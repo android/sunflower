@@ -26,11 +26,11 @@ buildscript {
         constraintLayoutVersion = '1.1.2'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
-        gradleVersion = '3.2.0-beta02'
+        gradleVersion = '3.2.0-beta03'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
-        navigationVersion = '1.0.0-alpha02'
+        navigationVersion = '1.0.0-alpha03'
         kotlinVersion = '1.2.51'
         ktlintVersion = '0.24.0'
         ktxVersion = '0.3'
@@ -48,6 +48,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     }
 }
 

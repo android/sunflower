@@ -54,6 +54,7 @@ Libraries Used
      asynchronous tasks for optimal execution.
   * [WorkManager][18] - Manage your Android background jobs.
 * [UI][30] - Details on why and how to use UI Components in your apps - together or separate
+  * [Animations & Transitions][31] - Move widgets and transition between screens.
   * [Fragment][34] - A basic unit of composable UI.
   * [Layout][35] - Lay out widgets using different algorithms.
 * Third party
@@ -72,6 +73,7 @@ Libraries Used
 [17]: https://developer.android.com/topic/libraries/architecture/viewmodel
 [18]: https://developer.android.com/topic/libraries/architecture/workmanager
 [30]: https://developer.android.com/jetpack/ui/
+[31]: https://developer.android.com/training/animation/
 [34]: https://developer.android.com/guide/components/fragments
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
 [90]: https://bumptech.github.io/glide/
