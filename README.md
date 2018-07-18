@@ -7,6 +7,9 @@ A gardening app illustrating Android development best practices with Android Jet
 Android Sunflower is currently released as an alpha and is under heavy development. To view the
 latest changes, please visit the
 [Releases page](https://github.com/googlesamples/android-sunflower/releases).
+Note that some changes (such as database schema modifications) are not backwards
+compatible during this alpha period and may cause the app to crash. In this
+case, please uninstall and re-install the app.
 
 Introduction
 ------------
