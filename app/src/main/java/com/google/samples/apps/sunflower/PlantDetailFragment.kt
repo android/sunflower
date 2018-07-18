@@ -85,29 +85,25 @@ class PlantDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_share -> {
-                startActivity(getShareTextIntent(shareText))
+                val shareIntent = ShareCompat.IntentBuilder.from(activity)
+                    .setText(shareText)
+                    .setType("text/plain")
+                    .createChooserIntent()
+                    .apply {
+                        // https://android-developers.googleblog.com/2012/02/share-with-intents.html
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            // If we're on Lollipop, we can open the intent as a document
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                        } else {
+                            // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                        }
+                    }
+                startActivity(shareIntent)
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun getShareTextIntent(text: String): Intent {
-        val intent = ShareCompat.IntentBuilder.from(activity)
-            .setText(text)
-            .setType("text/plain")
-            .createChooserIntent()
-
-        // https://android-developers.googleblog.com/2012/02/share-with-intents.html
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // If we're on Lollipop, we can open the intent as a document
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-        } else {
-            // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-        }
-
-        return intent
     }
 
     companion object {
