@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower.data
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
+import android.arch.persistence.room.Index
 import android.arch.persistence.room.PrimaryKey
 import java.util.Calendar
 
@@ -30,8 +31,11 @@ import java.util.Calendar
  * Declaring the column info allows for the renaming of variables without implementing a
  * database migration, as the column name would not change.
  */
-@Entity(tableName = "garden_plantings", foreignKeys = [ForeignKey(entity = Plant::class,
-        parentColumns = ["id"], childColumns = ["plant_id"])])
+@Entity(
+    tableName = "garden_plantings",
+    foreignKeys = [ForeignKey(entity = Plant::class, parentColumns = ["id"], childColumns = ["plant_id"])],
+    indices = [Index("plant_id")]
+)
 data class GardenPlanting(
     @ColumnInfo(name = "plant_id") val plantId: String,
 
