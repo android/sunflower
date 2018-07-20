@@ -34,14 +34,14 @@
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix" translation_description="Prefix for the text describing how often a plant should be watered. Used in combination with watering_needs_suffix.">Watering needs:</string>
     <plurals name="watering_needs_suffix">
-        <item quantity="one" translation_description="Suffix for the text describing how often a plant should be watered. Used in combination with watering_needs_prefix: 'Watering needs: every day'.">every day</item>
-        <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered. Used in combination with watering_needs_prefix: 'Watering needs: every 8 days'.">every %d days</item>
+        <item quantity="one" translation_description="Suffix for the text describing how often a plant should be watered, singular. Used in combination with watering_needs_prefix: 'Watering needs: every day'.">every day</item>
+        <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered, plural. Used in combination with watering_needs_prefix: 'Watering needs: every 8 days'.">every %d days</item>
     </plurals>
 
     <string name="watering_next_prefix" translation_description="Prefix for the text indicating when the plant should next be watered. Used in combination with watering_next_suffix.">Last watered on %s</string>
     <plurals name="watering_next_suffix">
-        <item quantity="one" translation_description="Suffix for the text indicating when the the plant should next be watered. Used in combination with watering_next_prefix: 'Last watered on May 24, 2018 - water tomorrow.'.">water tomorrow.</item>
-        <item quantity="other" translation_description="Suffix for the text indicating when the the plant should next be watered. Used in combination with watering_next_prefix: 'Last watered on May 24, 2018 - water in 8 days.'.">water in %d days.</item>
+        <item quantity="one" translation_description="Suffix for the text indicating when the the plant should next be watered, singular. Used in combination with watering_next_prefix: 'Last watered on May 24, 2018 - water tomorrow.'.">water tomorrow.</item>
+        <item quantity="other" translation_description="Suffix for the text indicating when the the plant should next be watered, plural. Used in combination with watering_next_prefix: 'Last watered on May 24, 2018 - water in 8 days.'.">water in %d days.</item>
     </plurals>
 
     <!-- Accessibility -->
