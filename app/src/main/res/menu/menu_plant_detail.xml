@@ -21,7 +21,7 @@
     <item
         android:id="@+id/action_share"
         android:icon="@drawable/ic_share"
-        android:title="@string/share_title"
+        android:title="@string/menu_item_share_plant"
         app:showAsAction="ifRoom" />
 
 </menu>
