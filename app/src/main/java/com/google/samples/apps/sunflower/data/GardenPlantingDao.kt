@@ -48,5 +48,5 @@ interface GardenPlantingDao {
     fun insertGardenPlanting(gardenPlanting: GardenPlanting): Long
 
     @Query("DELETE FROM garden_plantings WHERE plant_id = :plantId")
-    fun removeGardenPlanting(plantId: String) : Int
+    fun removeGardenPlanting(plantId: String): Int
 }

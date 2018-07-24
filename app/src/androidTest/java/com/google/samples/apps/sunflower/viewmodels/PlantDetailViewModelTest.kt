@@ -24,7 +24,6 @@ import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import com.google.samples.apps.sunflower.utilities.getValue
-import com.google.samples.apps.sunflower.utilities.runOnIoThread
 import com.google.samples.apps.sunflower.utilities.testPlant
 import org.junit.After
 import org.junit.Assert.assertEquals
