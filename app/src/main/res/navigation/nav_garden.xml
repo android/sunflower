@@ -48,7 +48,7 @@
         tools:layout="@layout/fragment_plant_detail">
         <argument
             android:name="plantId"
-            app:type="string" />
+            app:argType="string" />
     </fragment>
 
 </navigation>

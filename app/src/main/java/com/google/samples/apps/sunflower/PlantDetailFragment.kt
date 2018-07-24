@@ -69,7 +69,7 @@ class PlantDetailFragment : Fragment() {
             shareText = if (plant == null) {
                 ""
             } else {
-                getString(R.string.share_text, plant.name)
+                getString(R.string.share_text_plant, plant.name)
             }
         })
 
