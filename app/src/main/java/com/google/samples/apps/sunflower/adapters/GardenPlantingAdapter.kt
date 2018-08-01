@@ -55,10 +55,7 @@ class GardenPlantingAdapter(
 
         fun bind(plantings: PlantAndGardenPlantings) {
             with(binding) {
-                viewModel = PlantAndGardenPlantingsViewModel(
-                    itemView.context,
-                    plantings
-                )
+                viewModel = PlantAndGardenPlantingsViewModel(plantings)
                 executePendingBindings()
             }
         }
