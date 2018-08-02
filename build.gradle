@@ -36,7 +36,7 @@ buildscript {
         ktxVersion = '0.3'
         roomVersion = '1.1.1'
         runnerVersion = '1.0.1'
-        supportLibraryVersion = '28.0.0-alpha3'
+        supportLibraryVersion = '28.0.0-beta01'
         workVersion = '1.0.0-alpha05'
     }
 
