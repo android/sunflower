@@ -31,12 +31,12 @@ buildscript {
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
         navigationVersion = '1.0.0-alpha04'
-        kotlinVersion = '1.2.51'
+        kotlinVersion = '1.2.60'
         ktlintVersion = '0.24.0'
         ktxVersion = '0.3'
         roomVersion = '1.1.1'
         runnerVersion = '1.0.1'
-        supportLibraryVersion = '28.0.0-alpha3'
+        supportLibraryVersion = '28.0.0-beta01'
         workVersion = '1.0.0-alpha05'
     }
 
