@@ -74,7 +74,7 @@ class PlantDetailFragmentTest {
 
         // dismiss the Share Dialog
         InstrumentationRegistry.getInstrumentation()
-            .getUiAutomation()
+            .uiAutomation
             .performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
     }
 }
