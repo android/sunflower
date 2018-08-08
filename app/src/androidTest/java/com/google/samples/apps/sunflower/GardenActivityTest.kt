@@ -72,6 +72,14 @@ class GardenActivityTest {
         onView(withId(R.id.plant_list)).check(matches(isDisplayed()))
     }
 
+    @Test fun pressDeviceBack_CloseDrawer_Then_PressBack_Close_App() {
+        clickOnHomeIconToOpenNavigationDrawer()
+        onView(isRoot()).perform(ViewActions.pressBack())
+        checkDrawerIsNotOpen()
+        assertEquals(activityTestRule.activity.isFinishing, false)
+        assertEquals(activityTestRule.activity.isDestroyed, false)
+    }
+
     private fun clickOnHomeIconToOpenNavigationDrawer() {
         onView(withContentDescription(getToolbarNavigationContentDescription(
                 activityTestRule.activity, R.id.toolbar))).perform(click())

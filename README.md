@@ -7,6 +7,9 @@ A gardening app illustrating Android development best practices with Android Jet
 Android Sunflower is currently released as an alpha and is under heavy development. To view the
 latest changes, please visit the
 [Releases page](https://github.com/googlesamples/android-sunflower/releases).
+Note that some changes (such as database schema modifications) are not backwards
+compatible during this alpha period and may cause the app to crash. In this
+case, please uninstall and re-install the app.
 
 Introduction
 ------------
@@ -54,6 +57,7 @@ Libraries Used
      asynchronous tasks for optimal execution.
   * [WorkManager][18] - Manage your Android background jobs.
 * [UI][30] - Details on why and how to use UI Components in your apps - together or separate
+  * [Animations & Transitions][31] - Move widgets and transition between screens.
   * [Fragment][34] - A basic unit of composable UI.
   * [Layout][35] - Lay out widgets using different algorithms.
 * Third party
@@ -72,6 +76,7 @@ Libraries Used
 [17]: https://developer.android.com/topic/libraries/architecture/viewmodel
 [18]: https://developer.android.com/topic/libraries/architecture/workmanager
 [30]: https://developer.android.com/jetpack/ui/
+[31]: https://developer.android.com/training/animation/
 [34]: https://developer.android.com/guide/components/fragments
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
 [90]: https://bumptech.github.io/glide/
@@ -83,6 +88,31 @@ as the component libraries evolve.
 
 Interested in seeing a particular feature of the Android Framework or Jetpack implemented in this
 app? Please open a new [issue](https://github.com/googlesamples/android-sunflower/issues).
+
+Android Studio IDE setup
+------------------------
+For development, the latest version of Android Studio 3.2 is required. The latest version can be
+downloaded from [here](https://developer.android.com/studio/preview/).
+
+Sunflower uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
+Here's how to configure it for use with Android Studio (instructions adapted
+from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)):
+
+- Close Android Studio if it's open
+
+- Download ktlint:
+
+  `curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.24.0/ktlint && chmod a+x ktlint`
+
+- Inside the project root directory run:
+
+  `ktlint --apply-to-idea-project --android`
+
+- Remove ktlint if desired:
+
+  `rm ktlint`
+
+- Start Android Studio
 
 Support
 -------
