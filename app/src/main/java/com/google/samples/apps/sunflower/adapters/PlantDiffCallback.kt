@@ -28,5 +28,4 @@ class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
     override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
         return oldItem == newItem
     }
-
 }

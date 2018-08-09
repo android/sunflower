@@ -39,7 +39,6 @@ class GardenFragment : Fragment() {
         with(GardenPlantingAdapter(context)) {
             binding.gardenList.adapter = this
             binding.setLifecycleOwner(viewLifecycleOwner)
-
             subscribeUi(binding, this)
         }
         binding.root

@@ -18,11 +18,9 @@ package com.google.samples.apps.sunflower
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -49,17 +47,16 @@ class GardenActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Look for an action or destination matching the menu item ID and navigate there is found.
-        // Otherwise, bubble up to the parent.
-
-        return NavigationUI.onNavDestinationSelected(item,
-                Navigation.findNavController(this, R.id.garden_nav_fragment))
-                || super.onOptionsItemSelected(item)
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(drawerLayout,
                 Navigation.findNavController(this, R.id.garden_nav_fragment))
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 }
