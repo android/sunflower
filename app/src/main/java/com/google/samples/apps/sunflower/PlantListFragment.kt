@@ -40,8 +40,9 @@ class PlantListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = FragmentPlantListBinding.inflate(inflater, container, false).run {
-        setLifecycleOwner(this@PlantListFragment)
         val context = context ?: return root
+        setLifecycleOwner(viewLifecycleOwner)
+
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this@PlantListFragment, factory)
             .get(PlantListViewModel::class.java)
@@ -70,7 +71,7 @@ class PlantListFragment : Fragment() {
     }
 
     private fun subscribeUi(databinding: FragmentPlantListBinding, adapter: PlantAdapter) {
-        viewModel.getPlants().observe(this, Observer { plants ->
+        viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) {
                 adapter.submitList(plants)
                 databinding.loadingUi.visibility = View.GONE

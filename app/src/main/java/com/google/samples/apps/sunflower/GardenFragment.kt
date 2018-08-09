@@ -35,7 +35,7 @@ class GardenFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = FragmentGardenBinding.inflate(inflater, container, false).run {
-        setLifecycleOwner(this@GardenFragment)
+        setLifecycleOwner(viewLifecycleOwner)
         val context = context ?: return root
         with(GardenPlantingAdapter(context)) {
             gardenList.adapter = this
@@ -49,11 +49,11 @@ class GardenFragment : Fragment() {
         val viewModel =
             ViewModelProviders.of(this, factory).get(GardenPlantingListViewModel::class.java)
 
-        viewModel.getGardenPlantings().observe(this, Observer { plantings ->
-            databinding.setVariable(BR.hasPlantings, plantings != null && plantings.isNotEmpty())
+        viewModel.gardenPlantings.observe(viewLifecycleOwner, Observer { plantings ->
+            databinding.hasPlantings = plantings != null && plantings.isNotEmpty()
         })
 
-        viewModel.getPlantAndGardenPlantings().observe(this, Observer { result ->
+        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner, Observer { result ->
             if (result != null && result.isNotEmpty())
             adapter.submitList(result)
             databinding.loadingUi.visibility = View.GONE

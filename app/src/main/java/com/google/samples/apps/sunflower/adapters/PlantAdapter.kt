@@ -16,61 +16,52 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.content.Intent
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.google.samples.apps.sunflower.PlantDetailActivity
-import com.google.samples.apps.sunflower.PlantDetailFragment
+import androidx.navigation.findNavController
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.PlantListFragmentDirections
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
 class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
 
-    private val onClickListener = View.OnClickListener { view ->
-        val item = view.tag as Plant
-        val intent = Intent(view.context, PlantDetailActivity::class.java).apply {
-            putExtra(PlantDetailFragment.ARG_ITEM_ID, item.plantId)
-        }
-        view.context.startActivity(intent)
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val plant = getItem(position)
         holder.apply {
-            Glide.with(imageView.context)
-                    .load(getItem(position).imageUrl)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imageView)
-            contentView.text = getItem(position).name
-            with(itemView) {
-                tag = getItem(position)
-                setOnClickListener(onClickListener)
-            }
+            bind(createOnClickListener(plant.plantId), plant)
+            itemView.tag = plant
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(
-                R.layout.list_item_plant, parent, false))
+        return ViewHolder(ListItemPlantBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false))
     }
 
-    /**
-     * Use this constructor to create a new ViewHolder.
-     *
-     * @param itemView - view to store in the ViewHolder
-     */
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.plant_item_image)
-        val contentView: TextView = itemView.findViewById(R.id.plant_item_title)
+    private fun createOnClickListener(plantId: String): View.OnClickListener {
+        return View.OnClickListener {
+            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
+            it.findNavController().navigate(direction)
+        }
+    }
+
+    class ViewHolder(
+        private val binding: ListItemPlantBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(listener: View.OnClickListener, item: Plant) {
+            binding.apply {
+                clickListener = listener
+                plant = item
+                executePendingBindings()
+            }
+        }
     }
 }

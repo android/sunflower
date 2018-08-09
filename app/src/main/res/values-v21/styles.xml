@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright 2018 Google LLC
   ~
@@ -16,15 +15,9 @@
   -->
 
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="app_bar_height">200dp</dimen>
 
-    <dimen name="margin_normal">16dp</dimen>
-    <dimen name="margin_small">8dp</dimen>
+    <style name="AppTheme" parent="BaseAppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 
-    <dimen name="plant_item_image_height">100dp</dimen>
-
-    <dimen name="navigation_drawer_header_height">192dp</dimen>
-    <dimen name="navigation_drawer_header_padding">16dp</dimen>
-    <dimen name="navigation_drawer_image_width">100dp</dimen>
 </resources>

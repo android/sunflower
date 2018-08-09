@@ -19,19 +19,18 @@ package com.google.samples.apps.sunflower.viewmodels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import com.google.samples.apps.sunflower.PlantDetailActivity
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 
 /**
- * The ViewModel used in [PlantDetailActivity] and [PlantDetailFragment].
+ * The ViewModel used in [PlantDetailFragment].
  */
 class PlantDetailViewModel(
-        plantRepository: PlantRepository,
-        private val gardenPlantingRepository: GardenPlantingRepository,
-        private val plantId: String
+    plantRepository: PlantRepository,
+    private val gardenPlantingRepository: GardenPlantingRepository,
+    private val plantId: String
 ) : ViewModel() {
 
     val isPlanted: LiveData<Boolean>

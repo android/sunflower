@@ -16,12 +16,19 @@
 
 package com.google.samples.apps.sunflower
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.app.ShareCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.ViewGroup
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
@@ -32,13 +39,15 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
  */
 class PlantDetailFragment : Fragment() {
 
+    private lateinit var shareText: String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = FragmentPlantDetailBinding.inflate(inflater, container, false).run {
-        setLifecycleOwner(this@PlantDetailFragment)
-        val plantId = requireNotNull(arguments).getString(ARG_ITEM_ID)
+        setLifecycleOwner(viewLifecycleOwner)
+        val plantId = PlantDetailFragmentArgs.fromBundle(arguments).plantId
 
         val factory =
             InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
@@ -53,11 +62,45 @@ class PlantDetailFragment : Fragment() {
 
         val appCompatActivity = requireActivity() as AppCompatActivity
         appCompatActivity.setSupportActionBar(detailToolbar)
+        plantDetailViewModel.plant.observe(viewLifecycleOwner, Observer { plant ->
+            shareText = if (plant == null) {
+                ""
+            } else {
+                getString(R.string.share_text_plant, plant.name)
+            }
+        })
 
-        // Show the Up button in the action bar.
-        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        setHasOptionsMenu(true)
         root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_plant_detail, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.action_share -> {
+                val shareIntent = ShareCompat.IntentBuilder.from(activity)
+                    .setText(shareText)
+                    .setType("text/plain")
+                    .createChooserIntent()
+                    .apply {
+                        // https://android-developers.googleblog.com/2012/02/share-with-intents.html
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            // If we're on Lollipop, we can open the intent as a document
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                        } else {
+                            // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                        }
+                    }
+                startActivity(shareIntent)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {
