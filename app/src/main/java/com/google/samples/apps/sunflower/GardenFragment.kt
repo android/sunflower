@@ -48,7 +48,7 @@ class GardenFragment : Fragment() {
         InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext()).let { factory ->
             ViewModelProviders.of(this, factory).get(GardenPlantingListViewModel::class.java)
                 .let { viewModel ->
-                    viewModel.gardenPlantings.observe(this, Observer { plantings ->
+                    viewModel.gardenPlantings.observe(viewLifecycleOwner, Observer { plantings ->
                         databinding.hasPlantings = (plantings != null && plantings.isNotEmpty())
                     })
                     viewModel.plantAndGardenPlantings.observe(
