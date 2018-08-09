@@ -26,7 +26,7 @@ buildscript {
         constraintLayoutVersion = '1.1.2'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
-        gradleVersion = '3.2.0-beta02'
+        gradleVersion = '3.2.0-beta05'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         lifecycleVersion = '1.1.1'
