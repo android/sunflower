@@ -24,7 +24,6 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.ShareCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -47,21 +46,17 @@ class PlantDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = FragmentPlantDetailBinding.inflate(inflater, container, false).run {
         setLifecycleOwner(viewLifecycleOwner)
-        val plantId = PlantDetailFragmentArgs.fromBundle(arguments).plantId
+        context ?: return root
 
+        val plantId = PlantDetailFragmentArgs.fromBundle(arguments).plantId
         val factory =
             InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
-        val plantDetailViewModel = ViewModelProviders.of(this@PlantDetailFragment, factory)
-            .get(PlantDetailViewModel::class.java)
+        val plantDetailViewModel = ViewModelProviders.of(this@PlantDetailFragment, factory).get(PlantDetailViewModel::class.java)
         viewModel = plantDetailViewModel
-
         fab.setOnClickListener { view ->
             plantDetailViewModel.addPlantToGarden()
             Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
         }
-
-        val appCompatActivity = requireActivity() as AppCompatActivity
-        appCompatActivity.setSupportActionBar(detailToolbar)
         plantDetailViewModel.plant.observe(viewLifecycleOwner, Observer { plant ->
             shareText = if (plant == null) {
                 ""
@@ -100,24 +95,6 @@ class PlantDetailFragment : Fragment() {
                 return true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    companion object {
-
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
-        const val ARG_ITEM_ID = "item_id"
-
-        /**
-         * Create a new instance of PlantDetailFragment, initialized with a plant ID.
-         */
-        fun newInstance(plantId: String): PlantDetailFragment {
-            // Supply plant ID as an argument.
-            val bundle = Bundle().apply { putString(ARG_ITEM_ID, plantId) }
-            return PlantDetailFragment().apply { arguments = bundle }
         }
     }
 }
