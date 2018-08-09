@@ -64,7 +64,7 @@ class PlantDetailFragment : Fragment() {
             }
         }
 
-        plantDetailViewModel.plant.observe(viewLifecycleOwner, Observer { plant ->
+        plantDetailViewModel.plant.observe(this, Observer { plant ->
             shareText = if (plant == null) {
                 ""
             } else {
