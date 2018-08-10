@@ -34,9 +34,9 @@ class GardenFragment : Fragment() {
     lateinit var binding: FragmentGardenBinding
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_garden, container, false)
         val viewRoot: View = binding.root
@@ -56,7 +56,6 @@ class GardenFragment : Fragment() {
                 activity?.run {
                     binding.gardenList.run { visibility = View.VISIBLE }
                     binding.emptyGarden.run { visibility = View.GONE }
-
                 }
             } else {
                 activity?.run {

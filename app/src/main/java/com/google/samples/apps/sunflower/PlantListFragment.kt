@@ -41,7 +41,7 @@ class PlantListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding : FragmentPlantListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_plant_list, container, false)
+        val binding: FragmentPlantListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_plant_list, container, false)
         val viewRoot: View = binding.root
         val context = context ?: return viewRoot
 
