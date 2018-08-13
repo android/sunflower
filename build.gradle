@@ -23,7 +23,7 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        constraintLayoutVersion = '1.1.2'
+        constraintLayoutVersion = '2.0.0-alpha2'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
         gradleVersion = '3.2.0-beta05'
