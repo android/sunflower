@@ -19,7 +19,6 @@ package com.google.samples.apps.sunflower
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -29,9 +28,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
-
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
@@ -47,24 +44,20 @@ class PlantDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ) = FragmentPlantDetailBinding.inflate(inflater, container, false).run {
+        setLifecycleOwner(viewLifecycleOwner)
+        context ?: return root
+
         val plantId = PlantDetailFragmentArgs.fromBundle(arguments).plantId
-
-        val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
-        val plantDetailViewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel::class.java)
-
-        val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-                inflater, R.layout.fragment_plant_detail, container, false).apply {
-            viewModel = plantDetailViewModel
-            setLifecycleOwner(this@PlantDetailFragment)
-            fab.setOnClickListener { view ->
-                plantDetailViewModel.addPlantToGarden()
-                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
-            }
+        val factory =
+            InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
+        val plantDetailViewModel = ViewModelProviders.of(this@PlantDetailFragment, factory).get(PlantDetailViewModel::class.java)
+        viewModel = plantDetailViewModel
+        fab.setOnClickListener { view ->
+            plantDetailViewModel.addPlantToGarden()
+            Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
         }
-
-        plantDetailViewModel.plant.observe(this, Observer { plant ->
+        plantDetailViewModel.plant.observe(viewLifecycleOwner, Observer { plant ->
             shareText = if (plant == null) {
                 ""
             } else {
@@ -73,8 +66,7 @@ class PlantDetailFragment : Fragment() {
         })
 
         setHasOptionsMenu(true)
-
-        return binding.root
+        root
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

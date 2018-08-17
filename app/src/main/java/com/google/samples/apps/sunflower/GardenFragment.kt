@@ -20,12 +20,11 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
+import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 
@@ -35,36 +34,29 @@ class GardenFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_garden, container, false)
-        val adapter = GardenPlantingAdapter(view.context)
-        view.findViewById<RecyclerView>(R.id.garden_list).adapter = adapter
-        subscribeUi(adapter)
-        return view
+    ) = FragmentGardenBinding.inflate(inflater, container, false).run {
+        setLifecycleOwner(viewLifecycleOwner)
+        val context = context ?: return root
+        with(GardenPlantingAdapter(context)) {
+            gardenList.adapter = this
+            subscribeUi(this@run, this)
+        }
+        root
     }
 
-    private fun subscribeUi(adapter: GardenPlantingAdapter) {
+    private fun subscribeUi(databinding: FragmentGardenBinding, adapter: GardenPlantingAdapter) {
         val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
-        val viewModel = ViewModelProviders.of(this, factory)
-                .get(GardenPlantingListViewModel::class.java)
+        val viewModel =
+            ViewModelProviders.of(this, factory).get(GardenPlantingListViewModel::class.java)
 
         viewModel.gardenPlantings.observe(viewLifecycleOwner, Observer { plantings ->
-            if (plantings != null && plantings.isNotEmpty()) {
-                activity?.run {
-                    findViewById<RecyclerView>(R.id.garden_list).run { visibility = View.VISIBLE }
-                    findViewById<TextView>(R.id.empty_garden).run { visibility = View.GONE }
-                }
-            } else {
-                activity?.run {
-                    findViewById<RecyclerView>(R.id.garden_list).run { visibility = View.GONE }
-                    findViewById<TextView>(R.id.empty_garden).run { visibility = View.VISIBLE }
-                }
-            }
+            databinding.hasPlantings = plantings != null && plantings.isNotEmpty()
         })
 
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner, Observer { result ->
             if (result != null && result.isNotEmpty())
-                adapter.submitList(result)
+            adapter.submitList(result)
+            databinding.loadingUi.visibility = View.GONE
         })
     }
 }
