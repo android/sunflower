@@ -28,4 +28,5 @@
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:context="com.google.samples.apps.sunflower.GardenActivity"
         tools:listitem="@layout/list_item_plant" />
+
 </layout>
