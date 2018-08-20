@@ -116,12 +116,12 @@
             style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
+            android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@android:color/white"
-            app:goneIf="@{viewModel.isPlanted}"
+            app:isGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/plant_detail_scrollview"
-            app:layout_anchorGravity="top|end"
+            app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />
 
     </android.support.design.widget.CoordinatorLayout>
