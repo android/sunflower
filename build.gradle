@@ -23,21 +23,21 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        constraintLayoutVersion = '1.1.2'
+        constraintLayoutVersion = '2.0.0-alpha2'
         espressoVersion = '3.0.1'
         glideVersion = '4.4.0'
         gradleVersion = '3.2.0-beta05'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
-        lifecycleVersion = '1.1.1'
-        navigationVersion = '1.0.0-alpha04'
-        kotlinVersion = '1.2.60'
+        kotlinVersion = '1.2.61'
         ktlintVersion = '0.24.0'
         ktxVersion = '0.3'
+        lifecycleVersion = '1.1.1'
+        navigationVersion = '1.0.0-alpha05'
         roomVersion = '1.1.1'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '28.0.0-rc01'
-        workVersion = '1.0.0-alpha06'
+        workVersion = '1.0.0-alpha07'
         coreTestingVersion = '1.1.1'
     }
 
@@ -47,7 +47,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "com.android.tools.build:gradle:3.2.0-rc02"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     }

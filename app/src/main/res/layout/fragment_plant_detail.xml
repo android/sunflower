@@ -104,7 +104,7 @@
                     android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_watering"
+                    app:layout_constraintTop_toBottomOf="@id/plant_watering"
                     tools:text="Details about the plant" />
 
             </android.support.constraint.ConstraintLayout>
@@ -116,13 +116,13 @@
             style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
+            android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@android:color/white"
             android:onClick="@{() -> viewModel.toggleAddOrRemove()}"
             app:showPlusIf="@{viewModel.isPlanted}"
             app:layout_anchor="@id/plant_detail_scrollview"
-            app:layout_anchorGravity="top|end"
+            app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />
 
     </android.support.design.widget.CoordinatorLayout>
