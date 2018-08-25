@@ -17,9 +17,12 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.content.Context
 import com.google.samples.apps.sunflower.PlantDetailFragment
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -34,7 +37,10 @@ class PlantDetailViewModel(
 ) : ViewModel() {
 
     val isPlanted: LiveData<Boolean>
+    private var _plant: Plant? = null
     val plant: LiveData<Plant>
+    private val _share = MutableLiveData<String>()
+    val share: LiveData<String> = _share
 
     init {
 
@@ -45,10 +51,14 @@ class PlantDetailViewModel(
         val gardenPlantingForPlant = gardenPlantingRepository.getGardenPlantingForPlant(plantId)
         isPlanted = Transformations.map(gardenPlantingForPlant) { it != null }
 
-        plant = plantRepository.getPlant(plantId)
+        plant = plantRepository.getPlant(plantId).apply { observeForever { _plant = it } }
     }
 
     fun addPlantToGarden() {
         gardenPlantingRepository.createGardenPlanting(plantId)
+    }
+
+    fun share(context: Context) {
+        _share.value = context.getString(R.string.share_text_plant, _plant?.name ?: "")
     }
 }

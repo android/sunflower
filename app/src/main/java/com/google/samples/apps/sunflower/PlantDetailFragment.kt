@@ -31,7 +31,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
@@ -41,7 +40,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
  */
 class PlantDetailFragment : Fragment() {
 
-    private lateinit var shareText: String
+    private lateinit var viewModel: PlantDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,14 +63,9 @@ class PlantDetailFragment : Fragment() {
             }
         }
 
-        plantDetailViewModel.plant.observe(this, Observer { plant ->
-            shareText = if (plant == null) {
-                ""
-            } else {
-                getString(R.string.share_text_plant, plant.name)
-            }
-        })
+        plantDetailViewModel.share.observe(this, Observer { onShare(it) })
 
+        viewModel = plantDetailViewModel
         setHasOptionsMenu(true)
 
         return binding.root
@@ -85,24 +79,29 @@ class PlantDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_share -> {
-                val shareIntent = ShareCompat.IntentBuilder.from(activity)
-                    .setText(shareText)
-                    .setType("text/plain")
-                    .createChooserIntent()
-                    .apply {
-                        // https://android-developers.googleblog.com/2012/02/share-with-intents.html
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            // If we're on Lollipop, we can open the intent as a document
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                        } else {
-                            // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                        }
-                    }
-                startActivity(shareIntent)
+                viewModel.share(requireContext())
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun onShare(shareText: String?) {
+        val text = shareText ?: ""
+        val shareIntent = ShareCompat.IntentBuilder.from(activity)
+            .setText(text)
+            .setType("text/plain")
+            .createChooserIntent()
+            .apply {
+                // https://android-developers.googleblog.com/2012/02/share-with-intents.html
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    // If we're on Lollipop, we can open the intent as a document
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                } else {
+                    // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                }
+            }
+        startActivity(shareIntent)
     }
 }
