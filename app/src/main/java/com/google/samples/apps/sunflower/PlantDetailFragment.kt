@@ -96,6 +96,7 @@ class PlantDetailFragment : Fragment() {
                             addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
                         } else {
                             // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                            @Suppress("DEPRECATION")
                             addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
                         }
                     }
