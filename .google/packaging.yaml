@@ -27,7 +27,7 @@ github:       googlesamples/android-sunflower
 
 level:        INTERMEDIATE
 
-icon:         screenshots/icon.png
+icon:         screenshots/ic_launcher-web.png
 
 apiRefs:
     - android:android.support.constraint.ConstraintLayout
