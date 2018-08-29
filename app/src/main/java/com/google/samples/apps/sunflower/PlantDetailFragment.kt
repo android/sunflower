@@ -82,6 +82,7 @@ class PlantDetailFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Suppress("DEPRECATION")
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_share -> {
@@ -96,7 +97,6 @@ class PlantDetailFragment : Fragment() {
                             addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
                         } else {
                             // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-                            @Suppress("DEPRECATION")
                             addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
                         }
                     }
