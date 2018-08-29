@@ -76,7 +76,6 @@ class PlantDetailFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    @Suppress("DEPRECATION")
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_share -> {
@@ -87,6 +86,7 @@ class PlantDetailFragment : Fragment() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun onShare(shareText: String?) {
         val text = shareText ?: ""
         val shareIntent = ShareCompat.IntentBuilder.from(activity)
