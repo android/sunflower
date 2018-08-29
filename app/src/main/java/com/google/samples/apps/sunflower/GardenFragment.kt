@@ -26,6 +26,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
+import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 
@@ -36,11 +37,11 @@ class GardenFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_garden, container, false)
-        val adapter = GardenPlantingAdapter(view.context)
-        view.findViewById<RecyclerView>(R.id.garden_list).adapter = adapter
+        val binding = FragmentGardenBinding.inflate(inflater, container, false)
+        val adapter = GardenPlantingAdapter(binding.root.context)
+        binding.gardenList.adapter = adapter
         subscribeUi(adapter)
-        return view
+        return binding.root
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter) {
