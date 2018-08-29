@@ -40,18 +40,18 @@ class PlantListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = FragmentPlantListBinding.inflate(inflater, container, false)
-        val context = context ?: return view.root
+        val binding = FragmentPlantListBinding.inflate(inflater, container, false)
+        val context = context ?: return binding.root
 
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
 
         val adapter = PlantAdapter()
-        view.plantList.adapter = adapter
+        binding.plantList.adapter = adapter
         subscribeUi(adapter)
 
         setHasOptionsMenu(true)
-        return view.root
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
