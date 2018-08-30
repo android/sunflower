@@ -37,12 +37,12 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     }
 }
 
-@BindingAdapter("isGone")
-fun bindIsGone(view: FloatingActionButton, isGone: Boolean?) {
-    if (isGone == null || isGone) {
-        view.hide()
+@BindingAdapter("showPlusIf")
+fun showPlusIf(view: FloatingActionButton, isPlus: Boolean?) {
+    if (isPlus == null || !isPlus) {
+        view.setImageResource(R.drawable.ic_plus)
     } else {
-        view.show()
+        view.setImageResource(R.drawable.ic_minus)
     }
 }
 

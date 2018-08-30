@@ -34,6 +34,7 @@ import android.view.ViewGroup
 
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.utilities.SnackbarMessage
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -52,17 +53,17 @@ class PlantDetailFragment : Fragment() {
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel::class.java)
+            .get(PlantDetailViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
                 inflater, R.layout.fragment_plant_detail, container, false).apply {
             viewModel = plantDetailViewModel
             setLifecycleOwner(this@PlantDetailFragment)
-            fab.setOnClickListener { view ->
-                plantDetailViewModel.addPlantToGarden()
-                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
-            }
         }
+
+        plantDetailViewModel.snackbarText.observe(viewLifecycleOwner, SnackbarMessage.SnackbarObserver {
+            Snackbar.make(binding.fab, getString(it), Snackbar.LENGTH_LONG).show()
+        })
 
         plantDetailViewModel.plant.observe(this, Observer { plant ->
             shareText = if (plant == null) {
