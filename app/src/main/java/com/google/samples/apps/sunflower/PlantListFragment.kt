@@ -48,7 +48,7 @@ class PlantListFragment : Fragment() {
 
         val adapter = PlantAdapter()
         binding.plantList.adapter = adapter
-        subscribeUi(adapter)
+        binding.subscribeUi(adapter)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -68,9 +68,10 @@ class PlantListFragment : Fragment() {
         }
     }
 
-    private fun subscribeUi(adapter: PlantAdapter) {
+    private fun FragmentPlantListBinding.subscribeUi(adapter: PlantAdapter) {
         viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) adapter.submitList(plants)
+            finishLoading = true
         })
     }
 
