@@ -35,7 +35,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
-    <style name="ListLoadingProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
+    <style name="ListDataLoadingProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="layout_constraintBottom_toBottomOf">parent</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>

@@ -45,7 +45,7 @@
 
         <ProgressBar
             android:id="@+id/loading_ui"
-            style="@style/ListLoadingProgress"
+            style="@style/ListDataLoadingProgress"
             app:isGone="@{viewModel.hasPlants}"
             tools:ignore="MissingConstraints"/>
     </android.support.constraint.ConstraintLayout>
