@@ -119,7 +119,8 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@android:color/white"
-            app:isGone="@{viewModel.isPlanted}"
+            android:onClick="@{() -> viewModel.toggleAddOrRemove()}"
+            app:showPlusIf="@{viewModel.isPlanted}"
             app:layout_anchor="@id/plant_detail_scrollview"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />
