@@ -55,7 +55,7 @@ class PlantListViewModel internal constructor(
         }
     }
 
-    //TODO Change this line to be a property instead method.
+    // TODO Change this line to be a property instead method.
     fun getPlants() = plantList
 
     fun setGrowZoneNumber(num: Int) {
