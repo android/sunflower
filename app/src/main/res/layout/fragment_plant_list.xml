@@ -21,8 +21,8 @@
 
     <data>
         <variable
-            name="finishLoading"
-            type="boolean"/>
+            name="viewModel"
+            type="com.google.samples.apps.sunflower.viewmodels.PlantListViewModel"/>
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
         <ProgressBar
             android:id="@+id/loading_ui"
             style="@style/ListLoadingProgress"
-            app:isGone="@{finishLoading}"
+            app:isGone="@{viewModel.hasPlants}"
             tools:ignore="MissingConstraints"/>
     </android.support.constraint.ConstraintLayout>
 
