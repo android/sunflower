@@ -20,6 +20,7 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableBoolean
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -36,6 +37,8 @@ class PlantListViewModel internal constructor(
 
     private val plantList = MediatorLiveData<List<Plant>>()
 
+    val hasPlants = ObservableBoolean(false)
+
     init {
         growZoneNumber.value = NO_GROW_ZONE
 
@@ -46,9 +49,13 @@ class PlantListViewModel internal constructor(
                 plantRepository.getPlantsWithGrowZoneNumber(it)
             }
         }
-        plantList.addSource(livePlantList, plantList::setValue)
+        plantList.addSource(livePlantList) {
+            plantList.value = it
+            hasPlants.set(true)
+        }
     }
 
+    //TODO Change this line to be a property instead method.
     fun getPlants() = plantList
 
     fun setGrowZoneNumber(num: Int) {

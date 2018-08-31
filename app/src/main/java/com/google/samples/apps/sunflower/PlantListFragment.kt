@@ -45,10 +45,11 @@ class PlantListFragment : Fragment() {
 
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
+        binding.viewModel = viewModel
 
         val adapter = PlantAdapter()
         binding.plantList.adapter = adapter
-        binding.subscribeUi(adapter)
+        subscribeUi(adapter)
 
         setHasOptionsMenu(true)
         return binding.root
@@ -68,11 +69,9 @@ class PlantListFragment : Fragment() {
         }
     }
 
-    private fun FragmentPlantListBinding.subscribeUi(adapter: PlantAdapter) {
-        finishLoading = false
+    private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) adapter.submitList(plants)
-            finishLoading = true
         })
     }
 
