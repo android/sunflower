@@ -16,22 +16,20 @@
 
 package com.google.samples.apps.sunflower
 
-import android.arch.lifecycle.ViewModelProviders
 import android.support.test.annotation.UiThreadTest
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import androidx.navigation.findNavController
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
-import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
-import org.hamcrest.Matchers.not
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class PlantListFragmentTest {
@@ -39,25 +37,18 @@ class PlantListFragmentTest {
     @Rule
     @JvmField
     val activityTestRule = ActivityTestRule(GardenActivity::class.java)
-    private lateinit var viewModel: PlantListViewModel
 
     @Before
     @UiThreadTest
     fun openPlantListFragment() {
         activityTestRule.activity.apply {
-            val factory = InjectorUtils.providePlantListViewModelFactory(applicationContext)
-            viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
             findNavController(R.id.garden_nav_fragment).navigate(R.id.plant_list_fragment)
         }
     }
 
     @Test
-    fun should_Show_LoadingUI_Before_Data_Loaded() {
-        onView(withId(R.id.loading_ui)).check(matches(isDisplayed()))
-    }
-
-    @Test
     fun should_Dismiss_LoadingUI_After_Data_Loaded() {
-        onView(withId(R.id.loading_ui)).check(matches(not(isDisplayed())))
+        TimeUnit.SECONDS.sleep(1)
+        onView(withId(R.id.loading_ui)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
     }
 }

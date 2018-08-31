@@ -69,6 +69,7 @@ class PlantListFragment : Fragment() {
     }
 
     private fun FragmentPlantListBinding.subscribeUi(adapter: PlantAdapter) {
+        finishLoading = false
         viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) adapter.submitList(plants)
             finishLoading = true
