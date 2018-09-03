@@ -25,6 +25,7 @@ buildscript {
         // App dependencies
         constraintLayoutVersion = '2.0.0-alpha2'
         espressoVersion = '3.0.1'
+        uiautomator = "2.1.3"
         glideVersion = '4.4.0'
         gradleVersion = '3.2.0-rc02'
         gsonVersion = '2.8.2'
