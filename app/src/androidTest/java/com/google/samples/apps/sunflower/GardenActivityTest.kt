@@ -16,8 +16,10 @@
 
 package com.google.samples.apps.sunflower
 
+import android.annotation.TargetApi
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+import android.os.Build
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.click
@@ -31,6 +33,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.view.Gravity
+import android.view.WindowManager
 import com.google.samples.apps.sunflower.utilities.getToolbarNavigationContentDescription
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -78,6 +81,19 @@ class GardenActivityTest {
         checkDrawerIsNotOpen()
         assertEquals(activityTestRule.activity.isFinishing, false)
         assertEquals(activityTestRule.activity.isDestroyed, false)
+    }
+
+    @Test @TargetApi(28) fun shouldSupport_Cutout_When_API_28() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return
+
+        assertEquals(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            activityTestRule.activity.window.attributes.flags and WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+        assertEquals(
+            WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES,
+            activityTestRule.activity.window.attributes.layoutInDisplayCutoutMode
+        )
     }
 
     private fun clickOnHomeIconToOpenNavigationDrawer() {
