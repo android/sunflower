@@ -52,11 +52,12 @@ class GardenActivityTest {
     @Test fun onRotate_NavigationStaysOpen() {
         clickOnHomeIconToOpenNavigationDrawer()
 
-        // Rotate device to different orientations
         with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
+                // Rotate device to landscape
                 setOrientationLeft()
                 checkDrawerIsOpen()
-
+            
+                // Rotate device back to portrait
                 setOrientationRight()
                 checkDrawerIsOpen()
         }
