@@ -68,6 +68,6 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
-    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomator"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiAutomatorVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
 }
