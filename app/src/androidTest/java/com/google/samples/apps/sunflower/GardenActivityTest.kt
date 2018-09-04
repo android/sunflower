@@ -56,7 +56,7 @@ class GardenActivityTest {
                 // Rotate device to landscape
                 setOrientationLeft()
                 checkDrawerIsOpen()
-            
+
                 // Rotate device back to portrait
                 setOrientationRight()
                 checkDrawerIsOpen()
