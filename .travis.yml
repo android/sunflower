@@ -1,4 +1,6 @@
 language: android
+notifications:
+  slack: devxinyuezhao:6nLYv1EMjZOCmBjJAlQigURe
 env:
   global:
     - ANDROID_TARGET=22
