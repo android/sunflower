@@ -16,9 +16,9 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
+import android.support.test.annotation.UiThreadTest
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
@@ -30,17 +30,12 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 
 class PlantDetailViewModelTest {
 
     private lateinit var appDatabase: AppDatabase
     private lateinit var viewModel: PlantDetailViewModel
-
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
@@ -67,14 +62,14 @@ class PlantDetailViewModelTest {
         assertFalse(getValue(viewModel.isPlanted))
     }
 
-    @Test
+    @UiThreadTest
     fun testSnackbarMessage_AddedPlantToGardenString() {
         assertNotEquals(viewModel.snackbarText.value, R.string.added_plant_to_garden)
         viewModel.showSnackbarMessage(R.string.added_plant_to_garden)
         assertEquals(viewModel.snackbarText.value, R.string.added_plant_to_garden)
     }
 
-    @Test
+    @UiThreadTest
     fun testSnackbarMessage_RemovedPlantToGardenString() {
         assertNotEquals(viewModel.snackbarText.value, R.string.removed_plant_from_garden)
         viewModel.showSnackbarMessage(R.string.removed_plant_from_garden)
