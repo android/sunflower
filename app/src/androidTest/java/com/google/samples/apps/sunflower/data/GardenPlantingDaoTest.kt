@@ -66,6 +66,13 @@ class GardenPlantingDaoTest {
         )
     }
 
+    @Test fun testRemoveGardenPlanting() {
+        assertThat(
+                gardenPlantingDao.removeGardenPlanting(testGardenPlantingId.toString()),
+                equalTo(1)
+        )
+    }
+
     @Test fun testGetGardenPlantingForPlant() {
         assertThat(getValue(gardenPlantingDao.getGardenPlantingForPlant(testPlant.plantId)),
                 equalTo(testGardenPlanting))
