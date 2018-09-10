@@ -18,13 +18,17 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
+import android.support.test.annotation.UiThreadTest
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -36,7 +40,10 @@ class PlantDetailViewModelTest {
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getTargetContext()
-        appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
+            // allowing main thread queries, just for testing
+            .allowMainThreadQueries()
+            .build()
 
         val plantRepo = PlantRepository.getInstance(appDatabase.plantDao())
         val gardenPlantingRepo = GardenPlantingRepository.getInstance(
@@ -53,5 +60,19 @@ class PlantDetailViewModelTest {
     @Throws(InterruptedException::class)
     fun testDefaultValues() {
         assertFalse(getValue(viewModel.isPlanted))
+    }
+
+    @UiThreadTest
+    fun testSnackbarMessage_AddedPlantToGardenString() {
+        assertNotEquals(viewModel.snackbarText.value, R.string.added_plant_to_garden)
+        viewModel.showSnackbarMessage(R.string.added_plant_to_garden)
+        assertEquals(viewModel.snackbarText.value, R.string.added_plant_to_garden)
+    }
+
+    @UiThreadTest
+    fun testSnackbarMessage_RemovedPlantToGardenString() {
+        assertNotEquals(viewModel.snackbarText.value, R.string.removed_plant_from_garden)
+        viewModel.showSnackbarMessage(R.string.removed_plant_from_garden)
+        assertEquals(viewModel.snackbarText.value, R.string.removed_plant_from_garden)
     }
 }
