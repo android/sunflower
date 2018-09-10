@@ -22,6 +22,7 @@ import android.arch.lifecycle.ViewModel
 import android.support.annotation.StringRes
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -36,6 +37,7 @@ class PlantDetailViewModel(
     private val plantId: String
 ) : ViewModel() {
 
+    val gardenPlantingForPlant: LiveData<GardenPlanting>
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>
     val snackbarText = SnackbarMessage()
@@ -46,7 +48,7 @@ class PlantDetailViewModel(
          * method can return null in two cases: when the database query is running and if no records
          * are found. In these cases isPlanted is false. If a record is found then isPlanted is
          * true. */
-        val gardenPlantingForPlant = gardenPlantingRepository.getGardenPlantingForPlant(plantId)
+        gardenPlantingForPlant = gardenPlantingRepository.getGardenPlantingForPlant(plantId)
         isPlanted = Transformations.map(gardenPlantingForPlant) { it != null }
 
         plant = plantRepository.getPlant(plantId)
@@ -57,7 +59,9 @@ class PlantDetailViewModel(
     }
 
     private fun removePlantFromGarden() {
-        gardenPlantingRepository.removeGardenPlanting(plantId)
+        gardenPlantingForPlant.value?.let {
+            gardenPlantingRepository.removeGardenPlanting(it)
+        }
     }
 
     fun toggleAddOrRemove() {
