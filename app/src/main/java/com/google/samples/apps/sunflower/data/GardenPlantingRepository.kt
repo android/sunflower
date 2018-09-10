@@ -29,9 +29,9 @@ class GardenPlantingRepository private constructor(
         }
     }
 
-    fun removeGardenPlanting(plantId: String) {
+    fun removeGardenPlanting(gardenPlanting: GardenPlanting) {
         runOnIoThread {
-            gardenPlantingDao.removeGardenPlanting(plantId)
+            gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
         }
     }
 

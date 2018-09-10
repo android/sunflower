@@ -21,6 +21,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Transaction
+import android.arch.persistence.room.Delete
 
 /**
  * The Data Access Object for the [GardenPlanting] class.
@@ -47,6 +48,6 @@ interface GardenPlantingDao {
     @Insert
     fun insertGardenPlanting(gardenPlanting: GardenPlanting): Long
 
-    @Query("DELETE FROM garden_plantings WHERE plant_id = :plantId")
-    fun removeGardenPlanting(plantId: String): Int
+    @Delete
+    fun deleteGardenPlanting(gardenPlanting: GardenPlanting)
 }
