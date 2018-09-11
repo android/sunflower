@@ -29,6 +29,12 @@ class GardenPlantingRepository private constructor(
         }
     }
 
+    fun removeGardenPlanting(gardenPlanting: GardenPlanting) {
+        runOnIoThread {
+            gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
+        }
+    }
+
     fun getGardenPlantingForPlant(plantId: String) =
             gardenPlantingDao.getGardenPlantingForPlant(plantId)
 
