@@ -66,15 +66,15 @@ class GardenPlantingDaoTest {
         )
     }
 
-    @Test fun testRemoveGardenPlanting() {
-        val gardenPlanting3 = GardenPlanting(
+    @Test fun testDeleteGardenPlanting() {
+        val gardenPlanting2 = GardenPlanting(
                 testPlants[2].plantId,
                 testCalendar,
                 testCalendar
-        ).also { it.gardenPlantingId = 3 }
-        gardenPlantingDao.insertGardenPlanting(gardenPlanting3)
+        ).also { it.gardenPlantingId = 2 }
+        gardenPlantingDao.insertGardenPlanting(gardenPlanting2)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))
-        gardenPlantingDao.deleteGardenPlanting(gardenPlanting3)
+        gardenPlantingDao.deleteGardenPlanting(gardenPlanting2)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(1))
     }
 
