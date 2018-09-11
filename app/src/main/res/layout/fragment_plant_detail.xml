@@ -28,11 +28,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.google.samples.apps.sunflower.PlantDetailActivity"
+        tools:context="com.google.samples.apps.sunflower.GardenActivity"
         tools:ignore="MergeRootFrame">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
             android:fitsSystemWindows="true"
@@ -113,13 +113,15 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
+            android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:goneIf="@{viewModel.isPlanted}"
-            app:layout_anchor="@+id/plant_detail_scrollview"
-            app:layout_anchorGravity="top|end"
+            android:tint="@android:color/white"
+            app:isGone="@{viewModel.isPlanted}"
+            app:layout_anchor="@id/plant_detail_scrollview"
+            app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />
 
     </android.support.design.widget.CoordinatorLayout>
