@@ -22,6 +22,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.ShareCompat
@@ -34,6 +35,7 @@ import android.view.ViewGroup
 
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.utilities.SnackbarMessage
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -60,9 +62,15 @@ class PlantDetailFragment : Fragment() {
             setLifecycleOwner(this@PlantDetailFragment)
             fab.setOnClickListener { view ->
                 plantDetailViewModel.addPlantToGarden()
-                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+                plantDetailViewModel.showSnackbarMessage(R.string.added_plant_to_garden)
             }
         }
+
+        plantDetailViewModel.snackbarText.observe(viewLifecycleOwner, object : SnackbarMessage.SnackbarObserver {
+            override fun onNewMessage(@StringRes snackbarMessageResourceId: Int) {
+                Snackbar.make(binding.fab, getString(snackbarMessageResourceId), Snackbar.LENGTH_LONG).show()
+            }
+        })
 
         plantDetailViewModel.plant.observe(this, Observer { plant ->
             shareText = if (plant == null) {

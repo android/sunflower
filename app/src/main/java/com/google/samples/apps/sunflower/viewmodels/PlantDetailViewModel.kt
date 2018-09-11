@@ -19,10 +19,12 @@ package com.google.samples.apps.sunflower.viewmodels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.support.annotation.StringRes
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
+import com.google.samples.apps.sunflower.utilities.SnackbarMessage
 
 /**
  * The ViewModel used in [PlantDetailFragment].
@@ -35,6 +37,7 @@ class PlantDetailViewModel(
 
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>
+    val snackbarText = SnackbarMessage()
 
     init {
 
@@ -50,5 +53,9 @@ class PlantDetailViewModel(
 
     fun addPlantToGarden() {
         gardenPlantingRepository.createGardenPlanting(plantId)
+    }
+
+    fun showSnackbarMessage(@StringRes message: Int?) {
+        snackbarText.value = message
     }
 }
