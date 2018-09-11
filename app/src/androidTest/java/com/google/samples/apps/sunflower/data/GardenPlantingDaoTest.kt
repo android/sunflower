@@ -68,7 +68,7 @@ class GardenPlantingDaoTest {
 
     @Test fun testDeleteGardenPlanting() {
         val gardenPlanting2 = GardenPlanting(
-                testPlants[2].plantId,
+                testPlants[1].plantId,
                 testCalendar,
                 testCalendar
         ).also { it.gardenPlantingId = 2 }
