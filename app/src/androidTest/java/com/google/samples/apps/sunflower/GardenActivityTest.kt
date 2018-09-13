@@ -16,8 +16,7 @@
 
 package com.google.samples.apps.sunflower
 
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.click
@@ -30,6 +29,7 @@ import android.support.test.espresso.matcher.ViewMatchers.isRoot
 import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
+import android.support.test.uiautomator.UiDevice
 import android.view.Gravity
 import com.google.samples.apps.sunflower.utilities.getToolbarNavigationContentDescription
 import org.junit.Assert.assertEquals
@@ -52,13 +52,15 @@ class GardenActivityTest {
     @Test fun onRotate_NavigationStaysOpen() {
         clickOnHomeIconToOpenNavigationDrawer()
 
-        // Rotate device to landscape
-        activityTestRule.activity.requestedOrientation = SCREEN_ORIENTATION_LANDSCAPE
-        checkDrawerIsOpen()
+        with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
+                // Rotate device to landscape
+                setOrientationLeft()
+                checkDrawerIsOpen()
 
-        // Rotate device back to portrait
-        activityTestRule.activity.requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-        checkDrawerIsOpen()
+                // Rotate device back to portrait
+                setOrientationRight()
+                checkDrawerIsOpen()
+        }
     }
 
     @Test fun clickOnPlantListDrawerMenuItem_StartsPlantListActivity() {
