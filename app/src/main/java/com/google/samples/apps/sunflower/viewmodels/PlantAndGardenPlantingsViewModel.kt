@@ -16,9 +16,9 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import android.arch.lifecycle.ViewModel
 import android.content.Context
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
