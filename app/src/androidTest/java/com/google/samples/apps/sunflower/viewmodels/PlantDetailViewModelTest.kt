@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import com.google.samples.apps.sunflower.data.AppDatabase
@@ -26,12 +27,16 @@ import com.google.samples.apps.sunflower.utilities.testPlant
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class PlantDetailViewModelTest {
 
     private lateinit var appDatabase: AppDatabase
     private lateinit var viewModel: PlantDetailViewModel
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {

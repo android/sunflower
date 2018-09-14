@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -24,6 +25,7 @@ import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -34,6 +36,9 @@ class PlantDaoTest {
     private val plantA = Plant("1", "A", "", 1, 1, "")
     private val plantB = Plant("2", "B", "", 1, 1, "")
     private val plantC = Plant("3", "C", "", 2, 2, "")
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
