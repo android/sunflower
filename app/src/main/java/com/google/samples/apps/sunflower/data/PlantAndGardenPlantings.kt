@@ -16,8 +16,8 @@
 
 package com.google.samples.apps.sunflower.data
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Relation
+import androidx.room.Embedded
+import androidx.room.Relation
 
 /**
  * This class captures the relationship between a [Plant] and a user's [GardenPlanting], which is

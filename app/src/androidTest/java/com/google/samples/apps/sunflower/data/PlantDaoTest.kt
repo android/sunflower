@@ -16,9 +16,9 @@
 
 package com.google.samples.apps.sunflower.data
 
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.google.samples.apps.sunflower.utilities.getValue
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
