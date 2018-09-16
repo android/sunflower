@@ -19,12 +19,6 @@
 
     <style name="AppTheme" parent="BaseAppTheme">
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowFullscreen">true</item>
-    </style>
-
-    <style name="AppDrawerLayout">
-        <item name="android:fitsSystemWindows">false</item>
     </style>
 
 </resources>
