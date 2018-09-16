@@ -41,12 +41,10 @@ import org.junit.Test
 
 class GardenActivityTest {
 
-    @Rule
-    @JvmField
+    @Rule @JvmField
     var activityTestRule = ActivityTestRule(GardenActivity::class.java)
 
-    @Test
-    fun clickOnAndroidHomeIcon_OpensAndClosesNavigation() {
+    @Test fun clickOnAndroidHomeIcon_OpensAndClosesNavigation() {
         // Check that drawer is closed at startup
         onView(withId(R.id.drawer_layout)).check(matches(isClosed(Gravity.START)))
 
