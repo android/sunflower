@@ -91,10 +91,6 @@ class GardenActivityTest {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return
 
         assertEquals(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            activityTestRule.activity.window.attributes.flags and WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-        assertEquals(
             WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES,
             activityTestRule.activity.window.attributes.layoutInDisplayCutoutMode
         )
