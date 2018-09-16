@@ -35,8 +35,4 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
-    <style name="AppDrawerLayout">
-        <item name="android:fitsSystemWindows">true</item>
-    </style>
-
 </resources>
