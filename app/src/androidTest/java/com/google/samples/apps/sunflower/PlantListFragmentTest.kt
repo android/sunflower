@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower
 
 import androidx.navigation.findNavController
+import androidx.test.InstrumentationRegistry
 import androidx.test.annotation.UiThreadTest
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -25,11 +26,11 @@ import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import androidx.test.uiautomator.UiDevice
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class PlantListFragmentTest {
@@ -48,7 +49,9 @@ class PlantListFragmentTest {
 
     @Test
     fun should_Dismiss_LoadingUI_After_Data_Loaded() {
-        TimeUnit.SECONDS.sleep(1)
-        onView(withId(R.id.loading_ui)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
+        with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
+            this.waitForIdle(500)
+            onView(withId(R.id.loading_ui)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
+        }
     }
 }
