@@ -18,12 +18,12 @@ package com.google.samples.apps.sunflower.utilities
 
 import android.app.Activity
 import android.content.Intent
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasAction
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra
-import android.support.test.espresso.matcher.BoundedMatcher
-import android.support.v7.widget.Toolbar
 import android.view.View
+import androidx.appcompat.widget.Toolbar
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
+import androidx.test.espresso.matcher.BoundedMatcher
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import org.hamcrest.Description
