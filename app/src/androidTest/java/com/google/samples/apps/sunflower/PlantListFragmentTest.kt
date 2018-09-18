@@ -16,22 +16,20 @@
 
 package com.google.samples.apps.sunflower
 
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.test.annotation.UiThreadTest
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
-import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
-import org.hamcrest.Matchers.not
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class PlantListFragmentTest {
@@ -39,20 +37,18 @@ class PlantListFragmentTest {
     @Rule
     @JvmField
     val activityTestRule = ActivityTestRule(GardenActivity::class.java)
-    private lateinit var viewModel: PlantListViewModel
 
     @Before
     @UiThreadTest
     fun openPlantListFragment() {
         activityTestRule.activity.apply {
-            val factory = InjectorUtils.providePlantListViewModelFactory(applicationContext)
-            viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
             findNavController(R.id.garden_nav_fragment).navigate(R.id.plant_list_fragment)
         }
     }
 
     @Test
     fun should_Dismiss_LoadingUI_After_Data_Loaded() {
-        onView(withId(R.id.loading_ui)).check(matches(not(isDisplayed())))
+        TimeUnit.SECONDS.sleep(1)
+        onView(withId(R.id.loading_ui)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
     }
 }

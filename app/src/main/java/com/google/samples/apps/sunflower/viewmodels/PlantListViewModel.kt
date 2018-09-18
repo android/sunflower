@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -35,6 +36,8 @@ class PlantListViewModel internal constructor(
 
     private val plantList = MediatorLiveData<List<Plant>>()
 
+    val hasPlants = ObservableBoolean(false)
+
     init {
         growZoneNumber.value = NO_GROW_ZONE
 
@@ -45,9 +48,13 @@ class PlantListViewModel internal constructor(
                 plantRepository.getPlantsWithGrowZoneNumber(it)
             }
         }
-        plantList.addSource(livePlantList, plantList::setValue)
+        plantList.addSource(livePlantList) {
+            plantList.value = it
+            hasPlants.set(true)
+        }
     }
 
+    // TODO Change this line to be a property instead method.
     fun getPlants() = plantList
 
     fun setGrowZoneNumber(num: Int) {
