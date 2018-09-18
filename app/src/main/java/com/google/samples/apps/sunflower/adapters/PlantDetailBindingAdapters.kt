@@ -16,15 +16,15 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.databinding.BindingAdapter
-import android.support.design.widget.FloatingActionButton
 import android.text.SpannableStringBuilder
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.bold
 import androidx.core.text.italic
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.samples.apps.sunflower.R
 
 @BindingAdapter("imageFromUrl")

@@ -16,15 +16,15 @@
 
 package com.google.samples.apps.sunflower
 
-import android.arch.lifecycle.ViewModelProviders
-import android.support.test.annotation.UiThreadTest
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.test.annotation.UiThreadTest
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import org.hamcrest.Matchers.not
@@ -49,11 +49,6 @@ class PlantListFragmentTest {
             viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
             findNavController(R.id.garden_nav_fragment).navigate(R.id.plant_list_fragment)
         }
-    }
-
-    @Test
-    fun should_Show_LoadingUI_Before_Data_Loaded() {
-        onView(withId(R.id.loading_ui)).check(matches(isDisplayed()))
     }
 
     @Test
