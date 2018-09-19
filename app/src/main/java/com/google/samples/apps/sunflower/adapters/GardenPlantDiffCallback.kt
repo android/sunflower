@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 
 class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlantings>() {
