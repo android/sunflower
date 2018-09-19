@@ -16,8 +16,8 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.databinding.BindingAdapter
 import android.view.View
+import androidx.databinding.BindingAdapter
 
 @BindingAdapter("isGone")
 fun bindIsGone(view: View, isGone: Boolean) {
