@@ -39,7 +39,7 @@ buildscript {
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.0.0-rc02'
         uiAutomatorVersion = '2.2.0-alpha4'
-        workVersion = '1.0.0-alpha08'
+        workVersion = '1.0.0-alpha09'
     }
 
     repositories {
