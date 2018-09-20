@@ -16,8 +16,10 @@
 
 package com.google.samples.apps.sunflower.workers
 
+import android.content.Context
 import android.util.Log
 import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
@@ -25,7 +27,7 @@ import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 
-class SeedDatabaseWorker : Worker() {
+class SeedDatabaseWorker(val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     private val TAG = SeedDatabaseWorker::class.java.simpleName
 
     override fun doWork(): Worker.Result {
@@ -33,10 +35,10 @@ class SeedDatabaseWorker : Worker() {
         var jsonReader: JsonReader? = null
 
         return try {
-            val inputStream = applicationContext.assets.open(PLANT_DATA_FILENAME)
+            val inputStream = context.assets.open(PLANT_DATA_FILENAME)
             jsonReader = JsonReader(inputStream.reader())
             val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
-            val database = AppDatabase.getInstance(applicationContext)
+            val database = AppDatabase.getInstance(context)
             database.plantDao().insertAll(plantList)
             Worker.Result.SUCCESS
         } catch (ex: Exception) {
