@@ -22,6 +22,10 @@
         <variable
             name="viewModel"
             type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
+
+        <variable
+            name="requestListener"
+            type="com.bumptech.glide.request.RequestListener&lt;android.graphics.drawable.Drawable>" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -56,7 +60,8 @@
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
                     app:imageFromUrl="@{viewModel.plant.imageUrl}"
-                    app:layout_collapseMode="parallax" />
+                    app:layout_collapseMode="parallax"
+                    app:requestListener="@{requestListener}" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/detail_toolbar"

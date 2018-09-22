@@ -19,7 +19,9 @@ package com.google.samples.apps.sunflower.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.PlantListFragment
@@ -35,8 +37,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val plant = getItem(position)
         holder.apply {
-            bind(createOnClickListener(plant.plantId), plant)
-            itemView.tag = plant
+            bind(createOnClickListener(), plant)
         }
     }
 
@@ -45,10 +46,15 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
                 LayoutInflater.from(parent.context), parent, false))
     }
 
-    private fun createOnClickListener(plantId: String): View.OnClickListener {
-        return View.OnClickListener {
-            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
-            it.findNavController().navigate(direction)
+    private fun createOnClickListener(): OnPlantItemClickListener {
+        return object : OnPlantItemClickListener {
+            override fun onPlantItemClick(rootView: View, plant: Plant) {
+                val binding = DataBindingUtil.getBinding<ListItemPlantBinding>(rootView)
+                val navigatorExtras = FragmentNavigatorExtras(binding!!.plantItemImage to plant.plantId)
+
+                val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plant.plantId)
+                rootView.findNavController().navigate(direction, navigatorExtras)
+            }
         }
     }
 
@@ -56,12 +62,16 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
         private val binding: ListItemPlantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, item: Plant) {
+        fun bind(listener: OnPlantItemClickListener, item: Plant) {
             binding.apply {
                 clickListener = listener
                 plant = item
                 executePendingBindings()
             }
         }
+    }
+
+    interface OnPlantItemClickListener {
+        fun onPlantItemClick(rootView: View, plant: Plant)
     }
 }
