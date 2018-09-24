@@ -35,10 +35,10 @@ class SeedDatabaseWorker(val context: Context, workerParams: WorkerParameters) :
         var jsonReader: JsonReader? = null
 
         return try {
-            val inputStream = context.assets.open(PLANT_DATA_FILENAME)
+            val inputStream = applicationContext.assets.open(PLANT_DATA_FILENAME)
             jsonReader = JsonReader(inputStream.reader())
             val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
-            val database = AppDatabase.getInstance(context)
+            val database = AppDatabase.getInstance(applicationContext)
             database.plantDao().insertAll(plantList)
             Worker.Result.SUCCESS
         } catch (ex: Exception) {
