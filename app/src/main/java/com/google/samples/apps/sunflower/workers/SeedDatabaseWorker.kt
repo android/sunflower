@@ -27,18 +27,16 @@ import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 
-class SeedDatabaseWorker(val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     private val TAG = SeedDatabaseWorker::class.java.simpleName
 
     override fun doWork(): Worker.Result {
-        val plantType = object : TypeToken<List<Plant>>() {}.type
-        var jsonReader: JsonReader? = null
-
         return try {
-            context.assets.open(PLANT_DATA_FILENAME).use {
+            val plantType = object : TypeToken<List<Plant>>() {}.type
+            applicationContext.assets.open(PLANT_DATA_FILENAME).use {
                 JsonReader(it.reader()).use {
                     val plantList: List<Plant> = Gson().fromJson(it, plantType)
-                    val database = AppDatabase.getInstance(context)
+                    val database = AppDatabase.getInstance(applicationContext)
                     database.plantDao().insertAll(plantList)
                     Worker.Result.SUCCESS
                 }
