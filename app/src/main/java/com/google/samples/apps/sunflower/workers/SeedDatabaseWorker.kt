@@ -28,7 +28,7 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 
 class SeedDatabaseWorker(val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
-    private val TAG = SeedDatabaseWorker::class.java.simpleName
+    private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
     override fun doWork(): Worker.Result {
         val plantType = object : TypeToken<List<Plant>>() {}.type
