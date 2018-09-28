@@ -92,7 +92,7 @@ app? Please open a new [issue](https://github.com/googlesamples/android-sunflowe
 Android Studio IDE setup
 ------------------------
 For development, the latest version of Android Studio 3.2 is required. The latest version can be
-downloaded from [here](https://developer.android.com/studio/preview/).
+downloaded from [here](https://developer.android.com/studio/).
 
 Sunflower uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
 Here's how to configure it for use with Android Studio (instructions adapted
