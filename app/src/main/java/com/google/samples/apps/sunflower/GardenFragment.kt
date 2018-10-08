@@ -52,8 +52,7 @@ class GardenFragment : Fragment() {
         })
 
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner, Observer { result ->
-            if (result != null && result.isNotEmpty())
-                adapter.submitList(result)
+            adapter.submitList(result.orEmpty())
         })
     }
 }
