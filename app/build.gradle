@@ -21,14 +21,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdkVersion Config.compileSdkVersion
     dataBinding {
         enabled = true
     }
     defaultConfig {
         applicationId "com.google.samples.apps.sunflower"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
+        minSdkVersion Config.minSdkVersion
+        targetSdkVersion Config.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode 1
         versionName "0.1.5"
@@ -47,28 +47,28 @@ android {
 }
 
 dependencies {
-    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
-    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
-    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
-    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    implementation "android.arch.work:work-runtime-ktx:$rootProject.workVersion"
-    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
-    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportLibraryVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
-    implementation "androidx.recyclerview:recyclerview:$rootProject.supportLibraryVersion"
-    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
-    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
-    implementation "com.google.android.material:material:$rootProject.supportLibraryVersion"
-    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+    kapt Libs.room_compiler
+    kapt Libs.com_github_bumptech_glide_compiler
+    implementation Libs.navigation_fragment_ktx
+    implementation Libs.navigation_ui_ktx
+    implementation Libs.work_runtime_ktx
+    implementation Libs.appcompat
+    implementation Libs.constraintlayout
+    implementation Libs.core_ktx
+    implementation Libs.legacy_support_v4
+    implementation Libs.lifecycle_extensions
+    implementation Libs.recyclerview
+    implementation Libs.room_runtime
+    implementation Libs.glide
+    implementation Libs.material
+    implementation Libs.gson
+    implementation Libs.kotlin_stdlib_jdk8
 
     // Testing dependencies
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
-    androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
-    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation Libs.core_testing // room
+    androidTestImplementation Libs.espresso_contrib
+    androidTestImplementation Libs.espresso_core
+    androidTestImplementation Libs.espresso_intents
+    androidTestImplementation Libs.uiautomator
+    testImplementation Libs.junit
 }
