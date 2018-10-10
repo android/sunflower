@@ -19,12 +19,7 @@ package com.google.samples.apps.sunflower
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -62,7 +57,7 @@ class PlantDetailFragment : Fragment() {
             }
         }
 
-        plantDetailViewModel.plant.observe(this) { plant->
+        plantDetailViewModel.plant.observe(this) { plant ->
             shareText = if (plant == null) {
                 ""
             } else {

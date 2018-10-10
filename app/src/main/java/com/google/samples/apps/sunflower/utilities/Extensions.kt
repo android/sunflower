@@ -26,12 +26,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 
 inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
-        provider: ViewModelProvider.Factory
+    provider: ViewModelProvider.Factory
 ) = ViewModelProviders.of(this, provider).get(VM::class.java)
 
 inline fun <T> LiveData<T>.observe(
-        owner: LifecycleOwner,
-        crossinline observer: (T?) -> Unit
+    owner: LifecycleOwner,
+    crossinline observer: (T?) -> Unit
 ) {
     observe(owner, Observer<T> { v -> observer(v) })
 }
