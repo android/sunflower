@@ -17,7 +17,13 @@
 package com.google.samples.apps.sunflower.utilities
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 
 inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
         provider: ViewModelProvider.Factory
