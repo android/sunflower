@@ -18,11 +18,11 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
+import com.google.samples.apps.sunflower.utilities.switchMap
 
 /**
  * The ViewModel for [PlantListFragment].
@@ -38,7 +38,7 @@ class PlantListViewModel internal constructor(
     init {
         growZoneNumber.value = NO_GROW_ZONE
 
-        val livePlantList = Transformations.switchMap(growZoneNumber) {
+        val livePlantList = growZoneNumber.switchMap {
             if (it == NO_GROW_ZONE) {
                 plantRepository.getPlants()
             } else {

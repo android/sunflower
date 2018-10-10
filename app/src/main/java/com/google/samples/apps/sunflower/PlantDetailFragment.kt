@@ -19,20 +19,15 @@ package com.google.samples.apps.sunflower
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.utilities.observe
+import com.google.samples.apps.sunflower.utilities.viewModelProvider
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -50,8 +45,7 @@ class PlantDetailFragment : Fragment() {
         val plantId = PlantDetailFragmentArgs.fromBundle(arguments).plantId
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
-        val plantDetailViewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel::class.java)
+        val plantDetailViewModel: PlantDetailViewModel = viewModelProvider(factory)
 
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
                 inflater, R.layout.fragment_plant_detail, container, false).apply {
@@ -63,13 +57,13 @@ class PlantDetailFragment : Fragment() {
             }
         }
 
-        plantDetailViewModel.plant.observe(this, Observer { plant ->
+        plantDetailViewModel.plant.observe(this) { plant->
             shareText = if (plant == null) {
                 ""
             } else {
                 getString(R.string.share_text_plant, plant.name)
             }
-        })
+        }
 
         setHasOptionsMenu(true)
 
