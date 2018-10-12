@@ -16,11 +16,12 @@
 
 package com.google.samples.apps.sunflower.data
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Transaction
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Transaction
 
 /**
  * The Data Access Object for the [GardenPlanting] class.
@@ -46,4 +47,7 @@ interface GardenPlantingDao {
 
     @Insert
     fun insertGardenPlanting(gardenPlanting: GardenPlanting): Long
+
+    @Delete
+    fun deleteGardenPlanting(gardenPlanting: GardenPlanting)
 }

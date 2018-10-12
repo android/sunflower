@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.adapters
 
-import androidx.room.TypeConverter
-import java.util.Calendar
+import android.view.View
+import androidx.databinding.BindingAdapter
 
-/**
- * Type converters to allow Room to reference complex data types.
- */
-class Converters {
-    @TypeConverter fun calendarToDatestamp(calendar: Calendar): Long = calendar.timeInMillis
-
-    @TypeConverter fun datestampToCalendar(value: Long): Calendar =
-            Calendar.getInstance().apply { timeInMillis = value }
+@BindingAdapter("isGone")
+fun bindIsGone(view: View, isGone: Boolean) {
+    view.visibility = if (isGone) {
+        View.GONE
+    } else {
+        View.VISIBLE
+    }
 }

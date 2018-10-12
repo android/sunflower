@@ -16,21 +16,30 @@
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="hasPlantings"
+                type="Boolean" />
+
+    </data>
 
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/garden_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:isGone="@{!hasPlantings}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/list_item_garden_planting"/>
 
         <TextView
@@ -39,7 +48,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/garden_empty"
-                android:textSize="24sp"/>
+                android:textSize="24sp"
+                app:isGone="@{hasPlantings}"/>
 
     </FrameLayout>
 

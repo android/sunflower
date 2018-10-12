@@ -16,8 +16,10 @@
 
 package com.google.samples.apps.sunflower.workers
 
+import android.content.Context
 import android.util.Log
 import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
@@ -25,8 +27,8 @@ import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 
-class SeedDatabaseWorker : Worker() {
-    private val TAG = SeedDatabaseWorker::class.java.simpleName
+class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+    private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
     override fun doWork(): Worker.Result {
         val plantType = object : TypeToken<List<Plant>>() {}.type
