@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.viewmodels.PlantItemViewModel
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
 class PlantListFragment : Fragment() {
@@ -70,7 +71,11 @@ class PlantListFragment : Fragment() {
 
     private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
-            if (plants != null) adapter.submitList(plants)
+            if (plants != null) {
+                adapter.submitList(plants.map {
+                    PlantItemViewModel(it)
+                })
+            }
         })
     }
 

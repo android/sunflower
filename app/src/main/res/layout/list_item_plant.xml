@@ -18,19 +18,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener"/>
-        <variable
-            name="plant"
-            type="com.google.samples.apps.sunflower.data.Plant"/>
-    </data>
+	<data>
+		<variable
+				name="viewModel"
+				type="com.google.samples.apps.sunflower.viewmodels.PlantItemViewModel"/>
+	</data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{clickListener}">
+        android:onClick="@{viewModel}">
 
         <ImageView
             android:id="@+id/plant_item_image"
@@ -42,7 +39,7 @@
             android:layout_marginStart="@dimen/margin_small"
             android:contentDescription="@string/a11y_plant_item_image"
             android:scaleType="centerCrop"
-            app:imageFromUrl="@{plant.imageUrl}"
+            app:imageFromUrl="@{viewModel.plant.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -55,13 +52,13 @@
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
-            android:text="@{plant.name}"
+            android:text="@{viewModel.plant.name}"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/plant_item_image"
             tools:text="Tomato"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
