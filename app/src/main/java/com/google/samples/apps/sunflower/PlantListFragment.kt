@@ -26,6 +26,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
@@ -46,7 +47,11 @@ class PlantListFragment : Fragment() {
         val factory = InjectorUtils.providePlantListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
 
-        val adapter = PlantAdapter()
+        val plantClickListener: (String) -> Unit = {
+            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(it)
+            binding.root.findNavController().navigate(direction)
+        }
+        val adapter = PlantAdapter(plantClickListener)
         binding.plantList.adapter = adapter
         subscribeUi(adapter)
 
