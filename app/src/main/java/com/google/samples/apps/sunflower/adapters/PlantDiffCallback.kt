@@ -17,15 +17,15 @@
 package com.google.samples.apps.sunflower.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.viewmodels.PlantItemViewModel
 
-class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
+class PlantDiffCallback : DiffUtil.ItemCallback<PlantItemViewModel>() {
 
-    override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
-        return oldItem.plantId == newItem.plantId
+    override fun areItemsTheSame(oldItem: PlantItemViewModel, newItem: PlantItemViewModel): Boolean {
+        return oldItem.plant().plantId == newItem.plant().plantId
     }
 
-    override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItem: PlantItemViewModel, newItem: PlantItemViewModel): Boolean {
+        return oldItem.plant() == newItem.plant()
     }
 }

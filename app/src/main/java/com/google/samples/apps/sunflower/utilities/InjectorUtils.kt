@@ -19,9 +19,11 @@ package com.google.samples.apps.sunflower.utilities
 import android.content.Context
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory
+import com.google.samples.apps.sunflower.viewmodels.PlantItemViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
 
 /**
@@ -35,7 +37,8 @@ object InjectorUtils {
 
     private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
         return GardenPlantingRepository.getInstance(
-                AppDatabase.getInstance(context).gardenPlantingDao())
+            AppDatabase.getInstance(context).gardenPlantingDao()
+        )
     }
 
     fun provideGardenPlantingListViewModelFactory(
@@ -54,7 +57,13 @@ object InjectorUtils {
         context: Context,
         plantId: String
     ): PlantDetailViewModelFactory {
-        return PlantDetailViewModelFactory(getPlantRepository(context),
-                getGardenPlantingRepository(context), plantId)
+        return PlantDetailViewModelFactory(
+            getPlantRepository(context),
+            getGardenPlantingRepository(context), plantId
+        )
+    }
+
+    fun providePlantItemViewModelFactory(plant: Plant): PlantItemViewModelFactory {
+        return PlantItemViewModelFactory(plant)
     }
 }
