@@ -23,7 +23,6 @@ import org.junit.Before
 import org.junit.Test
 import java.util.Calendar
 import java.util.Calendar.DAY_OF_YEAR
-import java.util.Random
 
 class PlantTest {
 
@@ -58,19 +57,8 @@ class PlantTest {
 
             // Test for lastWateringDate is some days ago, three days ago, four days ago etc.
             lastWateringDate.time = now.time
-            val days = now.getMoreThanTwoDaysFromNow()
-            assertTrue(plant.shouldBeWatered(now, lastWateringDate.apply { add(DAY_OF_YEAR, -days) }))
+            assertTrue(plant.shouldBeWatered(now, lastWateringDate.apply { add(DAY_OF_YEAR, -3) }))
         }
-    }
-
-    private fun Calendar.getMoreThanTwoDaysFromNow(): Int {
-        val maxOverdue = getActualMaximum(DAY_OF_YEAR) // Should be 365 normally.
-        val minOverdue = 1
-        val largerThanWateringInterval = plant.wateringInterval + minOverdue
-        // Random some days before "the day before yesterday" (>= 3 days).
-        val days =
-            Random().nextInt(maxOverdue - largerThanWateringInterval) + largerThanWateringInterval
-        return days
     }
 
     @Test fun test_toString() {
