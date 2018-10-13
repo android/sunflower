@@ -39,7 +39,7 @@
             android:layout_marginStart="@dimen/margin_small"
             android:contentDescription="@string/a11y_plant_item_image"
             android:scaleType="centerCrop"
-            app:imageFromUrl="@{viewModel.plant().imageUrl}"
+            app:imageFromUrl="@{viewModel.plant.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -52,7 +52,7 @@
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
-            android:text="@{viewModel.plant().name}"
+            android:text="@{viewModel.plant.name}"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

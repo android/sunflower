@@ -22,10 +22,10 @@ import com.google.samples.apps.sunflower.viewmodels.PlantItemViewModel
 class PlantDiffCallback : DiffUtil.ItemCallback<PlantItemViewModel>() {
 
     override fun areItemsTheSame(oldItem: PlantItemViewModel, newItem: PlantItemViewModel): Boolean {
-        return oldItem.plant().plantId == newItem.plant().plantId
+        return oldItem.plant.plantId == newItem.plant.plantId
     }
 
     override fun areContentsTheSame(oldItem: PlantItemViewModel, newItem: PlantItemViewModel): Boolean {
-        return oldItem.plant() == newItem.plant()
+        return oldItem.plant == newItem.plant
     }
 }

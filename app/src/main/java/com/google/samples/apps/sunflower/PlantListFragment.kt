@@ -73,7 +73,7 @@ class PlantListFragment : Fragment() {
         viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) {
                 adapter.submitList(plants.map {
-                    InjectorUtils.providePlantItemViewModelFactory(it).create(PlantItemViewModel::class.java)
+                    PlantItemViewModel(it)
                 })
             }
         })

@@ -7,10 +7,8 @@ import com.google.samples.apps.sunflower.PlantListFragmentDirections
 import com.google.samples.apps.sunflower.data.Plant
 
 class PlantItemViewModel(
-    private val plant: Plant
+    val plant: Plant
 ) : ViewModel(), View.OnClickListener {
-
-    fun plant(): Plant = plant
 
     override fun onClick(view: View) {
         val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plant.plantId)
