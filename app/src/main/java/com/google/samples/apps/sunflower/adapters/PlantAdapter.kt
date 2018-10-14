@@ -33,7 +33,6 @@ class PlantAdapter : ListAdapter<PlantItemViewModel, PlantAdapter.ViewHolder>(Pl
         val plantViewModel = getItem(position)
         holder.apply {
             bind(plantViewModel)
-            itemView.tag = plantViewModel.plant
         }
     }
 
