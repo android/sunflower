@@ -35,8 +35,7 @@ object InjectorUtils {
 
     private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
         return GardenPlantingRepository.getInstance(
-            AppDatabase.getInstance(context).gardenPlantingDao()
-        )
+                AppDatabase.getInstance(context).gardenPlantingDao())
     }
 
     fun provideGardenPlantingListViewModelFactory(
@@ -55,9 +54,7 @@ object InjectorUtils {
         context: Context,
         plantId: String
     ): PlantDetailViewModelFactory {
-        return PlantDetailViewModelFactory(
-            getPlantRepository(context),
-            getGardenPlantingRepository(context), plantId
-        )
+        return PlantDetailViewModelFactory(getPlantRepository(context),
+                getGardenPlantingRepository(context), plantId)
     }
 }
