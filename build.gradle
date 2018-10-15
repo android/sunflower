@@ -38,7 +38,7 @@ buildscript {
 }
 
 plugins {
-    id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.2" // $ gw syncLibs
+    id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.3" // $ gw syncLibs
     id "com.diffplug.gradle.spotless" version "3.13.0"
 }
 
