@@ -31,14 +31,14 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:" + Versions.gradle
+        classpath "com.android.tools.build:gradle:" + Versions.com_android_tools_build_gradle
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:" + Versions.kotlin_gradle_plugin
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:" + Versions.navigation_safe_args_gradle_plugin
     }
 }
 
 plugins {
-    id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.3" // $ gw syncLibs
+    id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.4" // $ gw syncLibs
     id "com.diffplug.gradle.spotless" version "3.13.0"
 }
 

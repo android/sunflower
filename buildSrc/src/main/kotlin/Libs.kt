@@ -15,6 +15,11 @@ object Libs {
      * [appcompat website](http://developer.android.com/tools/extras/support-library.html) */
     const val appcompat: String = "androidx.appcompat:appcompat:" + Versions.appcompat
 
+    /**
+     * [gradle website](https://developer.android.com/studio) */
+    const val com_android_tools_build_gradle: String =
+            "com.android.tools.build:gradle:" + Versions.com_android_tools_build_gradle
+
     const val com_diffplug_gradle_spotless_gradle_plugin: String =
             "com.diffplug.gradle.spotless:com.diffplug.gradle.spotless.gradle.plugin:" + Versions.com_diffplug_gradle_spotless_gradle_plugin
 
@@ -70,10 +75,6 @@ object Libs {
     /**
      * [glide website](https://github.com/bumptech/glide) */
     const val glide: String = "com.github.bumptech.glide:glide:" + Versions.glide
-
-    /**
-     * [gradle website](https://developer.android.com/studio) */
-    const val gradle: String = "com.android.tools.build:gradle:" + Versions.gradle
 
     /**
      * [gson website](https://github.com/google/gson) */
