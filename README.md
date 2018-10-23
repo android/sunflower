@@ -102,7 +102,9 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Download ktlint:
 
-  `curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.29.0/ktlint && chmod a+x ktlint`
+  `curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.29.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/`
+
+  On macOS (or [Linux](http://linuxbrew.sh/)) you can also use [brew](https://brew.sh/) - `brew install shyiko/ktlint/ktlint`
 
 - Inside the project root directory run:
 
