@@ -21,6 +21,9 @@ categories:
 ![Android Jetpack](screenshots/jetpack_donut.png "Android Jetpack Components")
 
 Android Sunflower demonstrates utilizing these components to create a simple gardening app.
+Read the
+[Introducing Android Sunflower](https://medium.com/androiddevelopers/introducing-android-sunflower-e421b43fe0c2)
+article for a walkthrough of the app.
 
 Getting Started
 ---------------
@@ -107,6 +110,12 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
   `ktlint --apply-to-idea-project --android`
 
 - Start Android Studio
+
+Additional resources
+--------------------
+Check out the
+[Additional Resources Wiki page](https://github.com/googlesamples/android-sunflower/wiki/Sunflower-additional-resources)
+to learn more about Android Sunflower.
 
 Support
 -------
