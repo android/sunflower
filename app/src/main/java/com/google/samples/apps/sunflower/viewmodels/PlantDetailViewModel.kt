@@ -18,11 +18,12 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 /**
  * The ViewModel used in [PlantDetailFragment].
@@ -31,7 +32,7 @@ class PlantDetailViewModel(
     plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,
     private val plantId: String
-) : ViewModel() {
+) : ScopedViewModel() {
 
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>
@@ -48,7 +49,7 @@ class PlantDetailViewModel(
         plant = plantRepository.getPlant(plantId)
     }
 
-    fun addPlantToGarden() {
+    fun addPlantToGarden() = launch(IO) {
         gardenPlantingRepository.createGardenPlanting(plantId)
     }
 }

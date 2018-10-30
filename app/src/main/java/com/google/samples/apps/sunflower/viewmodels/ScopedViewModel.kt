@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.utilities
+package com.google.samples.apps.sunflower.viewmodels
 
-import java.util.concurrent.Executors
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
-private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
+abstract class ScopedViewModel : ViewModel(), CoroutineScope {
+    private val job = Job()
 
-/**
- * Utility method to run blocks on a dedicated background thread, used for io/database work.
- */
-fun runOnIoThread(f: () -> Unit) {
-    IO_EXECUTOR.execute(f)
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
+    override fun onCleared() {
+        job.cancel()
+    }
 }
