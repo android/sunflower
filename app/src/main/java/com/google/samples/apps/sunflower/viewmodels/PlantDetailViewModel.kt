@@ -75,7 +75,7 @@ class PlantDetailViewModel(
         plant = plantRepository.getPlant(plantId)
     }
 
-    fun addPlantToGarden() = viewModelScope.launch(IO) {
+    fun addPlantToGarden() = viewModelScope.launch {
         gardenPlantingRepository.createGardenPlanting(plantId)
     }
 }
