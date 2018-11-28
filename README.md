@@ -34,6 +34,10 @@ There are two Gradle tasks for testing the project:
 * `connectedAndroidTest` - for running Espresso on a connected device
 * `test` - for running unit tests
 
+For more resources on learning Android development, visit the
+[Developer Guides](https://developer.android.com/guide/) at
+[developer.android.com](https://developer.android.com).
+
 Screenshots
 -----------
 
@@ -115,9 +119,11 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 Additional resources
 --------------------
-Check out the
-[Additional Resources Wiki page](https://github.com/googlesamples/android-sunflower/wiki/Sunflower-additional-resources)
-to learn more about Android Sunflower.
+Check out these Wiki pages to learn more about Android Sunflower:
+
+- [Notable Community Contributions](https://github.com/googlesamples/android-sunflower/wiki/Notable-Community-Contributions)
+
+- [Publications](https://github.com/googlesamples/android-sunflower/wiki/Sunflower-Publications)
 
 Non-Goals
 ---------
