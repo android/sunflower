@@ -16,21 +16,22 @@
 
 package com.google.samples.apps.sunflower.data
 
-import com.google.samples.apps.sunflower.utilities.runOnIoThread
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 
 class GardenPlantingRepository private constructor(
     private val gardenPlantingDao: GardenPlantingDao
 ) {
 
-    fun createGardenPlanting(plantId: String) {
-        runOnIoThread {
+    suspend fun createGardenPlanting(plantId: String) {
+        withContext(IO) {
             val gardenPlanting = GardenPlanting(plantId)
             gardenPlantingDao.insertGardenPlanting(gardenPlanting)
         }
     }
 
-    fun removeGardenPlanting(gardenPlanting: GardenPlanting) {
-        runOnIoThread {
+    suspend fun removeGardenPlanting(gardenPlanting: GardenPlanting) {
+        withContext(IO) {
             gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
         }
     }

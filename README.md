@@ -65,6 +65,7 @@ Libraries Used
   * [Layout][35] - Lay out widgets using different algorithms.
 * Third party
   * [Glide][90] for image loading
+  * [Kotlin Coroutines][91] for managing background threads with simplified code and reducing needs for callbacks
 
 [0]: https://developer.android.com/jetpack/foundation/
 [1]: https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
@@ -83,6 +84,7 @@ Libraries Used
 [34]: https://developer.android.com/guide/components/fragments
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
 [90]: https://bumptech.github.io/glide/
+[91]: https://kotlinlang.org/docs/reference/coroutines-overview.html
 
 Upcoming features
 -----------------
@@ -116,6 +118,17 @@ Additional resources
 Check out the
 [Additional Resources Wiki page](https://github.com/googlesamples/android-sunflower/wiki/Sunflower-additional-resources)
 to learn more about Android Sunflower.
+
+Non-Goals
+---------
+The focus of this project is on Android Jetpack and the Android framework.
+Thus, there are no immediate plans to implement features outside of this scope.
+
+A note on dependency injection - while many projects (such as
+[Plaid](https://github.com/nickbutcher/plaid)) use
+[Dagger 2](https://github.com/google/dagger) for DI, there are no plans to
+incorporate DI into Sunflower.  This allows developers unfamiliar with dependency
+injection to better understand Sunflower's code without having to learn DI.
 
 Support
 -------
