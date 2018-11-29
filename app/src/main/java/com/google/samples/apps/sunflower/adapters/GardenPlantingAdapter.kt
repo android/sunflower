@@ -18,10 +18,13 @@ package com.google.samples.apps.sunflower.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.samples.apps.sunflower.GardenFragmentDirections
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
@@ -44,8 +47,16 @@ class GardenPlantingAdapter(
         getItem(position).let { plantings ->
             with(holder) {
                 itemView.tag = plantings
-                bind(plantings)
+                bind(createOnClickListener(plantings.plant.plantId), plantings)
             }
+        }
+    }
+
+    private fun createOnClickListener(plantId: String): View.OnClickListener {
+        return View.OnClickListener {
+                val direction =
+                        GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
+                it.findNavController().navigate(direction)
         }
     }
 
@@ -53,8 +64,9 @@ class GardenPlantingAdapter(
         private val binding: ListItemGardenPlantingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(plantings: PlantAndGardenPlantings) {
+        fun bind(listener: View.OnClickListener, plantings: PlantAndGardenPlantings) {
             with(binding) {
+                clickListener = listener
                 viewModel = PlantAndGardenPlantingsViewModel(
                     itemView.context,
                     plantings
