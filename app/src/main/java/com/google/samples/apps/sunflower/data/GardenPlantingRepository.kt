@@ -30,9 +30,9 @@ class GardenPlantingRepository private constructor(
         }
     }
 
-    suspend fun removeGardenPlanting(gardenPlanting: GardenPlanting) {
+    suspend fun removeGardenPlanting(plantId: String) {
         withContext(IO) {
-            gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
+            gardenPlantingDao.deleteGardenPlanting(plantId)
         }
     }
 

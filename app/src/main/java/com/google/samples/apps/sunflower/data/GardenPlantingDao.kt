@@ -48,6 +48,6 @@ interface GardenPlantingDao {
     @Insert
     fun insertGardenPlanting(gardenPlanting: GardenPlanting): Long
 
-    @Delete
-    fun deleteGardenPlanting(gardenPlanting: GardenPlanting)
+    @Query("DELETE FROM garden_plantings WHERE plant_id = :plantId")
+    fun deleteGardenPlanting(plantId: String)
 }

@@ -33,7 +33,7 @@ object InjectorUtils {
         return PlantRepository.getInstance(AppDatabase.getInstance(context).plantDao())
     }
 
-    private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
+    fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
         return GardenPlantingRepository.getInstance(
                 AppDatabase.getInstance(context).gardenPlantingDao())
     }

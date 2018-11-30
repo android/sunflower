@@ -16,30 +16,43 @@
 
 package com.google.samples.apps.sunflower.adapters
 
+import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.GardenFragmentDirections
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.data.GardenPlantingDao
+import com.google.samples.apps.sunflower.data.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
+import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
+import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.MainCoroutineDispatcher
+import kotlinx.coroutines.launch
 
 class GardenPlantingAdapter(
-    val context: Context
+        val context: Context
 ) : ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.list_item_garden_planting, parent, false
-            )
+                DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.list_item_garden_planting, parent, false
+                )
         )
     }
 
@@ -47,29 +60,53 @@ class GardenPlantingAdapter(
         getItem(position).let { plantings ->
             with(holder) {
                 itemView.tag = plantings
-                bind(createOnClickListener(plantings.plant.plantId), plantings)
+                bind(createOnClickListener(plantings.plant.plantId), createOnLongClickListener(plantings.plant.plantId), plantings)
             }
         }
     }
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-                val direction =
-                        GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
-                it.findNavController().navigate(direction)
+            val direction =
+                    GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
+            it.findNavController().navigate(direction)
+        }
+    }
+
+    private fun createOnLongClickListener(plantId: String): View.OnLongClickListener {
+        return View.OnLongClickListener {
+            AlertDialog.Builder(context, R.style.Base_ThemeOverlay_MaterialComponents_Dialog_Alert)
+                    .setTitle(R.string.remove_title)
+                    .setMessage(R.string.remove_message)
+
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        run {
+                            val gardenPlantingRepository = InjectorUtils.getGardenPlantingRepository(context)
+                            val scope = CoroutineScope(Main)
+                            scope.launch {
+                                gardenPlantingRepository.removeGardenPlanting(plantId)
+                            }
+                        }
+                    }.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                        dialog.dismiss()
+                    }.show()
+
+
+            true
         }
     }
 
     class ViewHolder(
-        private val binding: ListItemGardenPlantingBinding
+            private val binding: ListItemGardenPlantingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, plantings: PlantAndGardenPlantings) {
+        fun bind(listener: View.OnClickListener, longListener: View.OnLongClickListener, plantings: PlantAndGardenPlantings) {
             with(binding) {
                 clickListener = listener
+                longClickListener = longListener
                 viewModel = PlantAndGardenPlantingsViewModel(
-                    itemView.context,
-                    plantings
+                        itemView.context,
+                        plantings
                 )
                 executePendingBindings()
             }
