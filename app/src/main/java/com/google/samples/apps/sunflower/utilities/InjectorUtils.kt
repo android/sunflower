@@ -37,7 +37,22 @@ object InjectorUtils {
         return GardenPlantingRepository.getInstance(
                 AppDatabase.getInstance(context).gardenPlantingDao())
     }
-
+    private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
+        return GardenPlantingRepository.getInstance(
+                AppDatabase.getInstance(context).gardenPlantingDao())
+    }
+    private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
+        return GardenPlantingRepository.getInstance(
+                AppDatabase.getInstance(context).gardenPlantingDao())
+    }
+    private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
+        return GardenPlantingRepository.getInstance(
+                AppDatabase.getInstance(context).gardenPlantingDao())
+    }
+    private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
+        return GardenPlantingRepository.getInstance(
+                AppDatabase.getInstance(context).gardenPlantingDao())
+    }
     fun provideGardenPlantingListViewModelFactory(
         context: Context
     ): GardenPlantingListViewModelFactory {
