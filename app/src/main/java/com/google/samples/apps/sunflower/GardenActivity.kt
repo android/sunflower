@@ -31,13 +31,21 @@ import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
 
 class GardenActivity : AppCompatActivity() {
 
+    companion object {
+        const val PASSWORD = 20
+        const val LOGIN = "siemanko"
+    }
+
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
+    private var haha = null
+    private var haha2 = "seesf"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        haha2.toString()
         val binding: ActivityGardenBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_garden)
         drawerLayout = binding.drawerLayout
