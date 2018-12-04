@@ -26,6 +26,7 @@
             name="longClickListener"
             type="android.view.View.OnLongClickListener"/>
         <variable
+
             name="viewModel"
             type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel"/>
     </data>
