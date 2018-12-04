@@ -62,6 +62,10 @@ plugins {
     id "com.diffplug.gradle.spotless" version "3.13.0"
 }
 
+plugins {
+  id "org.sonarqube" version "2.6"
+}
+
 allprojects {
     repositories {
         google()
