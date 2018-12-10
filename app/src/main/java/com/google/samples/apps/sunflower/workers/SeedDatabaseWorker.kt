@@ -18,6 +18,7 @@ package com.google.samples.apps.sunflower.workers
 
 import android.content.Context
 import android.util.Log
+import androidx.work.Result
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.google.gson.Gson
@@ -40,10 +41,10 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
             val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
             val database = AppDatabase.getInstance(applicationContext)
             database.plantDao().insertAll(plantList)
-            Result.SUCCESS
+            Result.success()
         } catch (ex: Exception) {
             Log.e(TAG, "Error seeding database", ex)
-            Result.FAILURE
+            Result.failure()
         } finally {
             jsonReader?.close()
         }
