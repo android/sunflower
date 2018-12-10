@@ -38,11 +38,11 @@ buildscript {
         materialVersion = '1.0.0'
         navigationVersion = '1.0.0-alpha08'
         recyclerViewVersion = '1.0.0'
-        roomVersion = '2.1.0-alpha02'
+        roomVersion = '2.1.0-alpha03'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.0.2'
         uiAutomatorVersion = '2.2.0-alpha4'
-        workVersion = '1.0.0-alpha11'
+        workVersion = '1.0.0-alpha12'
     }
 
     repositories {
