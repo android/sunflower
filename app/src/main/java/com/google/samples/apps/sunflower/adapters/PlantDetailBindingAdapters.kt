@@ -17,8 +17,11 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.core.text.bold
 import androidx.core.text.italic
 import androidx.databinding.BindingAdapter
@@ -43,6 +46,16 @@ fun bindIsGone(view: FloatingActionButton, isGone: Boolean?) {
         view.hide()
     } else {
         view.show()
+    }
+}
+
+@BindingAdapter("renderHtml")
+fun bindRenderHtml(view: TextView, description: String?) {
+    if (description != null) {
+        view.text = HtmlCompat.fromHtml(description, FROM_HTML_MODE_COMPACT)
+        view.movementMethod = LinkMovementMethod.getInstance()
+    } else {
+        view.text = ""
     }
 }
 
