@@ -150,6 +150,10 @@ https://github.com/googlesamples/android-sunflower/issues
 Patches are encouraged, and may be submitted by forking this project and submitting a pull request
 through GitHub.
 
+Third Party Content
+-------------------
+Select text used for describing the plants (in `plants.json`) are used from Wikipedia via CC BY-SA 3.0 US (license in `ASSETS_LICENSE`).
+
 License
 -------
 
