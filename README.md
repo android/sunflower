@@ -109,11 +109,11 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Close Android Studio if it's open
 
-- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation).
+- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation)
 
 - Inside the project root directory run:
 
-  `ktlint --apply-to-idea-project --android`
+  `./ktlint --apply-to-idea-project --android`
 
 - Start Android Studio
 
