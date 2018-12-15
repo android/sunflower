@@ -72,4 +72,8 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+
+    // Explicitly add dependency for Fragment due to
+    // https://github.com/googlesamples/android-sunflower/issues/239
+    implementation "androidx.fragment:fragment:1.1.0-alpha02"
 }

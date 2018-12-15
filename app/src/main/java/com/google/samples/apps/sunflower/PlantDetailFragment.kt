@@ -76,14 +76,14 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_plant_detail, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_plant_detail, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     @Suppress("DEPRECATION")
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.action_share -> {
                 val shareIntent = ShareCompat.IntentBuilder.from(activity)
                     .setText(shareText)
