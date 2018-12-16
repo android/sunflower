@@ -109,11 +109,11 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Close Android Studio if it's open
 
-- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation).
+- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation)
 
 - Inside the project root directory run:
 
-  `ktlint --apply-to-idea-project --android`
+  `./ktlint --apply-to-idea-project --android`
 
 - Start Android Studio
 
@@ -149,6 +149,10 @@ https://github.com/googlesamples/android-sunflower/issues
 
 Patches are encouraged, and may be submitted by forking this project and submitting a pull request
 through GitHub.
+
+Third Party Content
+-------------------
+Select text used for describing the plants (in `plants.json`) are used from Wikipedia via CC BY-SA 3.0 US (license in `ASSETS_LICENSE`).
 
 License
 -------
