@@ -46,17 +46,8 @@ class GardenPlantingAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let { plantings ->
             with(holder) {
-                itemView.tag = plantings
-                bind(createOnClickListener(plantings.plant.plantId), plantings)
+                bind(plantings.plant.plantId, plantings)
             }
-        }
-    }
-
-    private fun createOnClickListener(plantId: String): View.OnClickListener {
-        return View.OnClickListener {
-                val direction =
-                        GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
-                it.findNavController().navigate(direction)
         }
     }
 
@@ -64,9 +55,13 @@ class GardenPlantingAdapter(
         private val binding: ListItemGardenPlantingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, plantings: PlantAndGardenPlantings) {
+        fun bind(plantId: String, plantings: PlantAndGardenPlantings) {
             with(binding) {
-                clickListener = listener
+                clickListener = View.OnClickListener {
+                    val direction =
+                        GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
+                    it.findNavController().navigate(direction)
+                }
                 viewModel = PlantAndGardenPlantingsViewModel(
                     itemView.context,
                     plantings
