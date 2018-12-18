@@ -19,18 +19,22 @@ package com.google.samples.apps.sunflower.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.PlantListFragmentDirections
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
+import com.google.samples.apps.sunflower.event.Event
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
 class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
+
+    private val _openPlant = MutableLiveData<Event<String>>()
+    internal val openPlant: LiveData<Event<String>> = _openPlant
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val plant = getItem(position)
@@ -47,8 +51,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
-            it.findNavController().navigate(direction)
+            _openPlant.value = Event(plantId)
         }
     }
 

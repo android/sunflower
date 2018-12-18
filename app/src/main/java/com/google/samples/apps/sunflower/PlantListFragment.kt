@@ -26,8 +26,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
+import com.google.samples.apps.sunflower.event.EventObserver
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
@@ -71,6 +73,11 @@ class PlantListFragment : Fragment() {
     private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) adapter.submitList(plants)
+        })
+
+        adapter.openPlant.observe(viewLifecycleOwner, EventObserver { plantId ->
+            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
+            findNavController().navigate(direction)
         })
     }
 

@@ -21,18 +21,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.GardenFragmentDirections
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
+import com.google.samples.apps.sunflower.event.Event
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
 class GardenPlantingAdapter(
     val context: Context
 ) : ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
+
+    private val _openPlant = MutableLiveData<Event<String>>()
+    internal val openPlant: LiveData<Event<String>> = _openPlant
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -54,9 +58,7 @@ class GardenPlantingAdapter(
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-                val direction =
-                        GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
-                it.findNavController().navigate(direction)
+            _openPlant.value = Event(plantId)
         }
     }
 

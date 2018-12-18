@@ -23,8 +23,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
+import com.google.samples.apps.sunflower.event.EventObserver
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 
@@ -54,6 +56,12 @@ class GardenFragment : Fragment() {
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner, Observer { result ->
             if (result != null && result.isNotEmpty())
                 adapter.submitList(result)
+        })
+
+        adapter.openPlant.observe(viewLifecycleOwner, EventObserver { plantId ->
+            val direction =
+                GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
+            findNavController().navigate(direction)
         })
     }
 }
