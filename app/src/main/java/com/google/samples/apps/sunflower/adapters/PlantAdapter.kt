@@ -55,7 +55,6 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
             DataBindingUtil.getBinding<ListItemPlantBinding>(view)?.let {
                 val navigatorExtras = FragmentNavigatorExtras(it.plantItemImage to plantId)
                 view.findNavController().navigate(direction, navigatorExtras)
-
             } ?: run {
                 // fail to getBinding for transition anim. we still proceed to navigate
                 view.findNavController().navigate(direction)
@@ -64,7 +63,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     }
 
     class ViewHolder(
-            private val binding: ListItemPlantBinding
+        private val binding: ListItemPlantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: View.OnClickListener, item: Plant) {
