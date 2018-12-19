@@ -26,7 +26,7 @@ import androidx.room.Relation
 class PlantAndGardenPlantings {
 
     @Embedded
-    var plant: Plant? = null
+    lateinit var plant: Plant
 
     @Relation(parentColumn = "id", entityColumn = "plant_id")
     var gardenPlantings: List<GardenPlanting> = arrayListOf()

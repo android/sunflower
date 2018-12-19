@@ -30,7 +30,7 @@ import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
-    override fun doWork(): Worker.Result {
+    override fun doWork(): Result {
         val plantType = object : TypeToken<List<Plant>>() {}.type
         var jsonReader: JsonReader? = null
 
@@ -40,10 +40,10 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
             val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
             val database = AppDatabase.getInstance(applicationContext)
             database.plantDao().insertAll(plantList)
-            Worker.Result.SUCCESS
+            Result.success()
         } catch (ex: Exception) {
             Log.e(TAG, "Error seeding database", ex)
-            Worker.Result.FAILURE
+            Result.failure()
         } finally {
             jsonReader?.close()
         }

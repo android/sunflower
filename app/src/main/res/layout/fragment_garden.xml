@@ -23,7 +23,7 @@
 
         <variable
                 name="hasPlantings"
-                type="Boolean" />
+                type="boolean" />
 
     </data>
 

@@ -25,7 +25,7 @@ class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlantings>()
         oldItem: PlantAndGardenPlantings,
         newItem: PlantAndGardenPlantings
     ): Boolean {
-        return oldItem.plant?.plantId == newItem.plant?.plantId
+        return oldItem.plant.plantId == newItem.plant.plantId
     }
 
     override fun areContentsTheSame(
