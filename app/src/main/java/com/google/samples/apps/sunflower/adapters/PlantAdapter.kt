@@ -37,7 +37,8 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val plant = getItem(position)
         holder.apply {
-            bind(createOnClickListener(), plant)
+            bind(createOnClickListener(plant.plantId), plant)
+            itemView.tag = plant
         }
     }
 
@@ -46,32 +47,32 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
                 LayoutInflater.from(parent.context), parent, false))
     }
 
-    private fun createOnClickListener(): OnPlantItemClickListener {
-        return object : OnPlantItemClickListener {
-            override fun onPlantItemClick(rootView: View, plant: Plant) {
-                val binding = DataBindingUtil.getBinding<ListItemPlantBinding>(rootView)
-                val navigatorExtras = FragmentNavigatorExtras(binding!!.plantItemImage to plant.plantId)
+    private fun createOnClickListener(plantId: String): View.OnClickListener {
+        return View.OnClickListener { view ->
+            val direction = PlantListFragmentDirections
+                    .ActionPlantListFragmentToPlantDetailFragment(plantId)
 
-                val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plant.plantId)
-                rootView.findNavController().navigate(direction, navigatorExtras)
+            DataBindingUtil.getBinding<ListItemPlantBinding>(view)?.let {
+                val navigatorExtras = FragmentNavigatorExtras(it.plantItemImage to plantId)
+                view.findNavController().navigate(direction, navigatorExtras)
+
+            } ?: run {
+                // fail to getBinding for transition anim. we still proceed to navigate
+                view.findNavController().navigate(direction)
             }
         }
     }
 
     class ViewHolder(
-        private val binding: ListItemPlantBinding
+            private val binding: ListItemPlantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: OnPlantItemClickListener, item: Plant) {
+        fun bind(listener: View.OnClickListener, item: Plant) {
             binding.apply {
                 clickListener = listener
                 plant = item
                 executePendingBindings()
             }
         }
-    }
-
-    interface OnPlantItemClickListener {
-        fun onPlantItemClick(rootView: View, plant: Plant)
     }
 }

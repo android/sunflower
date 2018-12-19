@@ -21,7 +21,7 @@
     <data>
         <variable
             name="clickListener"
-            type="com.google.samples.apps.sunflower.adapters.PlantAdapter.OnPlantItemClickListener"/>
+            type="android.view.View.OnClickListener"/>
         <variable
             name="plant"
             type="com.google.samples.apps.sunflower.data.Plant"/>
@@ -30,7 +30,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{v -> clickListener.onPlantItemClick(v, plant)}">
+        android:onClick="@{clickListener}">
 
         <ImageView
             android:id="@+id/plant_item_image"
