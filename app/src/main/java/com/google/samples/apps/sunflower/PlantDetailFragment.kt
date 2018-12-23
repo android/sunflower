@@ -30,15 +30,16 @@ import androidx.core.app.ShareCompat
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.transition.Fade
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
+import com.google.samples.apps.sunflower.utilities.AnimUtils
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.utilities.MoveViews
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
@@ -83,9 +84,7 @@ class PlantDetailFragment : Fragment() {
         })
 
         postponeEnterTransition() // wait for Glide callback to start transition
-        sharedElementEnterTransition = MoveViews().apply {
-            interpolator = FastOutSlowInInterpolator() // Material standard easing
-        }
+        setupTransition()
 
         setHasOptionsMenu(true)
 
@@ -142,6 +141,28 @@ class PlantDetailFragment : Fragment() {
         ): Boolean {
             startPostponedEnterTransition()
             return false
+        }
+    }
+
+    private fun setupTransition() {
+        // Animations when List entering Detail
+        sharedElementEnterTransition = MoveViews().apply {
+            interpolator = AnimUtils.getFastOutSlowInInterpolator()
+            duration = resources.getInteger(R.integer.config_duration_area_large_expand).toLong()
+        }
+        enterTransition = Fade().apply {
+            interpolator = AnimUtils.getLinearOutSlowInInterpolator()
+            startDelay = resources.getInteger(R.integer.config_duration_area_large_expand).toLong()
+        }
+
+        // Animations when Detail retuning to List
+        sharedElementReturnTransition = MoveViews().apply {
+            interpolator = AnimUtils.getFastOutSlowInInterpolator()
+            duration = resources.getInteger(R.integer.config_duration_area_large_collapse).toLong()
+        }
+        returnTransition = Fade().apply {
+            interpolator = AnimUtils.getFastOutLinearInInterpolator()
+            duration = resources.getInteger(R.integer.config_duration_area_small).toLong()
         }
     }
 }
