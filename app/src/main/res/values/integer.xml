@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Animation durations https://material.io/design/motion/speed.html#duration -->
+
+    <!-- Duration suitable for icons and selection controls. -->
+    <integer name="config_duration_area_small">100</integer>
+
+    <!-- Expanding duration suitable for bottom sheets and expanding chips -->
+    <integer name="config_duration_area_medium_expand">250</integer>
+
+    <!-- Collapsing duration suitable for bottom sheets and expanding chips -->
+    <integer name="config_duration_area_medium_collapse">200</integer>
+
+    <!-- Expanding duration suitable for cards and persistent sheet -->
+    <integer name="config_duration_area_large_expand">300</integer>
+
+    <!-- Expanding duration suitable for cards and persistent sheet -->
+    <integer name="config_duration_area_large_collapse">250</integer>
+
+</resources>

@@ -27,8 +27,10 @@ import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.transition.Fade
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
+import com.google.samples.apps.sunflower.utilities.AnimUtils
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
@@ -56,6 +58,7 @@ class PlantListFragment : Fragment() {
         binding.plantList.doOnLayout {
             startPostponedEnterTransition()
         }
+        setupTransition()
 
         setHasOptionsMenu(true)
         return binding.root
@@ -88,6 +91,13 @@ class PlantListFragment : Fragment() {
             } else {
                 setGrowZoneNumber(9)
             }
+        }
+    }
+
+    private fun setupTransition() {
+        exitTransition = Fade().apply {
+            interpolator = AnimUtils.getFastOutSlowInInterpolator()
+            duration = resources.getInteger(R.integer.config_duration_area_small).toLong()
         }
     }
 }
