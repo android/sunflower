@@ -31,14 +31,12 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
     override fun doWork(): Result {
-        val plantType = object : TypeToken<List<Plant>>() {}.type
-        var jsonReader: JsonReader? = null
-
+        
         return try {
             applicationContext.assets.open(PLANT_DATA_FILENAME)
                     .use {
-                        jsonReader = JsonReader(it.reader())
-                        val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
+                        val jsonReader = JsonReader(it.reader())
+                        val plantList: List<Plant> = Gson().fromJson(jsonReader, Array<Plant>::class.java)
                         val database = AppDatabase.getInstance(applicationContext)
                         database.plantDao().insertAll(plantList)
                     }
