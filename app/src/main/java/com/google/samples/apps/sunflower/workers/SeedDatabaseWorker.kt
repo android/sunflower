@@ -43,7 +43,7 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
 
             Result.success()
         } catch (ex: Exception) {
-            Log.e(TAG, "Error seeding database.", ex)
+            Log.e(TAG, "Error seeding database", ex)
             Result.failure()
         }
     }
