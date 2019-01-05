@@ -33,13 +33,12 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
     override fun doWork(): Result {
 
         return try {
-            applicationContext.assets.open(PLANT_DATA_FILENAME)
-                    .use {
-                        val plantList: List<Plant> = Gson().fromJson(JsonReader(it.reader()), Array<Plant>::class.java)
-                        AppDatabase.getInstance(applicationContext).apply {
-                            plantDao().insertAll(plantList)
-                        }
-                    }
+            applicationContext.assets.open(PLANT_DATA_FILENAME).use {
+                val plantList: List<Plant> = Gson().fromJson(JsonReader(it.reader()), Array<Plant>::class.java)
+                AppDatabase.getInstance(applicationContext).apply {
+                    plantDao().insertAll(plantList)
+                }
+            }
 
             Result.success()
         } catch (ex: Exception) {
