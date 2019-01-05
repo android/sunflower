@@ -31,19 +31,19 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
     override fun doWork(): Result {
-        
+
         return try {
             applicationContext.assets.open(PLANT_DATA_FILENAME)
                     .use {
-                        val jsonReader = JsonReader(it.reader())
-                        val plantList: List<Plant> = Gson().fromJson(jsonReader, Array<Plant>::class.java)
-                        val database = AppDatabase.getInstance(applicationContext)
-                        database.plantDao().insertAll(plantList)
+                        val plantList: List<Plant> = Gson().fromJson(JsonReader(it.reader()), Array<Plant>::class.java)
+                        AppDatabase.getInstance(applicationContext).apply {
+                            plantDao().insertAll(plantList)
+                        }
                     }
 
             Result.success()
         } catch (ex: Exception) {
-            Log.e(TAG, "Error seeding database", ex)
+            Log.e(TAG, "Error seeding database.", ex)
             Result.failure()
         }
     }
