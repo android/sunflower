@@ -51,10 +51,11 @@ class PlantDetailFragment : Fragment() {
 
         val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
-                .get(PlantDetailViewModel::class.java)
+            .get(PlantDetailViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-                inflater, R.layout.fragment_plant_detail, container, false).apply {
+            inflater, R.layout.fragment_plant_detail, container, false
+        ).apply {
             viewModel = plantDetailViewModel
             setLifecycleOwner(this@PlantDetailFragment)
             fab.setOnClickListener { view ->

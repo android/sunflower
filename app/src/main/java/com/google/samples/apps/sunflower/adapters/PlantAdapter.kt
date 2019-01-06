@@ -42,13 +42,17 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ListItemPlantBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            ListItemPlantBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
+            val direction =
+                PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
             it.findNavController().navigate(direction)
         }
     }

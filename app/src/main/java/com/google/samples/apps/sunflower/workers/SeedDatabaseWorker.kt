@@ -27,7 +27,8 @@ import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 
-class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) :
+    Worker(context, workerParams) {
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
     override fun doWork(): Result {

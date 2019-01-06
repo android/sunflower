@@ -38,8 +38,10 @@ class GardenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityGardenBinding = DataBindingUtil.setContentView(this,
-                R.layout.activity_garden)
+        val binding: ActivityGardenBinding = DataBindingUtil.setContentView(
+            this,
+            R.layout.activity_garden
+        )
         drawerLayout = binding.drawerLayout
 
         navController = Navigation.findNavController(this, R.id.garden_nav_fragment)

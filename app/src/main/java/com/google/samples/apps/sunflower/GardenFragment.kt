@@ -45,7 +45,7 @@ class GardenFragment : Fragment() {
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
         val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
         val viewModel = ViewModelProviders.of(this, factory)
-                .get(GardenPlantingListViewModel::class.java)
+            .get(GardenPlantingListViewModel::class.java)
 
         viewModel.gardenPlantings.observe(viewLifecycleOwner, Observer { plantings ->
             binding.hasPlantings = (plantings != null && plantings.isNotEmpty())
