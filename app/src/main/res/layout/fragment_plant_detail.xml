@@ -19,6 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
@@ -43,9 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:title="@{viewModel.plant.name}"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@{viewModel.plant.name}"
                 app:toolbarId="@+id/toolbar">
 
                 <ImageView
@@ -73,6 +74,8 @@
             android:id="@+id/plant_detail_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/fab_bottom_padding"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,28 +86,28 @@
                     android:id="@+id/plant_watering"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_small"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:wateringText="@{viewModel.plant.wateringInterval}"
-                    tools:text="Watering needs: every 7 days"/>
+                    tools:text="Watering needs: every 7 days" />
 
                 <TextView
                     android:id="@+id/plant_detail"
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:text="@{viewModel.plant.description}"
+                    android:layout_marginEnd="@dimen/margin_small"
                     android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/plant_watering"
+                    app:renderHtml="@{viewModel.plant.description}"
                     tools:text="Details about the plant" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,12 +42,12 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) :
                     AppDatabase.getInstance(applicationContext).apply {
                         plantDao().insertAll(plantList)
                     }
-                    Result.SUCCESS
+                    Result.success()
                 }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "Error seeding database", ex)
-            Result.FAILURE
+            Result.failure()
         }
     }
 }

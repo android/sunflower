@@ -21,6 +21,9 @@ categories:
 ![Android Jetpack](screenshots/jetpack_donut.png "Android Jetpack Components")
 
 Android Sunflower demonstrates utilizing these components to create a simple gardening app.
+Read the
+[Introducing Android Sunflower](https://medium.com/androiddevelopers/introducing-android-sunflower-e421b43fe0c2)
+article for a walkthrough of the app.
 
 Getting Started
 ---------------
@@ -30,6 +33,10 @@ This project uses the Gradle build system. To build this project, use the
 There are two Gradle tasks for testing the project:
 * `connectedAndroidTest` - for running Espresso on a connected device
 * `test` - for running unit tests
+
+For more resources on learning Android development, visit the
+[Developer Guides](https://developer.android.com/guide/) at
+[developer.android.com](https://developer.android.com).
 
 Screenshots
 -----------
@@ -62,6 +69,7 @@ Libraries Used
   * [Layout][35] - Lay out widgets using different algorithms.
 * Third party
   * [Glide][90] for image loading
+  * [Kotlin Coroutines][91] for managing background threads with simplified code and reducing needs for callbacks
 
 [0]: https://developer.android.com/jetpack/foundation/
 [1]: https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
@@ -80,6 +88,7 @@ Libraries Used
 [34]: https://developer.android.com/guide/components/fragments
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
 [90]: https://bumptech.github.io/glide/
+[91]: https://kotlinlang.org/docs/reference/coroutines-overview.html
 
 Upcoming features
 -----------------
@@ -91,7 +100,7 @@ app? Please open a new [issue](https://github.com/googlesamples/android-sunflowe
 
 Android Studio IDE setup
 ------------------------
-For development, the latest version of Android Studio 3.2 is required. The latest version can be
+For development, the latest version of Android Studio 3.3 is required. The latest version can be
 downloaded from [here](https://developer.android.com/studio/).
 
 Sunflower uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
@@ -100,19 +109,32 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Close Android Studio if it's open
 
-- Download ktlint:
-
-  `curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.29.0/ktlint && chmod a+x ktlint`
+- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation)
 
 - Inside the project root directory run:
 
-  `ktlint --apply-to-idea-project --android`
-
-- Remove ktlint if desired:
-
-  `rm ktlint`
+  `./ktlint --apply-to-idea-project --android`
 
 - Start Android Studio
+
+Additional resources
+--------------------
+Check out these Wiki pages to learn more about Android Sunflower:
+
+- [Notable Community Contributions](https://github.com/googlesamples/android-sunflower/wiki/Notable-Community-Contributions)
+
+- [Publications](https://github.com/googlesamples/android-sunflower/wiki/Sunflower-Publications)
+
+Non-Goals
+---------
+The focus of this project is on Android Jetpack and the Android framework.
+Thus, there are no immediate plans to implement features outside of this scope.
+
+A note on dependency injection - while many projects (such as
+[Plaid](https://github.com/nickbutcher/plaid)) use
+[Dagger 2](https://github.com/google/dagger) for DI, there are no plans to
+incorporate DI into Sunflower.  This allows developers unfamiliar with dependency
+injection to better understand Sunflower's code without having to learn DI.
 
 Support
 -------
@@ -127,6 +149,10 @@ https://github.com/googlesamples/android-sunflower/issues
 
 Patches are encouraged, and may be submitted by forking this project and submitting a pull request
 through GitHub.
+
+Third Party Content
+-------------------
+Select text used for describing the plants (in `plants.json`) are used from Wikipedia via CC BY-SA 3.0 US (license in `ASSETS_LICENSE`).
 
 License
 -------

@@ -23,6 +23,10 @@ import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 /**
  * The ViewModel used in [PlantDetailFragment].
@@ -35,6 +39,29 @@ class PlantDetailViewModel(
 
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>
+
+    /**
+     * This is the job for all coroutines started by this ViewModel.
+     *
+     * Cancelling this job will cancel all coroutines started by this ViewModel.
+     */
+    private val viewModelJob = Job()
+
+    /**
+     * This is the scope for all coroutines launched by [PlantDetailViewModel].
+     *
+     * Since we pass [viewModelJob], you can cancel all coroutines launched by [viewModelScope] by calling
+     * viewModelJob.cancel().  This is called in [onCleared].
+     */
+    private val viewModelScope = CoroutineScope(Main + viewModelJob)
+
+    /**
+     * Cancel all coroutines when the ViewModel is cleared.
+     */
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 
     init {
 
@@ -49,6 +76,8 @@ class PlantDetailViewModel(
     }
 
     fun addPlantToGarden() {
-        gardenPlantingRepository.createGardenPlanting(plantId)
+        viewModelScope.launch {
+            gardenPlantingRepository.createGardenPlanting(plantId)
+        }
     }
 }

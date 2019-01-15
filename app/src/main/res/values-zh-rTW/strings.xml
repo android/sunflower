@@ -21,7 +21,7 @@
     <string name="plant_list_title">植物目錄</string>
     <string name="plant_details_title">植物介紹</string>
     <string name="navigation_drawer_header_content_description">導航抽屜頁眉</string>
-    <string name="added_plant_to_garden">加新植物</string>
+    <string name="added_plant_to_garden">添加了新植物</string>
     <string name="garden_empty">花園裡還沒有植物</string>
     <string name="planted_date">%1$s 種植於 %2$s</string>
     <string name="menu_item_share_plant">分享</string>
