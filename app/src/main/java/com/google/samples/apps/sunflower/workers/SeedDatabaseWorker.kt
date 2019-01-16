@@ -27,8 +27,10 @@ import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 
-class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) :
-    Worker(context.applicationContext, workerParams) {
+class SeedDatabaseWorker(
+    context: Context,
+    workerParams: WorkerParameters
+) : Worker(context.applicationContext, workerParams) {
 
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
@@ -39,9 +41,9 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) :
                     val plantType = object : TypeToken<List<Plant>>() {}.type
                     val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
 
-                    AppDatabase.getInstance(applicationContext).apply {
-                        plantDao().insertAll(plantList)
-                    }
+                    val database = AppDatabase.getInstance(applicationContext)
+                    database.plantDao().insertAll(plantList)
+
                     Result.success()
                 }
             }
