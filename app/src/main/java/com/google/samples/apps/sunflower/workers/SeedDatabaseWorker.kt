@@ -30,7 +30,7 @@ import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 class SeedDatabaseWorker(
     context: Context,
     workerParams: WorkerParameters
-) : Worker(context.applicationContext, workerParams) {
+) : Worker(context, workerParams) {
 
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
