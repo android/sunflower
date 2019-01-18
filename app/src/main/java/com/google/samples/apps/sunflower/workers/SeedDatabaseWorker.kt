@@ -18,7 +18,9 @@ package com.google.samples.apps.sunflower.workers
 
 import android.content.Context
 import android.util.Log
+import androidx.work.ListenableWorker
 import androidx.work.Worker
+import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -26,30 +28,58 @@ import com.google.gson.stream.JsonReader
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
+import javax.inject.Inject
+import javax.inject.Provider
 
-class SeedDatabaseWorker(
-    context: Context,
-    workerParams: WorkerParameters
-) : Worker(context, workerParams) {
-
-    private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
+class SeedDatabaseWorker @AssistedInject constructor(
+        @Assisted context: Context,
+        @Assisted params: WorkerParameters,
+        private val database: AppDatabase
+) : Worker(context, params) {
+    private val tag by lazy { SeedDatabaseWorker::class.java.simpleName }
 
     override fun doWork(): Result {
+        val plantType = object : TypeToken<List<Plant>>() {}.type
+        var jsonReader: JsonReader? = null
+
         return try {
-            applicationContext.assets.open(PLANT_DATA_FILENAME).use { inputStream ->
-                JsonReader(inputStream.reader()).use { jsonReader ->
-                    val plantType = object : TypeToken<List<Plant>>() {}.type
-                    val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
-
-                    val database = AppDatabase.getInstance(applicationContext)
-                    database.plantDao().insertAll(plantList)
-
-                    Result.success()
-                }
-            }
+            val inputStream = applicationContext.assets.open(PLANT_DATA_FILENAME)
+            jsonReader = JsonReader(inputStream.reader())
+            val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
+            database.plantDao().insertAll(plantList)
+            Result.success()
         } catch (ex: Exception) {
-            Log.e(TAG, "Error seeding database", ex)
+            Log.e(tag, "Error seeding database", ex)
             Result.failure()
+        } finally {
+            jsonReader?.close()
         }
     }
+
+    @AssistedInject.Factory
+    interface Factory : ChildWorkerFactory
 }
+
+
+interface ChildWorkerFactory {
+    fun create(context: Context, params: WorkerParameters): ListenableWorker
+}
+
+class SampleWorkerFactory @Inject constructor(
+        private val workerFactories: Map<Class<out ListenableWorker>, @JvmSuppressWildcards Provider<ChildWorkerFactory>>
+) : WorkerFactory() {
+    override fun createWorker(
+            appContext: Context,
+            workerClassName: String,
+            workerParameters: WorkerParameters
+    ): ListenableWorker? {
+        val foundEntry =
+                workerFactories.entries.find { Class.forName(workerClassName).isAssignableFrom(it.key) }
+        val factoryProvider = foundEntry?.value
+                ?: throw IllegalArgumentException("unknown worker class name: $workerClassName")
+        return factoryProvider.get().create(appContext, workerParameters)
+    }
+}
+

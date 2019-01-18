@@ -20,12 +20,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 import com.google.samples.apps.sunflower.data.PlantRepository
+import javax.inject.Inject
 
 /**
  * Factory for creating a [PlantListViewModel] with a constructor that takes a [PlantRepository].
  */
-class PlantListViewModelFactory(
-    private val repository: PlantRepository
+class PlantListViewModelFactory @Inject constructor(
+        private val repository: PlantRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

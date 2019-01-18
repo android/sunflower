@@ -23,8 +23,9 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
+import javax.inject.Inject
 
-class PlantAndGardenPlantingsViewModel(
+class PlantAndGardenPlantingsViewModel @Inject constructor(
     context: Context,
     plantings: PlantAndGardenPlantings
 ) : ViewModel() {

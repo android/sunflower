@@ -20,30 +20,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
+import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class GardenFragment : Fragment() {
+class GardenFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var adapter: GardenPlantingAdapter
+    @Inject
+    lateinit var factory: GardenPlantingListViewModelFactory
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentGardenBinding.inflate(inflater, container, false)
-        val adapter = GardenPlantingAdapter()
         binding.gardenList.adapter = adapter
         subscribeUi(adapter, binding)
         return binding.root
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
         val viewModel = ViewModelProviders.of(this, factory)
                 .get(GardenPlantingListViewModel::class.java)
 
