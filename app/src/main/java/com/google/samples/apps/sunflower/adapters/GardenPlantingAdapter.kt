@@ -16,13 +16,13 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.R
@@ -31,9 +31,8 @@ import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBindi
 import com.google.samples.apps.sunflower.event.Event
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
-class GardenPlantingAdapter(
-    val context: Context
-) : ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
+class GardenPlantingAdapter :
+    ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
 
     private val _openPlant = MutableLiveData<Event<String>>()
     internal val openPlant: LiveData<Event<String>> = _openPlant
@@ -76,5 +75,22 @@ class GardenPlantingAdapter(
                 executePendingBindings()
             }
         }
+    }
+}
+
+private class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlantings>() {
+
+    override fun areItemsTheSame(
+        oldItem: PlantAndGardenPlantings,
+        newItem: PlantAndGardenPlantings
+    ): Boolean {
+        return oldItem.plant.plantId == newItem.plant.plantId
+    }
+
+    override fun areContentsTheSame(
+        oldItem: PlantAndGardenPlantings,
+        newItem: PlantAndGardenPlantings
+    ): Boolean {
+        return oldItem.plant == newItem.plant
     }
 }
