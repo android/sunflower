@@ -30,7 +30,8 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
 object InjectorUtils {
 
     private fun getPlantRepository(context: Context): PlantRepository {
-        return PlantRepository.getInstance(AppDatabase.getInstance(context.applicationContext).plantDao())
+        return PlantRepository.getInstance(
+                AppDatabase.getInstance(context.applicationContext).plantDao())
     }
 
     private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
