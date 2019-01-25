@@ -1,0 +1,38 @@
+language: android
+notifications:
+  slack: devxinyuezhao:6nLYv1EMjZOCmBjJAlQigURe
+env:
+  global:
+    - ANDROID_TARGET=22
+    - ANDROID_ABI=armeabi-v7a
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-28
+    - android-28
+    - add-on
+    - extra
+    - android-$ANDROID_TARGET
+    - sys-img-$ANDROID_ABI-android-$ANDROID_TARGET
+licenses:
+    - 'android-sdk-license-.+'
+jdk:
+    - oraclejdk8
+script:
+    - ./gradlew spotlessApply testAll
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+before_install:
+      - chmod +x ./gradlew
+      - yes | sdkmanager "platforms;android-28"
+      - yes | sdkmanager "build-tools;28.0.0"
+      - echo no | android create avd --force -n test -t android-$ANDROID_TARGET --abi $ANDROID_ABI
+      - emulator -avd test -no-skin -no-audio -no-window &
+      - adb wait-for-device
+      - adb shell input keyevent 82 &

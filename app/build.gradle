@@ -73,3 +73,6 @@ dependencies {
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
 }
+
+
+task testAll(dependsOn: ['uninstallAll', 'clean', 'check', 'connectedCheck'])
