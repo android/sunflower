@@ -16,8 +16,8 @@
 
 package com.google.samples.apps.sunflower.data
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Relation
+import androidx.room.Embedded
+import androidx.room.Relation
 
 /**
  * This class captures the relationship between a [Plant] and a user's [GardenPlanting], which is
@@ -26,7 +26,7 @@ import android.arch.persistence.room.Relation
 class PlantAndGardenPlantings {
 
     @Embedded
-    var plant: Plant? = null
+    lateinit var plant: Plant
 
     @Relation(parentColumn = "id", entityColumn = "plant_id")
     var gardenPlantings: List<GardenPlanting> = arrayListOf()

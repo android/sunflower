@@ -16,21 +16,21 @@
 
 package com.google.samples.apps.sunflower
 
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.contrib.DrawerMatchers.isClosed
-import android.support.test.espresso.contrib.DrawerMatchers.isOpen
-import android.support.test.espresso.contrib.NavigationViewActions.navigateTo
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.isRoot
-import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.rule.ActivityTestRule
 import android.view.Gravity
+import androidx.test.InstrumentationRegistry
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.DrawerMatchers.isClosed
+import androidx.test.espresso.contrib.DrawerMatchers.isOpen
+import androidx.test.espresso.contrib.NavigationViewActions.navigateTo
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
+import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
 import com.google.samples.apps.sunflower.utilities.getToolbarNavigationContentDescription
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -52,13 +52,15 @@ class GardenActivityTest {
     @Test fun onRotate_NavigationStaysOpen() {
         clickOnHomeIconToOpenNavigationDrawer()
 
-        // Rotate device to landscape
-        activityTestRule.activity.requestedOrientation = SCREEN_ORIENTATION_LANDSCAPE
-        checkDrawerIsOpen()
+        with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
+                // Rotate device to landscape
+                setOrientationLeft()
+                checkDrawerIsOpen()
 
-        // Rotate device back to portrait
-        activityTestRule.activity.requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-        checkDrawerIsOpen()
+                // Rotate device back to portrait
+                setOrientationRight()
+                checkDrawerIsOpen()
+        }
     }
 
     @Test fun clickOnPlantListDrawerMenuItem_StartsPlantListActivity() {
