@@ -54,7 +54,7 @@ class GardenPlantingAdapter :
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
                 val direction =
-                        GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
+                        GardenFragmentDirections.actionGardenFragmentToPlantDetailFragment(plantId)
                 it.findNavController().navigate(direction)
         }
     }
