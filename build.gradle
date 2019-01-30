@@ -36,13 +36,13 @@ buildscript {
         ktxVersion = '1.0.1'
         lifecycleVersion = '2.0.0'
         materialVersion = '1.0.0'
-        navigationVersion = '1.0.0-alpha09'
+        navigationVersion = '1.0.0-alpha11'
         recyclerViewVersion = '1.0.0'
-        roomVersion = '2.1.0-alpha03'
+        roomVersion = '2.1.0-alpha04'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.0.2'
-        uiAutomatorVersion = '2.2.0-alpha4'
-        workVersion = '1.0.0-beta02'
+        uiAutomatorVersion = '2.2.0'
+        workVersion = '1.0.0-beta03'
     }
 
     repositories {
