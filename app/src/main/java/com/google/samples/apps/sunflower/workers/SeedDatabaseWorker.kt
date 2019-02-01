@@ -27,25 +27,29 @@ import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 
-class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class SeedDatabaseWorker(
+    context: Context,
+    workerParams: WorkerParameters
+) : Worker(context, workerParams) {
+
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
 
     override fun doWork(): Result {
-        val plantType = object : TypeToken<List<Plant>>() {}.type
-        var jsonReader: JsonReader? = null
-
         return try {
-            val inputStream = applicationContext.assets.open(PLANT_DATA_FILENAME)
-            jsonReader = JsonReader(inputStream.reader())
-            val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
-            val database = AppDatabase.getInstance(applicationContext)
-            database.plantDao().insertAll(plantList)
-            Result.success()
+            applicationContext.assets.open(PLANT_DATA_FILENAME).use { inputStream ->
+                JsonReader(inputStream.reader()).use { jsonReader ->
+                    val plantType = object : TypeToken<List<Plant>>() {}.type
+                    val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
+
+                    val database = AppDatabase.getInstance(applicationContext)
+                    database.plantDao().insertAll(plantList)
+
+                    Result.success()
+                }
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "Error seeding database", ex)
             Result.failure()
-        } finally {
-            jsonReader?.close()
         }
     }
 }

@@ -51,7 +51,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener { view ->
             val direction = PlantListFragmentDirections
-                    .ActionPlantListFragmentToPlantDetailFragment(plantId)
+                    .actionPlantListFragmentToPlantDetailFragment(plantId)
 
             DataBindingUtil.getBinding<ListItemPlantBinding>(view)?.let {
                 val navigatorExtras = FragmentNavigatorExtras(it.plantItemImage to plantId)
