@@ -20,6 +20,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.PlantDetailFragment
+import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -75,9 +76,15 @@ class PlantDetailViewModel(
         plant = plantRepository.getPlant(plantId)
     }
 
-    fun addPlantToGarden() {
-        viewModelScope.launch {
+    fun addPlantToGarden(): Job {
+        return viewModelScope.launch {
             gardenPlantingRepository.createGardenPlanting(plantId)
+        }
+    }
+
+    fun removePlantFromGarden(gardenPlanting: GardenPlanting): Job {
+        return viewModelScope.launch {
+            gardenPlantingRepository.removeGardenPlanting(gardenPlanting)
         }
     }
 }

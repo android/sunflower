@@ -24,8 +24,12 @@ import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,6 +38,7 @@ class PlantDetailViewModelTest {
 
     private lateinit var appDatabase: AppDatabase
     private lateinit var viewModel: PlantDetailViewModel
+    private lateinit var gardenPlantingRepo: GardenPlantingRepository
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -44,8 +49,7 @@ class PlantDetailViewModelTest {
         appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
 
         val plantRepo = PlantRepository.getInstance(appDatabase.plantDao())
-        val gardenPlantingRepo = GardenPlantingRepository.getInstance(
-                appDatabase.gardenPlantingDao())
+        gardenPlantingRepo = GardenPlantingRepository.getInstance(appDatabase.gardenPlantingDao())
         viewModel = PlantDetailViewModel(plantRepo, gardenPlantingRepo, testPlant.plantId)
     }
 
@@ -58,5 +62,26 @@ class PlantDetailViewModelTest {
     @Throws(InterruptedException::class)
     fun testDefaultValues() {
         assertFalse(getValue(viewModel.isPlanted))
+    }
+
+    @Test
+    fun should_AddPlantToGarden_And_Can_RemovePlantFromGarden() = runBlocking {
+        viewModel.addPlantToGarden().join()
+        val plantAdded =
+            getValue(gardenPlantingRepo.getGardenPlantingForPlant(testPlant.plantId))
+        assertNotNull(plantAdded)
+
+        viewModel.removePlantFromGarden(plantAdded).join()
+        val plantRemoved =
+            getValue(gardenPlantingRepo.getGardenPlantingForPlant(testPlant.plantId))
+        assertNull(plantRemoved)
+    }
+
+    @Test
+    fun should_StopAddingPlantToGarden() = runBlocking {
+        viewModel.addPlantToGarden().cancelAndJoin()
+        val plantJustAdded =
+            getValue(gardenPlantingRepo.getGardenPlantingForPlant(testPlant.plantId))
+        assertNull(plantJustAdded)
     }
 }
