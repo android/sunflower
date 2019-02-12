@@ -48,7 +48,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
+            val direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(plantId)
             it.findNavController().navigate(direction)
         }
     }

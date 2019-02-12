@@ -102,5 +102,13 @@
     "growZoneNumber": 10,
     "wateringInterval": 1,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/82/Hibiscus_rosa-sinensis_flower_2.JPG"
+  },
+  {
+    "plantId": "14",
+    "name": "Pink & White Lady's Slipper",
+    "description": "Cypripedium reginae, known as the showy lady's slipper, pink-and-white lady's-slipper, or the queen's lady's-slipper, is a rare terrestrial lady's-slipper orchid native to northern North America.<br><br>It is the state flower of Minnesota, United States, and the provincial flower of Prince Edward Island, Canada.<br><br>Despite producing a large amount of seeds per seed pod, it reproduces largely by vegetative reproduction, and remains restricted to the North East region of the United States and south east regions of Canada. Although never common, this rare plant has vanished from much of its historical range due to habitat loss. It has been a subject of horticultural interest for many years with Charles Darwin who, like many, was unsuccessful in cultivating the plant.<br><br>(From <a href=\"https://en.wikipedia.org/wiki/Cypripedium_reginae\">Wikipedia</a>)",
+    "growZoneNumber": 4,
+    "wateringInterval": 7,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Cypripedium_reginae_Orchi_004.jpg"
   }
 ]
