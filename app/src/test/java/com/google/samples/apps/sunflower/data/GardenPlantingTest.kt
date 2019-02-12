@@ -29,7 +29,7 @@ class GardenPlantingTest {
 
     @Test
     fun testDefaultValues() {
-        val gardenPlanting = GardenPlanting("1")
+        val gardenPlanting = GardenPlanting(1)
         val cal = Calendar.getInstance()
         assertYMD(cal, gardenPlanting.plantDate)
         assertYMD(cal, gardenPlanting.lastWateringDate)

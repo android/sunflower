@@ -23,7 +23,7 @@ class GardenPlantingRepository private constructor(
     private val gardenPlantingDao: GardenPlantingDao
 ) {
 
-    suspend fun createGardenPlanting(plantId: String) {
+    suspend fun createGardenPlanting(plantId: Long) {
         withContext(IO) {
             val gardenPlanting = GardenPlanting(plantId)
             gardenPlantingDao.insertGardenPlanting(gardenPlanting)
@@ -36,7 +36,7 @@ class GardenPlantingRepository private constructor(
         }
     }
 
-    fun getGardenPlantingForPlant(plantId: String) =
+    fun getGardenPlantingForPlant(plantId: Long) =
             gardenPlantingDao.getGardenPlantingForPlant(plantId)
 
     fun getGardenPlantings() = gardenPlantingDao.getGardenPlantings()

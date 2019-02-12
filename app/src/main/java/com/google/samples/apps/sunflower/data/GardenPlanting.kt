@@ -37,7 +37,7 @@ import java.util.Calendar
     indices = [Index("plant_id")]
 )
 data class GardenPlanting(
-    @ColumnInfo(name = "plant_id") val plantId: String,
+    @ColumnInfo(name = "plant_id") val plantId: Long,
 
     /**
      * Indicates when the [Plant] was planted. Used for showing notification when it's time

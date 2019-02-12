@@ -24,7 +24,7 @@ import java.util.Calendar.DAY_OF_YEAR
 
 @Entity(tableName = "plants")
 data class Plant(
-    @PrimaryKey @ColumnInfo(name = "id") val plantId: String,
+    @PrimaryKey @ColumnInfo(name = "id") val plantId: Long,
     val name: String,
     val description: String,
     val growZoneNumber: Int,

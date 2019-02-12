@@ -30,7 +30,7 @@ import com.google.samples.apps.sunflower.data.PlantRepository
 class PlantDetailViewModelFactory(
     private val plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,
-    private val plantId: String
+    private val plantId: Long
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

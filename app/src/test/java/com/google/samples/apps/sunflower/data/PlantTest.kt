@@ -29,11 +29,11 @@ class PlantTest {
     private lateinit var plant: Plant
 
     @Before fun setUp() {
-        plant = Plant("1", "Tomato", "A red vegetable", 1, 2, "")
+        plant = Plant(1, "Tomato", "A red vegetable", 1, 2, "")
     }
 
     @Test fun test_default_values() {
-        val defaultPlant = Plant("2", "Apple", "Description", 1)
+        val defaultPlant = Plant(2, "Apple", "Description", 1)
         assertEquals(7, defaultPlant.wateringInterval)
         assertEquals("", defaultPlant.imageUrl)
     }

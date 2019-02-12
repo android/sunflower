@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 class PlantDetailViewModel(
     plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,
-    private val plantId: String
+    private val plantId: Long
 ) : ViewModel() {
 
     val isPlanted: LiveData<Boolean>

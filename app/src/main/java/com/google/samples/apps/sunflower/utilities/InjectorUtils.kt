@@ -53,7 +53,7 @@ object InjectorUtils {
 
     fun providePlantDetailViewModelFactory(
         context: Context,
-        plantId: String
+        plantId: Long
     ): PlantDetailViewModelFactory {
         return PlantDetailViewModelFactory(getPlantRepository(context),
                 getGardenPlantingRepository(context), plantId)

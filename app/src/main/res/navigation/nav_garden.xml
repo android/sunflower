@@ -57,7 +57,7 @@
         tools:layout="@layout/fragment_plant_detail">
         <argument
             android:name="plantId"
-            app:argType="string" />
+            app:argType="long" />
     </fragment>
 
 </navigation>
