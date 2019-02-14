@@ -28,7 +28,7 @@
     <string name="share_text_plant">%s という植物を「Sunflower」アプリで見てみてください</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
-    <!-- Item quantities for zero and one are not used in Chinese -->
+    <!-- Item quantities for zero and one are not used in Japanese -->
     <string name="watering_needs_prefix">水の必要量:</string>
     <plurals name="watering_needs_suffix">
         <item quantity="other">毎%d日</item>
