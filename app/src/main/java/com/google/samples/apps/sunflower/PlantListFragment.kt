@@ -76,7 +76,7 @@ class PlantListFragment : Fragment() {
         })
 
         adapter.openPlant.observe(viewLifecycleOwner, EventObserver { plantId ->
-            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
+            val direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(plantId)
             findNavController().navigate(direction)
         })
     }

@@ -60,7 +60,7 @@ class GardenFragment : Fragment() {
 
         adapter.openPlant.observe(viewLifecycleOwner, EventObserver { plantId ->
             val direction =
-                GardenFragmentDirections.ActionGardenFragmentToPlantDetailFragment(plantId)
+                GardenFragmentDirections.actionGardenFragmentToPlantDetailFragment(plantId)
             findNavController().navigate(direction)
         })
     }
