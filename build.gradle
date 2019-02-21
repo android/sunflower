@@ -36,7 +36,7 @@ buildscript {
         ktxVersion = '1.0.1'
         lifecycleVersion = '2.0.0'
         materialVersion = '1.0.0'
-        navigationVersion = '1.0.0-beta02'
+        navigationVersion = '1.0.0-rc01'
         recyclerViewVersion = '1.1.0-alpha02'
         roomVersion = '2.1.0-alpha04'
         runnerVersion = '1.0.1'
@@ -48,7 +48,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
 
     dependencies {
@@ -66,7 +66,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
 }
 

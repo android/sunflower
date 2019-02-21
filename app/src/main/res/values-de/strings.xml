@@ -37,7 +37,7 @@
     <string name="watering_next_prefix">Zuletzt bewässert am %s</string>
     <plurals name="watering_next_suffix">
         <item quantity="one">Morgen wässern</item>
-        <item quantity="other">%In %d Tagen wässern</item>
+        <item quantity="other">In %d Tagen wässern</item>
     </plurals>
 
     <!-- Accessibility -->

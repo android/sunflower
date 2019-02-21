@@ -66,10 +66,7 @@ class GardenPlantingAdapter :
         fun bind(listener: View.OnClickListener, plantings: PlantAndGardenPlantings) {
             with(binding) {
                 clickListener = listener
-                viewModel = PlantAndGardenPlantingsViewModel(
-                    itemView.context,
-                    plantings
-                )
+                viewModel = PlantAndGardenPlantingsViewModel(plantings)
                 executePendingBindings()
             }
         }
