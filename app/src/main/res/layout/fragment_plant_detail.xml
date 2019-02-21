@@ -59,13 +59,6 @@
                     app:imageFromUrl="@{viewModel.plant.imageUrl}"
                     app:layout_collapseMode="parallax" />
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/detail_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -83,21 +76,35 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/plant_watering"
+                    android:id="@+id/plant_name"
+                    style="?android:attr/textAppearanceLarge"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:layout_marginEnd="@dimen/margin_small"
+                    android:text="@{viewModel.plant.name}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Sunflower" />
+
+                <TextView
+                    android:id="@+id/plant_watering"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_name"
                     app:wateringText="@{viewModel.plant.wateringInterval}"
                     tools:text="Watering needs: every 7 days" />
 
                 <TextView
-                    android:id="@+id/plant_detail"
-                    style="?android:attr/textAppearanceLarge"
+                    android:id="@+id/plant_description"
+                    style="?android:attr/textAppearanceMedium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
