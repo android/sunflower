@@ -47,6 +47,11 @@
     </plurals>
     <string name="water_date" translatable="false">%1$s - %2$s</string>
 
+    <plurals name="garden_action_mode_count">
+        <item quantity="one" translation_description="Number of plants selected">%1$d Selected</item>
+        <item quantity="other" translation_description="Number of plants selected">%1$d Selected</item>
+    </plurals>
+
     <!-- Accessibility -->
     <string name="a11y_plant_item_image" translation_description="Accessibility text for each of the plant images shown in the 'My garden' and 'Plant list' screens.">Picture of plant</string>
 
