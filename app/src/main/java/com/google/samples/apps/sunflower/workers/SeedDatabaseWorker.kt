@@ -30,8 +30,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 
 class SeedDatabaseWorker(
-        context: Context,
-        workerParams: WorkerParameters
+    context: Context,
+    workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
 
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
