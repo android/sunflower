@@ -31,41 +31,41 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.samples.apps.sunflower.R
 
 @BindingAdapter("imageFromUrl")
-fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
+fun ImageView.bindImageFromUrl(imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
-        Glide.with(view.context)
+        Glide.with(context)
                 .load(imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(view)
+                .into(this)
     }
 }
 
 @BindingAdapter("isGone")
-fun bindIsGone(view: FloatingActionButton, isGone: Boolean?) {
+fun FloatingActionButton.bindIsGone(isGone: Boolean?) {
     if (isGone == null || isGone) {
-        view.hide()
+        hide()
     } else {
-        view.show()
+        show()
     }
 }
 
 @BindingAdapter("renderHtml")
-fun bindRenderHtml(view: TextView, description: String?) {
+fun TextView.bindRenderHtml(description: String?) {
     if (description != null) {
-        view.text = HtmlCompat.fromHtml(description, FROM_HTML_MODE_COMPACT)
-        view.movementMethod = LinkMovementMethod.getInstance()
+        text = HtmlCompat.fromHtml(description, FROM_HTML_MODE_COMPACT)
+        movementMethod = LinkMovementMethod.getInstance()
     } else {
-        view.text = ""
+        text = ""
     }
 }
 
 @BindingAdapter("wateringText")
-fun bindWateringText(textView: TextView, wateringInterval: Int) {
-    val resources = textView.context.resources
+fun TextView.bindWateringText(wateringInterval: Int) {
+    val resources = context.resources
     val quantityString = resources.getQuantityString(R.plurals.watering_needs_suffix,
         wateringInterval, wateringInterval)
 
-    textView.text = SpannableStringBuilder()
+    text = SpannableStringBuilder()
         .bold { append(resources.getString(R.string.watering_needs_prefix)) }
         .append(" ")
         .italic { append(quantityString) }
