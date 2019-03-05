@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2018 Google LLC
+  ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,12 +15,6 @@
   -->
 
 <resources>
-
-    <!-- Resources that do not require translation -->
-    <string name="app_name" translatable="false">Sunflower</string>
-    <string name="navigation_drawer_header_title" translatable="false">Sunflower</string>
-
-    <!-- Translatable resources -->
     <string name="menu_filter_by_grow_zone">Filtrer par zone de croissance</string>
     <string name="my_garden_title">Mon jardin</string>
     <string name="plant_detail_image_content_description">Image de plante</string>
@@ -45,7 +39,6 @@
         <item quantity="one">à arroser dans %d jour.</item>
         <item quantity="other">à arroser dans %d jours.</item>
     </plurals>
-    <string name="water_date" translatable="false">%1$s - %2$s</string>
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Image de plante</string>
