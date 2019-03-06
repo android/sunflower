@@ -42,6 +42,7 @@
             android:layout_marginStart="@dimen/margin_small"
             android:contentDescription="@string/a11y_plant_item_image"
             android:scaleType="centerCrop"
+            android:transitionName="@{plant.plantId}"
             app:imageFromUrl="@{plant.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

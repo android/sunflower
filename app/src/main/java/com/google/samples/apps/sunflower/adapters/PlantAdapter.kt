@@ -19,7 +19,9 @@ package com.google.samples.apps.sunflower.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -47,9 +49,17 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
     }
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
-        return View.OnClickListener {
-            val direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(plantId)
-            it.findNavController().navigate(direction)
+        return View.OnClickListener { view ->
+            val direction = PlantListFragmentDirections
+                    .actionPlantListFragmentToPlantDetailFragment(plantId)
+
+            DataBindingUtil.getBinding<ListItemPlantBinding>(view)?.let {
+                val navigatorExtras = FragmentNavigatorExtras(it.plantItemImage to plantId)
+                view.findNavController().navigate(direction, navigatorExtras)
+            } ?: run {
+                // fail to getBinding for transition anim. we still proceed to navigate
+                view.findNavController().navigate(direction)
+            }
         }
     }
 

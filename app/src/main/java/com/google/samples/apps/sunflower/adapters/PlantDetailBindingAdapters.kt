@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.adapters
 
+import android.graphics.drawable.Drawable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.widget.ImageView
@@ -27,15 +28,17 @@ import androidx.core.text.italic
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.samples.apps.sunflower.R
 
-@BindingAdapter("imageFromUrl")
-fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
+@BindingAdapter("imageFromUrl", "requestListener", requireAll = false)
+fun bindImageFromUrl(view: ImageView, imageUrl: String?, listener: RequestListener<Drawable>?) {
     if (!imageUrl.isNullOrEmpty()) {
         Glide.with(view.context)
                 .load(imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
+                .listener(listener)
                 .into(view)
     }
 }

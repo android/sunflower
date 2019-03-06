@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,13 +27,21 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.transition.Fade
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
+import com.google.samples.apps.sunflower.utilities.AnimUtils
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.utilities.MoveViews
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -61,6 +70,9 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
+
+            ViewCompat.setTransitionName(detailImage, plantId)
+            requestListener = imageListener
         }
 
         plantDetailViewModel.plant.observe(this, Observer { plant ->
@@ -70,6 +82,9 @@ class PlantDetailFragment : Fragment() {
                 getString(R.string.share_text_plant, plant.name)
             }
         })
+
+        postponeEnterTransition() // wait for Glide callback to start transition
+        setupTransition()
 
         setHasOptionsMenu(true)
 
@@ -103,6 +118,51 @@ class PlantDetailFragment : Fragment() {
                 return true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    val imageListener = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            startPostponedEnterTransition()
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            startPostponedEnterTransition()
+            return false
+        }
+    }
+
+    private fun setupTransition() {
+        // Animations when List entering Detail
+        sharedElementEnterTransition = MoveViews().apply {
+            interpolator = AnimUtils.getFastOutSlowInInterpolator()
+            duration = resources.getInteger(R.integer.config_duration_area_large_expand).toLong()
+        }
+        enterTransition = Fade().apply {
+            interpolator = AnimUtils.getLinearOutSlowInInterpolator()
+            startDelay = resources.getInteger(R.integer.config_duration_area_large_expand).toLong()
+        }
+
+        // Animations when Detail retuning to List
+        sharedElementReturnTransition = MoveViews().apply {
+            interpolator = AnimUtils.getFastOutSlowInInterpolator()
+            duration = resources.getInteger(R.integer.config_duration_area_large_collapse).toLong()
+        }
+        returnTransition = Fade().apply {
+            interpolator = AnimUtils.getFastOutLinearInInterpolator()
+            duration = resources.getInteger(R.integer.config_duration_area_small).toLong()
         }
     }
 }
