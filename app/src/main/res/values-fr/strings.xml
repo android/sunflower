@@ -18,12 +18,12 @@
     <string name="menu_filter_by_grow_zone">Filtrer par zone de croissance</string>
     <string name="my_garden_title">Mon jardin</string>
     <string name="plant_detail_image_content_description">Image de plante</string>
-    <string name="plant_list_title">Liste de plantes</string>
+    <string name="plant_list_title">Liste des plantes</string>
     <string name="plant_details_title">Détails sur la plante</string>
     <string name="navigation_drawer_header_content_description">Logo de l\'application du volet de navigation</string>
     <string name="added_plant_to_garden">Plante ajoutée à votre jardin</string>
     <string name="garden_empty">Votre jardin est vide</string>
-    <string name="planted_date">%1$s planté(e) let %2$s</string>
+    <string name="planted_date">%1$s planté(e) le %2$s</string>
     <string name="menu_item_share_plant">Partager</string>
     <string name="share_text_plant">Regardez la plante %s sur l\'application Sunflower</string>
 
