@@ -37,7 +37,6 @@ buildscript {
         lifecycleVersion = '2.1.0-alpha02'
         materialVersion = '1.0.0'
         navigationVersion = '2.0.0-rc02'
-        navigationSafeArgsVersion = '1.0.0-rc02'
         recyclerViewVersion = '1.1.0-alpha02'
         roomVersion = '2.1.0-alpha04'
         runnerVersion = '1.0.1'
@@ -54,7 +53,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigationSafeArgsVersion"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     }
 }
 
