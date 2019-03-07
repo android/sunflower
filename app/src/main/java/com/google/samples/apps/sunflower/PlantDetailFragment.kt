@@ -30,6 +30,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
@@ -40,6 +41,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
  */
 class PlantDetailFragment : Fragment() {
 
+    private val args: PlantDetailFragmentArgs by navArgs()
     private lateinit var shareText: String
 
     override fun onCreateView(
@@ -47,9 +49,7 @@ class PlantDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val plantId = PlantDetailFragmentArgs.fromBundle(arguments!!).plantId
-
-        val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), plantId)
+        val factory = InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
         val plantDetailViewModel = ViewModelProviders.of(this, factory)
                 .get(PlantDetailViewModel::class.java)
 
