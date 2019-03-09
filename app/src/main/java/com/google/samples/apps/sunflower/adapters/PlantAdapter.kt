@@ -37,7 +37,6 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
         val plant = getItem(position)
         holder.apply {
             bind(createOnClickListener(plant.plantId), plant)
-            itemView.tag = plant
         }
     }
 
