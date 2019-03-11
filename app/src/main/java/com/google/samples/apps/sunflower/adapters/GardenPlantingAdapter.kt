@@ -81,7 +81,7 @@ class GardenPlantingAdapter :
             isSelected: Boolean
         ) {
 
-            itemView.isActivated = isSelected
+            itemView.isSelected = isSelected
             with(binding) {
                 clickListener = listener
                 viewModel = PlantAndGardenPlantingsViewModel(plantings)
@@ -91,8 +91,8 @@ class GardenPlantingAdapter :
 
         fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
             object : ItemDetailsLookup.ItemDetails<Long>() {
-                override fun getPosition(): Int = adapterPosition
-                override fun getSelectionKey(): Long? = itemId
+                override fun getPosition() = adapterPosition
+                override fun getSelectionKey() = itemId
             }
     }
 }
@@ -114,8 +114,9 @@ private class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlan
     }
 }
 
-class GardenPlantingDetailsLookup(private val recyclerView: RecyclerView) :
-    ItemDetailsLookup<Long>() {
+class GardenPlantingDetailsLookup(
+    private val recyclerView: RecyclerView
+) : ItemDetailsLookup<Long>() {
     override fun getItemDetails(event: MotionEvent): ItemDetails<Long>? {
         val view = recyclerView.findChildViewUnder(event.x, event.y)
         if (view != null) {

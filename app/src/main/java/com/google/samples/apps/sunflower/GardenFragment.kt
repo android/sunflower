@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -36,12 +37,7 @@ import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 class GardenFragment : Fragment() {
 
     private lateinit var selectionTracker: SelectionTracker<Long>
-    private val selectionObserver = object : SelectionTracker.SelectionObserver<Long>() {
-        override fun onSelectionChanged() {
-            super.onSelectionChanged()
-            onSelectionChanged(selectionTracker.selection?.size() ?: 0)
-        }
-    }
+    private lateinit var selectionObserver: GardenSelectionObserver
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,18 +54,10 @@ class GardenFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().addOnBackPressedCallback {
-            onBackPressed()
-        }
+        // Add a listener to the back button here with the fragment as the lifecycler owner so
+        // that it will automatically be removed in onDestroy.
+        requireActivity().addOnBackPressedCallback(this, selectionObserver)
     }
-
-    private fun onBackPressed() =
-        if (selectionTracker.hasSelection()) {
-            selectionTracker.clearSelection()
-            true
-        } else {
-            false
-        }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
         val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
@@ -96,10 +84,40 @@ class GardenFragment : Fragment() {
             SelectionPredicates.createSelectAnything()
         ).build()
         adapter.tracker = selectionTracker
+
+        selectionObserver = GardenSelectionObserver(selectionTracker) { selectedCount ->
+            onSelectionChanged(selectedCount)
+        }
         selectionTracker.addObserver(selectionObserver)
     }
 
     private fun onSelectionChanged(selectedCount: Int) {
         // TODO: Enable/disable ActionMode when items are selected.
+    }
+
+    /**
+     * Class to handle the selection of items in one's garden.
+     */
+    private class GardenSelectionObserver(
+        private val selectionTracker: SelectionTracker<Long>,
+        private val onSelectionChangedListener: (Int) -> Unit
+    ) :
+        SelectionTracker.SelectionObserver<Long>(),
+        OnBackPressedCallback {
+
+        override fun onSelectionChanged() {
+            super.onSelectionChanged()
+            onSelectionChangedListener(selectionTracker.selection?.size() ?: 0)
+        }
+
+        // If the back button is pressed and there's a selection, clear the selection, rather
+        // than potentially exiting the app.
+        override fun handleOnBackPressed() =
+            if (selectionTracker.hasSelection()) {
+                selectionTracker.clearSelection()
+                true
+            } else {
+                false
+            }
     }
 }

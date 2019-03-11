@@ -15,6 +15,6 @@
   ~ limitations under the License.
   -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/holo_blue_light" android:state_activated="true" />
+    <item android:drawable="@android:color/holo_blue_light" android:state_selected="true" />
     <item android:drawable="@android:color/white" />
 </selector>
