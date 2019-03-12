@@ -17,10 +17,13 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.recyclerview.selection.ItemDetailsLookup
+import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +36,12 @@ import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewM
 class GardenPlantingAdapter :
     ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
 
+    var tracker: SelectionTracker<Long>? = null
+
+    init {
+        setHasStableIds(true)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             DataBindingUtil.inflate(
@@ -44,32 +53,47 @@ class GardenPlantingAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let { plantings ->
+            val isSelected = tracker?.isSelected(position.toLong()) ?: false
             with(holder) {
                 itemView.tag = plantings
-                bind(createOnClickListener(plantings.plant.plantId), plantings)
+                bind(createOnClickListener(plantings.plant.plantId), plantings, isSelected)
             }
         }
     }
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-                val direction =
-                        GardenFragmentDirections.actionGardenFragmentToPlantDetailFragment(plantId)
-                it.findNavController().navigate(direction)
+            val direction =
+                GardenFragmentDirections.actionGardenFragmentToPlantDetailFragment(plantId)
+            it.findNavController().navigate(direction)
         }
     }
+
+    override fun getItemId(position: Int): Long = position.toLong()
 
     class ViewHolder(
         private val binding: ListItemGardenPlantingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, plantings: PlantAndGardenPlantings) {
+        fun bind(
+            listener: View.OnClickListener,
+            plantings: PlantAndGardenPlantings,
+            isSelected: Boolean
+        ) {
+
+            itemView.isSelected = isSelected
             with(binding) {
                 clickListener = listener
                 viewModel = PlantAndGardenPlantingsViewModel(plantings)
                 executePendingBindings()
             }
         }
+
+        fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
+            object : ItemDetailsLookup.ItemDetails<Long>() {
+                override fun getPosition() = adapterPosition
+                override fun getSelectionKey() = itemId
+            }
     }
 }
 
@@ -87,5 +111,18 @@ private class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlan
         newItem: PlantAndGardenPlantings
     ): Boolean {
         return oldItem.plant == newItem.plant
+    }
+}
+
+class GardenPlantingDetailsLookup(
+    private val recyclerView: RecyclerView
+) : ItemDetailsLookup<Long>() {
+    override fun getItemDetails(event: MotionEvent): ItemDetails<Long>? {
+        val view = recyclerView.findChildViewUnder(event.x, event.y)
+        if (view != null) {
+            return (recyclerView.getChildViewHolder(view) as GardenPlantingAdapter.ViewHolder)
+                .getItemDetails()
+        }
+        return null
     }
 }
