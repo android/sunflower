@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,17 +18,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="clickListener"
-            type="android.view.View.OnClickListener"/>
+            type="android.view.View.OnClickListener" />
+
         <variable
             name="viewModel"
-            type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel"/>
+            type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/list_item_garden_planting_background"
         android:onClick="@{clickListener}">
 
         <ImageView
@@ -46,33 +48,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/plant_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_normal"
             android:text="@{@string/planted_date(viewModel.plantName, viewModel.plantDateString)}"
+            android:layout_marginEnd="@dimen/margin_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView"/>
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
 
         <TextView
             android:id="@+id/water_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_normal"
             android:text="@{@string/water_date(@string/watering_next_prefix(viewModel.waterDateString), @plurals/watering_next_suffix(viewModel.wateringInterval, viewModel.wateringInterval))}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/plant_date"/>
+            app:layout_constraintTop_toBottomOf="@id/plant_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
