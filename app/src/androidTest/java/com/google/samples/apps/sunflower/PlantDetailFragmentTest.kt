@@ -18,6 +18,7 @@ package com.google.samples.apps.sunflower
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
+import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.test.InstrumentationRegistry
 import androidx.test.espresso.Espresso.onView
@@ -49,7 +50,7 @@ class PlantDetailFragmentTest {
     fun jumpToPlantDetailFragment() {
         activityTestRule.activity.apply {
             runOnUiThread {
-                val bundle = PlantDetailFragmentArgs.Builder(testPlant.plantId).build().toBundle()
+                val bundle = Bundle().apply { putString("plantId", testPlant.plantId) }
                 findNavController(R.id.garden_nav_fragment).navigate(R.id.plant_detail_fragment, bundle)
             }
         }

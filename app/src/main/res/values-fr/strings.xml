@@ -1,0 +1,46 @@
+<!--
+  ~ Copyright 2019 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="menu_filter_by_grow_zone">Filtrer par zone de croissance</string>
+    <string name="my_garden_title">Mon jardin</string>
+    <string name="plant_detail_image_content_description">Image de plante</string>
+    <string name="plant_list_title">Liste des plantes</string>
+    <string name="plant_details_title">Détails sur la plante</string>
+    <string name="navigation_drawer_header_content_description">Logo de l\'application du volet de navigation</string>
+    <string name="added_plant_to_garden">Plante ajoutée à votre jardin</string>
+    <string name="garden_empty">Votre jardin est vide</string>
+    <string name="planted_date">%1$s planté(e) le %2$s</string>
+    <string name="menu_item_share_plant">Partager</string>
+    <string name="share_text_plant">Regardez la plante %s sur l\'application Sunflower</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">Arrosage nécessaire:</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">%d fois par jour</item>
+        <item quantity="other">Tous les %d jours</item>
+    </plurals>
+
+    <string name="watering_next_prefix">Dernier arrosage le %s</string>
+    <plurals name="watering_next_suffix">
+        <item quantity="one">à arroser dans %d jour.</item>
+        <item quantity="other">à arroser dans %d jours.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Image de plante</string>
+
+</resources>
