@@ -47,6 +47,7 @@
     </plurals>
     <string name="water_date" translatable="false">%1$s - %2$s</string>
 
+    <!-- Plural string to allow flexibility in terms for other locales. -->
     <plurals name="garden_action_mode_count">
         <item quantity="one" translation_description="Number of plants selected">%1$d Selected</item>
         <item quantity="other" translation_description="Number of plants selected">%1$d Selected</item>
