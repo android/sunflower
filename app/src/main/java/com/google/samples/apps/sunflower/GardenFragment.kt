@@ -18,9 +18,12 @@ package com.google.samples.apps.sunflower
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -36,6 +39,8 @@ import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 
 class GardenFragment : Fragment() {
 
+    private var actionMode: ActionMode? = null
+
     private lateinit var selectionTracker: SelectionTracker<Long>
     private lateinit var selectionObserver: GardenSelectionObserver
 
@@ -49,14 +54,6 @@ class GardenFragment : Fragment() {
         binding.gardenList.adapter = adapter
         subscribeUi(adapter, binding)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        // Add a listener to the back button here with the fragment as the lifecycler owner so
-        // that it will automatically be removed in onDestroy.
-        requireActivity().addOnBackPressedCallback(this, selectionObserver)
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
@@ -92,7 +89,24 @@ class GardenFragment : Fragment() {
     }
 
     private fun onSelectionChanged(selectedCount: Int) {
-        // TODO: Enable/disable ActionMode when items are selected.
+        if (selectedCount == 0) {
+            actionMode?.let {
+                it.finish()
+                actionMode = null
+            }
+        } else {
+            (requireActivity() as? AppCompatActivity)?.let { activity ->
+                if (actionMode == null) {
+                    actionMode = activity.startSupportActionMode(GardenActionModeCallback())
+                }
+            }
+            actionMode?.title =
+                resources.getQuantityString(
+                    R.plurals.garden_action_mode_count,
+                    /* quantity= */ selectedCount,
+                    /* parameter value */ selectedCount
+                )
+        }
     }
 
     /**
@@ -101,23 +115,36 @@ class GardenFragment : Fragment() {
     private class GardenSelectionObserver(
         private val selectionTracker: SelectionTracker<Long>,
         private val onSelectionChangedListener: (Int) -> Unit
-    ) :
-        SelectionTracker.SelectionObserver<Long>(),
-        OnBackPressedCallback {
+    ) : SelectionTracker.SelectionObserver<Long>() {
 
         override fun onSelectionChanged() {
             super.onSelectionChanged()
             onSelectionChangedListener(selectionTracker.selection?.size() ?: 0)
         }
+    }
 
-        // If the back button is pressed and there's a selection, clear the selection, rather
-        // than potentially exiting the app.
-        override fun handleOnBackPressed() =
-            if (selectionTracker.hasSelection()) {
-                selectionTracker.clearSelection()
-                true
-            } else {
-                false
-            }
+    /**
+     * Inner class to encapsulate handling of the [ActionMode] in my garden.
+     */
+    private inner class GardenActionModeCallback : ActionMode.Callback {
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            // TODO: Implement ActionMode actions.
+            return false
+        }
+
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            val menuInflater = requireActivity().menuInflater
+            menuInflater.inflate(R.menu.menu_garden_action_mode, menu)
+            return true
+        }
+
+        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+            // TODO: Update once there are actions.
+            return false
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode) {
+            selectionTracker.clearSelection()
+        }
     }
 }
