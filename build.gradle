@@ -36,7 +36,7 @@ buildscript {
         ktxVersion = '1.0.1'
         lifecycleVersion = '2.1.0-alpha02'
         materialVersion = '1.0.0'
-        navigationVersion = '2.0.0-rc02'
+        navigationVersion = '2.0.0'
         recyclerViewVersion = '1.1.0-alpha02'
         roomVersion = '2.1.0-alpha04'
         runnerVersion = '1.0.1'
