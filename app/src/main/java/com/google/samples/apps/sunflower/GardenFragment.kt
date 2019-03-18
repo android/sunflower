@@ -102,10 +102,7 @@ class GardenFragment : Fragment() {
             }
             actionMode?.title =
                 resources.getQuantityString(
-                    R.plurals.garden_action_mode_count,
-                    /* quantity= */ selectedCount,
-                    /* parameter value */ selectedCount
-                )
+                        R.plurals.garden_action_mode_count, selectedCount, selectedCount)
         }
     }
 
