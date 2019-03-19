@@ -124,7 +124,7 @@ class GardenFragment : Fragment() {
      * Inner class to encapsulate handling of the [ActionMode] in my garden.
      */
     private inner class GardenActionModeCallback : ActionMode.Callback {
-        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean =
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem) =
                 when (item.itemId) {
                     R.id.action_remove -> {
                         // TODO: Remove planting.
