@@ -26,6 +26,7 @@
     <string name="planted_date">%1$s 種植於 %2$s</string>
     <string name="menu_item_share_plant">分享</string>
     <string name="share_text_plant">在安卓 Sunflower APP 上看看這 %s</string>
+    <string name="remove_plant_title">刪除植物</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <!-- Item quantities for zero and one are not used in Chinese -->

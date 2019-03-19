@@ -26,6 +26,7 @@
     <string name="planted_date">%1$s planté(e) le %2$s</string>
     <string name="menu_item_share_plant">Partager</string>
     <string name="share_text_plant">Regardez la plante %s sur l\'application Sunflower</string>
+    <string name="remove_plant_title">Enlevez la/les plante(s).</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Arrosage nécessaire:</string>

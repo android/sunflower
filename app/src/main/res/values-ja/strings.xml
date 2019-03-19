@@ -26,6 +26,7 @@
     <string name="planted_date">%1$s は %2$s に植わっています</string>
     <string name="menu_item_share_plant">共有</string>
     <string name="share_text_plant">%s という植物を「Sunflower」アプリで見てみてください</string>
+    <string name="remove_plant_title">植物を削除</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <!-- Item quantities for zero and one are not used in Japanese -->
