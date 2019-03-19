@@ -27,6 +27,7 @@
     <string name="added_plant_to_garden">Pianta aggiunta al giardino</string>
     <string name="navigation_drawer_header_content_description">Logo dell\'intestazione di navigazione</string>
     <string name="share_text_plant">Controlla la pianta %s nell\'app Sunflower</string>
+    <string name="remove_plant_title">Rimuovere le pianta/e</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Esigenze di irrigazione:</string>

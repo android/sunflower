@@ -124,10 +124,15 @@ class GardenFragment : Fragment() {
      * Inner class to encapsulate handling of the [ActionMode] in my garden.
      */
     private inner class GardenActionModeCallback : ActionMode.Callback {
-        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            // TODO: Implement ActionMode actions.
-            return false
-        }
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem) =
+                when (item.itemId) {
+                    R.id.action_remove -> {
+                        // TODO: Remove planting.
+                        selectionTracker.clearSelection()
+                        true
+                    }
+                    else -> false
+                }
 
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
             val menuInflater = requireActivity().menuInflater
@@ -136,7 +141,7 @@ class GardenFragment : Fragment() {
         }
 
         override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-            // TODO: Update once there are actions.
+            // At the moment there's nothing to "prepare" for the action mode.
             return false
         }
 
