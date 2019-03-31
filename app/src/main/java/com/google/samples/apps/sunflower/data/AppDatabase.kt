@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower.data
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -45,6 +46,11 @@ abstract class AppDatabase : RoomDatabase() {
             return instance ?: synchronized(this) {
                 instance ?: buildDatabase(context).also { instance = it }
             }
+        }
+
+        @VisibleForTesting
+        fun setInstance(appDatabase: AppDatabase) {
+            instance = appDatabase
         }
 
         // Create and pre-populate the database. See this article for more details:

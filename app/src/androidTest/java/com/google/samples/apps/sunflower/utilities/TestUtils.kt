@@ -28,6 +28,13 @@ import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import java.util.Calendar
 
+object Apple {
+    const val ID = "1"
+    const val NAME = "Apple"
+    const val WATERING = 30
+    const val DESCRIPTION = "An apple is a sweet, edible fruit produced by an apple tree"
+}
+
 /**
  * [Plant] objects used for tests.
  */
