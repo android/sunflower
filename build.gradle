@@ -40,7 +40,7 @@ buildscript {
         recyclerViewVersion = '1.1.0-alpha02'
         roomVersion = '2.1.0-alpha06'
         runnerVersion = '1.0.1'
-        supportLibraryVersion = '1.1.0-alpha02'
+        supportLibraryVersion = '1.1.0-alpha04'
         uiAutomatorVersion = '2.2.0'
         workVersion = '2.0.0'
     }
