@@ -1,4 +1,4 @@
-package com.google.samples.apps.sunflower.screen
+package integration.screen
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView

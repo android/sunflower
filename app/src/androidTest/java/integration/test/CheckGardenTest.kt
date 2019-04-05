@@ -1,8 +1,8 @@
-package com.google.samples.apps.sunflower.test
+package integration.test
 
 import androidx.test.rule.ActivityTestRule
 import com.google.samples.apps.sunflower.GardenActivity
-import com.google.samples.apps.sunflower.screen.GardenScreen
+import integration.screen.GardenScreen
 import com.google.samples.apps.sunflower.utilities.Apple
 import org.junit.Rule
 import org.junit.Test

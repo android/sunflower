@@ -1,4 +1,4 @@
-package com.google.samples.apps.sunflower.screen
+package integration.screen
 
 import android.app.Activity
 import androidx.test.InstrumentationRegistry.getInstrumentation
