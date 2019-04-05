@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Usage: dockerized_emulator.sh '<command>' [<id>]"
+echo "Usage: dockerized.sh '<command>' [<id>]"
 id=123
 if [[ "$#" -eq 2 ]]; then
     id=$2
