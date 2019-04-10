@@ -42,7 +42,7 @@ buildscript {
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.1.0-alpha04'
         uiAutomatorVersion = '2.2.0'
-        workVersion = '2.0.0'
+        workVersion = '2.0.1'
     }
 
     repositories {
