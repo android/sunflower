@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.worker
 
-
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.ListenableWorker.Result
@@ -49,6 +48,6 @@ class RefreshMainDataWorkTest {
         // Start the work synchronously
         val result = worker.startWork().get()
 
-        assertThat(result, `is` (Result.success()))
+        assertThat(result, `is`(Result.success()))
     }
 }
