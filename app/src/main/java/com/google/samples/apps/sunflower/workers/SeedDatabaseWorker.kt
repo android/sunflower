@@ -34,7 +34,6 @@ class SeedDatabaseWorker(
 ) : CoroutineWorker(context, workerParams) {
 
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
-    override val coroutineContext = Dispatchers.IO
 
     override suspend fun doWork(): Result = coroutineScope {
 
