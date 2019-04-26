@@ -26,7 +26,6 @@ import com.google.gson.stream.JsonReader
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 
 class SeedDatabaseWorker(
