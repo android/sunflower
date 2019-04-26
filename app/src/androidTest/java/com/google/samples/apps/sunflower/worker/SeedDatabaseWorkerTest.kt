@@ -20,7 +20,6 @@ package com.google.samples.apps.sunflower.worker
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.ListenableWorker.Result
-import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.testing.TestListenableWorkerBuilder
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
@@ -44,12 +43,8 @@ class RefreshMainDataWorkTest {
 
     @Test
     fun testRefreshMainDataWork() {
-        // Create request
-        val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
-                .build()
-
         // Get the ListenableWorker
-        val worker = TestListenableWorkerBuilder.from(context, request).build()
+        val worker = TestListenableWorkerBuilder<SeedDatabaseWorker>(context).build()
 
         // Start the work synchronously
         val result = worker.startWork().get()
