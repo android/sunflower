@@ -17,9 +17,9 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.map
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
@@ -56,7 +56,7 @@ class PlantDetailViewModel(
          * are found. In these cases isPlanted is false. If a record is found then isPlanted is
          * true. */
         val gardenPlantingForPlant = gardenPlantingRepository.getGardenPlantingForPlant(plantId)
-        isPlanted = Transformations.map(gardenPlantingForPlant) { it != null }
+        isPlanted = gardenPlantingForPlant.map { it != null }
 
         plant = plantRepository.getPlant(plantId)
     }
