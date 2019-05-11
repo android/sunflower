@@ -25,7 +25,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
@@ -68,9 +68,14 @@ class PlantListFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: PlantAdapter) {
-        viewModel.plants.observe(viewLifecycleOwner, Observer { plants ->
+        viewModel.plants.observe(viewLifecycleOwner) { plants ->
+            /**
+             *  Plant may return null, but the [observe] extension function assumes it will not be null.
+             *  So there will be a warning（Condition `plants != null` is always `true`） here.
+             *  I am not sure if the database return data type should be defined as nullable, Such as `LiveData<List<Plant>?>` .
+             */
             if (plants != null) adapter.submitList(plants)
-        })
+        }
     }
 
     private fun updateData() {
