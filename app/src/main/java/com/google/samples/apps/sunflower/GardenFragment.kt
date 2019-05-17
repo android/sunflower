@@ -21,14 +21,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 
 class GardenFragment : Fragment() {
+
+    private val viewModel: GardenPlantingListViewModel by viewModels {
+        InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,10 +47,6 @@ class GardenFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        val factory = InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
-        val viewModel = ViewModelProviders.of(this, factory)
-                .get(GardenPlantingListViewModel::class.java)
-
         viewModel.gardenPlantings.observe(viewLifecycleOwner, Observer { plantings ->
             binding.hasPlantings = !plantings.isNullOrEmpty()
         })
