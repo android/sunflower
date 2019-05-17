@@ -16,10 +16,10 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -27,28 +27,17 @@ import com.google.samples.apps.sunflower.data.PlantRepository
 /**
  * The ViewModel for [PlantListFragment].
  */
-class PlantListViewModel internal constructor(
-    private val plantRepository: PlantRepository
-) : ViewModel() {
+class PlantListViewModel internal constructor(plantRepository: PlantRepository) : ViewModel() {
 
-    private val growZoneNumber = MutableLiveData<Int>()
+    private val growZoneNumber = MutableLiveData<Int>().apply { value = NO_GROW_ZONE }
 
-    private val plantList = MediatorLiveData<List<Plant>>()
-
-    init {
-        growZoneNumber.value = NO_GROW_ZONE
-
-        val livePlantList = Transformations.switchMap(growZoneNumber) {
-            if (it == NO_GROW_ZONE) {
-                plantRepository.getPlants()
-            } else {
-                plantRepository.getPlantsWithGrowZoneNumber(it)
-            }
+    val plants: LiveData<List<Plant>> = growZoneNumber.switchMap {
+        if (it == NO_GROW_ZONE) {
+            plantRepository.getPlants()
+        } else {
+            plantRepository.getPlantsWithGrowZoneNumber(it)
         }
-        plantList.addSource(livePlantList, plantList::setValue)
     }
-
-    fun getPlants() = plantList
 
     fun setGrowZoneNumber(num: Int) {
         growZoneNumber.value = num

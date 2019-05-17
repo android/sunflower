@@ -17,15 +17,15 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.map
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 /**
@@ -41,26 +41,12 @@ class PlantDetailViewModel(
     val plant: LiveData<Plant>
 
     /**
-     * This is the job for all coroutines started by this ViewModel.
-     *
-     * Cancelling this job will cancel all coroutines started by this ViewModel.
-     */
-    private val viewModelJob = Job()
-
-    /**
-     * This is the scope for all coroutines launched by [PlantDetailViewModel].
-     *
-     * Since we pass [viewModelJob], you can cancel all coroutines launched by [viewModelScope] by calling
-     * viewModelJob.cancel().  This is called in [onCleared].
-     */
-    private val viewModelScope = CoroutineScope(Main + viewModelJob)
-
-    /**
      * Cancel all coroutines when the ViewModel is cleared.
      */
+    @ExperimentalCoroutinesApi
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        viewModelScope.cancel()
     }
 
     init {
@@ -70,7 +56,7 @@ class PlantDetailViewModel(
          * are found. In these cases isPlanted is false. If a record is found then isPlanted is
          * true. */
         val gardenPlantingForPlant = gardenPlantingRepository.getGardenPlantingForPlant(plantId)
-        isPlanted = Transformations.map(gardenPlantingForPlant) { it != null }
+        isPlanted = gardenPlantingForPlant.map { it != null }
 
         plant = plantRepository.getPlant(plantId)
     }

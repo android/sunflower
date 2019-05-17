@@ -24,8 +24,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
@@ -33,7 +33,9 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
 class PlantListFragment : Fragment() {
 
-    private lateinit var viewModel: PlantListViewModel
+    private val viewModel: PlantListViewModel by viewModels {
+        InjectorUtils.providePlantListViewModelFactory(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,10 +43,7 @@ class PlantListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
-        val context = context ?: return binding.root
-
-        val factory = InjectorUtils.providePlantListViewModelFactory(context)
-        viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
+        context ?: return binding.root
 
         val adapter = PlantAdapter()
         binding.plantList.adapter = adapter
@@ -54,8 +53,8 @@ class PlantListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_plant_list, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_plant_list, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -69,7 +68,7 @@ class PlantListFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: PlantAdapter) {
-        viewModel.getPlants().observe(viewLifecycleOwner, Observer { plants ->
+        viewModel.plants.observe(viewLifecycleOwner, Observer { plants ->
             if (plants != null) adapter.submitList(plants)
         })
     }
