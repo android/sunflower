@@ -43,6 +43,7 @@ buildscript {
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.1.0-alpha05'
         truth = '0.42'
+        testExtJunit = '1.1.0'
         uiAutomatorVersion = '2.2.0'
         workVersion = '2.1.0-alpha02'
     }
