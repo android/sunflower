@@ -56,7 +56,7 @@ class PlantDetailFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
                 inflater, R.layout.fragment_plant_detail, container, false).apply {
             viewModel = plantDetailViewModel
-            setLifecycleOwner(this@PlantDetailFragment)
+            lifecycleOwner = this@PlantDetailFragment
             fab.setOnClickListener { view ->
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
