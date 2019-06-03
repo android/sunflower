@@ -139,7 +139,6 @@ injection to better understand Sunflower's code without having to learn DI.
 Support
 -------
 
-- Google+ Community: https://plus.google.com/communities/105153134372062985968
 - Stack Overflow:
   - http://stackoverflow.com/questions/tagged/android
   - http://stackoverflow.com/questions/tagged/android-jetpack
