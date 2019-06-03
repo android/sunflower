@@ -39,7 +39,7 @@ buildscript {
         materialVersion = '1.0.0'
         navigationVersion = '2.0.0'
         recyclerViewVersion = '1.1.0-alpha05'
-        roomVersion = '2.1.0-beta01'
+        roomVersion = '2.1.0-rc01'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.1.0-alpha05'
         truth = '0.42'
