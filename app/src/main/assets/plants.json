@@ -110,5 +110,21 @@
     "growZoneNumber": 4,
     "wateringInterval": 7,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Cypripedium_reginae_Orchi_004.jpg"
+  },
+  {
+    "plantId": "aquilegia-coerulea",
+    "name": "Rocky Mountain Columbine",
+    "description": "Aquilegia coerulea, the state flower of Colorado, is a species of flowering plant in the buttercup family Ranunculaceae, native to the Rocky Mountains from Montana south to New Mexico and west to Idaho and Arizona. Its common name is Colorado blue columbine; sometimes it is called \"Rocky Mountain columbine,\" but this also refers to Aquilegia saximontana.<br><br>(From <a href=\"https://en.wikipedia.org/wiki/Aquilegia_coerulea\">Wikipedia</a>)",
+    "growZoneNumber": 5,
+    "wateringInterval": 3,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/Aquilegia_caerulea.jpg"
+  },
+  {
+    "plantId": "magnolia-denudata",
+    "name": "Yulan Magnolia",
+    "description": "Magnolia denudata, known as the lilytree or Yulan magnolia (simplified Chinese: 玉兰花; traditional Chinese: 玉蘭花), is native to central and eastern China. It has been cultivated in Chinese Buddhist temple gardens since 600 AD. Its flowers were regarded as a symbol of purity in the Tang Dynasty and it was planted in the grounds of the Emperor's palace.<br><br>It is the official city flower of Shanghai.<br><br>(From <a href=\"https://en.wikipedia.org/wiki/Magnolia_denudata\">Wikipedia</a>)",
+    "growZoneNumber": 8,
+    "wateringInterval": 7,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/Yulan_magnolia_%28Magnolia_denudata%29_%2816953983745%29.jpg"
   }
 ]
