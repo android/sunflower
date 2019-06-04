@@ -73,6 +73,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+    implementation 'com.google.firebase:firebase-core:16.0.9'
 }
 
 
@@ -96,3 +97,5 @@ android {
         }
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
