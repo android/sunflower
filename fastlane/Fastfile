@@ -1,0 +1,73 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+#default_platform(:android)
+
+#platform :android do
+#  desc "Runs all the tests"
+#  lane :test do
+#   gradle(task: "test")
+ # end
+
+ # desc "Submit a new Beta Build to Crashlytics Beta"
+ # lane :beta do
+ #   gradle(task: "clean assembleRelease")
+ #   crashlytics
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+ # end
+
+ # desc "Deploy a new version to the Google Play"
+  #lane :deploy do
+   # gradle(task: "clean assembleRelease")
+   # upload_to_play_store
+  #end
+#end
+
+default_platform(:android)
+
+platform :android do
+  desc "Run the unit tests"
+  lane :unit_tests do
+    gradle(task: "test")
+  end
+
+  desc "Assemble a debug apk"
+  lane :assemble_debug do
+    gradle(task: "assembleDebug")
+  end
+
+  desc "Assemble an android test apk"
+  lane :assemble_android_test do
+    gradle(task: "assembleDebugAndroidTest")
+  end 
+
+  desc "Run the instrumentation tests in the Firebase test lab"
+  lane :instrumentation_tests do
+    assemble_debug
+    assemble_android_test
+    sh("../ci/run_firebase_tests.sh")
+  end
+
+  desc "Deploy the app to the internal track"
+  lane :deploy_internal do
+    gradle(task: "bundleRelease")
+    supply(
+      track: 'internal',
+      aab: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH].to_s
+    )
+  end
+end
