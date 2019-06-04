@@ -38,7 +38,7 @@ class PlantDetailViewModel(
 ) : ViewModel() {
 
     val isPlanted: LiveData<Boolean>
-    val plant: LiveData<Plant>
+    val plant: LiveData<Plant?>
 
     /**
      * Cancel all coroutines when the ViewModel is cleared.

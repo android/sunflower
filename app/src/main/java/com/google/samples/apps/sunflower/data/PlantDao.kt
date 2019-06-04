@@ -34,7 +34,7 @@ interface PlantDao {
     fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): LiveData<List<Plant>>
 
     @Query("SELECT * FROM plants WHERE id = :plantId")
-    fun getPlant(plantId: String): LiveData<Plant>
+    fun getPlant(plantId: String): LiveData<Plant?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(plants: List<Plant>)
