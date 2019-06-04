@@ -74,3 +74,25 @@ dependencies {
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
 }
+
+
+def props = new Properties()
+file("../signing.properties").withInputStream { props.load(it) }
+
+android {
+    //...
+    signingConfigs {
+        release {
+            keyAlias props.getProperty('keyAlias')
+            keyPassword props.getProperty('keyPassword')
+            storeFile file(props.getProperty('storeFile'))
+            storePassword props.getProperty('storePassword')
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            //...
+        }
+    }
+}
