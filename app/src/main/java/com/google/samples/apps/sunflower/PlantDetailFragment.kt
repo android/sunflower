@@ -29,7 +29,7 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
@@ -63,13 +63,13 @@ class PlantDetailFragment : Fragment() {
             }
         }
 
-        plantDetailViewModel.plant.observe(this, Observer { plant ->
+        plantDetailViewModel.plant.observe(this) { plant ->
             shareText = if (plant == null) {
                 ""
             } else {
                 getString(R.string.share_text_plant, plant.name)
             }
-        })
+        }
 
         setHasOptionsMenu(true)
 

@@ -22,7 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
@@ -47,13 +47,13 @@ class GardenFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        viewModel.gardenPlantings.observe(viewLifecycleOwner, Observer { plantings ->
+        viewModel.gardenPlantings.observe(viewLifecycleOwner) { plantings ->
             binding.hasPlantings = !plantings.isNullOrEmpty()
-        })
+        }
 
-        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
             if (!result.isNullOrEmpty())
                 adapter.submitList(result)
-        })
+        }
     }
 }
