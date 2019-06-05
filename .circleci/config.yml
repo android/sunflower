@@ -1,4 +1,4 @@
-version: 2
+  version: 2
 
 defaults: &defaults
   docker:
@@ -68,8 +68,37 @@ jobs:
           name: Download ci's data
           command: ./ci/download_ci_data.sh
       - run:
+        name: Deploy to Crashlytics Beta
+        command: bundle exec fastlane deploy_to_crashlytics
+        
+      - run:
           name: Deploy the app to the internal track
           command: bundle exec fastlane deploy_internal
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }} 
+  deploy-crashlytics:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Install fastlane
+          command: bundle install
+      - run:
+          name: Store the google play key
+          command: echo $GOOGLE_PLAY_KEY > gplay_key.json
+      - run:
+          name: Init fastlane supply
+          command: bundle exec fastlane supply init
+      - run:
+          name: Download ci's data
+          command: ./ci/download_ci_data.sh
+      - run:
+        name: Deploy to Crashlytics Beta
+        command: bundle exec fastlane deploy_to_crashlytics
       - save_cache:
           paths:
             - ~/.gradle
@@ -78,6 +107,18 @@ jobs:
 workflows:
   version: 2
   deploy-internal:
+    jobs:
+      - unit-tests
+      - instrumentation-tests
+      - hold:
+          type: approval
+          requires:
+            - unit-tests
+            - instrumentation-tests
+      - deploy-internal:
+          requires:
+            - hold
+    deploy-crashlytics:
     jobs:
       - unit-tests
       - instrumentation-tests
