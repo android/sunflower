@@ -115,18 +115,10 @@ workflows:
           requires:
             - unit-tests
             - instrumentation-tests
-      - deploy-internal:
-          requires:
-            - hold
-    deploy-crashlytics:
-    jobs:
-      - unit-tests
-      - instrumentation-tests
-      - hold:
-          type: approval
-          requires:
-            - unit-tests
-            - instrumentation-tests
       - deploy-crashlytics:
           requires:
             - hold
+      - deploy-internal:
+          requires:
+            - hold
+
