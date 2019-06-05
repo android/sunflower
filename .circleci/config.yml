@@ -1,8 +1,8 @@
-  version: 2
+version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/android:api-28-alpha
+    - image: circleci/android:api-28
   environment:
     JVM_OPTS: -Xmx3200m
 
@@ -127,6 +127,6 @@ workflows:
           requires:
             - unit-tests
             - instrumentation-tests
-      - deploy-internal:
+      - deploy-crashlytics:
           requires:
             - hold
