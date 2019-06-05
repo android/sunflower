@@ -42,7 +42,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 class PlantDetailFragment : Fragment() {
 
     private val args: PlantDetailFragmentArgs by navArgs()
-    private lateinit var shareText: String
+    private var shareText: String = ""
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
         InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
@@ -64,10 +64,8 @@ class PlantDetailFragment : Fragment() {
         }
 
         plantDetailViewModel.plant.observe(this) { plant ->
-            shareText = if (plant == null) {
-                ""
-            } else {
-                getString(R.string.share_text_plant, plant.name)
+            plant?.let {
+                shareText = getString(R.string.share_text_plant, plant.name)
             }
         }
 
