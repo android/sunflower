@@ -22,7 +22,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
-import kotlinx.coroutines.coroutineScope
 /**
  * The Data Access Object for the Plant class.
  */
