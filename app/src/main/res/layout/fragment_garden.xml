@@ -39,7 +39,8 @@
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
                 app:isGone="@{!hasPlantings}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
                 tools:listitem="@layout/list_item_garden_planting"/>
 
         <TextView
