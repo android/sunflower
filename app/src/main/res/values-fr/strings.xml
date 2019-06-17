@@ -21,6 +21,7 @@
     <string name="plant_list_title">Liste des plantes</string>
     <string name="plant_details_title">Détails sur la plante</string>
     <string name="navigation_drawer_header_content_description">Logo de l\'application du volet de navigation</string>
+    <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Plante ajoutée à votre jardin</string>
     <string name="garden_empty">Votre jardin est vide</string>
     <string name="planted_date">%1$s planté(e) le %2$s</string>

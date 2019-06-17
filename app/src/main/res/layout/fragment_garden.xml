@@ -42,14 +42,27 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/list_item_garden_planting"/>
 
-        <TextView
-                android:id="@+id/empty_garden"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/garden_empty"
-                android:textSize="24sp"
-                app:isGone="@{hasPlantings}"/>
+                android:orientation="vertical"
+                app:isGone="@{hasPlantings}">
+
+            <TextView
+                    android:id="@+id/empty_garden"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/garden_empty"
+                    android:textSize="24sp"/>
+
+            <Button
+                    android:id="@+id/add_plant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_plant"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 
