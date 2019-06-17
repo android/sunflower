@@ -27,6 +27,13 @@
         tools:layout="@layout/fragment_garden">
 
         <action
+            android:id="@+id/action_garden_fragment_to_plant_list_fragment"
+            app:destination="@id/plant_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
             android:id="@+id/action_garden_fragment_to_plant_detail_fragment"
             app:destination="@id/plant_detail_fragment"
             app:enterAnim="@anim/slide_in_right"
