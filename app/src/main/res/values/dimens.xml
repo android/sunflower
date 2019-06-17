@@ -34,4 +34,7 @@
     <dimen name="navigation_drawer_header_height">192dp</dimen>
     <dimen name="navigation_drawer_header_padding">16dp</dimen>
     <dimen name="navigation_drawer_image_width">100dp</dimen>
+
+    <!-- Number of columns for garden and plant list grid -->
+    <integer name="grid_columns">2</integer>
 </resources>
