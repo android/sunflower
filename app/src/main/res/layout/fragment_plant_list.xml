@@ -26,7 +26,8 @@
             android:clipToPadding="false"
             android:paddingLeft="@dimen/margin_normal"
             android:paddingRight="@dimen/margin_normal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
             tools:context="com.google.samples.apps.sunflower.GardenActivity"
             tools:listitem="@layout/list_item_plant" />
 
