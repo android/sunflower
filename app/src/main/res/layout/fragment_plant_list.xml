@@ -26,9 +26,9 @@
             android:clipToPadding="false"
             android:layout_marginStart="@dimen/card_side_margin"
             android:layout_marginEnd="@dimen/card_side_margin"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="@integer/grid_columns"
             tools:context="com.google.samples.apps.sunflower.GardenActivity"
-            tools:listitem="@layout/list_item_plant" />
+            tools:listitem="@layout/list_item_plant"/>
 
 </layout>
