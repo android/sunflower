@@ -20,7 +20,6 @@
     <string name="my_garden_title">Mein Garten</string>
     <string name="plant_list_title">Pflanzenliste</string>
     <string name="plant_details_title">Details zur Pflanze</string>
-    <string name="navigation_drawer_header_content_description">App Navigation</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Pflanze wurde zum Garten hinzugefügt</string>
     <string name="garden_empty">Ihr Garten ist unbepflanzt</string>

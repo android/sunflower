@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.PlantListFragmentDirections
+import com.google.samples.apps.sunflower.ViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 
@@ -48,7 +48,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-            val direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(plantId)
+            val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
             it.findNavController().navigate(direction)
         }
     }

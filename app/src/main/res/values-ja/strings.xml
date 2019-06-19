@@ -20,7 +20,6 @@
     <string name="my_garden_title">私の庭</string>
     <string name="plant_list_title">植物のリスト</string>
     <string name="plant_details_title">植物の詳細</string>
-    <string name="navigation_drawer_header_content_description">アプリナビゲーション</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">植物が庭に追加されました</string>
     <string name="garden_empty">あなたの庭に植物はありません</string>
