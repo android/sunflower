@@ -36,16 +36,11 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
     <style name="CardShapeAppearance">
-        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamily">rounded</item>
+
         <item name="cornerSizeTopLeft">0dp</item>
-
-        <item name="cornerFamilyTopRight">rounded</item>
         <item name="cornerSizeTopRight">@dimen/card_corner_radius</item>
-
-        <item name="cornerFamilyBottomRight">rounded</item>
         <item name="cornerSizeBottomRight">0dp</item>
-
-        <item name="cornerFamilyBottomLeft">rounded</item>
         <item name="cornerSizeBottomLeft">@dimen/card_corner_radius</item>
     </style>
 

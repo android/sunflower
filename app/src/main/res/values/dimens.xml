@@ -35,14 +35,11 @@
     <dimen name="navigation_drawer_header_padding">16dp</dimen>
     <dimen name="navigation_drawer_image_width">100dp</dimen>
 
-    <!-- Card Paddings in Grid -->
     <dimen name="card_side_margin">12dp</dimen>
     <dimen name="card_bottom_margin">26dp</dimen>
 
-    <!--Card Elevation -->
     <dimen name="card_elevation">2dp</dimen>
 
-    <!--Card Corner Radius -->
     <dimen name="card_corner_radius">12dp</dimen>
 
     <!-- Number of columns for garden and plant list grid -->

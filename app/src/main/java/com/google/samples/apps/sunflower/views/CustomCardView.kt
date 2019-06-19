@@ -36,14 +36,16 @@ class CustomCardView @JvmOverloads constructor(
     defStyle: Int = R.attr.materialCardViewStyle
 ) : MaterialCardView(context, attrs, defStyle) {
     @SuppressLint("RestrictedApi")
-    val pathProvider = ShapeAppearancePathProvider()
-    val path: Path = Path()
-    val shapeAppearance: ShapeAppearanceModel =
+    private val pathProvider = ShapeAppearancePathProvider()
+    private val path: Path = Path()
+    private val shapeAppearance: ShapeAppearanceModel =
             ShapeAppearanceModel(context, attrs, defStyle, R.style.Widget_MaterialComponents_CardView)
+    private val rectF = RectF(0f, 0f, 0f, 0f)
 
     @SuppressLint("RestrictedApi")
     override fun onDraw(canvas: Canvas?) {
-        val rectF = RectF(0f, 0f, width.toFloat(), height.toFloat())
+        rectF.right = width.toFloat()
+        rectF.bottom = height.toFloat()
         pathProvider.calculatePath(shapeAppearance, 1f, rectF, path)
         canvas!!.clipPath(path)
         super.onDraw(canvas)
