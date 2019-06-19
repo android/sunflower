@@ -30,7 +30,7 @@ class ViewPagerFragment : Fragment() {
         val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(requireActivity(), requireActivity().supportFragmentManager)
+        viewPager.adapter = SunflowerPagerAdapter(requireActivity(), childFragmentManager)
         binding.tabs.setupWithViewPager(viewPager)
 
         return binding.root
