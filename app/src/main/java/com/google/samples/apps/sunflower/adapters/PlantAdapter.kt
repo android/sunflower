@@ -48,10 +48,6 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-            // crashes:
-            // java.lang.IllegalArgumentException: navigation destination com.google.samples.apps.sunflower:id/action_plant_list_fragment_to_plant_detail_fragment is unknown to this NavController
-//            val direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(plantId)
-
             val direction = ViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
             it.findNavController().navigate(direction)
         }

@@ -19,37 +19,12 @@ package com.google.samples.apps.sunflower
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
 
 class GardenActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding: ActivityGardenBinding = DataBindingUtil.setContentView(this,
-                R.layout.activity_garden)
-
-        navController = findNavController(R.id.nav_host)
-//        drawerLayout = binding.drawerLayout
-
-//        navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
-//        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-
-        // Set up ActionBar
-//        setSupportActionBar(binding.toolbar)
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // Set up navigation menu
-//        binding.navigationView.setupWithNavController(navController)
-
-//        val viewPager = binding.viewPager
-//        viewPager.adapter = SunflowerPagerAdapter(this, supportFragmentManager)
-//        binding.tabs.setupWithViewPager(viewPager)
+        DataBindingUtil.setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
     }
 }
