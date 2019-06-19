@@ -31,7 +31,7 @@ class SunflowerPagerAdapter(
     private val context: Context,
     fragmentManager: FragmentManager
 ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-    
+
     override fun getCount() = 2
 
     override fun getItem(position: Int): Fragment {
