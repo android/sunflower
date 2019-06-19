@@ -24,6 +24,9 @@ import com.google.samples.apps.sunflower.GardenFragment
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.R
 
+const val MY_GARDEN_PAGE_INDEX = 0
+const val PLANT_LIST_PAGE_INDEX = 1
+
 class SunflowerPagerAdapter(
     private val context: Context,
     fragmentManager: FragmentManager
@@ -33,15 +36,16 @@ class SunflowerPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> GardenFragment()
-            else -> PlantListFragment()
+            MY_GARDEN_PAGE_INDEX -> GardenFragment()
+            PLANT_LIST_PAGE_INDEX -> PlantListFragment()
+            else -> throw IndexOutOfBoundsException()
         }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> context.getString(R.string.my_garden_title)
-            1 -> context.getString(R.string.plant_list_title)
+            MY_GARDEN_PAGE_INDEX -> context.getString(R.string.my_garden_title)
+            PLANT_LIST_PAGE_INDEX -> context.getString(R.string.plant_list_title)
             else -> null
         }
     }
