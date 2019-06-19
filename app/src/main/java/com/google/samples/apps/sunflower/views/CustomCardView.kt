@@ -31,15 +31,15 @@ import android.graphics.RectF
  * working around it for now.
  */
 class CustomCardView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyle: Int = R.attr.materialCardViewStyle
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = R.attr.materialCardViewStyle
 ) : MaterialCardView(context, attrs, defStyle) {
     @SuppressLint("RestrictedApi")
     val pathProvider = ShapeAppearancePathProvider()
     val path: Path = Path()
     val shapeAppearance: ShapeAppearanceModel =
-            ShapeAppearanceModel(context, attrs, defStyle, R.style.Widget_MaterialComponents_CardView);
+            ShapeAppearanceModel(context, attrs, defStyle, R.style.Widget_MaterialComponents_CardView)
 
     @SuppressLint("RestrictedApi")
     override fun onDraw(canvas: Canvas?) {
