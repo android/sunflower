@@ -32,6 +32,9 @@ class SunflowerPagerAdapter(
     fragmentManager: FragmentManager
 ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
+    /**
+     * There are only two fragments in this ViewPager: [GardenFragment] and [PlantListFragment]
+     */
     override fun getCount() = 2
 
     override fun getItem(position: Int): Fragment {
