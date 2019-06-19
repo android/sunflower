@@ -42,6 +42,9 @@
     <!--Card Elevation -->
     <dimen name="card_elevation">2dp</dimen>
 
+    <!--Card Corner Radius -->
+    <dimen name="card_corner_radius">12dp</dimen>
+
     <!-- Number of columns for garden and plant list grid -->
     <integer name="grid_columns">2</integer>
 </resources>
