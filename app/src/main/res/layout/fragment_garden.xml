@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/garden_empty"
-                    android:textSize="24sp"/>
+                    android:textSize="@dimen/font_large"/>
 
             <Button
                     android:id="@+id/add_plant"

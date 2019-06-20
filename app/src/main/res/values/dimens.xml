@@ -33,10 +33,10 @@
 
     <dimen name="card_side_margin">12dp</dimen>
     <dimen name="card_bottom_margin">26dp</dimen>
-
     <dimen name="card_elevation">2dp</dimen>
-
     <dimen name="card_corner_radius">12dp</dimen>
+
+    <dimen name="font_large">24sp</dimen>
 
     <!-- Number of columns for garden and plant list grid -->
     <integer name="grid_columns">2</integer>

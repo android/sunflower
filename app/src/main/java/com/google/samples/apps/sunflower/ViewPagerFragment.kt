@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
@@ -32,6 +33,8 @@ class ViewPagerFragment : Fragment() {
 
         viewPager.adapter = SunflowerPagerAdapter(requireActivity(), childFragmentManager)
         binding.tabs.setupWithViewPager(viewPager)
+
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
     }
