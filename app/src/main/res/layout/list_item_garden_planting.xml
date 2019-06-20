@@ -56,8 +56,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                />
+                app:layout_constraintVertical_bias="0.0"/>
 
             <TextView
                 android:id="@+id/plant_name"
@@ -65,10 +64,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@{@string/plant_name(viewModel.plantName)}"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
-                android:gravity="center_horizontal"/>
+                app:layout_constraintTop_toBottomOf="@id/imageView"/>
 
             <TextView
                 android:id="@+id/plant_date_header"
@@ -76,11 +75,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@{@string/plant_date_header}"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/plant_name"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"/>
+                app:layout_constraintTop_toBottomOf="@id/plant_name"/>
 
             <TextView
                 android:id="@+id/plant_date"
@@ -88,10 +87,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:text="@{@string/planted_date(viewModel.plantDateString)}"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/plant_date_header"
-                android:gravity="center_horizontal"/>
+                app:layout_constraintTop_toBottomOf="@id/plant_date_header"/>
 
             <TextView
                 android:id="@+id/watered_date_header"
@@ -99,11 +98,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@{@string/watered_date_header}"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/plant_date"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"/>
+                app:layout_constraintTop_toBottomOf="@id/plant_date"/>
 
             <TextView
                 android:id="@+id/water_date"
@@ -112,11 +111,11 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:text="@{@string/water_date(@string/watering_next_prefix(viewModel.waterDateString), @plurals/watering_next_suffix(viewModel.wateringInterval, viewModel.wateringInterval))}"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/watered_date_header"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:gravity="center_horizontal"/>
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.samples.apps.sunflower.views.CustomCardView>
