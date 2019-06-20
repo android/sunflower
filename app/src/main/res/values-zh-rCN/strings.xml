@@ -35,8 +35,7 @@
         <item quantity="other">每隔 %d 天</item>
     </plurals>
 
-    <string name="watering_next_prefix">上次浇水: %s</string>
-    <plurals name="watering_next_suffix">
+    <plurals name="watering_next">
         <item quantity="other">%d 天后浇水</item>
     </plurals>
 

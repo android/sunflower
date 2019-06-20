@@ -46,16 +46,14 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/plant_item_image_height"
                 android:contentDescription="@string/a11y_plant_item_image"
                 android:scaleType="centerCrop"
                 app:imageFromUrl="@{viewModel.imageUrl}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/plant_name"
@@ -73,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
-                android:text="@{@string/plant_date_header}"
+                android:text="@string/plant_date_header"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
-                android:text="@{@string/watered_date_header}"
+                android:text="@string/watered_date_header"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="@dimen/margin_normal"
-                android:text="@{@plurals/watering_next_suffix(viewModel.wateringInterval, viewModel.wateringInterval)}"
+                android:text="@{@plurals/watering_next(viewModel.wateringInterval, viewModel.wateringInterval)}"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
