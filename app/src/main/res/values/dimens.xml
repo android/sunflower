@@ -24,7 +24,7 @@
     <!-- Padding on the bottom of a screen so that the FAB won't overlap scrolled text. -->
     <dimen name="fab_bottom_padding">72dp</dimen>
 
-    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="plant_detail_app_bar_height">278dp</dimen>
 
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>
