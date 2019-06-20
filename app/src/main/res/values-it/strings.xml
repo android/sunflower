@@ -25,7 +25,7 @@
     <string name="plant_name">(translate me) Plant Name</string>
     <string name="plant_date_header">(translate me) Planted</string>
     <string name="watered_date_header">(translate me) Last Watered</string>
-    <string name="planted_date">(translate me) Planted Date</string>
+    <string name="planted_date">%1$s piantata il %2$s</string>
     <string name="garden_empty">Il tuo giardino è vuoto</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Pianta aggiunta al giardino</string>
