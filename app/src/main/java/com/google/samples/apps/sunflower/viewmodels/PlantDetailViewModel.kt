@@ -25,6 +25,7 @@ import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
@@ -61,8 +62,8 @@ class PlantDetailViewModel(
         plant = plantRepository.getPlant(plantId)
     }
 
-    fun addPlantToGarden() {
-        viewModelScope.launch {
+    fun addPlantToGarden(): Job {
+        return viewModelScope.launch {
             gardenPlantingRepository.createGardenPlanting(plantId)
         }
     }
