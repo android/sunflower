@@ -16,7 +16,10 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorBackground">#49bb79</color>
+    <color name="colorOnPrimary">#ffff63</color>
+    <color name="colorPrimary">#49bb79</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorSurface">#FAFAFA</color>
 </resources>

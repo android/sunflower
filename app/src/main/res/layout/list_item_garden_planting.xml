@@ -74,6 +74,7 @@
                 android:text="@string/plant_date_header"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/plant_name"/>
@@ -96,6 +97,7 @@
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/watered_date_header"
                 android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

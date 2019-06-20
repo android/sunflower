@@ -23,7 +23,6 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.core.text.bold
-import androidx.core.text.italic
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -67,6 +66,6 @@ fun bindWateringText(textView: TextView, wateringInterval: Int) {
 
     textView.text = SpannableStringBuilder()
         .bold { append(resources.getString(R.string.watering_needs_prefix)) }
-        .append(" ")
-        .italic { append(quantityString) }
+        .append("\n")
+        .append(quantityString)
 }
