@@ -23,7 +23,8 @@
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">添加了新植物</string>
     <string name="garden_empty">花园里还没有植物</string>
-    <string name="planted_date">%1$s 种植于 %2$s</string>
+    <string name="plant_date_header">(translate me) Planted</string>
+    <string name="watered_date_header">(translate me) Last Watered</string>
     <string name="menu_item_share_plant">分享</string>
     <string name="share_text_plant">在安卓 Sunflower APP 上看看这 %s</string>
 
@@ -34,8 +35,7 @@
         <item quantity="other">每隔 %d 天</item>
     </plurals>
 
-    <string name="watering_next_prefix">上次浇水: %s</string>
-    <plurals name="watering_next_suffix">
+    <plurals name="watering_next">
         <item quantity="other">%d 天后浇水</item>
     </plurals>
 
