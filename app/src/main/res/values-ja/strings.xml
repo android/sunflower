@@ -25,8 +25,6 @@
     <string name="garden_empty">あなたの庭に植物はありません</string>
     <string name="plant_date_header">(translate me) Planted</string>
     <string name="watered_date_header">(translate me) Last Watered</string>
-    <string name="plant_name">(translate me) Plant Name</string>
-    <string name="planted_date">%1$s は %2$s に植わっています</string>
     <string name="menu_item_share_plant">共有</string>
     <string name="share_text_plant">%s という植物を「Sunflower」アプリで見てみてください</string>
 

@@ -28,9 +28,7 @@
     <string name="add_plant" translation_description="Button text that prompts user to navigate to the Plant List to add plants to their empty garden.">Add plant</string>
     <string name="added_plant_to_garden" translation_description="Confirmation text that is shown when a user adds a plant to their empty garden.">Added plant to garden</string>
     <string name="garden_empty" translation_description="Text that is shown on the 'My Garden' screen when no plants have been added to the user's garden">Your garden is empty</string>
-    <string name="plant_name" translation_description="Text that is shown on each plant on the 'My Garden' screen detailing the name of the plant">%1$s</string>
     <string name="watered_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Last Watered to show date of last watering below">Last Watered</string>
-    <string name="planted_date" translation_description="Text with placeholders that indicates when the plant was planted. Example: 'Sunflower planted on May 24, 2018'.">%1$s</string>
     <string name="menu_item_share_plant" translation_description="The label for the Share menu item">Share</string>
     <string name="share_text_plant" translation_description="The default messaged used when sharing a plant on SNS, etc.">Check out the %s plant in the Android Sunflower app</string>
 

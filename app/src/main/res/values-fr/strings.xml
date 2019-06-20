@@ -23,8 +23,6 @@
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Plante ajoutée à votre jardin</string>
     <string name="garden_empty">Votre jardin est vide</string>
-    <string name="plant_name">(translate me) Plant Name</string>
-    <string name="planted_date">%1$s planté(e) le %2$s</string>
     <string name="plant_date_header">(translate me) Planted</string>
     <string name="watered_date_header">(translate me) Last Watered</string>
     <string name="menu_item_share_plant">Partager</string>
