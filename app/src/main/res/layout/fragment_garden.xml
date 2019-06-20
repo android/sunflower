@@ -36,10 +36,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingLeft="@dimen/margin_normal"
-                android:paddingRight="@dimen/margin_normal"
+                android:layout_marginStart="@dimen/card_side_margin"
+                android:layout_marginEnd="@dimen/card_side_margin"
                 app:isGone="@{!hasPlantings}"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:spanCount="@integer/grid_columns"
                 tools:listitem="@layout/list_item_garden_planting"/>
 

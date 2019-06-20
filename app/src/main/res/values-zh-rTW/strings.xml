@@ -23,6 +23,9 @@
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">添加了新植物</string>
     <string name="garden_empty">花園裡還沒有植物</string>
+    <string name="plant_name" translation_description="Text that is shown on each plant on the 'My Garden' screen detailing the name of the plant">%1$s</string>
+    <string name="plant_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Planted to show date of planting below">Planted</string>
+    <string name="watered_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Last Watered to show date of last watering below">Last Watered</string>
     <string name="planted_date">%1$s 種植於 %2$s</string>
     <string name="menu_item_share_plant">分享</string>
     <string name="share_text_plant">在安卓 Sunflower APP 上看看這 %s</string>

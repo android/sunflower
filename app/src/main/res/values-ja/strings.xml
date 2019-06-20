@@ -23,6 +23,9 @@
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">植物が庭に追加されました</string>
     <string name="garden_empty">あなたの庭に植物はありません</string>
+    <string name="plant_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Planted to show date of planting below">Planted</string>
+    <string name="watered_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Last Watered to show date of last watering below">Last Watered</string>
+    <string name="plant_name" translation_description="Text that is shown on each plant on the 'My Garden' screen detailing the name of the plant">%1$s</string>
     <string name="planted_date">%1$s は %2$s に植わっています</string>
     <string name="menu_item_share_plant">共有</string>
     <string name="share_text_plant">%s という植物を「Sunflower」アプリで見てみてください</string>
