@@ -31,8 +31,16 @@
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                    android:layout_height="?attr/actionBarSize">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textSize="@dimen/font_large"/>
+
+            </androidx.appcompat.widget.Toolbar>
 
             <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabs"
