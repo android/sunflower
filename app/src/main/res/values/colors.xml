@@ -22,6 +22,6 @@
     <color name="colorPrimaryDark">#DE2E2E2E</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorSurface">#FAFAFA</color>
-    <color name="colorSecondary">#FAFAFA</color>
+    <color name="colorSecondary">#ffff63</color>
     <color name="colorOnSurface">#f1f2f6</color>
 </resources>
