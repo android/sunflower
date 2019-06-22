@@ -57,11 +57,12 @@
                     android:text="@string/garden_empty"
                     android:textSize="@dimen/font_large"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                     android:id="@+id/add_plant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_plant"/>
+                    android:text="@string/add_plant"
+                    app:shapeAppearance="@style/AddButtonShapeAppearance"/>
 
         </LinearLayout>
 
