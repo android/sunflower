@@ -36,6 +36,10 @@
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">12dp</dimen>
 
+    <dimen name="detail_header_fab_size">32dp</dimen>
+    <dimen name="detail_header_fab_margin">12dp</dimen>
+    <dimen name="detail_header_fab_elevation">4dp</dimen>
+
     <dimen name="font_large">24sp</dimen>
 
     <!-- Number of columns for garden and plant list grid -->

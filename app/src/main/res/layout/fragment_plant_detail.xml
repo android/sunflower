@@ -62,18 +62,20 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorSurface">
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize">
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:text="@{viewModel.plant.name}"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/font_large" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:gravity="center"
-                    android:text="@{viewModel.plant.name}"
-                    android:textSize="@dimen/font_large" />
-
-            </androidx.appcompat.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -95,7 +97,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_normal"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -124,11 +125,35 @@
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/back"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="@dimen/detail_header_fab_size"
+            android:layout_height="@dimen/detail_header_fab_size"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_gravity="start"
+            app:elevation="@dimen/detail_header_fab_elevation"
+            app:borderWidth="0dp"
+            app:fabCustomSize="@dimen/detail_header_fab_size"
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/share"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="@dimen/detail_header_fab_size"
+            android:layout_height="@dimen/detail_header_fab_size"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_gravity="end"
+            app:elevation="@dimen/detail_header_fab_elevation"
+            app:borderWidth="0dp"
+            app:fabCustomSize="@dimen/detail_header_fab_size"
+            app:srcCompat="@drawable/ic_share" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
             android:tint="@android:color/white"
             app:isGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/appbar"

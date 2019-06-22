@@ -61,6 +61,10 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
+
+            back.setOnClickListener {
+                fragmentManager?.popBackStackImmediate()
+            }
         }
 
         plantDetailViewModel.plant.observe(this) { plant ->
