@@ -62,6 +62,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/add_plant"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:textColor="@color/colorPrimary"
                     app:shapeAppearance="@style/AddButtonShapeAppearance"/>
 
         </LinearLayout>
