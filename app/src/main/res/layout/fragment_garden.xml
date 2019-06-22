@@ -38,6 +38,7 @@
                 android:clipToPadding="false"
                 android:layout_marginStart="@dimen/card_side_margin"
                 android:layout_marginEnd="@dimen/card_side_margin"
+                android:layout_marginTop="@dimen/margin_normal"
                 app:isGone="@{!hasPlantings}"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:spanCount="@integer/grid_columns"
