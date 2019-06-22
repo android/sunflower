@@ -37,7 +37,4 @@
     <dimen name="card_corner_radius">12dp</dimen>
 
     <dimen name="font_large">24sp</dimen>
-
-    <!-- Number of columns for garden and plant list grid -->
-    <integer name="grid_columns">2</integer>
 </resources>
