@@ -37,5 +37,8 @@
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">12dp</dimen>
 
+    <!-- Add plant button style -->
+    <dimen name="button_corner_radius">12dp</dimen>
+
     <dimen name="font_large">24sp</dimen>
 </resources>
