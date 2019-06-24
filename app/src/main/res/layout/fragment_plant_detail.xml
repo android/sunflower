@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:background="@color/colorSurface"
+        android:background="?attr/colorSurface"
         tools:context="com.google.samples.apps.sunflower.GardenActivity"
         tools:ignore="MergeRootFrame">
 
