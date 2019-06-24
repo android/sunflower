@@ -29,7 +29,6 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
@@ -42,7 +41,10 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 class PlantDetailFragment : Fragment() {
 
     private val args: PlantDetailFragmentArgs by navArgs()
-    private var shareText: String = ""
+    private val shareText
+        get() = plantDetailViewModel.plant.value?.let { plant ->
+            getString(R.string.share_text_plant, plant.name)
+        } ?: ""
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
         InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
@@ -60,12 +62,6 @@ class PlantDetailFragment : Fragment() {
             fab.setOnClickListener { view ->
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
-            }
-        }
-
-        plantDetailViewModel.plant.observe(this) { plant ->
-            plant?.let {
-                shareText = getString(R.string.share_text_plant, plant.name)
             }
         }
 
