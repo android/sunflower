@@ -61,8 +61,8 @@
                 android:id="@+id/add_plant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorSecondary"
-                android:textColor="@color/colorPrimary"
+                android:backgroundTint="?attr/colorSecondary"
+                android:textColor="?attr/colorPrimary"
                 android:text="@string/add_plant"
                 app:shapeAppearance="@style/AddButtonShapeAppearance"/>
 
