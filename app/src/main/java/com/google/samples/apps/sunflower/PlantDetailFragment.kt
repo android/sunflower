@@ -63,8 +63,12 @@ class PlantDetailFragment : Fragment() {
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
 
-            back.setOnClickListener {
-                it.findNavController().navigateUp()
+            back.setOnClickListener { view ->
+                view.findNavController().navigateUp()
+            }
+
+            share.setOnClickListener {
+                createShareIntent()
             }
         }
 
@@ -90,24 +94,29 @@ class PlantDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_share -> {
-                val shareIntent = ShareCompat.IntentBuilder.from(activity)
-                    .setText(shareText)
-                    .setType("text/plain")
-                    .createChooserIntent()
-                    .apply {
-                        // https://android-developers.googleblog.com/2012/02/share-with-intents.html
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            // If we're on Lollipop, we can open the intent as a document
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                        } else {
-                            // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                        }
-                    }
-                startActivity(shareIntent)
+                createShareIntent()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    @Suppress("DEPRECATION")
+    fun createShareIntent() {
+        val shareIntent = ShareCompat.IntentBuilder.from(activity)
+                .setText(shareText)
+                .setType("text/plain")
+                .createChooserIntent()
+                .apply {
+                    // https://android-developers.googleblog.com/2012/02/share-with-intents.html
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        // If we're on Lollipop, we can open the intent as a document
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                    } else {
+                        // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                    }
+                }
+        startActivity(shareIntent)
     }
 }
