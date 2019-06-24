@@ -20,6 +20,7 @@
     <string name="plant_detail_image_content_description">Immagine della pianta</string>
     <string name="my_garden_title">Il mio giardino</string>
     <string name="plant_list_title">Lista delle piante</string>
+    <string name="available">(translate me) Available Plants</string>
     <string name="plant_details_title">Dettagli della pianta</string>
     <string name="menu_item_share_plant">Condividi</string>
     <string name="plant_date_header">(translate me) Planted</string>
@@ -43,6 +44,5 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Immagine della pianta</string>
-    <string name="available">(translate me) Available Plants</string>
 
 </resources>
