@@ -16,40 +16,26 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.samples.apps.sunflower.GardenFragment
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.R
 
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
-class SunflowerPagerAdapter(
-    private val context: Context,
-    fragmentManager: FragmentManager
-) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SunflowerPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     /**
      * There are only two fragments in this ViewPager: [GardenFragment] and [PlantListFragment]
      */
-    override fun getCount() = 2
+    override fun getItemCount() = 2
 
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         return when (position) {
             MY_GARDEN_PAGE_INDEX -> GardenFragment()
             PLANT_LIST_PAGE_INDEX -> PlantListFragment()
             else -> throw IndexOutOfBoundsException()
-        }
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-            MY_GARDEN_PAGE_INDEX -> context.getString(R.string.my_garden_title)
-            PLANT_LIST_PAGE_INDEX -> context.getString(R.string.plant_list_title)
-            else -> null
         }
     }
 }

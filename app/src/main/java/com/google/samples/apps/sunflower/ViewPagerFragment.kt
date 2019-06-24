@@ -22,6 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
+import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
 
@@ -31,11 +33,21 @@ class ViewPagerFragment : Fragment() {
         val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(requireActivity(), childFragmentManager)
-        binding.tabs.setupWithViewPager(viewPager)
+        viewPager.adapter = SunflowerPagerAdapter(this)
+        TabLayoutMediator(binding.tabs, viewPager) { tab, position ->
+            tab.text = getTabTitle(position)
+        }.attach()
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
+    }
+
+    private fun getTabTitle(position: Int): CharSequence? {
+        return when (position) {
+            MY_GARDEN_PAGE_INDEX -> getString(R.string.my_garden_title)
+            PLANT_LIST_PAGE_INDEX -> getString(R.string.plant_list_title)
+            else -> null
+        }
     }
 }
