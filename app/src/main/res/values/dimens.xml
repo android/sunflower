@@ -36,5 +36,8 @@
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">12dp</dimen>
 
+    <!-- Plant List Header margin -->
+    <dimen name="header_margin">24dp</dimen>
+
     <dimen name="font_large">24sp</dimen>
 </resources>

@@ -42,5 +42,6 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Bild der Pflanze</string>
+    <string name="available">(translate me) Available Plants</string>
 
 </resources>
