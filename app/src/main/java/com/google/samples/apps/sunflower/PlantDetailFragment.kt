@@ -62,14 +62,6 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
-
-            back.setOnClickListener { view ->
-                view.findNavController().navigateUp()
-            }
-
-            share.setOnClickListener {
-                createShareIntent()
-            }
         }
 
         plantDetailViewModel.plant.observe(this) { plant ->
