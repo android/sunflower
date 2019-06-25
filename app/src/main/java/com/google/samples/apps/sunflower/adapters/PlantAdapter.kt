@@ -23,7 +23,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.samples.apps.sunflower.PlantListFragment
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.ViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
@@ -31,19 +33,54 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
-class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallback()) {
+class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val plant = getItem(position)
-        holder.apply {
-            bind(createOnClickListener(plant.plantId), plant)
-            itemView.tag = plant
+    private val headerPositions: IntArray = intArrayOf(0)
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (position in headerPositions) {
+            val holderViewParams = (holder as HeaderViewHolder).itemView.layoutParams
+            val layoutParams = holderViewParams as StaggeredGridLayoutManager.LayoutParams
+            layoutParams.isFullSpan = true
+        } else {
+            val plant = getItem(position)
+            (holder as PlantViewHolder).apply {
+                bind(createOnClickListener(plant.plantId), plant)
+                itemView.tag = plant
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ListItemPlantBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            in headerPositions -> R.layout.plant_list_header
+            else -> R.layout.list_item_plant
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return if (currentList.size == 0) {
+            0
+        } else {
+            currentList.size + headerPositions.size
+        }
+    }
+
+    override fun getItem(position: Int): Plant {
+        return currentList[position - headerPositions.size]
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+
+            R.layout.plant_list_header -> HeaderViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.plant_list_header, parent, false))
+
+            R.layout.list_item_plant -> PlantViewHolder(ListItemPlantBinding
+                    .inflate(LayoutInflater.from(parent.context), parent, false))
+
+            else -> throw IllegalArgumentException("Invalid viewType")
+        }
     }
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
@@ -53,7 +90,7 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
         }
     }
 
-    class ViewHolder(
+    class PlantViewHolder(
         private val binding: ListItemPlantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -65,6 +102,10 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.ViewHolder>(PlantDiffCallba
             }
         }
     }
+
+    class HeaderViewHolder(
+        headerView: View
+    ) : RecyclerView.ViewHolder(headerView)
 }
 
 private class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
