@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:background="@color/colorSurface"
+        android:background="?attr/colorSurface"
         tools:context="com.google.samples.apps.sunflower.GardenActivity"
         tools:ignore="MergeRootFrame">
 
@@ -71,7 +71,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:gravity="center"
                     android:text="@{viewModel.plant.name}"
-                    android:textSize="@dimen/font_large" />
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -130,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@android:color/white"
+            app:shapeAppearance="@style/FABShapeAppearance"
             app:isGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
