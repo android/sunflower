@@ -24,6 +24,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme"/>

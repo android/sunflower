@@ -25,6 +25,7 @@
     <dimen name="fab_bottom_padding">72dp</dimen>
 
     <dimen name="plant_detail_app_bar_height">278dp</dimen>
+    <dimen name="plant_detail_image_height">238dp</dimen>
 
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>

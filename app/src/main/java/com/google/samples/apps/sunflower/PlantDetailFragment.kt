@@ -44,6 +44,7 @@ class PlantDetailFragment : Fragment() {
 
     private val args: PlantDetailFragmentArgs by navArgs()
     private lateinit var shareText: String
+    private val startMarginTitle = -100
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
         InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
@@ -62,6 +63,10 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
+
+
+            //Bug workaround: Add margin to title to prevent from floating right on collapse
+            //toolbar.titleMarginStart = startMarginTitle
         }
 
         plantDetailViewModel.plant.observe(this) { plant ->
