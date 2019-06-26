@@ -19,6 +19,7 @@
     <string name="plant_detail_image_content_description">植物のイメージ</string>
     <string name="my_garden_title">私の庭</string>
     <string name="plant_list_title">植物のリスト</string>
+    <string name="available">(translate me) Available Plants</string>
     <string name="plant_details_title">植物の詳細</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">植物が庭に追加されました</string>

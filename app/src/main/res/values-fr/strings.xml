@@ -19,6 +19,7 @@
     <string name="my_garden_title">Mon jardin</string>
     <string name="plant_detail_image_content_description">Image de plante</string>
     <string name="plant_list_title">Liste des plantes</string>
+    <string name="available">(translate me) Available Plants</string>
     <string name="plant_details_title">Détails sur la plante</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Plante ajoutée à votre jardin</string>
