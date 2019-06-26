@@ -24,7 +24,9 @@
         android:id="@+id/header_plant_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/header_margin"
+        android:layout_marginStart="@dimen/card_side_margin"
+        android:layout_marginTop="@dimen/header_margin"
+        android:layout_marginBottom="@dimen/header_margin"
         android:text="@string/available"
         android:textAppearance="?attr/textAppearanceHeadline5" />
 
