@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -36,6 +37,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import com.google.android.material.appbar.AppBarLayout
+import kotlinx.android.synthetic.main.fragment_plant_detail.*
+
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -44,7 +48,6 @@ class PlantDetailFragment : Fragment() {
 
     private val args: PlantDetailFragmentArgs by navArgs()
     private lateinit var shareText: String
-    private val startMarginTitle = -100
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
         InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
@@ -64,9 +67,25 @@ class PlantDetailFragment : Fragment() {
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
 
+            toolbarLayout.setCollapsedTitleTextColor(R.color.colorPrimaryDark)
 
-            //Bug workaround: Add margin to title to prevent from floating right on collapse
-            //toolbar.titleMarginStart = startMarginTitle
+            appbar.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+                var toShow = false
+                var scrollRange = -1
+
+                override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                    if (scrollRange == -1) {
+                        scrollRange = appBarLayout.totalScrollRange
+                    }
+                    if (scrollRange + verticalOffset == 0) {
+                        toolbarLayout.title = viewModel?.plant?.value?.name
+                        toShow = false
+                    } else if (!toShow) {
+                        toolbarLayout.title = " "
+                        toShow = true
+                    }
+                }
+            })
         }
 
         plantDetailViewModel.plant.observe(this) { plant ->
