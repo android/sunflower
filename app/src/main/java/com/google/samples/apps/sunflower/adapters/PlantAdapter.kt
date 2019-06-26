@@ -42,19 +42,19 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        //if current position is a header element
+        // if current position is a header element
         if (position in headerPositions) {
 
-            //cast generic RecyclerView.ViewHolder to header view holder
+            // cast generic RecyclerView.ViewHolder to header view holder
             val holderViewParams = (holder as HeaderViewHolder).itemView.layoutParams
             val layoutParams = holderViewParams as StaggeredGridLayoutManager.LayoutParams
 
-            //set width of header to span entire screen
+            // set width of header to span entire screen
             layoutParams.isFullSpan = true
-        } else { //Must be a plant type
+        } else { // Must be a plant type
             val plant = getItem(position)
 
-            //cast generic RecyclerView.ViewHolder to Plant view holder
+            // cast generic RecyclerView.ViewHolder to Plant view holder
             (holder as PlantViewHolder).apply {
                 bind(createOnClickListener(plant.plantId), plant)
                 itemView.tag = plant
@@ -64,7 +64,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
     override fun getItemViewType(position: Int): Int {
 
-        //if current position is where a header should go, return header view type
+        // if current position is where a header should go, return header view type
         return when (position) {
             in headerPositions -> R.layout.plant_list_header
             else -> R.layout.list_item_plant
@@ -73,7 +73,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
     override fun getItemCount(): Int {
 
-        //If no available plants, don't print header either, otherwise return number of cards needed
+        // If no available plants, don't print header either, otherwise return number of cards needed
         return if (currentList.size == 0) {
             0
         } else {
@@ -83,16 +83,16 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
     override fun getItem(position: Int): Plant {
 
-        //index in plant list is position subtracted by offset of number of headers
+        // index in plant list is position subtracted by offset of number of headers
         return currentList[position - headerPositions.size]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        //Return a specific viewholder type depending on current viewType
+        // Return a specific viewholder type depending on current viewType
         return when (viewType) {
 
-            //Generic layout inflate from Layout XML file
+            // Generic layout inflate from Layout XML file
             R.layout.plant_list_header -> HeaderViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.plant_list_header, parent, false))
 
