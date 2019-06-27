@@ -26,6 +26,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -39,7 +40,6 @@ import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
-
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -86,6 +86,20 @@ class PlantDetailFragment : Fragment() {
                     }
                 }
             })
+
+            toolbar.setNavigationOnClickListener { view ->
+                view.findNavController().navigateUp()
+            }
+
+            toolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.action_share -> {
+                        createShareIntent()
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
 
         plantDetailViewModel.plant.observe(this) { plant ->
@@ -102,12 +116,15 @@ class PlantDetailFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_plant_detail, menu)
+        menu.clear()
         super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_plant_detail, menu)
     }
 
     @Suppress("DEPRECATION")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("THIS"+item.itemId, ""+R.id.action_share)
+
         return when (item.itemId) {
             R.id.action_share -> {
                 createShareIntent()
@@ -115,6 +132,7 @@ class PlantDetailFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+
     }
 
     @Suppress("DEPRECATION")
