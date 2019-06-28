@@ -65,7 +65,5 @@ fun bindWateringText(textView: TextView, wateringInterval: Int) {
         wateringInterval, wateringInterval)
 
     textView.text = SpannableStringBuilder()
-        .bold { append(resources.getString(R.string.watering_needs_prefix)) }
-        .append("\n")
         .append(quantityString)
 }

@@ -23,6 +23,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme"/>
