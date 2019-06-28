@@ -22,7 +22,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
-import androidx.core.text.bold
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
