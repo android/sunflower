@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
