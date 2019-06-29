@@ -23,4 +23,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorSurface">#FAFAFA</color>
     <color name="colorSecondary">#ffff63</color>
+
+    <!-- Colors for the TabLayout icons-->
+    <color name="colorTabIconStroke">#005D2B</color>
 </resources>
