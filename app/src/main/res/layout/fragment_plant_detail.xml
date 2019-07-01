@@ -103,8 +103,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Watering needs: every 7 days" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/plant_watering"
@@ -117,7 +116,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/plant_watering_header"
                     app:wateringText="@{viewModel.plant.wateringInterval}"
-                    tools:text="Watering needs: every 7 days" />
+                    tools:text="every 7 days" />
 
                 <TextView
                     android:id="@+id/plant_description"

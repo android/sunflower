@@ -31,7 +31,7 @@
 
     <!-- String plurals and their related prefix / suffix strings -->
     <!-- Item quantities for zero and one are not used in Chinese -->
-    <string name="watering_needs_prefix">浇水指南:</string>
+    <string name="watering_needs_prefix">浇水指南</string>
     <plurals name="watering_needs_suffix">
         <item quantity="other">每隔 %d 天</item>
     </plurals>
