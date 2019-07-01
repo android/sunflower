@@ -19,13 +19,16 @@ package com.google.samples.apps.sunflower
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
+import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,6 +38,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import androidx.navigation.findNavController
+import com.google.android.material.appbar.AppBarLayout
+import androidx.core.widget.NestedScrollView
+import kotlinx.android.synthetic.main.fragment_plant_detail.view.*
+
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -61,6 +69,49 @@ class PlantDetailFragment : Fragment() {
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
+
+            toolbarLayout.setCollapsedTitleTextColor(R.color.colorPrimaryDark)
+
+            //scroll change listener begins at Y = 0 when image is fully collapsed
+            plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+
+                //if scroll past image to height of toolbar, plant name in body is off screen
+                if (scrollY > toolbar.height) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                        //convert dp value from dimens to pixel value
+                        //set regular shadow to toolbar
+                        appbar.elevation = resources.displayMetrics.density *
+                                resources.getDimension(R.dimen.toolbar_elevation)
+                    }
+
+                    //set toolbar title to plant name
+                    toolbarLayout.title = viewModel?.plant?.value?.name
+                } else { //if plant name in body is still visible
+
+                    //remove title (since plant name in body is used as title)
+                    toolbarLayout.title = " "
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                        //remove shadow from toolbar
+                        appbar.elevation = 0.0f
+                    }
+                }
+            })
+
+            toolbar.setNavigationOnClickListener { view ->
+                view.findNavController().navigateUp()
+            }
+
+            toolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.action_share -> {
+                        createShareIntent()
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
 
         plantDetailViewModel.plant.observe(this) { plant ->
@@ -85,24 +136,29 @@ class PlantDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_share -> {
-                val shareIntent = ShareCompat.IntentBuilder.from(activity)
-                    .setText(shareText)
-                    .setType("text/plain")
-                    .createChooserIntent()
-                    .apply {
-                        // https://android-developers.googleblog.com/2012/02/share-with-intents.html
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            // If we're on Lollipop, we can open the intent as a document
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                        } else {
-                            // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                        }
-                    }
-                startActivity(shareIntent)
+                createShareIntent()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    @Suppress("DEPRECATION")
+    fun createShareIntent() {
+        val shareIntent = ShareCompat.IntentBuilder.from(activity)
+                .setText(shareText)
+                .setType("text/plain")
+                .createChooserIntent()
+                .apply {
+                    // https://android-developers.googleblog.com/2012/02/share-with-intents.html
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        // If we're on Lollipop, we can open the intent as a document
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                    } else {
+                        // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                    }
+                }
+        startActivity(shareIntent)
     }
 }
