@@ -22,6 +22,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayout
+import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
+import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
 
@@ -29,9 +32,29 @@ class ViewPagerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
+        val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
         viewPager.adapter = SunflowerPagerAdapter(requireActivity(), childFragmentManager)
+
+        // Change tab icons based on the selected tab
+        tabLayout.addOnTabSelectedListener(object : TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                super.onTabSelected(tab)
+                when (tab?.position) {
+                    MY_GARDEN_PAGE_INDEX -> {
+                        tabLayout.getTabAt(MY_GARDEN_PAGE_INDEX)?.setIcon(R.drawable.ic_my_garden_active)
+                        tabLayout.getTabAt(PLANT_LIST_PAGE_INDEX)?.setIcon(R.drawable.ic_plant_list_inactive)
+                    }
+                    PLANT_LIST_PAGE_INDEX -> {
+                        tabLayout.getTabAt(MY_GARDEN_PAGE_INDEX)?.setIcon(R.drawable.ic_my_garden_inactive)
+                        tabLayout.getTabAt(PLANT_LIST_PAGE_INDEX)?.setIcon(R.drawable.ic_plant_list_active)
+                    }
+                }
+            }
+        })
+
         binding.tabs.setupWithViewPager(viewPager)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)

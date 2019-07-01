@@ -30,7 +30,7 @@
     <string name="share_text_plant">Regardez la plante %s sur l\'application Sunflower</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
-    <string name="watering_needs_prefix">Arrosage nécessaire:</string>
+    <string name="watering_needs_prefix">Arrosage nécessaire</string>
     <plurals name="watering_needs_suffix">
         <item quantity="one">%d fois par jour</item>
         <item quantity="other">Tous les %d jours</item>
