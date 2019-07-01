@@ -124,21 +124,6 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_plant_detail, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_share -> {
-                createShareIntent()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     // Helper function for calling a share functionality.
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
