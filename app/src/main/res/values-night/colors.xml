@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2018 Google LLC
+  ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,14 +16,11 @@
   -->
 
 <resources>
-    <color name="colorBackground">#49bb79</color>
-    <color name="colorOnPrimary">#ffff63</color>
-    <color name="colorPrimary">#49bb79</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#005d2b</color>
-    <color name="colorSurface">#FAFAFA</color>
-    <color name="colorSecondary">#ffff63</color>
-
-    <!-- Colors for the TabLayout icons-->
-    <color name="colorTabIconStroke">#005D2B</color>
+    <color name="colorBackground">#161f1a</color>
+    <color name="colorOnPrimary">#f8f99f</color>
+    <color name="colorPrimary">#161f1a</color>
+    <color name="colorPrimaryDark">#DEFFFFFF</color>
+    <color name="colorAccent">#6dc790</color>
+    <color name="colorSurface">#1a231e</color>
+    <color name="colorSecondary">#f8f99f</color>
 </resources>
