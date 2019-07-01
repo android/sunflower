@@ -19,16 +19,13 @@ package com.google.samples.apps.sunflower
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.View.*
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
-import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -39,10 +36,7 @@ import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 import androidx.navigation.findNavController
-import com.google.android.material.appbar.AppBarLayout
 import androidx.core.widget.NestedScrollView
-import kotlinx.android.synthetic.main.fragment_plant_detail.view.*
-
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -72,28 +66,28 @@ class PlantDetailFragment : Fragment() {
 
             toolbarLayout.setCollapsedTitleTextColor(R.color.colorPrimaryDark)
 
-            //scroll change listener begins at Y = 0 when image is fully collapsed
+            // scroll change listener begins at Y = 0 when image is fully collapsed
             plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
 
-                //if scroll past image to height of toolbar, plant name in body is off screen
+                // if scroll past image to height of toolbar, plant name in body is off screen
                 if (scrollY > toolbar.height) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                        //convert dp value from dimens to pixel value
-                        //set regular shadow to toolbar
+                        // convert dp value from dimens to pixel value
+                        // set regular shadow to toolbar
                         appbar.elevation = resources.displayMetrics.density *
                                 resources.getDimension(R.dimen.toolbar_elevation)
                     }
 
-                    //set toolbar title to plant name
+                    // set toolbar title to plant name
                     toolbarLayout.title = viewModel?.plant?.value?.name
-                } else { //if plant name in body is still visible
+                } else { // if plant name in body is still visible
 
-                    //remove title (since plant name in body is used as title)
+                    // remove title (since plant name in body is used as title)
                     toolbarLayout.title = " "
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                        //remove shadow from toolbar
+                        // remove shadow from toolbar
                         appbar.elevation = 0.0f
                     }
                 }
