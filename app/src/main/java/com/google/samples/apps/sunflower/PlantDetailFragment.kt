@@ -159,7 +159,7 @@ class PlantDetailFragment : Fragment() {
                 }
         startActivity(shareIntent)
     }
-  
+
     // FloatingActionButtons anchored to AppBarLayouts have their visibility controlled by the scroll position.
     // We want to turn this behavior off to hide the FAB when it is clicked.
     //
