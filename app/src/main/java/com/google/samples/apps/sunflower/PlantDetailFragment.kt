@@ -24,6 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ShareCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -64,7 +65,7 @@ class PlantDetailFragment : Fragment() {
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
 
-            toolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.colorPrimaryDark))
+            toolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDark))
 
             // scroll change listener begins at Y = 0 when image is fully collapsed
             plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
