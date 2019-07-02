@@ -38,6 +38,7 @@ class ViewPagerFragment : Fragment() {
 
         viewPager.adapter = SunflowerPagerAdapter(this)
 
+        // Set the text for each tab
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()

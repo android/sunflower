@@ -49,10 +49,6 @@ class PlantListFragment : Fragment() {
         binding.plantList.adapter = adapter
         subscribeUi(adapter)
 
-        // Temporary workaround to programmatically set the menu visibility when changing tabs.
-        // See https://issuetracker.google.com/issues/124183800 for more details.
-        setMenuVisibility(false)
-
         setHasOptionsMenu(true)
         return binding.root
     }
