@@ -44,7 +44,8 @@
     <!-- Plant List Header margin -->
     <dimen name="header_margin">24dp</dimen>
 
-    <dimen name="plant_description_min_height">555dp</dimen>
+    <!-- minimum height of plant detail page so that the collapsing toolbar can be shown on every page -->
+    <dimen name="plant_description_min_height">550dp</dimen>
 
     <!-- Add plant button style -->
     <dimen name="button_corner_radius">12dp</dimen>

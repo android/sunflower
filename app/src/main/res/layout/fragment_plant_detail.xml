@@ -104,7 +104,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Plant Name" />
+                    tools:text="Apple" />
 
                 <TextView
                     android:id="@+id/plant_watering_header"
