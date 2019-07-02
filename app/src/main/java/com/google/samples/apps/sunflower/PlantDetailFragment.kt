@@ -65,7 +65,7 @@ class PlantDetailFragment : Fragment() {
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
 
-            toolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDark))
+            toolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
 
             // scroll change listener begins at Y = 0 when image is fully collapsed
             plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
