@@ -22,7 +22,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
@@ -36,18 +35,6 @@ class ViewPagerFragment : Fragment() {
         val viewPager = binding.viewPager
 
         viewPager.adapter = SunflowerPagerAdapter(this)
-
-        // Temporary workaround to programmatically set the menu visibility when changing tabs.
-        // See https://issuetracker.google.com/issues/124183800 for more details.
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                when (position) {
-                    MY_GARDEN_PAGE_INDEX -> setAllChildFragmentMenuVisibility(false)
-                    PLANT_LIST_PAGE_INDEX -> setAllChildFragmentMenuVisibility(true)
-                    else -> Unit
-                }
-            }
-        })
 
         TabLayoutMediator(binding.tabs, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
@@ -63,12 +50,6 @@ class ViewPagerFragment : Fragment() {
             MY_GARDEN_PAGE_INDEX -> getString(R.string.my_garden_title)
             PLANT_LIST_PAGE_INDEX -> getString(R.string.plant_list_title)
             else -> null
-        }
-    }
-
-    private fun setAllChildFragmentMenuVisibility(isVisible: Boolean) {
-        childFragmentManager.fragments.forEach { fragment ->
-            fragment.setMenuVisibility(isVisible)
         }
     }
 }
