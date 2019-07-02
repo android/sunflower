@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2018 Google LLC
+  ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,13 +15,15 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<resources>
+    <color name="colorBackground">#161f1a</color>
+    <color name="colorOnPrimary">#f8f99f</color>
+    <color name="colorPrimary">#161f1a</color>
+    <color name="colorPrimaryDark">#DEFFFFFF</color>
+    <color name="colorAccent">#6dc790</color>
+    <color name="colorSurface">#1a231e</color>
+    <color name="colorSecondary">#f8f99f</color>
 
-    <item
-        android:id="@+id/action_share"
-        android:icon="@drawable/detail_share_icon"
-        android:title="@string/menu_item_share_plant"
-        app:showAsAction="ifRoom" />
-
-</menu>
+    <!-- Colors for the TabLayout icons-->
+    <color name="colorTabIconStroke">#99FAFAFA</color>
+</resources>

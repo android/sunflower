@@ -62,6 +62,7 @@
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@{viewModel.plantName}"
                 android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView"/>
@@ -74,7 +75,8 @@
                 android:text="@string/plant_date_header"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
-                android:textColor="?attr/colorPrimary"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="?attr/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/plant_name"/>
@@ -86,6 +88,7 @@
                 android:layout_marginTop="0dp"
                 android:text="@{viewModel.plantDateString}"
                 android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/plant_date_header"/>
@@ -97,7 +100,8 @@
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/watered_date_header"
                 android:textStyle="bold"
-                android:textColor="?attr/colorPrimary"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="?attr/colorAccent"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,6 +114,7 @@
                 android:layout_marginTop="0dp"
                 android:text="@{viewModel.waterDateString}"
                 android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/watered_date_header" />
@@ -122,6 +127,7 @@
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:text="@{@plurals/watering_next(viewModel.wateringInterval, viewModel.wateringInterval)}"
                 android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/water_date"

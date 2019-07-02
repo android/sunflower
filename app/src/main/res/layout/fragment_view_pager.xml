@@ -51,6 +51,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="parallax">
@@ -66,11 +67,14 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+            <!-- Override tabIconTint attribute of style with selector -->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 style="@style/Widget.MaterialComponents.TabLayout.Colored"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"/>
+                android:layout_height="?actionBarSize"
+                app:tabIconTint="@drawable/tab_icon_color_selector"
+                app:tabTextColor="@color/colorTabIconStroke"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
