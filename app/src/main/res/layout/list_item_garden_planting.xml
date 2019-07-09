@@ -38,7 +38,7 @@
         android:onClick="@{clickListener}"
         app:cardElevation="@dimen/card_elevation"
         app:cardPreventCornerOverlap="false"
-        app:shapeAppearanceOverlay="@style/CardShapeAppearance">
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Sunflower.Card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
