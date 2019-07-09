@@ -17,7 +17,7 @@
 <resources>
 
     <!-- To see how these attributes are used, please visit https://material.io/develop/android/theming/color/ -->
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.Sunflower" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -27,42 +27,15 @@
         <item name="android:colorBackground">@color/colorBackground</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme"/>
+    <style name="Theme.Sunflower" parent="Base.Theme.Sunflower"/>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="Theme.Sunflower.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="Theme.Sunflower.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
-
-    <style name="CardShapeAppearance">
-        <item name="cornerFamily">rounded</item>
-
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeTopRight">@dimen/card_corner_radius</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">@dimen/card_corner_radius</item>
-    </style>
-
-    <style name="AddButtonShapeAppearance">
-        <item name="cornerFamily">rounded</item>
-
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeTopRight">@dimen/button_corner_radius</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">@dimen/button_corner_radius</item>
-    </style>
-  
-    <style name="FABShapeAppearance">
-        <item name="cornerFamily">rounded</item>
-
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeTopRight">@dimen/fab_corner_radius</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">@dimen/fab_corner_radius</item>
-    </style>
+    <style name="Theme.Sunflower.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
 </resources>

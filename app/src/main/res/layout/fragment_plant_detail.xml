@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@android:color/white"
-            app:shapeAppearance="@style/FABShapeAppearance"
+            app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
             app:isGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
