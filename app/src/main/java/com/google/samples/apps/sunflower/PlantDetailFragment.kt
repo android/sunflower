@@ -69,16 +69,16 @@ class PlantDetailFragment : Fragment() {
 
             // scroll change listener begins at Y = 0 when image is fully collapsed
             plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
-                //user scrolled past image to height of toolbar
+                // user scrolled past image to height of toolbar
                 val showToolbar = scrollY > toolbar.height
 
-                //set title programatically so not shown by default
+                // set title programatically so not shown by default
                 toolbarLayout.title = viewModel?.plant?.value?.name
 
-                //use shadow animator to add elevation when toolbar should appear
+                // use shadow animator to add elevation when toolbar should appear
                 appbar.isActivated = showToolbar
 
-                //plant name in body is off screen, so show plant name in toolbar
+                // plant name in body is off screen, so show plant name in toolbar
                 toolbarLayout.isTitleEnabled = showToolbar
             })
 
