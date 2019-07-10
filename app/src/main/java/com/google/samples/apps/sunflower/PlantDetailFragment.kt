@@ -58,14 +58,14 @@ class PlantDetailFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
                 inflater, R.layout.fragment_plant_detail, container, false).apply {
             viewModel = plantDetailViewModel
-            lifecycleOwner = this@PlantDetailFragment
+            lifecycleOwner = viewLifecycleOwner
             fab.setOnClickListener { view ->
                 hideAppBarFab(view as FloatingActionButton)
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
 
-            toolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
+            toolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(requireContext(), R.color.colorOnSurface))
 
             // scroll change listener begins at Y = 0 when image is fully collapsed
             plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
