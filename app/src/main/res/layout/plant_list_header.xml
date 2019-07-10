@@ -15,14 +15,11 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/header_plant_list"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/card_side_margin"
         android:layout_marginEnd="@dimen/card_side_margin"
@@ -31,4 +28,4 @@
         android:text="@string/available"
         android:textAppearance="?attr/textAppearanceHeadline5" />
 
-</LinearLayout>
+</layout>

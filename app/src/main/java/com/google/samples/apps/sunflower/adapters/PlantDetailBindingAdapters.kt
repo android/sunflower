@@ -63,6 +63,5 @@ fun bindWateringText(textView: TextView, wateringInterval: Int) {
     val quantityString = resources.getQuantityString(R.plurals.watering_needs_suffix,
         wateringInterval, wateringInterval)
 
-    textView.text = SpannableStringBuilder()
-        .append(quantityString)
+    textView.text = quantityString
 }
