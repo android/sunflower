@@ -20,7 +20,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--
-     Note: even though the IDs for the CoordinatorLayout and the AppBarLayout unused in ViewPagerFragment, they are
+     Note: even though the IDs for the CoordinatorLayout and the AppBarLayout unused in HomeViewPagerFragment, they are
      both required to preserve the toolbar scroll / collapse state when navigating to a new screen and then coming back.
     -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout

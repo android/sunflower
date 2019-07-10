@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/view_pager_fragment"
-        android:name="com.google.samples.apps.sunflower.ViewPagerFragment"
+        android:name="com.google.samples.apps.sunflower.HomeViewPagerFragment"
         tools:layout="@layout/fragment_view_pager">
 
         <action
