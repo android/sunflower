@@ -35,7 +35,7 @@ class HomeViewPagerFragment : Fragment() {
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(requireActivity(), childFragmentManager)
+        viewPager.adapter = SunflowerPagerAdapter(getTabTitles(), childFragmentManager)
 
         // Change tab icons based on the selected tab
         tabLayout.addOnTabSelectedListener(object : TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
@@ -60,5 +60,14 @@ class HomeViewPagerFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
+    }
+
+    /** Return the list of tab titles to pass to SunflowerPagerAdapter **/
+    private fun getTabTitles(): List<String> {
+        val tabTitles: MutableList<String> = arrayListOf()
+        tabTitles.add(MY_GARDEN_PAGE_INDEX, getString(R.string.my_garden_title))
+        tabTitles.add(PLANT_LIST_PAGE_INDEX, getString(R.string.plant_list_title))
+
+        return tabTitles
     }
 }

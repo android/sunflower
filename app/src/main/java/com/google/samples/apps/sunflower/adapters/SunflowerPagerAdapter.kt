@@ -16,19 +16,17 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.samples.apps.sunflower.GardenFragment
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.R
 
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
 class SunflowerPagerAdapter(
-    private val context: Context,
+    private val tabTitles: List<String>,
     fragmentManager: FragmentManager
 ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
@@ -47,8 +45,8 @@ class SunflowerPagerAdapter(
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            MY_GARDEN_PAGE_INDEX -> context.getString(R.string.my_garden_title)
-            PLANT_LIST_PAGE_INDEX -> context.getString(R.string.plant_list_title)
+            MY_GARDEN_PAGE_INDEX -> tabTitles[MY_GARDEN_PAGE_INDEX]
+            PLANT_LIST_PAGE_INDEX -> tabTitles[PLANT_LIST_PAGE_INDEX]
             else -> null
         }
     }
