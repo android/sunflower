@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.widget.ImageView
 import android.widget.TextView
