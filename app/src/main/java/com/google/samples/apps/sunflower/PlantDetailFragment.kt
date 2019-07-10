@@ -60,12 +60,10 @@ class PlantDetailFragment : Fragment() {
             viewModel = plantDetailViewModel
             lifecycleOwner = this@PlantDetailFragment
             fab.setOnClickListener { view ->
-                hideAppBarFab(view as FloatingActionButton)
+                hideAppBarFab(fab)
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
-
-            toolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
 
             // scroll change listener begins at Y = 0 when image is fully collapsed
             plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->

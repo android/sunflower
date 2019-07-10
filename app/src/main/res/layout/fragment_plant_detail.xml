@@ -50,7 +50,7 @@
                 app:contentScrim="?attr/colorSurface"
                 app:statusBarScrim="?attr/colorSurface"
                 app:collapsedTitleGravity="center"
-                app:collapsedTitleTextAppearance="?attr/textAppearanceHeadline5"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.Sunflower.Toolbar.Text"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/toolbar">
 

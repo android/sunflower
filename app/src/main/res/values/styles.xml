@@ -38,6 +38,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
+    <style name="TextAppearance.Sunflower.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorPrimaryDark</item>
+    </style>
+
     <style name="CardShapeAppearance">
         <item name="cornerFamily">rounded</item>
 

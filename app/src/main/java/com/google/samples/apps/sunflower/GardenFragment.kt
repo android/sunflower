@@ -46,16 +46,13 @@ class GardenFragment : Fragment() {
         binding = FragmentGardenBinding.inflate(inflater, container, false)
         val adapter = GardenPlantingAdapter()
         binding.gardenList.adapter = adapter
-        subscribeUi(adapter, binding)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding.addPlant.setOnClickListener {
             navigateToPlantListPage()
         }
+
+        subscribeUi(adapter, binding)
+        return binding.root
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
