@@ -64,17 +64,13 @@ class HomeViewPagerFragment : Fragment() {
 
     /** Return a hashmap from tab index to tab title to pass to SunflowerPagerAdapter **/
     private fun getTabTitles(): HashMap<Int, String> {
-        val tabTitles: HashMap<Int, String> = hashMapOf()
-        tabTitles[MY_GARDEN_PAGE_INDEX] = getString(R.string.my_garden_title)
-        tabTitles[PLANT_LIST_PAGE_INDEX] = getString(R.string.plant_list_title)
-        return tabTitles
+        return hashMapOf(MY_GARDEN_PAGE_INDEX to getString(R.string.my_garden_title),
+                PLANT_LIST_PAGE_INDEX to getString(R.string.plant_list_title))
     }
 
     /** Return a hashmap from tab index to tab Fragment to pass to SunflowerPagerAdapter **/
     private fun getTabFragments(): HashMap<Int, Fragment> {
-        val tabFragments: HashMap<Int, Fragment> = hashMapOf()
-        tabFragments[MY_GARDEN_PAGE_INDEX] = GardenFragment()
-        tabFragments[PLANT_LIST_PAGE_INDEX] = PlantListFragment()
-        return tabFragments
+        return hashMapOf(MY_GARDEN_PAGE_INDEX to GardenFragment(),
+                PLANT_LIST_PAGE_INDEX to PlantListFragment())
     }
 }
