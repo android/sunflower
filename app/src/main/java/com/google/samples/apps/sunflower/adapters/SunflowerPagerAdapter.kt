@@ -26,7 +26,7 @@ const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
 class SunflowerPagerAdapter(
-    private val tabTitles: List<String>,
+    private val tabTitles: HashMap<Int, String>,
     fragmentManager: FragmentManager
 ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
