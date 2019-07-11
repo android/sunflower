@@ -35,7 +35,7 @@ class HomeViewPagerFragment : Fragment() {
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(getTabTitles(), childFragmentManager)
+        viewPager.adapter = SunflowerPagerAdapter(getTabTitles(), getTabFragments(), childFragmentManager)
 
         // Change tab icons based on the selected tab
         tabLayout.addOnTabSelectedListener(object : TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
@@ -68,5 +68,13 @@ class HomeViewPagerFragment : Fragment() {
         tabTitles[MY_GARDEN_PAGE_INDEX] = getString(R.string.my_garden_title)
         tabTitles[PLANT_LIST_PAGE_INDEX] = getString(R.string.plant_list_title)
         return tabTitles
+    }
+
+    /** Return a hashmap from tab index to tab Fragment to pass to SunflowerPagerAdapter **/
+    private fun getTabFragments(): HashMap<Int, Fragment> {
+        val tabFragments: HashMap<Int, Fragment> = hashMapOf()
+        tabFragments[MY_GARDEN_PAGE_INDEX] = GardenFragment()
+        tabFragments[PLANT_LIST_PAGE_INDEX] = PlantListFragment()
+        return tabFragments
     }
 }
