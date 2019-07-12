@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.widget.ImageView
 import android.widget.TextView
@@ -63,6 +62,5 @@ fun bindWateringText(textView: TextView, wateringInterval: Int) {
     val quantityString = resources.getQuantityString(R.plurals.watering_needs_suffix,
         wateringInterval, wateringInterval)
 
-    textView.text = SpannableStringBuilder()
-        .append(quantityString)
+    textView.text = quantityString
 }
