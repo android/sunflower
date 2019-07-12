@@ -42,6 +42,6 @@ class SunflowerPagerAdapter(
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return tabTitles[position] ?: throw IndexOutOfBoundsException()
+        return tabTitles[position]
     }
 }
