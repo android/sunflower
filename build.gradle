@@ -44,7 +44,7 @@ buildscript {
         supportLibraryVersion = '1.1.0-alpha05'
         truth = '0.42'
         uiAutomatorVersion = '2.2.0'
-        workVersion = '2.1.0-alpha01'
+        workVersion = '2.1.0'
     }
 
     repositories {
