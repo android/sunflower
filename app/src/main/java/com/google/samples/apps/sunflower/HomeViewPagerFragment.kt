@@ -28,14 +28,14 @@ import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
 
-class ViewPagerFragment : Fragment() {
+class HomeViewPagerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(requireActivity(), childFragmentManager)
+        viewPager.adapter = SunflowerPagerAdapter(getTabTitles(), getTabFragments(), childFragmentManager)
 
         // Change tab icons based on the selected tab
         tabLayout.addOnTabSelectedListener(object : TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
@@ -60,5 +60,17 @@ class ViewPagerFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
+    }
+
+    /** Return a hashmap from tab index to tab title to pass to SunflowerPagerAdapter **/
+    private fun getTabTitles(): HashMap<Int, String> {
+        return hashMapOf(MY_GARDEN_PAGE_INDEX to getString(R.string.my_garden_title),
+                PLANT_LIST_PAGE_INDEX to getString(R.string.plant_list_title))
+    }
+
+    /** Return a hashmap from tab index to tab Fragment to pass to SunflowerPagerAdapter **/
+    private fun getTabFragments(): HashMap<Int, Fragment> {
+        return hashMapOf(MY_GARDEN_PAGE_INDEX to GardenFragment(),
+                PLANT_LIST_PAGE_INDEX to PlantListFragment())
     }
 }

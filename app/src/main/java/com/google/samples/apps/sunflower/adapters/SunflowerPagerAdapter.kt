@@ -16,19 +16,19 @@
 
 package com.google.samples.apps.sunflower.adapters
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.samples.apps.sunflower.GardenFragment
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.R
+import kotlin.IndexOutOfBoundsException
 
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
 class SunflowerPagerAdapter(
-    private val context: Context,
+    private val tabTitles: HashMap<Int, String>,
+    private val tabFragments: HashMap<Int, Fragment>,
     fragmentManager: FragmentManager
 ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
@@ -38,18 +38,10 @@ class SunflowerPagerAdapter(
     override fun getCount() = 2
 
     override fun getItem(position: Int): Fragment {
-        return when (position) {
-            MY_GARDEN_PAGE_INDEX -> GardenFragment()
-            PLANT_LIST_PAGE_INDEX -> PlantListFragment()
-            else -> throw IndexOutOfBoundsException()
-        }
+        return tabFragments[position] ?: throw IndexOutOfBoundsException()
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-            MY_GARDEN_PAGE_INDEX -> context.getString(R.string.my_garden_title)
-            PLANT_LIST_PAGE_INDEX -> context.getString(R.string.plant_list_title)
-            else -> null
-        }
+        return tabTitles[position]
     }
 }
