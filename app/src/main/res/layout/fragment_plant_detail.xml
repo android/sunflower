@@ -39,6 +39,7 @@
             android:layout_height="@dimen/plant_detail_app_bar_height"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:stateListAnimator="@animator/show_toolbar"
             android:background="?attr/colorSurface"
             android:animateLayoutChanges="true">
 
