@@ -33,7 +33,7 @@ buildscript {
         gradleVersion = '3.4.1'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
-        kotlinVersion = '1.3.40'
+        kotlinVersion = '1.3.41'
         ktlintVersion = '0.30.0'
         ktxVersion = '1.0.2'
         lifecycleVersion = '2.2.0-alpha01'
@@ -45,7 +45,7 @@ buildscript {
         truthVersion = '0.42'
         testExtJunit = '1.1.0'
         uiAutomatorVersion = '2.2.0'
-        workVersion = '2.1.0-beta01'
+        workVersion = '2.1.0'
     }
 
     repositories {
