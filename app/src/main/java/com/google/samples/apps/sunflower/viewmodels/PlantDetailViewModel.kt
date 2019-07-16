@@ -18,13 +18,12 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
@@ -43,7 +42,6 @@ class PlantDetailViewModel(
     /**
      * Cancel all coroutines when the ViewModel is cleared.
      */
-    @ExperimentalCoroutinesApi
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
