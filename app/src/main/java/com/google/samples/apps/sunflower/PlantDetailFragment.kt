@@ -57,7 +57,7 @@ class PlantDetailFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
                 inflater, R.layout.fragment_plant_detail, container, false).apply {
             viewModel = plantDetailViewModel
-            lifecycleOwner = this@PlantDetailFragment
+            lifecycleOwner = viewLifecycleOwner
             fab.setOnClickListener { view ->
                 hideAppBarFab(fab)
                 plantDetailViewModel.addPlantToGarden()
