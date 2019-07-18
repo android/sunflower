@@ -45,7 +45,7 @@ buildscript {
         truthVersion = '0.42'
         testExtJunit = '1.1.0'
         uiAutomatorVersion = '2.2.0'
-        viewPagerVersion = '1.0.0-alpha06'
+        viewPagerVersion = '1.0.0-beta01'
         workVersion = '2.1.0'
     }
 
