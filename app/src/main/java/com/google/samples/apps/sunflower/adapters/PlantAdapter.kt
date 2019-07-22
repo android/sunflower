@@ -57,7 +57,6 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
             // cast generic RecyclerView.ViewHolder to Plant view holder
             (holder as PlantViewHolder).apply {
                 bind(createOnClickListener(plant.plantId), plant)
-                itemView.tag = plant
             }
         }
     }

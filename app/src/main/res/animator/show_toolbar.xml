@@ -15,17 +15,24 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/header_plant_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/card_side_margin"
-        android:layout_marginEnd="@dimen/card_side_margin"
-        android:layout_marginTop="@dimen/header_margin"
-        android:layout_marginBottom="@dimen/header_margin"
-        android:text="@string/available"
-        android:textAppearance="?attr/textAppearanceHeadline5" />
+    <item android:state_activated="true">
 
-</layout>
+        <objectAnimator
+            android:propertyName="translationZ"
+            android:valueTo="@dimen/toolbar_elevation"
+            android:valueType="floatType" />
+
+    </item>
+
+    <item android:state_activated="false">
+
+        <objectAnimator
+            android:propertyName="translationZ"
+            android:valueTo="0dp"
+            android:valueType="floatType" />
+
+    </item>
+
+</selector>

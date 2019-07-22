@@ -45,7 +45,6 @@ class GardenPlantingAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let { plantings ->
             with(holder) {
-                itemView.tag = plantings
                 bind(createOnClickListener(plantings.plant.plantId), plantings)
             }
         }

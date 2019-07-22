@@ -39,6 +39,7 @@
             android:layout_height="@dimen/plant_detail_app_bar_height"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:stateListAnimator="@animator/show_toolbar"
             android:background="?attr/colorSurface"
             android:animateLayoutChanges="true">
 
@@ -50,7 +51,7 @@
                 app:contentScrim="?attr/colorSurface"
                 app:statusBarScrim="?attr/colorSurface"
                 app:collapsedTitleGravity="center"
-                app:collapsedTitleTextAppearance="?attr/textAppearanceHeadline5"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.Sunflower.Toolbar.Text"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/toolbar">
 
@@ -69,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
                     android:background="@android:color/transparent"
-                    app:titleTextColor="?attr/colorPrimaryDark"
+                    app:titleTextColor="?attr/colorOnSurface"
                     app:layout_collapseMode="pin"
                     app:contentInsetStartWithNavigation="0dp"
                     app:navigationIcon="@drawable/detail_back_icon"

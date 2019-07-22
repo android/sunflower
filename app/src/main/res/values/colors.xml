@@ -19,7 +19,7 @@
     <color name="colorBackground">#49bb79</color>
     <color name="colorOnPrimary">#ffff63</color>
     <color name="colorPrimary">#49bb79</color>
-    <color name="colorPrimaryDark">#DE000000</color>
+    <color name="colorOnSurface">#DE000000</color>
     <color name="colorAccent">#005d2b</color>
     <color name="colorSurface">#FAFAFA</color>
     <color name="colorSecondary">#ffff63</color>
