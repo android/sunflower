@@ -36,7 +36,7 @@ class HomeViewPagerFragment : Fragment() {
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(getTabFragments(), this)
+        viewPager.adapter = SunflowerPagerAdapter(this)
 
         // Set the text for each tab
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -71,11 +71,5 @@ class HomeViewPagerFragment : Fragment() {
             PLANT_LIST_PAGE_INDEX -> getString(R.string.plant_list_title)
             else -> null
         }
-    }
-
-    /** Return a hashmap from tab index to tab Fragment to pass to SunflowerPagerAdapter **/
-    private fun getTabFragments(): HashMap<Int, Fragment> {
-        return hashMapOf(MY_GARDEN_PAGE_INDEX to GardenFragment(),
-                PLANT_LIST_PAGE_INDEX to PlantListFragment())
     }
 }

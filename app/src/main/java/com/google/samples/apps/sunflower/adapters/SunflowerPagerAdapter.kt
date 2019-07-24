@@ -24,15 +24,17 @@ import com.google.samples.apps.sunflower.PlantListFragment
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
-class SunflowerPagerAdapter(
-    private val tabFragments: HashMap<Int, Fragment>,
-    fragment: Fragment
-) : FragmentStateAdapter(fragment) {
+class SunflowerPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     /**
-     * There are only two fragments in this ViewPager: [GardenFragment] and [PlantListFragment]
+     * Mapping of the ViewPager page indexes to their respective Fragments
      */
-    override fun getItemCount() = 2
+    private val tabFragments = hashMapOf(
+        MY_GARDEN_PAGE_INDEX to GardenFragment(),
+        PLANT_LIST_PAGE_INDEX to PlantListFragment()
+    )
+
+    override fun getItemCount() = tabFragments.size
 
     override fun createFragment(position: Int): Fragment {
         return tabFragments[position] ?: throw IndexOutOfBoundsException()
