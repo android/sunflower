@@ -22,7 +22,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
@@ -43,22 +42,9 @@ class HomeViewPagerFragment : Fragment() {
             tab.text = getTabTitle(position)
         }.attach()
 
-        // Change tab icons based on the selected tab
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                when (position) {
-                    MY_GARDEN_PAGE_INDEX -> {
-                        tabLayout.getTabAt(MY_GARDEN_PAGE_INDEX)?.setIcon(R.drawable.ic_my_garden_active)
-                        tabLayout.getTabAt(PLANT_LIST_PAGE_INDEX)?.setIcon(R.drawable.ic_plant_list_inactive)
-                    }
-                    PLANT_LIST_PAGE_INDEX -> {
-                        tabLayout.getTabAt(MY_GARDEN_PAGE_INDEX)?.setIcon(R.drawable.ic_my_garden_inactive)
-                        tabLayout.getTabAt(PLANT_LIST_PAGE_INDEX)?.setIcon(R.drawable.ic_plant_list_active)
-                    }
-                }
-            }
-        })
+        // selectors will automatically switch between icons
+        tabLayout.getTabAt(MY_GARDEN_PAGE_INDEX)?.setIcon(R.drawable.garden_tab_selector)
+        tabLayout.getTabAt(PLANT_LIST_PAGE_INDEX)?.setIcon(R.drawable.plant_list_tab_selector)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
