@@ -126,5 +126,13 @@
     "growZoneNumber": 8,
     "wateringInterval": 7,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/Yulan_magnolia_%28Magnolia_denudata%29_%2816953983745%29.jpg"
+  },
+  {
+    "plantId": "bougainvillea-glabra",
+    "name": "Bougainvillea",
+    "description": "Bougainvillea is a genus of thorny ornamental vines, bushes, or trees. The inflorescence consists of large colourful sepallike bracts which surround three simple waxy flowers. The vine species grow anywhere from 1 to 12 m (3 to 40 ft.) tall, scrambling over other plants with their spiky thorns, which are tipped with a black, waxy substance. They are evergreen where rainfall occurs all year, or deciduous if there is a dry season.<br><br>Bougainvillea glabra (simplified Chinese: 簕杜鹃; traditional Chinese: 簕杜鵑) is the official city flower of Shenzhen and many other cities around the world.<br><br><br>(From <a href=\\\"https://en.wikipedia.org/wiki/Bougainvillea\\\">Wikipedia</a>)",
+    "growZoneNumber": 10,
+    "wateringInterval": 21,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Paperflower_--_Bougainvillea_glabra.jpg"
   }
 ]
