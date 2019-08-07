@@ -15,7 +15,6 @@
   -->
 
 <resources>
-    <string name="app_name">Sunflower</string>
     <string name="menu_filter_by_grow_zone">Filtra per zona di crescita</string>
     <string name="plant_detail_image_content_description">Immagine della pianta</string>
     <string name="my_garden_title">Il mio giardino</string>
