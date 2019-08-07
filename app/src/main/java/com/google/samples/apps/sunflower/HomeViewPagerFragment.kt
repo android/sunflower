@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
@@ -34,9 +35,12 @@ class HomeViewPagerFragment : Fragment() {
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(getTabTitles(), getTabFragments(), childFragmentManager)
+        viewPager.adapter = SunflowerPagerAdapter(this)
 
-        binding.tabs.setupWithViewPager(viewPager)
+        // Set the text for each tab
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = getTabTitle(position)
+        }.attach()
 
         // selectors will automatically switch between icons
         tabLayout.getTabAt(MY_GARDEN_PAGE_INDEX)?.setIcon(R.drawable.garden_tab_selector)
@@ -47,15 +51,11 @@ class HomeViewPagerFragment : Fragment() {
         return binding.root
     }
 
-    /** Return a hashmap from tab index to tab title to pass to SunflowerPagerAdapter **/
-    private fun getTabTitles(): HashMap<Int, String> {
-        return hashMapOf(MY_GARDEN_PAGE_INDEX to getString(R.string.my_garden_title),
-                PLANT_LIST_PAGE_INDEX to getString(R.string.plant_list_title))
-    }
-
-    /** Return a hashmap from tab index to tab Fragment to pass to SunflowerPagerAdapter **/
-    private fun getTabFragments(): HashMap<Int, Fragment> {
-        return hashMapOf(MY_GARDEN_PAGE_INDEX to GardenFragment(),
-                PLANT_LIST_PAGE_INDEX to PlantListFragment())
+    private fun getTabTitle(position: Int): String? {
+        return when (position) {
+            MY_GARDEN_PAGE_INDEX -> getString(R.string.my_garden_title)
+            PLANT_LIST_PAGE_INDEX -> getString(R.string.plant_list_title)
+            else -> null
+        }
     }
 }

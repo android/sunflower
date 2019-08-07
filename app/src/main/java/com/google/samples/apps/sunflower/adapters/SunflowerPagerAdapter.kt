@@ -17,31 +17,26 @@
 package com.google.samples.apps.sunflower.adapters
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.samples.apps.sunflower.GardenFragment
 import com.google.samples.apps.sunflower.PlantListFragment
-import kotlin.IndexOutOfBoundsException
 
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
-class SunflowerPagerAdapter(
-    private val tabTitles: HashMap<Int, String>,
-    private val tabFragments: HashMap<Int, Fragment>,
-    fragmentManager: FragmentManager
-) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SunflowerPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     /**
-     * There are only two fragments in this ViewPager: [GardenFragment] and [PlantListFragment]
+     * Mapping of the ViewPager page indexes to their respective Fragments
      */
-    override fun getCount() = 2
+    private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
+        MY_GARDEN_PAGE_INDEX to { GardenFragment() },
+        PLANT_LIST_PAGE_INDEX to { PlantListFragment() }
+    )
 
-    override fun getItem(position: Int): Fragment {
-        return tabFragments[position] ?: throw IndexOutOfBoundsException()
-    }
+    override fun getItemCount() = tabFragmentsCreators.size
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return tabTitles[position]
+    override fun createFragment(position: Int): Fragment {
+        return tabFragmentsCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
     }
 }
