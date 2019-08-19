@@ -42,8 +42,8 @@ class CustomCardView @JvmOverloads constructor(
             ShapeAppearanceModel(context, attrs, defStyle, R.style.Widget_MaterialComponents_CardView)
     private val rectF = RectF(0f, 0f, 0f, 0f)
 
-    override fun onDraw(canvas: Canvas?) {
-        canvas!!.clipPath(path)
+    override fun onDraw(canvas: Canvas) {
+        canvas.clipPath(path)
         super.onDraw(canvas)
     }
 
