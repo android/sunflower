@@ -85,22 +85,25 @@ class PlantDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_share -> {
-                val shareIntent = ShareCompat.IntentBuilder.from(activity)
-                    .setText(shareText)
-                    .setType("text/plain")
-                    .createChooserIntent()
-                    .apply {
-                        // https://android-developers.googleblog.com/2012/02/share-with-intents.html
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            // If we're on Lollipop, we can open the intent as a document
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                        } else {
-                            // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                        }
-                    }
-                startActivity(shareIntent)
-                return true
+                activity?.let {
+                    val shareIntent = ShareCompat.IntentBuilder.from(it)
+                            .setText(shareText)
+                            .setType("text/plain")
+                            .createChooserIntent()
+                            .apply {
+                                // https://android-developers.googleblog.com/2012/02/share-with-intents.html
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    // If we're on Lollipop, we can open the intent as a document
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                                } else {
+                                    // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                                }
+                            }
+                    startActivity(shareIntent)
+                    return true
+                }
+                return false
             }
             else -> super.onOptionsItemSelected(item)
         }

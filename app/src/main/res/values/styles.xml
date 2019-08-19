@@ -35,4 +35,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
+    <style name="NavigationHeaderAppearance" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>
