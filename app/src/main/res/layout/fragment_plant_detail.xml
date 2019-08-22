@@ -75,7 +75,7 @@
                     app:titleTextColor="?attr/colorOnSurface"
                     app:layout_collapseMode="pin"
                     app:contentInsetStartWithNavigation="0dp"
-                    app:navigationIcon="@drawable/detail_back_icon"
+                    app:navigationIcon="@drawable/ic_detail_back"
                     app:menu="@menu/menu_plant_detail" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
