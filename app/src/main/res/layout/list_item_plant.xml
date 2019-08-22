@@ -33,8 +33,6 @@
         android:layout_marginStart="@dimen/card_side_margin"
         android:layout_marginEnd="@dimen/card_side_margin"
         android:layout_marginBottom="@dimen/card_bottom_margin"
-        android:clickable="true"
-        android:focusable="true"
         android:onClick="@{clickListener}"
         app:cardElevation="@dimen/card_elevation"
         app:cardPreventCornerOverlap="false"

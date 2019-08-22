@@ -33,8 +33,6 @@
         android:layout_marginStart="@dimen/card_side_margin"
         android:layout_marginEnd="@dimen/card_side_margin"
         android:layout_marginBottom="@dimen/card_bottom_margin"
-        android:clickable="true"
-        android:focusable="true"
         android:onClick="@{clickListener}"
         app:cardElevation="@dimen/card_elevation"
         app:cardPreventCornerOverlap="false"
@@ -75,7 +73,7 @@
                 android:text="@string/plant_date_header"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:textColor="?attr/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +86,7 @@
                 android:layout_marginTop="0dp"
                 android:text="@{viewModel.plantDateString}"
                 android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/plant_date_header"/>
@@ -100,7 +98,7 @@
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@string/watered_date_header"
                 android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:textColor="?attr/colorAccent"
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +112,7 @@
                 android:layout_marginTop="0dp"
                 android:text="@{viewModel.waterDateString}"
                 android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/watered_date_header" />
@@ -127,12 +125,14 @@
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:text="@{@plurals/watering_next(viewModel.wateringInterval, viewModel.wateringInterval)}"
                 android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/water_date"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.samples.apps.sunflower.views.CustomCardView>
+
 </layout>
