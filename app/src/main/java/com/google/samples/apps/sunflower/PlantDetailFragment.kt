@@ -64,20 +64,29 @@ class PlantDetailFragment : Fragment() {
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
 
+            var isToolbarShown = false
+
             // scroll change listener begins at Y = 0 when image is fully collapsed
-            plantDetailScrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
-                // user scrolled past image to height of toolbar
-                val showToolbar = scrollY > toolbar.height
+            plantDetailScrollview.setOnScrollChangeListener(
+                NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
 
-                // set title programatically so not shown by default
-                toolbarLayout.title = viewModel?.plant?.value?.name
+                    // User scrolled past image to height of toolbar and the title text is
+                    // underneath the toolbar, so the toolbar should be shown.
+                    val shouldShowToolbar = scrollY > toolbar.height
 
-                // use shadow animator to add elevation when toolbar should appear
-                appbar.isActivated = showToolbar
+                    // The new state of the toolbar differs from the previous state; update
+                    // appbar and toolbar attributes.
+                    if (isToolbarShown != shouldShowToolbar) {
+                        isToolbarShown = shouldShowToolbar
 
-                // plant name in body is off screen, so show plant name in toolbar
-                toolbarLayout.isTitleEnabled = showToolbar
-            })
+                        // Use shadow animator to add elevation if toolbar is shown
+                        appbar.isActivated = shouldShowToolbar
+
+                        // Show the plant name if toolbar is shown
+                        toolbarLayout.isTitleEnabled = shouldShowToolbar
+                    }
+                }
+            )
 
             toolbar.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()

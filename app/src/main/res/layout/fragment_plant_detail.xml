@@ -53,6 +53,8 @@
                 app:collapsedTitleGravity="center"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.Sunflower.Toolbar.Text"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@{viewModel.plant.name}"
+                app:titleEnabled="false"
                 app:toolbarId="@+id/toolbar">
 
                 <ImageView

@@ -37,18 +37,23 @@ class HomeViewPagerFragment : Fragment() {
 
         viewPager.adapter = SunflowerPagerAdapter(this)
 
-        // Set the text for each tab
+        // Set the icon and text for each tab
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.setIcon(getTabIcon(position))
             tab.text = getTabTitle(position)
         }.attach()
-
-        // selectors will automatically switch between icons
-        tabLayout.getTabAt(MY_GARDEN_PAGE_INDEX)?.setIcon(R.drawable.garden_tab_selector)
-        tabLayout.getTabAt(PLANT_LIST_PAGE_INDEX)?.setIcon(R.drawable.plant_list_tab_selector)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
+    }
+
+    private fun getTabIcon(position: Int): Int {
+        return when (position) {
+            MY_GARDEN_PAGE_INDEX -> R.drawable.garden_tab_selector
+            PLANT_LIST_PAGE_INDEX -> R.drawable.plant_list_tab_selector
+            else -> throw IndexOutOfBoundsException()
+        }
     }
 
     private fun getTabTitle(position: Int): String? {
