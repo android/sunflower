@@ -35,6 +35,7 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
  */
 class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
+<<<<<<< HEAD
     /**
      * Int array of all the positions with header-style cards
      */
@@ -56,7 +57,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
             // cast generic RecyclerView.ViewHolder to Plant view holder
             (holder as PlantViewHolder).apply {
-                bind(createOnClickListener(plant.plantId), plant)
+                bind(createOnClickListener(plant)
             }
         }
     }
@@ -102,20 +103,27 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
         }
     }
 
-    private fun createOnClickListener(plantId: String): View.OnClickListener {
-        return View.OnClickListener {
-            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
-            it.findNavController().navigate(direction)
-        }
-    }
-
     class PlantViewHolder(
         private val binding: ListItemPlantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.setClickListener {
+                binding.plant?.let { plant ->
+                    navigateToPlant(plant, it)
+                }
+            }
+        }
 
-        fun bind(listener: View.OnClickListener, item: Plant) {
+        private fun navigateToPlant(
+            plant: Plant,
+            it: View
+        ) {
+            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
+            it.findNavController().navigate(direction)
+        }
+
+        fun bind(item: Plant) {
             binding.apply {
-                clickListener = listener
                 plant = item
                 executePendingBindings()
             }
