@@ -54,7 +54,7 @@ class GardenPlantingAdapter :
         private val binding: ListItemGardenPlantingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.clickListener = View.OnClickListener { view ->
+            binding.setClickListener { view ->
                 binding.viewModel?.plantId?.let { plantId ->
                     navigateToPlant(plantId, view)
                 }
