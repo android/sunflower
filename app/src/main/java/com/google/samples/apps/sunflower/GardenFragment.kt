@@ -56,13 +56,9 @@ class GardenFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        viewModel.gardenPlantings.observe(viewLifecycleOwner) { plantings ->
-            binding.hasPlantings = !plantings.isNullOrEmpty()
-        }
-
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
-            if (!result.isNullOrEmpty())
-                adapter.submitList(result)
+            binding.hasPlantings = !result.isNullOrEmpty()
+            adapter.submitList(result)
         }
     }
 
