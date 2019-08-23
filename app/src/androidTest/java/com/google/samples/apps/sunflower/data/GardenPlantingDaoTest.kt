@@ -28,7 +28,8 @@ import com.google.samples.apps.sunflower.utilities.testPlants
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.After
-import org.junit.Assert.assertNull
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -85,12 +86,11 @@ class GardenPlantingDaoTest {
     }
 
     @Test fun testGetGardenPlantingForPlant() {
-        assertThat(getValue(gardenPlantingDao.getGardenPlantingForPlant(testPlant.plantId)),
-                equalTo(testGardenPlanting))
+        assertTrue(getValue(gardenPlantingDao.isPlanted(testPlant.plantId)))
     }
 
     @Test fun testGetGardenPlantingForPlant_notFound() {
-        assertNull(getValue(gardenPlantingDao.getGardenPlantingForPlant(testPlants[2].plantId)))
+        assertFalse(getValue(gardenPlantingDao.isPlanted(testPlants[2].plantId)))
     }
 
     @Test fun testGetPlantAndGardenPlantings() {

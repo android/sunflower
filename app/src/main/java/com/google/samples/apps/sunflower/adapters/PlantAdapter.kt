@@ -34,8 +34,6 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
 class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
-
-<<<<<<< HEAD
     /**
      * Int array of all the positions with header-style cards
      */
@@ -56,9 +54,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
             val plant = getItem(position)
 
             // cast generic RecyclerView.ViewHolder to Plant view holder
-            (holder as PlantViewHolder).apply {
-                bind(createOnClickListener(plant)
-            }
+            (holder as PlantViewHolder).bind(plant)
         }
     }
 
@@ -118,7 +114,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
             plant: Plant,
             it: View
         ) {
-            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
+            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plant.plantId)
             it.findNavController().navigate(direction)
         }
 

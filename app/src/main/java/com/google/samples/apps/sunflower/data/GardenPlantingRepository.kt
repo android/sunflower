@@ -16,9 +16,6 @@
 
 package com.google.samples.apps.sunflower.data
 
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.withContext
-
 class GardenPlantingRepository private constructor(
     private val gardenPlantingDao: GardenPlantingDao
 ) {
@@ -32,8 +29,8 @@ class GardenPlantingRepository private constructor(
         gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
     }
 
-    fun getGardenPlantingForPlant(plantId: String) =
-            gardenPlantingDao.getGardenPlantingForPlant(plantId)
+    fun isPlanted(plantId: String) =
+            gardenPlantingDao.isPlanted(plantId)
 
     fun getGardenPlantings() = gardenPlantingDao.getGardenPlantings()
 
