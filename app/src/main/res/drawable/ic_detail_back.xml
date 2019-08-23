@@ -16,18 +16,18 @@
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="32dp"
-        android:height="32dp"
-        android:viewportWidth="32.0"
-        android:viewportHeight="32.0">
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32.0"
+    android:viewportHeight="32.0">
 
     <path
-            android:name="circle"
-            android:fillColor="?attr/colorSurface"
-            android:pathData="M0,16C0,7.2 7.2,0 16,0C 24.8,0 32,7.2 32,16C 32,24.8 24.8,32 16,32C 7.2,32 0,24.8 0,16"/>
+        android:name="circle"
+        android:fillColor="?attr/colorSurface"
+        android:pathData="M16,16m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0"/>
 
     <path
-            android:name="arrow"
-            android:fillColor="?attr/colorOnSurface"
-            android:pathData="M20,14.66H10.44l7.45,-7.45L16,5.33l-10.66,10.66 10.66,10.66 1.88,-1.88L10.44,17.33H26.66v-2.66z"/>
+        android:name="arrow"
+        android:fillColor="?attr/colorOnSurface"
+        android:pathData="M20,14.66H10.44l7.45,-7.45L16,5.33l-10.66,10.66 10.66,10.66 1.88,-1.88L10.44,17.33H26.66v-2.66z"/>
 </vector>
