@@ -34,8 +34,8 @@ interface GardenPlantingDao {
     @Query("SELECT * FROM garden_plantings WHERE id = :gardenPlantingId")
     fun getGardenPlanting(gardenPlantingId: Long): LiveData<GardenPlanting>
 
-    @Query("SELECT * FROM garden_plantings WHERE plant_id = :plantId")
-    fun getGardenPlantingForPlant(plantId: String): LiveData<GardenPlanting?>
+    @Query("SELECT EXISTS(SELECT 1 FROM garden_plantings WHERE plant_id = :plantId LIMIT 1)")
+    fun isPlanted(plantId: String): LiveData<Boolean>
 
     /**
      * This query will tell Room to query both the [Plant] and [GardenPlanting] tables and handle

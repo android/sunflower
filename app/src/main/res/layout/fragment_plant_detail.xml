@@ -19,10 +19,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.google.samples.apps.sunflower.data.Plant"/>
         <variable
             name="viewModel"
             type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
+        <variable
+            name="callback"
+            type="com.google.samples.apps.sunflower.PlantDetailFragment.Callback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -167,6 +170,7 @@
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
             app:isGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/appbar"
+            android:onClick="@{() -> callback.add(viewModel.plant)}"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />
 
