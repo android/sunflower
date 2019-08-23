@@ -45,25 +45,30 @@ class GardenPlantingAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let { plantings ->
             with(holder) {
-                bind(createOnClickListener(plantings.plant.plantId), plantings)
+                bind(plantings)
             }
-        }
-    }
-
-    private fun createOnClickListener(plantId: String): View.OnClickListener {
-        return View.OnClickListener {
-                val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
-                it.findNavController().navigate(direction)
         }
     }
 
     class ViewHolder(
         private val binding: ListItemGardenPlantingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.clickListener = View.OnClickListener { view ->
+                binding.viewModel?.plantId?.let { plantId ->
+                    navigateToPlant(plantId, view)
+                }
+            }
+        }
 
-        fun bind(listener: View.OnClickListener, plantings: PlantAndGardenPlantings) {
+        private fun navigateToPlant(plantId: String, view: View) {
+            val direction = HomeViewPagerFragmentDirections
+                .actionViewPagerFragmentToPlantDetailFragment(plantId)
+            view.findNavController().navigate(direction)
+        }
+
+        fun bind(plantings: PlantAndGardenPlantings) {
             with(binding) {
-                clickListener = listener
                 viewModel = PlantAndGardenPlantingsViewModel(plantings)
                 executePendingBindings()
             }
