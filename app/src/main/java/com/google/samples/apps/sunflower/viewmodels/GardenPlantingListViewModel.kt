@@ -24,9 +24,6 @@ import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 class GardenPlantingListViewModel internal constructor(
     gardenPlantingRepository: GardenPlantingRepository
 ) : ViewModel() {
-
-    val gardenPlantings = gardenPlantingRepository.getGardenPlantings()
-
     val plantAndGardenPlantings: LiveData<List<PlantAndGardenPlantings>> =
             gardenPlantingRepository.getPlantedGardens()
 }

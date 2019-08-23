@@ -65,14 +65,6 @@ class GardenPlantingDaoTest {
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))
     }
 
-    @Test
-    fun testGetGardenPlanting() {
-        assertThat(
-            getValue(gardenPlantingDao.getGardenPlanting(testGardenPlantingId)),
-            equalTo(testGardenPlanting)
-        )
-    }
-
     @Test fun testDeleteGardenPlanting() = runBlocking<Unit> {
         val gardenPlanting2 = GardenPlanting(
                 testPlants[1].plantId,
