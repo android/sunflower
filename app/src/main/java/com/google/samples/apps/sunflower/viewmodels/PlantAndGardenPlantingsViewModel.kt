@@ -18,13 +18,11 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
-import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) : ViewModel() {
-
+class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) {
     private val plant = checkNotNull(plantings.plant)
     private val gardenPlanting = plantings.gardenPlantings[0]
     private val dateFormat by lazy { SimpleDateFormat("MMM d, yyyy", Locale.US) }
@@ -35,4 +33,5 @@ class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) : Vie
     val imageUrl = ObservableField<String>(plant.imageUrl)
     val plantName = ObservableField<String>(plant.name)
     val plantDateString = ObservableField<String>(dateFormat.format(gardenPlanting.plantDate.time))
+    val plantId = plant.plantId
 }
