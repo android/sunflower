@@ -19,13 +19,13 @@
     <string name="plant_detail_image_content_description">植物圖片</string>
     <string name="my_garden_title">我的花園</string>
     <string name="plant_list_title">植物目錄</string>
-    <string name="available">(translate me) Available Plants</string>
+    <string name="available">植物品種</string>
     <string name="plant_details_title">植物介紹</string>
-    <string name="add_plant">(translate me) Add plant</string>
+    <string name="add_plant">添加植物</string>
     <string name="added_plant_to_garden">添加了新植物</string>
     <string name="garden_empty">花園裡還沒有植物</string>
-    <string name="plant_date_header">(translate me) Planted</string>
-    <string name="watered_date_header">(translate me) Last Watered</string>
+    <string name="plant_date_header">種下日期</string>
+    <string name="watered_date_header">最後澆水</string>
     <string name="menu_item_share_plant">分享</string>
     <string name="share_text_plant">在安卓 Sunflower APP 上看看這 %s</string>
 
