@@ -23,11 +23,10 @@ import androidx.room.Relation
  * This class captures the relationship between a [Plant] and a user's [GardenPlanting], which is
  * used by Room to fetch the related entities.
  */
-class PlantAndGardenPlantings {
-
+data class PlantAndGardenPlantings(
     @Embedded
-    lateinit var plant: Plant
+    val plant: Plant,
 
     @Relation(parentColumn = "id", entityColumn = "plant_id")
-    var gardenPlantings: List<GardenPlanting> = arrayListOf()
-}
+    val gardenPlantings: List<GardenPlanting> = emptyList()
+)
