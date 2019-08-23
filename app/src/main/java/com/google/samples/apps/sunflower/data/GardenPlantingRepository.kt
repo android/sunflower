@@ -24,16 +24,12 @@ class GardenPlantingRepository private constructor(
 ) {
 
     suspend fun createGardenPlanting(plantId: String) {
-        withContext(IO) {
-            val gardenPlanting = GardenPlanting(plantId)
-            gardenPlantingDao.insertGardenPlanting(gardenPlanting)
-        }
+        val gardenPlanting = GardenPlanting(plantId)
+        gardenPlantingDao.insertGardenPlanting(gardenPlanting)
     }
 
     suspend fun removeGardenPlanting(gardenPlanting: GardenPlanting) {
-        withContext(IO) {
-            gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
-        }
+        gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
     }
 
     fun getGardenPlantingForPlant(plantId: String) =
