@@ -25,6 +25,7 @@ import com.google.samples.apps.sunflower.utilities.testCalendar
 import com.google.samples.apps.sunflower.utilities.testGardenPlanting
 import com.google.samples.apps.sunflower.utilities.testPlant
 import com.google.samples.apps.sunflower.utilities.testPlants
+import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.After
 import org.junit.Assert.assertNull
@@ -40,7 +41,7 @@ class GardenPlantingDaoTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Before fun createDb() {
+    @Before fun createDb() = runBlocking<Unit> {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         gardenPlantingDao = database.gardenPlantingDao()
@@ -53,7 +54,7 @@ class GardenPlantingDaoTest {
         database.close()
     }
 
-    @Test fun testGetGardenPlantings() {
+    @Test fun testGetGardenPlantings() = runBlocking<Unit> {
         val gardenPlanting2 = GardenPlanting(
             testPlants[1].plantId,
             testCalendar,
@@ -71,7 +72,7 @@ class GardenPlantingDaoTest {
         )
     }
 
-    @Test fun testDeleteGardenPlanting() {
+    @Test fun testDeleteGardenPlanting() = runBlocking<Unit> {
         val gardenPlanting2 = GardenPlanting(
                 testPlants[1].plantId,
                 testCalendar,
