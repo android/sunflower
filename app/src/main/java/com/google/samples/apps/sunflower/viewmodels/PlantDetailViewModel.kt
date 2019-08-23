@@ -39,14 +39,6 @@ class PlantDetailViewModel(
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>
 
-    /**
-     * Cancel all coroutines when the ViewModel is cleared.
-     */
-    override fun onCleared() {
-        super.onCleared()
-        viewModelScope.cancel()
-    }
-
     init {
 
         /* The getGardenPlantingForPlant method returns a LiveData from querying the database. The
