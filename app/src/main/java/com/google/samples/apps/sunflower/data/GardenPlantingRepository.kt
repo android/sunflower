@@ -41,7 +41,7 @@ class GardenPlantingRepository private constructor(
 
     fun getGardenPlantings() = gardenPlantingDao.getGardenPlantings()
 
-    fun getPlantAndGardenPlantings() = gardenPlantingDao.getPlantAndGardenPlantings()
+    fun getPlantedGardens() = gardenPlantingDao.getPlantedGardens()
 
     companion object {
 
