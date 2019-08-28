@@ -28,8 +28,6 @@
         <item name="android:colorBackground">@color/sunflower_green_900</item>
     </style>
 
-    <style name="Theme.Sunflower" parent="Base.Theme.Sunflower"/>
-
     <style name="Theme.Sunflower.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
