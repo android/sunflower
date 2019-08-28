@@ -19,23 +19,24 @@
     <string name="plant_detail_image_content_description">植物图片</string>
     <string name="my_garden_title">我的花园</string>
     <string name="plant_list_title">植物目录</string>
+    <string name="available">植物品种</string>
     <string name="plant_details_title">植物介绍</string>
-    <string name="navigation_drawer_header_content_description">导航抽屉页眉</string>
+    <string name="add_plant">添加植物</string>
     <string name="added_plant_to_garden">添加了新植物</string>
     <string name="garden_empty">花园里还没有植物</string>
-    <string name="planted_date">%1$s 种植于 %2$s</string>
+    <string name="plant_date_header">种下日期</string>
+    <string name="watered_date_header">最后浇水</string>
     <string name="menu_item_share_plant">分享</string>
     <string name="share_text_plant">在安卓 Sunflower APP 上看看这 %s</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <!-- Item quantities for zero and one are not used in Chinese -->
-    <string name="watering_needs_prefix">浇水指南:</string>
+    <string name="watering_needs_prefix">浇水指南</string>
     <plurals name="watering_needs_suffix">
         <item quantity="other">每隔 %d 天</item>
     </plurals>
 
-    <string name="watering_next_prefix">上次浇水: %s</string>
-    <plurals name="watering_next_suffix">
+    <plurals name="watering_next">
         <item quantity="other">%d 天后浇水</item>
     </plurals>
 
