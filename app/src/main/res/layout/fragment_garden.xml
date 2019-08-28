@@ -36,20 +36,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingLeft="@dimen/margin_normal"
-                android:paddingRight="@dimen/margin_normal"
+                android:layout_marginStart="@dimen/card_side_margin"
+                android:layout_marginEnd="@dimen/card_side_margin"
+                android:layout_marginTop="@dimen/margin_normal"
                 app:isGone="@{!hasPlantings}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="@integer/grid_columns"
                 tools:listitem="@layout/list_item_garden_planting"/>
 
-        <TextView
-                android:id="@+id/empty_garden"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/garden_empty"
-                android:textSize="24sp"
-                app:isGone="@{hasPlantings}"/>
+                android:orientation="vertical"
+                app:isGone="@{hasPlantings}">
+
+            <TextView
+                    android:id="@+id/empty_garden"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/garden_empty"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_plant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/add_plant"
+                app:backgroundTint="?attr/colorOnPrimary"
+                app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Add"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 

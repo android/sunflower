@@ -15,28 +15,28 @@
   -->
 
 <resources>
-    <string name="app_name">Sunflower</string>
     <string name="menu_filter_by_grow_zone">Filtra per zona di crescita</string>
     <string name="plant_detail_image_content_description">Immagine della pianta</string>
     <string name="my_garden_title">Il mio giardino</string>
     <string name="plant_list_title">Lista delle piante</string>
+    <string name="available">(translate me) Available Plants</string>
     <string name="plant_details_title">Dettagli della pianta</string>
     <string name="menu_item_share_plant">Condividi</string>
-    <string name="planted_date">%1$s piantata il %2$s</string>
+    <string name="plant_date_header">(translate me) Planted</string>
+    <string name="watered_date_header">(translate me) Last Watered</string>
     <string name="garden_empty">Il tuo giardino è vuoto</string>
+    <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Pianta aggiunta al giardino</string>
-    <string name="navigation_drawer_header_content_description">Logo dell\'intestazione di navigazione</string>
     <string name="share_text_plant">Controlla la pianta %s nell\'app Sunflower</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
-    <string name="watering_needs_prefix">Esigenze di irrigazione:</string>
+    <string name="watering_needs_prefix">Esigenze di irrigazione</string>
     <plurals name="watering_needs_suffix">
         <item quantity="one">ogni giorno</item>
         <item quantity="other">ogni %d giorni</item>
     </plurals>
 
-    <string name="watering_next_prefix">Annaffiata il %s</string>
-    <plurals name="watering_next_suffix">
+    <plurals name="watering_next">
         <item quantity="one">annaffia domani.</item>
         <item quantity="other">annaffia tra %d giorni.</item>
     </plurals>
