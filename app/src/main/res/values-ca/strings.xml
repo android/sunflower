@@ -19,25 +19,26 @@
     <string name="plant_detail_image_content_description">Imatge de la planta</string>
     <string name="my_garden_title">El meu jardí</string>
     <string name="plant_list_title">Llistat de plantes</string>
+    <string name="available">Plantes Disponibles</string>
     <string name="plant_details_title">Detalles de la planta</string>
-    <string name="navigation_drawer_header_content_description">Logotip de l\’encabezat de navegació</string>
+    <string name="add_plant">Afegiu planta</string>
     <string name="added_plant_to_garden">Planta afegida al jardí</string>
     <string name="garden_empty">El teu jardí està buit</string>
-    <string name="planted_date">%1$s plantada el %2$s</string>
+    <string name="plant_date_header">Plantada</string>
+    <string name="watered_date_header">L\'últim cop regada</string>
     <string name="menu_item_share_plant">Compartir</string>
     <string name="share_text_plant">Revisa la planta %s en l\'aplicació "Sunflower"</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
-    <string name="watering_needs_prefix">Necessita regar:</string>
+    <string name="watering_needs_prefix">Necessita regar</string>
     <plurals name="watering_needs_suffix">
-        <item quantity="one">cada dia</item>
-        <item quantity="other">cada %d dies</item>
+        <item quantity="one">cada dia.</item>
+        <item quantity="other">cada %d dies.</item>
     </plurals>
 
-    <string name="watering_next_prefix">Tornar a regar el %s</string>
-    <plurals name="watering_next_suffix">
-        <item quantity="one">regar demà</item>
-        <item quantity="other">regar en %d dies</item>
+    <plurals name="watering_next">
+        <item quantity="one">regar demà.</item>
+        <item quantity="other">regar en %d dies.</item>
     </plurals>
 
     <!-- Accessibility -->
