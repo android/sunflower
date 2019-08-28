@@ -29,6 +29,7 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
+import java.security.InvalidParameterException
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
@@ -40,21 +41,22 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
     private val headerPositions = intArrayOf(0)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            VIEW_TYPE_HEADER -> {
+                // cast generic RecyclerView.ViewHolder to header view holder
+                val holderViewParams = (holder as HeaderViewHolder).itemView.layoutParams
+                val layoutParams = holderViewParams as StaggeredGridLayoutManager.LayoutParams
 
-        // if current position is a header element
-        if (position in headerPositions) {
+                // set width of header to span entire screen
+                layoutParams.isFullSpan = true
+            }
+            VIEW_TYPE_PLANT -> {
+                val plant = getItem(position)
 
-            // cast generic RecyclerView.ViewHolder to header view holder
-            val holderViewParams = (holder as HeaderViewHolder).itemView.layoutParams
-            val layoutParams = holderViewParams as StaggeredGridLayoutManager.LayoutParams
-
-            // set width of header to span entire screen
-            layoutParams.isFullSpan = true
-        } else { // Must be a plant type
-            val plant = getItem(position)
-
-            // cast generic RecyclerView.ViewHolder to Plant view holder
-            (holder as PlantViewHolder).bind(plant)
+                // cast generic RecyclerView.ViewHolder to Plant view holder
+                (holder as PlantViewHolder).bind(plant)
+            }
+            else -> throw InvalidParameterException()
         }
     }
 
@@ -70,7 +72,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
     override fun getItemCount(): Int {
 
         // If no available plants, don't print header either, otherwise return number of cards needed
-        return if (currentList.size == 0) {
+        return if (currentList.isEmpty()) {
             0
         } else {
             currentList.size + headerPositions.size
@@ -89,13 +91,13 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
         return when (viewType) {
 
             // Generic layout inflate from Layout XML file
-            R.layout.plant_list_header -> HeaderViewHolder(LayoutInflater.from(parent.context)
+            VIEW_TYPE_HEADER -> HeaderViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.plant_list_header, parent, false))
 
-            R.layout.list_item_plant -> PlantViewHolder(ListItemPlantBinding
+            VIEW_TYPE_PLANT -> PlantViewHolder(ListItemPlantBinding
                     .inflate(LayoutInflater.from(parent.context), parent, false))
 
-            else -> throw IllegalArgumentException("Invalid viewType")
+            else -> throw InvalidParameterException("Invalid viewType")
         }
     }
 
@@ -133,6 +135,11 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
     class HeaderViewHolder(
         headerView: View
     ) : RecyclerView.ViewHolder(headerView)
+
+    companion object {
+        private const val VIEW_TYPE_HEADER = R.layout.plant_list_header
+        private const val VIEW_TYPE_PLANT = R.layout.list_item_plant
+    }
 }
 
 private class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
