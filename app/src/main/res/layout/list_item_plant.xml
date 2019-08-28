@@ -27,41 +27,49 @@
             type="com.google.samples.apps.sunflower.data.Plant"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.samples.apps.sunflower.views.MaskedCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{clickListener}">
+        android:layout_marginStart="@dimen/card_side_margin"
+        android:layout_marginEnd="@dimen/card_side_margin"
+        android:layout_marginBottom="@dimen/card_bottom_margin"
+        android:onClick="@{clickListener}"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardPreventCornerOverlap="false"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Sunflower.Card">
 
-        <ImageView
-            android:id="@+id/plant_item_image"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/plant_item_image_height"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:contentDescription="@string/a11y_plant_item_image"
-            android:scaleType="centerCrop"
-            app:imageFromUrl="@{plant.imageUrl}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/plant_item_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@{plant.name}"
-            android:textAppearance="?attr/textAppearanceListItem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/plant_item_image"
-            tools:text="Tomato"/>
+                <ImageView
+                    android:id="@+id/plant_item_image"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/plant_item_image_height"
+                    android:contentDescription="@string/a11y_plant_item_image"
+                    android:scaleType="centerCrop"
+                    app:imageFromUrl="@{plant.imageUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/plant_item_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@{plant.name}"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/plant_item_image"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="Tomato"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.samples.apps.sunflower.views.MaskedCardView>
 
 </layout>

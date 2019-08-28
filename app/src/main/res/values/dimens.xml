@@ -24,14 +24,26 @@
     <!-- Padding on the bottom of a screen so that the FAB won't overlap scrolled text. -->
     <dimen name="fab_bottom_padding">72dp</dimen>
 
-    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="plant_detail_app_bar_height">278dp</dimen>
 
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
 
-    <dimen name="plant_item_image_height">100dp</dimen>
+    <dimen name="plant_item_image_height">95dp</dimen>
 
-    <dimen name="navigation_drawer_header_height">192dp</dimen>
-    <dimen name="navigation_drawer_header_padding">16dp</dimen>
-    <dimen name="navigation_drawer_image_width">100dp</dimen>
+    <dimen name="card_side_margin">12dp</dimen>
+    <dimen name="card_bottom_margin">26dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+
+    <!-- elevation for Plant Detail toolbar - used to convert to pixels when hiding/showing -->
+    <dimen name="toolbar_elevation">5dp</dimen>
+
+    <!-- Plant List Header margin -->
+    <dimen name="header_margin">24dp</dimen>
+
+    <!-- minimum height of plant detail page so that the collapsing toolbar can be shown on every page -->
+    <dimen name="plant_description_min_height">555dp</dimen>
+
 </resources>
