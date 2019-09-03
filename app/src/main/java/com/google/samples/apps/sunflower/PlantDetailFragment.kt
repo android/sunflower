@@ -61,16 +61,12 @@ class PlantDetailFragment : Fragment() {
             callback = object : Callback {
                 override fun add(plant: Plant?) {
                     plant?.let {
+                        hideAppBarFab(fab)
                         plantDetailViewModel.addPlantToGarden()
                         Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
                             .show()
                     }
                 }
-            }
-            fab.setOnClickListener { view ->
-                hideAppBarFab(fab)
-                plantDetailViewModel.addPlantToGarden()
-                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
             }
 
             var isToolbarShown = false
