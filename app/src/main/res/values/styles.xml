@@ -41,8 +41,4 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
-    <style name="NavigationHeaderAppearance" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="android:background">@color/colorPrimaryDark</item>
-    </style>
-
 </resources>
