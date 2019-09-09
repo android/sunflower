@@ -44,7 +44,8 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:stateListAnimator="@animator/show_toolbar"
             android:background="?attr/colorSurface"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            tools:targetApi="lollipop">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"

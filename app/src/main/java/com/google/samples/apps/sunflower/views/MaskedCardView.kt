@@ -21,11 +21,11 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import com.google.android.material.R
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.shape.ShapeAppearancePathProvider
 import android.annotation.SuppressLint
 import android.graphics.Path
 import android.graphics.RectF
+import com.google.android.material.shape.ShapeAppearanceModel
 
 /**
  * A Card view that clips the content of any shape, this should be done upstream in card,
@@ -39,8 +39,9 @@ class MaskedCardView @JvmOverloads constructor(
     @SuppressLint("RestrictedApi")
     private val pathProvider = ShapeAppearancePathProvider()
     private val path: Path = Path()
-    private val shapeAppearance: ShapeAppearanceModel =
-            ShapeAppearanceModel(context, attrs, defStyle, R.style.Widget_MaterialComponents_CardView)
+    private val shapeAppearance: ShapeAppearanceModel = ShapeAppearanceModel
+            .builder(context, attrs, defStyle, R.style.Widget_MaterialComponents_CardView)
+            .build()
     private val rectF = RectF(0f, 0f, 0f, 0f)
 
     override fun onDraw(canvas: Canvas) {
