@@ -16,7 +16,14 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="sunflower_black">#de000000</color>
+    <color name="sunflower_gray_50">#fafafa</color>
+    <color name="sunflower_gray_50_a600">#99fafafa</color>
+    <color name="sunflower_green_300">#6dc790</color>
+    <color name="sunflower_green_500">#49bb79</color>
+    <color name="sunflower_green_700">#005d2b</color>
+    <color name="sunflower_green_900">#1a231e</color>
+    <color name="sunflower_white">#deffffff</color>
+    <color name="sunflower_yellow_300">#f8f99f</color>
+    <color name="sunflower_yellow_500">#ffff63</color>
 </resources>

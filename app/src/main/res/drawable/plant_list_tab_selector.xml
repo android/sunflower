@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2018 Google LLC
+  ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,13 +15,7 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/garden_fragment"
-        android:title="@string/my_garden_title"/>
-    <item
-        android:id="@+id/plant_list_fragment"
-        android:title="@string/plant_list_title"/>
-
-</menu>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:drawable="@drawable/ic_plant_list_active" android:state_selected="true"/>
+    <item android:drawable="@drawable/ic_plant_list_inactive"/>
+</selector>

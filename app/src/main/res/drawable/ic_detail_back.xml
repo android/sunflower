@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2018 Google LLC
+  ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,13 +15,19 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32.0"
+    android:viewportHeight="32.0">
 
-    <item
-        android:id="@+id/action_share"
-        android:icon="@drawable/ic_detail_share"
-        android:title="@string/menu_item_share_plant"
-        app:showAsAction="ifRoom" />
+    <path
+        android:name="circle"
+        android:fillColor="?attr/colorSurface"
+        android:pathData="M16,16m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0"/>
 
-</menu>
+    <path
+        android:name="arrow"
+        android:fillColor="?attr/colorOnSurface"
+        android:pathData="M20,14.66H10.44l7.45,-7.45L16,5.33l-10.66,10.66 10.66,10.66 1.88,-1.88L10.44,17.33H26.66v-2.66z"/>
+</vector>

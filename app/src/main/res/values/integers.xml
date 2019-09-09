@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2018 Google LLC
+  ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,13 +15,9 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<resources>
 
-    <item
-        android:id="@+id/action_share"
-        android:icon="@drawable/ic_detail_share"
-        android:title="@string/menu_item_share_plant"
-        app:showAsAction="ifRoom" />
+    <!-- Number of columns for garden and plant list grid -->
+    <integer name="grid_columns">2</integer>
 
-</menu>
+</resources>
