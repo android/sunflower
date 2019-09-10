@@ -23,9 +23,9 @@
     <string name="plant_details_title">Detalles de la planta</string>
     <string name="add_plant">Agregar planta</string>
     <string name="added_plant_to_garden">Planta añadida al jardín</string>
-    <string name="garden_empty">Tu jardín esta vacio</string>
+    <string name="garden_empty">Tu jardín esta vacío</string>
     <string name="plant_date_header">Plantada</string>
-    <string name="watered_date_header">Ultima vez regada</string>
+    <string name="watered_date_header">Última vez regada</string>
     <string name="menu_item_share_plant">Compartir</string>
     <string name="share_text_plant">Revisa la planta %s en la aplicación "Sunflower"</string>
 
