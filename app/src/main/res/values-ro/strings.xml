@@ -15,19 +15,19 @@
   -->
 
 <resources>
-    <string name="menu_filter_by_grow_zone">Filtrează pe zona de creștere</string>
+    <string name="menu_filter_by_grow_zone">Filtrează după zona de creștere.</string>
     <string name="plant_detail_image_content_description">Imaginea plantei</string>
     <string name="my_garden_title">Grădina mea</string>
     <string name="plant_list_title">Lista plantelor</string>
     <string name="available">Plante disponibile</string>
     <string name="plant_details_title">Detaliile plantei</string>
-    <string name="add_plant">Adăuga plantă</string>
+    <string name="add_plant">Adaugă plantă</string>
     <string name="added_plant_to_garden">Plantă adăugată în grădină</string>
     <string name="garden_empty">Grădina ta este goală</string>
     <string name="plant_date_header">Plantată</string>
     <string name="watered_date_header">Ultima oară udată</string>
     <string name="menu_item_share_plant">Împarte</string>
-    <string name="share_text_plant">Schau dir die %s Pflanze in der App "Sunflower" an</string>
+    <string name="share_text_plant">Vezi planta %s în aplicația Android Sunflower</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Trebuie udată</string>
