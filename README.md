@@ -1,12 +1,10 @@
 Android Sunflower (alpha)
 =========================
-[![CircleCI](https://circleci.com/gh/googlesamples/android-sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/googlesamples/android-sunflower/tree/master)
+[![CircleCI](https://circleci.com/gh/android/sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/android/sunflower/tree/master)
 
 A gardening app illustrating Android development best practices with Android Jetpack.
 
-Android Sunflower is currently released as an alpha and is under heavy development. To view the
-latest changes, please visit the
-[Releases page](https://github.com/googlesamples/android-sunflower/releases).
+Android Sunflower is currently under heavy development.
 Note that some changes (such as database schema modifications) are not backwards
 compatible during this alpha period and may cause the app to crash. In this
 case, please uninstall and re-install the app.
@@ -96,7 +94,7 @@ Updates will include incorporating additional Jetpack components and updating ex
 as the component libraries evolve.
 
 Interested in seeing a particular feature of the Android Framework or Jetpack implemented in this
-app? Please open a new [issue](https://github.com/googlesamples/android-sunflower/issues).
+app? Please open a new [issue](https://github.com/android/sunflower/issues).
 
 Android Studio IDE setup
 ------------------------
@@ -121,9 +119,9 @@ Additional resources
 --------------------
 Check out these Wiki pages to learn more about Android Sunflower:
 
-- [Notable Community Contributions](https://github.com/googlesamples/android-sunflower/wiki/Notable-Community-Contributions)
+- [Notable Community Contributions](https://github.com/android/sunflower/wiki/Notable-Community-Contributions)
 
-- [Publications](https://github.com/googlesamples/android-sunflower/wiki/Sunflower-Publications)
+- [Publications](https://github.com/android/sunflower/wiki/Sunflower-Publications)
 
 Non-Goals
 ---------
@@ -144,7 +142,7 @@ Support
   - http://stackoverflow.com/questions/tagged/android-jetpack
 
 If you've found an error in this sample, please file an issue:
-https://github.com/googlesamples/android-sunflower/issues
+https://github.com/android/sunflower/issues
 
 Patches are encouraged, and may be submitted by forking this project and submitting a pull request
 through GitHub.
