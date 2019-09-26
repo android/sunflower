@@ -1,0 +1,44 @@
+<!--
+  ~ Copyright 2018 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <!-- To see how these attributes are used, please visit https://material.io/develop/android/theming/color/ -->
+    <style name="Base.Theme.Sunflower" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/sunflower_green_900</item>
+        <item name="colorOnPrimary">@color/sunflower_yellow_300</item>
+        <item name="colorPrimaryDark">@color/sunflower_gray_50_a600</item>
+        <item name="colorOnSurface">@color/sunflower_white</item>
+        <item name="colorAccent">@color/sunflower_green_300</item>
+        <item name="colorSurface">@color/sunflower_green_900</item>
+        <item name="colorSecondary">@color/sunflower_yellow_300</item>
+        <item name="android:colorBackground">@color/sunflower_green_900</item>
+    </style>
+
+    <style name="Theme.Sunflower" parent="Base.Theme.Sunflower"/>
+
+    <style name="Theme.Sunflower.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Sunflower.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+
+    <style name="TextAppearance.Sunflower.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+</resources>

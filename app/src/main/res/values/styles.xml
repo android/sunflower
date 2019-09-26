@@ -16,23 +16,29 @@
 
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!-- To see how these attributes are used, please visit https://material.io/develop/android/theming/color/ -->
+    <style name="Base.Theme.Sunflower" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/sunflower_green_500</item>
+        <item name="colorOnPrimary">@color/sunflower_yellow_500</item>
+        <item name="colorPrimaryDark">@color/sunflower_green_700</item>
+        <item name="colorOnSurface">@color/sunflower_black</item>
+        <item name="colorAccent">@color/sunflower_green_700</item>
+        <item name="colorSurface">@color/sunflower_gray_50</item>
+        <item name="colorSecondary">@color/sunflower_yellow_500</item>
+        <item name="android:colorBackground">@color/sunflower_green_500</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme"/>
+    <style name="Theme.Sunflower" parent="Base.Theme.Sunflower"/>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="Theme.Sunflower.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="Theme.Sunflower.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+    <style name="TextAppearance.Sunflower.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
 
 </resources>
