@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.utilities
 
+import kotlin.math.abs
+
 /**
  * A helper function to determine a Plant's growing zone for a given latitude.
  *
@@ -30,7 +32,7 @@ package com.google.samples.apps.sunflower.utilities
  *
  * For latitude values greater than max (90.0), zone 1 is returned.
  */
-fun getZoneForLatitude(latitude: Double) = when (Math.abs(latitude)) {
+fun getZoneForLatitude(latitude: Double) = when (abs(latitude)) {
     in 0.0..7.0 -> 13
     in 7.0..14.0 -> 12
     in 14.0..21.0 -> 11

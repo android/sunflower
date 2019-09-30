@@ -43,11 +43,7 @@ class GardenPlantingAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position).let { plantings ->
-            with(holder) {
-                bind(plantings)
-            }
-        }
+        holder.bind(getItem(position))
     }
 
     class ViewHolder(
