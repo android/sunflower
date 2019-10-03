@@ -39,8 +39,12 @@ class MaskedCardView @JvmOverloads constructor(
     @SuppressLint("RestrictedApi")
     private val pathProvider = ShapeAppearancePathProvider()
     private val path: Path = Path()
-    private val shapeAppearance: ShapeAppearanceModel =
-            ShapeAppearanceModel(context, attrs, defStyle, R.style.Widget_MaterialComponents_CardView)
+    private val shapeAppearance: ShapeAppearanceModel = ShapeAppearanceModel(
+        context,
+        attrs,
+        defStyle,
+        R.style.Widget_MaterialComponents_CardView
+    )
     private val rectF = RectF(0f, 0f, 0f, 0f)
 
     override fun onDraw(canvas: Canvas) {

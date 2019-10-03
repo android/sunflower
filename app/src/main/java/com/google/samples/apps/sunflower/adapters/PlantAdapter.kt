@@ -58,7 +58,10 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
             plant: Plant,
             it: View
         ) {
-            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plant.plantId)
+            val direction =
+                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
+                    plant.plantId
+                )
             it.findNavController().navigate(direction)
         }
 

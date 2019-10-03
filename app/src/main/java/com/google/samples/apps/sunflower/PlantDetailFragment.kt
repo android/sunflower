@@ -131,7 +131,9 @@ class PlantDetailFragment : Fragment() {
                 // https://android-developers.googleblog.com/2012/02/share-with-intents.html
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // If we're on Lollipop, we can open the intent as a document
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                    addFlags(
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                    )
                 } else {
                     // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
