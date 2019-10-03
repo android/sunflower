@@ -19,7 +19,6 @@
     <string name="plant_detail_image_content_description">Bild der Pflanze</string>
     <string name="my_garden_title">Mein Garten</string>
     <string name="plant_list_title">Pflanzenliste</string>
-    <string name="available">Verfügbare Pflanzen</string>
     <string name="plant_details_title">Details zur Pflanze</string>
     <string name="add_plant">Pflanze hinzufügen</string>
     <string name="added_plant_to_garden">Pflanze wurde zum Garten hinzugefügt</string>
