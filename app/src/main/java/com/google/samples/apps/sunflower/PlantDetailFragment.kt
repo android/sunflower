@@ -24,9 +24,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ShareCompat
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -34,8 +36,6 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
-import androidx.navigation.findNavController
-import androidx.core.widget.NestedScrollView
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -61,9 +61,18 @@ class PlantDetailFragment : Fragment() {
             callback = object : Callback {
                 override fun add(plant: Plant?) {
                     plant?.let {
-                        hideAppBarFab(fab)
                         plantDetailViewModel.addPlantToGarden()
                         Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
+                            .show()
+                    }
+                }
+
+                override fun remove(plant: Plant?) {
+                    plant?.let {
+                        plantDetailViewModel.removePlantFromGarden()
+                        Snackbar.make(
+                            root, R.string.removed_plant_from_garden, Snackbar.LENGTH_LONG
+                        )
                             .show()
                     }
                 }
@@ -155,5 +164,6 @@ class PlantDetailFragment : Fragment() {
 
     interface Callback {
         fun add(plant: Plant?)
+        fun remove(plant: Plant?)
     }
 }

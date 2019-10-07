@@ -73,7 +73,7 @@ class GardenPlantingDaoTest {
         ).also { it.gardenPlantingId = 2 }
         gardenPlantingDao.insertGardenPlanting(gardenPlanting2)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))
-        gardenPlantingDao.deleteGardenPlanting(gardenPlanting2)
+        gardenPlantingDao.deleteGardenPlanting(gardenPlanting2.plantId)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(1))
     }
 

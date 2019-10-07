@@ -40,4 +40,10 @@ class PlantDetailViewModel(
             gardenPlantingRepository.createGardenPlanting(plantId)
         }
     }
+
+    fun removePlantFromGarden() {
+        viewModelScope.launch {
+            gardenPlantingRepository.removeGardenPlanting(plantId)
+        }
+    }
 }

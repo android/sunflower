@@ -166,13 +166,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> callback.add(viewModel.plant)}"
+            android:onClick="@{() -> viewModel.isPlanted ?  callback.remove(viewModel.plant) : callback.add(viewModel.plant)}"
             android:tint="@android:color/white"
+            android:src="@{viewModel.isPlanted  ? @drawable/ic_clear : @drawable/ic_plus}"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
-            app:isGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/appbar"
-            app:layout_anchorGravity="bottom|end"
-            app:srcCompat="@drawable/ic_plus" />
+            app:layout_anchorGravity="bottom|end" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
