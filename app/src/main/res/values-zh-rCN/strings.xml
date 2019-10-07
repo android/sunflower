@@ -23,6 +23,7 @@
     <string name="plant_details_title">植物介绍</string>
     <string name="add_plant">添加植物</string>
     <string name="added_plant_to_garden">添加了新植物</string>
+    <string name="removed_plant_from_garden">从花园里移走了植物</string>
     <string name="garden_empty">花园里还没有植物</string>
     <string name="plant_date_header">种下日期</string>
     <string name="watered_date_header">最后浇水</string>

@@ -23,6 +23,7 @@
     <string name="plant_details_title">Bitki detayları</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Bitki bahçeye eklendi</string>
+    <string name="removed_plant_from_garden">Bahçeden kaldırılan bitki</string>
     <string name="garden_empty">Bahçen boş</string>
     <string name="plant_date_header">(translate me) Planted</string>
     <string name="watered_date_header">(translate me) Last Watered</string>

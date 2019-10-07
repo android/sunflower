@@ -23,6 +23,7 @@
     <string name="plant_details_title">植物の詳細</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">植物が庭に追加されました</string>
+    <string name="removed_plant_from_garden">庭から植物を削除</string>
     <string name="garden_empty">あなたの庭に植物はありません</string>
     <string name="plant_date_header">(translate me) Planted</string>
     <string name="watered_date_header">(translate me) Last Watered</string>

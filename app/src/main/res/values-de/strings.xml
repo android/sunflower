@@ -23,6 +23,7 @@
     <string name="plant_details_title">Details zur Pflanze</string>
     <string name="add_plant">Pflanze hinzufügen</string>
     <string name="added_plant_to_garden">Pflanze wurde zum Garten hinzugefügt</string>
+    <string name="removed_plant_from_garden">Pflanze aus dem Garten entfernt</string>
     <string name="garden_empty">Ihr Garten ist unbepflanzt</string>
     <string name="plant_date_header">Gepflanzt</string>
     <string name="watered_date_header">Zuletzt gegossen</string>

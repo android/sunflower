@@ -27,6 +27,7 @@
     <string name="garden_empty">Il tuo giardino è vuoto</string>
     <string name="add_plant">(translate me) Add plant</string>
     <string name="added_plant_to_garden">Pianta aggiunta al giardino</string>
+    <string name="removed_plant_from_garden">Pianta rimossa dal giardino</string>
     <string name="share_text_plant">Controlla la pianta %s nell\'app Sunflower</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
