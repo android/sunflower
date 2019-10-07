@@ -59,22 +59,20 @@ class PlantDetailFragment : Fragment() {
             viewModel = plantDetailViewModel
             lifecycleOwner = viewLifecycleOwner
             callback = object : Callback {
-                override fun add(plant: Plant?) {
+                override fun toggle(plant: Plant?) {
                     plant?.let {
-                        plantDetailViewModel.addPlantToGarden()
-                        Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
+                        val isPlanted = viewModel?.isPlanted?.value ?: false
+                        plantDetailViewModel.togglePlanted()
+                        Snackbar.make(root, getToggleMessage(isPlanted), Snackbar.LENGTH_LONG)
                             .show()
                     }
                 }
 
-                override fun remove(plant: Plant?) {
-                    plant?.let {
-                        plantDetailViewModel.removePlantFromGarden()
-                        Snackbar.make(
-                            root, R.string.removed_plant_from_garden, Snackbar.LENGTH_LONG
-                        )
-                            .show()
+                private fun getToggleMessage(isPlanted: Boolean): Int {
+                    if (isPlanted) {
+                        return R.string.removed_plant_from_garden
                     }
+                    return R.string.added_plant_to_garden
                 }
             }
 
@@ -163,7 +161,6 @@ class PlantDetailFragment : Fragment() {
     }
 
     interface Callback {
-        fun add(plant: Plant?)
-        fun remove(plant: Plant?)
+        fun toggle(plant: Plant?)
     }
 }

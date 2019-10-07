@@ -166,7 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> viewModel.isPlanted ?  callback.remove(viewModel.plant) : callback.add(viewModel.plant)}"
+            android:onClick="@{() -> callback.toggle(viewModel.plant)}"
             android:tint="@android:color/white"
             android:src="@{viewModel.isPlanted  ? @drawable/ic_clear : @drawable/ic_plus}"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"

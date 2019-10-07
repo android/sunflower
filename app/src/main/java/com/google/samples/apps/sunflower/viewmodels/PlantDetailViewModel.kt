@@ -35,15 +35,15 @@ class PlantDetailViewModel(
     val isPlanted = gardenPlantingRepository.isPlanted(plantId)
     val plant = plantRepository.getPlant(plantId)
 
-    fun addPlantToGarden() {
+    fun togglePlanted() {
         viewModelScope.launch {
-            gardenPlantingRepository.createGardenPlanting(plantId)
-        }
-    }
-
-    fun removePlantFromGarden() {
-        viewModelScope.launch {
-            gardenPlantingRepository.removeGardenPlanting(plantId)
+            isPlanted.value?.let {
+                if (it) {
+                    gardenPlantingRepository.removeGardenPlanting(plantId)
+                } else {
+                    gardenPlantingRepository.createGardenPlanting(plantId)
+                }
+            }
         }
     }
 }
