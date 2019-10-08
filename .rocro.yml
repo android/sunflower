@@ -1,2 +1,4 @@
 inspecode:
   detekt: default
+  jscpd: default
+  ktlint: default
