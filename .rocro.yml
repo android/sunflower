@@ -1,4 +1,7 @@
 inspecode:
+  fossology: default
+  grep: default
+  misspell: default
   detekt: default
   jscpd: default
   ktlint: default
