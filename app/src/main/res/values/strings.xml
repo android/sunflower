@@ -21,12 +21,12 @@
 
     <!-- Translatable resources -->
     <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">Filter by grow zone</string>
-    <string name="plant_detail_image_content_description" translation_description="Content description for the header / hero image that is show at the top of the plant detail screen.">Image of plant</string>
-    <string name="my_garden_title" translation_description="Title for the 'My garden' screen where the user can see the list of plants that have been added to their garden.">My garden</string>
-    <string name="plant_list_title" translation_description="Title for the plant list screen where the user can see a list of plants available to add to their garden.">Plant list</string>
+    <string name="plant_detail_image_content_description" translation_description="Content description for the header / hero image that is show at the top of the plant detail screen.">Image of Plant</string>
+    <string name="my_garden_title" translation_description="Title for the 'My garden' screen where the user can see the list of plants that have been added to their garden.">My Garden</string>
+    <string name="plant_list_title" translation_description="Title for the plant list screen where the user can see a list of plants available to add to their garden.">Plant List</string>
     <string name="available" translation_description="Text for the header of the plant list page indicating the available plants for users to choose from.">Available Plants</string>
-    <string name="plant_details_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">Plant details</string>
-    <string name="add_plant" translation_description="Button text that prompts user to navigate to the Plant List to add plants to their empty garden.">Add plant</string>
+    <string name="plant_details_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">Plant Details</string>
+    <string name="add_plant" translation_description="Button text that prompts user to navigate to the Plant List to add plants to their empty garden.">Add Plant</string>
     <string name="added_plant_to_garden" translation_description="Confirmation text that is shown when a user adds a plant to their empty garden.">Added plant to garden</string>
     <string name="garden_empty" translation_description="Text that is shown on the 'My Garden' screen when no plants have been added to the user's garden">Your garden is empty</string>
     <string name="plant_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Planted to show date of planting below">Planted</string>
