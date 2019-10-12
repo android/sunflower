@@ -168,7 +168,7 @@
             android:layout_margin="@dimen/fab_margin"
             android:onClick="@{() -> callback.toggle(viewModel.plant)}"
             android:tint="@android:color/white"
-            android:src="@{callback.getToggleIcon(viewModel.isPlanted)}"
+            android:src="@{viewModel.toggleIcon}"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end" />

@@ -17,7 +17,6 @@
 package com.google.samples.apps.sunflower
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,7 +24,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ShareCompat
-import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -75,13 +73,6 @@ class PlantDetailFragment : Fragment() {
                         return R.string.removed_plant_from_garden
                     }
                     return R.string.added_plant_to_garden
-                }
-
-                override fun getToggleIcon(isPlanted: Boolean): Drawable? {
-                    if (isPlanted) {
-                        return ContextCompat.getDrawable(requireContext(), R.drawable.ic_clear)
-                    }
-                    return ContextCompat.getDrawable(requireContext(), R.drawable.ic_plus)
                 }
             }
 
@@ -171,6 +162,5 @@ class PlantDetailFragment : Fragment() {
 
     interface Callback {
         fun toggle(plant: Plant?)
-        fun getToggleIcon(isPlanted: Boolean): Drawable?
     }
 }

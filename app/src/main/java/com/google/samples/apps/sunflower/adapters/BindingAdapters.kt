@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("isGone")
@@ -26,4 +27,9 @@ fun bindIsGone(view: View, isGone: Boolean) {
     } else {
         View.VISIBLE
     }
+}
+
+@BindingAdapter("android:src")
+fun setImageResource(imageView: ImageView, resource: Int) {
+    imageView.setImageResource(resource)
 }

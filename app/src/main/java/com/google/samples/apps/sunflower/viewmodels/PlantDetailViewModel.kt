@@ -16,9 +16,11 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.PlantDetailFragment
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import kotlinx.coroutines.launch
@@ -34,6 +36,9 @@ class PlantDetailViewModel(
 
     val isPlanted = gardenPlantingRepository.isPlanted(plantId)
     val plant = plantRepository.getPlant(plantId)
+    val toggleIcon = Transformations.map(isPlanted) {
+        if (it) R.drawable.ic_clear else R.drawable.ic_plus
+    }
 
     fun togglePlanted() {
         viewModelScope.launch {
