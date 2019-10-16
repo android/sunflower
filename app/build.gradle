@@ -31,12 +31,13 @@ jacoco {
 sonarqube {
     properties {
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.login", "afaa101012926f389168a52b00f323d061c37303")
         property("sonar.sources", "src/main")
         property("sonar.tests", "src/test")
         property("sonar.sourceEncoding", "UTF-8")
         property("sonar.junit.reportPaths", "build/test-results/testDebugUnitTest")
         property("sonar.java.coveragePlugin", "jacoco")
-        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/jacocoTestReport/jacoco.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
         property("sonar.kotlin.detekt.reportPaths", "build/reports/detekt/detekt.xml")
         property("sonar.androidLint.reportPaths", "build/reports/lint-results-debug.xml")
         property("sonar.scm.provider","git")
@@ -62,7 +63,7 @@ task jacocoTestReport(type: JacocoReport) {
                       '**/BuildConfig.*',
                       '**/Manifest*.*',
                       '**/*Test*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def debugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     sourceDirectories = files([mainSrc])
