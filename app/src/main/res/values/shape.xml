@@ -35,17 +35,9 @@
         <item name="cornerSizeBottomLeft">@dimen/button_corner_radius</item>
     </style>
 
-    <style name="ShapeAppearance.Sunflower.FAB" parent="ShapeAppearance.MaterialComponents">
-        <item name="cornerFamily">rounded</item>
-
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeTopRight">@dimen/fab_corner_radius</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">@dimen/fab_corner_radius</item>
-    </style>
-
-    <!-- Plus button on detail page -->
-    <dimen name="fab_corner_radius">30dp</dimen>
+    <style
+        name="ShapeAppearance.Sunflower.FAB"
+        parent="ShapeAppearance.MaterialComponents.SmallComponent" />
 
     <!-- Add plant button -->
     <dimen name="button_corner_radius">12dp</dimen>
