@@ -19,8 +19,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/filter_zone"
-        android:icon="@drawable/ic_filter_list_24dp"
-        app:showAsAction="always"
+        app:showAsAction="never"
+        android:checkable="true"
         android:title="@string/menu_filter_by_grow_zone"/>
 
 </menu>

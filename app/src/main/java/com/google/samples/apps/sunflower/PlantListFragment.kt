@@ -60,7 +60,9 @@ class PlantListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.filter_zone -> {
-                updateData()
+                val isFiltered = item.isChecked
+                updateData(isFiltered)
+                item.isChecked = !item.isChecked
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -73,9 +75,9 @@ class PlantListFragment : Fragment() {
         }
     }
 
-    private fun updateData() {
+    private fun updateData(isFiltered: Boolean) {
         with(viewModel) {
-            if (isFiltered()) {
+            if (isFiltered) {
                 clearGrowZoneNumber()
             } else {
                 setGrowZoneNumber(9)
