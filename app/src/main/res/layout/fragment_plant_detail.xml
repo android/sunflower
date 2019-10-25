@@ -100,7 +100,7 @@
 
                 <TextView
                     android:id="@+id/plant_detail_name"
-                    android:layout_width="0dp"
+                    android:layout_width="-1dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
