@@ -19,10 +19,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.google.samples.apps.sunflower.data.Plant"/>
         <variable
             name="viewModel"
             type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
+        <variable
+            name="callback"
+            type="com.google.samples.apps.sunflower.PlantDetailFragment.Callback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -55,7 +58,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="@{viewModel.plant.name}"
                 app:titleEnabled="false"
-                app:toolbarId="@+id/toolbar">
+                app:toolbarId="@id/toolbar">
 
                 <ImageView
                     android:id="@+id/detail_image"
@@ -122,7 +125,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_detail_name" />
+                    app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
 
                 <TextView
                     android:id="@+id/plant_watering"
@@ -133,7 +136,7 @@
                     android:gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_watering_header"
+                    app:layout_constraintTop_toBottomOf="@id/plant_watering_header"
                     app:wateringText="@{viewModel.plant.wateringInterval}"
                     tools:text="every 7 days" />
 
@@ -149,7 +152,7 @@
                     android:minHeight="@dimen/plant_description_min_height"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_watering"
+                    app:layout_constraintTop_toBottomOf="@id/plant_watering"
                     app:renderHtml="@{viewModel.plant.description}"
                     tools:text="Details about the plant" />
 
@@ -163,6 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{() -> callback.add(viewModel.plant)}"
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
             app:isGone="@{viewModel.isPlanted}"
