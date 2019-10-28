@@ -23,7 +23,7 @@ categories:   [Getting Started, Jetpack]
 languages:    [Kotlin]
 solutions:    [Mobile]
 
-github:       googlesamples/android-sunflower
+github:       android/sunflower
 
 level:        INTERMEDIATE
 
