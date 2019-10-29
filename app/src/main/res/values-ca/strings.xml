@@ -38,7 +38,7 @@
 
     <plurals name="watering_next">
         <item quantity="one">regar demà.</item>
-        <item quantity="other">regar en %d dies.</item>
+        <item quantity="other">cal regar-la d'aquí a %d dies.</item>
     </plurals>
 
     <!-- Accessibility -->
