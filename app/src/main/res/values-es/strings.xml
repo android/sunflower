@@ -19,18 +19,18 @@
     <string name="plant_detail_image_content_description">Imagen de la planta</string>
     <string name="my_garden_title">Mi jardín</string>
     <string name="plant_list_title">Lista de plantas</string>
-    <string name="available">Plantas Disponibles</string>
+    <string name="available">Plantas disponibles</string>
     <string name="plant_details_title">Detalles de la planta</string>
-    <string name="add_plant">Agregar planta</string>
+    <string name="add_plant">Añadir planta</string>
     <string name="added_plant_to_garden">Planta añadida al jardín</string>
     <string name="garden_empty">Tu jardín esta vacío</string>
     <string name="plant_date_header">Plantada</string>
     <string name="watered_date_header">Última vez regada</string>
     <string name="menu_item_share_plant">Compartir</string>
-    <string name="share_text_plant">Revisa la planta %s en la aplicación "Sunflower"</string>
+    <string name="share_text_plant">Revisa la planta %s en la aplicación Android Sunflower</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
-    <string name="watering_needs_prefix">Necesita regarla</string>
+    <string name="watering_needs_prefix">Necesita ser regada</string>
     <plurals name="watering_needs_suffix">
         <item quantity="one">cada día.</item>
         <item quantity="other">cada %d días.</item>
