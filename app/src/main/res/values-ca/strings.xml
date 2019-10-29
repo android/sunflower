@@ -20,7 +20,7 @@
     <string name="my_garden_title">El meu jardí</string>
     <string name="plant_list_title">Llistat de plantes</string>
     <string name="available">Plantes Disponibles</string>
-    <string name="plant_details_title">Detalles de la planta</string>
+    <string name="plant_details_title">Detalls de la planta</string>
     <string name="add_plant">Afegiu planta</string>
     <string name="added_plant_to_garden">Planta afegida al jardí</string>
     <string name="garden_empty">El teu jardí està buit</string>
