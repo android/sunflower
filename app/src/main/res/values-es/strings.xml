@@ -32,7 +32,7 @@
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Necesita ser regada</string>
     <plurals name="watering_needs_suffix">
-        <item quantity="one">cada día.</item>
+        <item quantity="one">diariamente.</item>
         <item quantity="other">cada %d días.</item>
     </plurals>
 
