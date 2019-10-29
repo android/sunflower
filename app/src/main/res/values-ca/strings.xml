@@ -33,7 +33,7 @@
     <string name="watering_needs_prefix">Necessita ser regada</string>
     <plurals name="watering_needs_suffix">
         <item quantity="one">diàriament.</item>
-        <item quantity="other">cada %d dies.</item>
+        <item quantity="other">cada %d dies</item>
     </plurals>
 
     <plurals name="watering_next">
