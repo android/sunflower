@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="menu_filter_by_grow_zone">Filtrar per zona de creixement</string>
+    <string name="menu_filter_by_grow_zone">Filtra per zona de creixement</string>
     <string name="plant_detail_image_content_description">Imatge de la planta</string>
     <string name="my_garden_title">El meu jardí</string>
     <string name="plant_list_title">Llista de plantes</string>
