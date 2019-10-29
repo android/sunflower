@@ -25,14 +25,14 @@
     <string name="added_plant_to_garden">Planta afegida al jardí</string>
     <string name="garden_empty">No hi ha plantes al teu jardí</string>
     <string name="plant_date_header">Plantada</string>
-    <string name="watered_date_header">L\'últim cop regada</string>
+    <string name="watered_date_header">Regada per última vegada</string>
     <string name="menu_item_share_plant">Compartir</string>
-    <string name="share_text_plant">Revisa la planta %s en l\'aplicació "Sunflower"</string>
+    <string name="share_text_plant">Revisa la planta %s a l\'aplicació Android Sunflower</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
-    <string name="watering_needs_prefix">Necessita regar</string>
+    <string name="watering_needs_prefix">Necessita ser regada</string>
     <plurals name="watering_needs_suffix">
-        <item quantity="one">diariament.</item>
+        <item quantity="one">diàriament.</item>
         <item quantity="other">cada %d dies.</item>
     </plurals>
 
