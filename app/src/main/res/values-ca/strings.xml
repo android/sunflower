@@ -25,7 +25,7 @@
     <string name="added_plant_to_garden">La planta s'ha afegit al jardí</string>
     <string name="garden_empty">No hi ha plantes al teu jardí</string>
     <string name="plant_date_header">Plantada</string>
-    <string name="watered_date_header">Regada per última vegada</string>
+    <string name="watered_date_header">Regada per darrera vegada</string>
     <string name="menu_item_share_plant">Comparteix</string>
     <string name="share_text_plant">Mira la planta %s a l\'aplicació Android Sunflower</string>
 
