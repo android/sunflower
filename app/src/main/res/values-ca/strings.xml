@@ -21,7 +21,7 @@
     <string name="plant_list_title">Llista de plantes</string>
     <string name="available">Plantes disponibles</string>
     <string name="plant_details_title">Detalls de la planta</string>
-    <string name="add_plant">Afegir planta</string>
+    <string name="add_plant">Afegeix una planta</string>
     <string name="added_plant_to_garden">La planta s'ha afegit al jardí</string>
     <string name="garden_empty">No hi ha plantes al teu jardí</string>
     <string name="plant_date_header">Plantada</string>
