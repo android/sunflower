@@ -27,7 +27,7 @@
     <string name="plant_date_header">Plantada</string>
     <string name="watered_date_header">Regada per última vegada</string>
     <string name="menu_item_share_plant">Compartir</string>
-    <string name="share_text_plant">Revisa la planta %s a l\'aplicació Android Sunflower</string>
+    <string name="share_text_plant">Mira la planta %s a l\'aplicació Android Sunflower</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Cal regar-la</string>
