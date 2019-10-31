@@ -22,7 +22,7 @@ import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 
 class GardenPlantingListViewModel internal constructor(
-    gardenPlantingRepository: GardenPlantingRepository
+        gardenPlantingRepository: GardenPlantingRepository
 ) : ViewModel() {
     val plantAndGardenPlantings: LiveData<List<PlantAndGardenPlantings>> =
             gardenPlantingRepository.getPlantedGardens()

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,10 +23,10 @@
     <path
         android:name="circle"
         android:fillColor="?attr/colorSurface"
-        android:pathData="M16,16m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0"/>
+        android:pathData="M16,16m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0" />
 
     <path
         android:name="arrow"
         android:fillColor="?attr/colorOnSurface"
-        android:pathData="M20,14.66H10.44l7.45,-7.45L16,5.33l-10.66,10.66 10.66,10.66 1.88,-1.88L10.44,17.33H26.66v-2.66z"/>
+        android:pathData="M20,14.66H10.44l7.45,-7.45L16,5.33l-10.66,10.66 10.66,10.66 1.88,-1.88L10.44,17.33H26.66v-2.66z" />
 </vector>

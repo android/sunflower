@@ -27,10 +27,12 @@ import org.junit.Test
 
 class GardenActivityTest {
 
-    @Rule @JvmField
+    @Rule
+    @JvmField
     var activityTestRule = ActivityTestRule(GardenActivity::class.java)
 
-    @Test fun clickAddPlant_OpensPlantList() {
+    @Test
+    fun clickAddPlant_OpensPlantList() {
         // Given that no Plants are added to the user's garden
 
         // When the "Add Plant" button is clicked

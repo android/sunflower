@@ -24,9 +24,9 @@ import androidx.room.Relation
  * used by Room to fetch the related entities.
  */
 data class PlantAndGardenPlantings(
-    @Embedded
-    val plant: Plant,
+        @Embedded
+        val plant: Plant,
 
-    @Relation(parentColumn = "id", entityColumn = "plant_id")
-    val gardenPlantings: List<GardenPlanting> = emptyList()
+        @Relation(parentColumn = "id", entityColumn = "plant_id")
+        val gardenPlantings: List<GardenPlanting> = emptyList()
 )

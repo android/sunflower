@@ -18,7 +18,7 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) {
     private val plant = checkNotNull(plantings.plant)

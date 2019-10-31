@@ -41,7 +41,8 @@ class PlantDaoTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Before fun createDb() = runBlocking {
+    @Before
+    fun createDb() = runBlocking {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         plantDao = database.plantDao()
@@ -50,11 +51,13 @@ class PlantDaoTest {
         plantDao.insertAll(listOf(plantB, plantC, plantA))
     }
 
-    @After fun closeDb() {
+    @After
+    fun closeDb() {
         database.close()
     }
 
-    @Test fun testGetPlants() {
+    @Test
+    fun testGetPlants() {
         val plantList = getValue(plantDao.getPlants())
         assertThat(plantList.size, equalTo(3))
 
@@ -64,7 +67,8 @@ class PlantDaoTest {
         assertThat(plantList[2], equalTo(plantC))
     }
 
-    @Test fun testGetPlantsWithGrowZoneNumber() {
+    @Test
+    fun testGetPlantsWithGrowZoneNumber() {
         val plantList = getValue(plantDao.getPlantsWithGrowZoneNumber(1))
         assertThat(plantList.size, equalTo(2))
         assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(2)).size, equalTo(1))
@@ -75,7 +79,8 @@ class PlantDaoTest {
         assertThat(plantList[1], equalTo(plantB))
     }
 
-    @Test fun testGetPlant() {
+    @Test
+    fun testGetPlant() {
         assertThat(getValue(plantDao.getPlant(plantA.plantId)), equalTo(plantA))
     }
 }

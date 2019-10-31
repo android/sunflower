@@ -24,23 +24,23 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
 class GardenPlantingAdapter :
-    ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(
-        GardenPlantDiffCallback()
-    ) {
+        ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(
+                GardenPlantDiffCallback()
+        ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.list_item_garden_planting, parent, false
-            )
+                DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.list_item_garden_planting, parent, false
+                )
         )
     }
 
@@ -49,7 +49,7 @@ class GardenPlantingAdapter :
     }
 
     class ViewHolder(
-        private val binding: ListItemGardenPlantingBinding
+            private val binding: ListItemGardenPlantingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener { view ->
@@ -61,7 +61,7 @@ class GardenPlantingAdapter :
 
         private fun navigateToPlant(plantId: String, view: View) {
             val direction = HomeViewPagerFragmentDirections
-                .actionViewPagerFragmentToPlantDetailFragment(plantId)
+                    .actionViewPagerFragmentToPlantDetailFragment(plantId)
             view.findNavController().navigate(direction)
         }
 
@@ -77,15 +77,15 @@ class GardenPlantingAdapter :
 private class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlantings>() {
 
     override fun areItemsTheSame(
-        oldItem: PlantAndGardenPlantings,
-        newItem: PlantAndGardenPlantings
+            oldItem: PlantAndGardenPlantings,
+            newItem: PlantAndGardenPlantings
     ): Boolean {
         return oldItem.plant.plantId == newItem.plant.plantId
     }
 
     override fun areContentsTheSame(
-        oldItem: PlantAndGardenPlantings,
-        newItem: PlantAndGardenPlantings
+            oldItem: PlantAndGardenPlantings,
+            newItem: PlantAndGardenPlantings
     ): Boolean {
         return oldItem.plant == newItem.plant
     }

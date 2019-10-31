@@ -20,10 +20,8 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThat
 import org.junit.Test
-import java.util.Calendar
-import java.util.Calendar.DAY_OF_MONTH
-import java.util.Calendar.MONTH
-import java.util.Calendar.YEAR
+import java.util.*
+import java.util.Calendar.*
 
 class GardenPlantingTest {
 

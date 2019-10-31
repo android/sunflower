@@ -24,9 +24,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
+import androidx.test.espresso.intent.matcher.IntentMatchers.*
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -61,26 +59,26 @@ class PlantDetailFragmentTest {
     @Test
     fun testShareTextIntent() {
         val shareText = activityTestRule.activity.getString(
-            R.string.share_text_plant,
-            testPlant.name
+                R.string.share_text_plant,
+                testPlant.name
         )
 
         Intents.init()
         onView(withId(R.id.action_share)).perform(click())
         intended(
-            chooser(
-                allOf(
-                    hasAction(Intent.ACTION_SEND),
-                    hasType("text/plain"),
-                    hasExtra(Intent.EXTRA_TEXT, shareText)
+                chooser(
+                        allOf(
+                                hasAction(Intent.ACTION_SEND),
+                                hasType("text/plain"),
+                                hasExtra(Intent.EXTRA_TEXT, shareText)
+                        )
                 )
-            )
         )
         Intents.release()
 
         // dismiss the Share Dialog
         InstrumentationRegistry.getInstrumentation()
-            .uiAutomation
-            .performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
+                .uiAutomation
+                .performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
     }
 }

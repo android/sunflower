@@ -27,9 +27,9 @@ import kotlinx.coroutines.launch
  * The ViewModel used in [PlantDetailFragment].
  */
 class PlantDetailViewModel(
-    plantRepository: PlantRepository,
-    private val gardenPlantingRepository: GardenPlantingRepository,
-    private val plantId: String
+        plantRepository: PlantRepository,
+        private val gardenPlantingRepository: GardenPlantingRepository,
+        private val plantId: String
 ) : ViewModel() {
 
     val isPlanted = gardenPlantingRepository.isPlanted(plantId)

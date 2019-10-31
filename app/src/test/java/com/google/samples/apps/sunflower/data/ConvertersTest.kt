@@ -18,11 +18,8 @@ package com.google.samples.apps.sunflower.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.Calendar
-import java.util.Calendar.DAY_OF_MONTH
-import java.util.Calendar.MONTH
-import java.util.Calendar.SEPTEMBER
-import java.util.Calendar.YEAR
+import java.util.*
+import java.util.Calendar.*
 
 class ConvertersTest {
 
@@ -32,11 +29,13 @@ class ConvertersTest {
         set(DAY_OF_MONTH, 4)
     }
 
-    @Test fun calendarToDatestamp() {
+    @Test
+    fun calendarToDatestamp() {
         assertEquals(cal.timeInMillis, Converters().calendarToDatestamp(cal))
     }
 
-    @Test fun datestampToCalendar() {
+    @Test
+    fun datestampToCalendar() {
         assertEquals(Converters().datestampToCalendar(cal.timeInMillis), cal)
     }
 }

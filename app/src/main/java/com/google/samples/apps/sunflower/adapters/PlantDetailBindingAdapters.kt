@@ -60,7 +60,7 @@ fun bindRenderHtml(view: TextView, description: String?) {
 fun bindWateringText(textView: TextView, wateringInterval: Int) {
     val resources = textView.context.resources
     val quantityString = resources.getQuantityString(R.plurals.watering_needs_suffix,
-        wateringInterval, wateringInterval)
+            wateringInterval, wateringInterval)
 
     textView.text = quantityString
 }

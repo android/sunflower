@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,10 @@
   -->
 
 <set xmlns:android="http://schemas.android.com/apk/res/android">
-    <translate android:fromXDelta="-100%" android:toXDelta="0%"
-        android:fromYDelta="0%" android:toYDelta="0%"
-        android:duration="@integer/slide"/>
+    <translate
+        android:duration="@integer/slide"
+        android:fromXDelta="-100%"
+        android:fromYDelta="0%"
+        android:toXDelta="0%"
+        android:toYDelta="0%" />
 </set>

@@ -20,11 +20,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.platform.app.InstrumentationRegistry
-import com.google.samples.apps.sunflower.utilities.getValue
-import com.google.samples.apps.sunflower.utilities.testCalendar
-import com.google.samples.apps.sunflower.utilities.testGardenPlanting
-import com.google.samples.apps.sunflower.utilities.testPlant
-import com.google.samples.apps.sunflower.utilities.testPlants
+import com.google.samples.apps.sunflower.utilities.*
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.After
@@ -42,7 +38,8 @@ class GardenPlantingDaoTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Before fun createDb() = runBlocking {
+    @Before
+    fun createDb() = runBlocking {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         gardenPlantingDao = database.gardenPlantingDao()
@@ -51,21 +48,24 @@ class GardenPlantingDaoTest {
         testGardenPlantingId = gardenPlantingDao.insertGardenPlanting(testGardenPlanting)
     }
 
-    @After fun closeDb() {
+    @After
+    fun closeDb() {
         database.close()
     }
 
-    @Test fun testGetGardenPlantings() = runBlocking {
+    @Test
+    fun testGetGardenPlantings() = runBlocking {
         val gardenPlanting2 = GardenPlanting(
-            testPlants[1].plantId,
-            testCalendar,
-            testCalendar
+                testPlants[1].plantId,
+                testCalendar,
+                testCalendar
         ).also { it.gardenPlantingId = 2 }
         gardenPlantingDao.insertGardenPlanting(gardenPlanting2)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))
     }
 
-    @Test fun testDeleteGardenPlanting() = runBlocking {
+    @Test
+    fun testDeleteGardenPlanting() = runBlocking {
         val gardenPlanting2 = GardenPlanting(
                 testPlants[1].plantId,
                 testCalendar,
@@ -77,15 +77,18 @@ class GardenPlantingDaoTest {
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(1))
     }
 
-    @Test fun testGetGardenPlantingForPlant() {
+    @Test
+    fun testGetGardenPlantingForPlant() {
         assertTrue(getValue(gardenPlantingDao.isPlanted(testPlant.plantId)))
     }
 
-    @Test fun testGetGardenPlantingForPlant_notFound() {
+    @Test
+    fun testGetGardenPlantingForPlant_notFound() {
         assertFalse(getValue(gardenPlantingDao.isPlanted(testPlants[2].plantId)))
     }
 
-    @Test fun testGetPlantAndGardenPlantings() {
+    @Test
+    fun testGetPlantAndGardenPlantings() {
         val plantAndGardenPlantings = getValue(gardenPlantingDao.getPlantedGardens())
         assertThat(plantAndGardenPlantings.size, equalTo(1))
 

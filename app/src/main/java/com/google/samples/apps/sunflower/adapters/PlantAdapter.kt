@@ -40,11 +40,11 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PlantViewHolder(ListItemPlantBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
+                LayoutInflater.from(parent.context), parent, false))
     }
 
     class PlantViewHolder(
-        private val binding: ListItemPlantBinding
+            private val binding: ListItemPlantBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
@@ -55,13 +55,13 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
         }
 
         private fun navigateToPlant(
-            plant: Plant,
-            it: View
+                plant: Plant,
+                it: View
         ) {
             val direction =
-                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-                    plant.plantId
-                )
+                    HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
+                            plant.plantId
+                    )
             it.findNavController().navigate(direction)
         }
 

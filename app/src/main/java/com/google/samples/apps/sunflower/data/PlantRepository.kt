@@ -31,7 +31,8 @@ class PlantRepository private constructor(private val plantDao: PlantDao) {
     companion object {
 
         // For Singleton instantiation
-        @Volatile private var instance: PlantRepository? = null
+        @Volatile
+        private var instance: PlantRepository? = null
 
         fun getInstance(plantDao: PlantDao) =
                 instance ?: synchronized(this) {

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@drawable/ic_my_garden_active" android:state_selected="true"/>
-    <item android:drawable="@drawable/ic_my_garden_inactive"/>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_my_garden_active" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_my_garden_inactive" />
 </selector>
