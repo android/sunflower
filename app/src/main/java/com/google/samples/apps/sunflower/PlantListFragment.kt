@@ -48,8 +48,8 @@ class PlantListFragment : Fragment() {
         context ?: return binding.root
 
         val adapter = PlantAdapter()
-        adapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int){
+        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 val layout = (binding.plantList.layoutManager as StaggeredGridLayoutManager)
                 layout.scrollToPositionWithOffset(positionStart, 0)
             }
