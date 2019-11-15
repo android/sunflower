@@ -27,6 +27,7 @@ import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
+import com.google.samples.apps.sunflower.utilities.navigateSafe
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
@@ -62,7 +63,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
                 HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
                     plant.plantId
                 )
-            it.findNavController().navigate(direction)
+            it.findNavController().navigateSafe(direction)
         }
 
         fun bind(item: Plant) {

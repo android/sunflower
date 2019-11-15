@@ -28,6 +28,7 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
+import com.google.samples.apps.sunflower.utilities.navigateSafe
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
 class GardenPlantingAdapter :
@@ -62,7 +63,7 @@ class GardenPlantingAdapter :
         private fun navigateToPlant(plantId: String, view: View) {
             val direction = HomeViewPagerFragmentDirections
                 .actionViewPagerFragmentToPlantDetailFragment(plantId)
-            view.findNavController().navigate(direction)
+            view.findNavController().navigateSafe(direction)
         }
 
         fun bind(plantings: PlantAndGardenPlantings) {
