@@ -27,18 +27,18 @@ import androidx.navigation.Navigator
  * NavController extension functions to navigate safely
  */
 fun NavController.navigateSafe(
-        navDirections: NavDirections,
-        navOptions: NavOptions? = null,
-        navigatorExtras: Navigator.Extras? = null
+    navDirections: NavDirections,
+    navOptions: NavOptions? = null,
+    navigatorExtras: Navigator.Extras? = null
 ) {
     navigateSafe(navDirections.actionId, navDirections.arguments, navOptions, navigatorExtras)
 }
 
 fun NavController.navigateSafe(
-        @IdRes resId: Int,
-        args: Bundle? = null,
-        navOptions: NavOptions? = null,
-        navExtras: Navigator.Extras? = null
+    @IdRes resId: Int,
+    args: Bundle? = null,
+    navOptions: NavOptions? = null,
+    navExtras: Navigator.Extras? = null
 ) {
     val action = currentDestination?.getAction(resId) ?: graph.getAction(resId)
     if (action != null && currentDestination?.id != action.destinationId) {
