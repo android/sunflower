@@ -4,7 +4,7 @@
 .idea/*
 !.idea/copyright
 .DS_Store
-/build
+build/
 /captures
 .externalNativeBuild
 ktlint
