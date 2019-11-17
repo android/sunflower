@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':app'
+include ":app"
