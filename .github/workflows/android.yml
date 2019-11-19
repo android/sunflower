@@ -15,3 +15,7 @@ jobs:
         java-version: 1.8
     - name: Build with Gradle
       run: ./gradlew build
+    - uses: actions/upload-artifact
+      with:
+        name: outputs
+	path: app/build/outputs
