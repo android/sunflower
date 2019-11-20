@@ -1,9 +1,9 @@
 name: Android CI
 
 on: [push]
-env:
-  http_proxy: http://proxy.kanto.sony.co.jp:10080
-  https_proxy: http://proxy.kanto.sony.co.jp:10080
+#env:
+#  http_proxy: http://proxy.kanto.sony.co.jp:10080
+#  https_proxy: http://proxy.kanto.sony.co.jp:10080
   
 jobs:
   build:
