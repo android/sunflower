@@ -60,7 +60,10 @@ class PlantDetailFragmentTest {
     @Ignore("Share button redesign pending")
     @Test
     fun testShareTextIntent() {
-        val shareText = activityTestRule.activity.getString(R.string.share_text_plant, testPlant.name)
+        val shareText = activityTestRule.activity.getString(
+            R.string.share_text_plant,
+            testPlant.name
+        )
 
         Intents.init()
         onView(withId(R.id.action_share)).perform(click())

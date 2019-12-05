@@ -31,7 +31,9 @@ import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBindi
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
 class GardenPlantingAdapter :
-    ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
+    ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(
+        GardenPlantDiffCallback()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

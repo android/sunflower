@@ -13,7 +13,7 @@ Introduction
 ------------
 
 Android Jetpack is a set of components, tools and guidance to make great Android apps. They bring
-together the existing Support Library and Architecture Components and arranges them into four
+together the existing Support Library and Architecture Components and arrange them into four
 categories:
 
 ![Android Jetpack](screenshots/jetpack_donut.png "Android Jetpack Components")
