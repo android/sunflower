@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2019 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <string name="menu_filter_by_grow_zone">Saring berdasarkan zona tumbuh</string>
+    <string name="plant_detail_image_content_description">Gambar tanaman</string>
+    <string name="my_garden_title">Tamanku</string>
+    <string name="plant_list_title">Daftar tanaman</string>
+    <string name="available">Tanaman yang tersedia</string>
+    <string name="plant_details_title">Detail tanaman</string>
+    <string name="menu_item_share_plant">Berbagi</string>
+    <string name="plant_date_header">Tanggal ditanam</string>
+    <string name="watered_date_header">Tanggal terakhir disiram</string>
+    <string name="garden_empty">Taman anda kosong</string>
+    <string name="add_plant">Tambahkan tanaman</string>
+    <string name="added_plant_to_garden">Tanaman ditambahkan ke taman</string>
+    <string name="share_text_plant">Ayo cek %s tanaman pada App Android Sunflower</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">Kebutuhan penyiraman</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">setiap hari</item>
+        <item quantity="other">setiap %d hari</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one">sirami air besok.</item>
+        <item quantity="other">sirami air dalam %d hari.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Gambar tanaman</string>
+
+</resources>
