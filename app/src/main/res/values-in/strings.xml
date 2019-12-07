@@ -18,7 +18,7 @@
 <resources>
 
     <string name="menu_filter_by_grow_zone">Saring berdasarkan area bertumbuh </string>
-    <string name="my_garden_title">Kebun ku</string>
+    <string name="my_garden_title">Kebunku</string>
     <string name="plant_detail_image_content_description">Gambar tanaman</string>
     <string name="plant_list_title">Daftar tanaman</string>
     <string name="available">Tanaman yang tersedia</string>
