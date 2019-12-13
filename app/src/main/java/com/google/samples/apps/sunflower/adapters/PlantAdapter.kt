@@ -56,13 +56,13 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
         private fun navigateToPlant(
             plant: Plant,
-            it: View
+            view: View
         ) {
             val direction =
                 HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
                     plant.plantId
                 )
-            it.findNavController().navigate(direction)
+            view.findNavController().navigate(direction)
         }
 
         fun bind(item: Plant) {
