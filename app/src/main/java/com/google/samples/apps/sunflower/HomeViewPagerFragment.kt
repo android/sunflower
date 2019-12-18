@@ -60,11 +60,11 @@ class HomeViewPagerFragment : Fragment() {
         }
     }
 
-    private fun getTabTitle(position: Int): String? {
+    private fun getTabTitle(position: Int): String {
         return when (position) {
             MY_GARDEN_PAGE_INDEX -> getString(R.string.my_garden_title)
             PLANT_LIST_PAGE_INDEX -> getString(R.string.plant_list_title)
-            else -> null
+            else -> ""
         }
     }
 }
