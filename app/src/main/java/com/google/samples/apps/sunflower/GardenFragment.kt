@@ -64,6 +64,7 @@ class GardenFragment : Fragment() {
 
     // TODO: convert to data binding if applicable
     private fun navigateToPlantListPage() {
-        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem = PLANT_LIST_PAGE_INDEX
+        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
+            PLANT_LIST_PAGE_INDEX
     }
 }
