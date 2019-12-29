@@ -119,9 +119,10 @@ class PlantDetailFragment : Fragment() {
             if (plant == null) {
                 ""
             } else {
-                getString(R.string.share_text_plant, plant.name)
+                getString(R.string.share_text_plant, plant.name, plant.wikiUrl)
             }
         }
+
         val shareIntent = ShareCompat.IntentBuilder.from(activity)
             .setText(shareText)
             .setType("text/plain")

@@ -156,6 +156,23 @@
                     app:renderHtml="@{viewModel.plant.description}"
                     tools:text="Details about the plant" />
 
+                <TextView
+                    android:id="@+id/plant_url"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:autoLink="web"
+                    android:textIsSelectable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/plant_description"
+                    app:renderHtml="@{viewModel.plant.wikiUrl}"
+                    tools:text="From: Wikipedia" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
