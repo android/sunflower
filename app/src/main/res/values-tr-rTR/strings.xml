@@ -19,13 +19,13 @@
     <string name="plant_detail_image_content_description">Bitkinin görüntüsü</string>
     <string name="my_garden_title">Bahçem</string>
     <string name="plant_list_title">Bitki listesi</string>
-    <string name="available">(translate me) Available Plants</string>
+    <string name="available">Mevcut Bitkiler</string>
     <string name="plant_details_title">Bitki detayları</string>
-    <string name="add_plant">(translate me) Add plant</string>
+    <string name="add_plant">Bitki Ekle</string>
     <string name="added_plant_to_garden">Bitki bahçeye eklendi</string>
     <string name="garden_empty">Bahçen boş</string>
-    <string name="plant_date_header">(translate me) Planted</string>
-    <string name="watered_date_header">(translate me) Last Watered</string>
+    <string name="plant_date_header">Ekiliş Tarihi</string>
+    <string name="watered_date_header">Son Sulama Tarihi</string>
     <string name="menu_item_share_plant">Paylaş</string>
     <string name="share_text_plant">%s bitkisini Android Sunflower uygulamasında inceleyin</string>
 
