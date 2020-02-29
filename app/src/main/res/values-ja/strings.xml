@@ -19,13 +19,13 @@
     <string name="plant_detail_image_content_description">植物のイメージ</string>
     <string name="my_garden_title">私の庭</string>
     <string name="plant_list_title">植物のリスト</string>
-    <string name="available">(translate me) Available Plants</string>
+    <string name="available">選択できる植物</string>
     <string name="plant_details_title">植物の詳細</string>
-    <string name="add_plant">(translate me) Add plant</string>
+    <string name="add_plant">植物を追加する</string>
     <string name="added_plant_to_garden">植物が庭に追加されました</string>
     <string name="garden_empty">あなたの庭に植物はありません</string>
-    <string name="plant_date_header">(translate me) Planted</string>
-    <string name="watered_date_header">(translate me) Last Watered</string>
+    <string name="plant_date_header">植えた日</string>
+    <string name="watered_date_header">最後に水をあげた日</string>
     <string name="menu_item_share_plant">共有</string>
     <string name="share_text_plant">%s という植物を「Sunflower」アプリで見てみてください</string>
 
@@ -33,7 +33,7 @@
     <!-- Item quantities for zero and one are not used in Japanese -->
     <string name="watering_needs_prefix">水の必要量</string>
     <plurals name="watering_needs_suffix">
-        <item quantity="other">毎%d日</item>
+        <item quantity="other">%d日ごと</item>
     </plurals>
 
     <plurals name="watering_next">
