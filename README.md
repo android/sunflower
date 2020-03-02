@@ -1,13 +1,14 @@
-Android Sunflower (alpha)
-=========================
-[![CircleCI](https://circleci.com/gh/android/sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/android/sunflower/tree/master)
+Android Sunflower
+=================
 
 A gardening app illustrating Android development best practices with Android Jetpack.
 
 Android Sunflower is currently under heavy development.
 Note that some changes (such as database schema modifications) are not backwards
-compatible during this alpha period and may cause the app to crash. In this
+compatible and may cause the app to crash. In this
 case, please uninstall and re-install the app.
+
+[![CircleCI](https://circleci.com/gh/android/sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/android/sunflower/tree/master)
 
 Introduction
 ------------
