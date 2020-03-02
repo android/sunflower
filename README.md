@@ -8,10 +8,10 @@ Note that some changes (such as database schema modifications) are not backwards
 compatible and may cause the app to crash. In this
 case, please uninstall and re-install the app.
 
-[![CircleCI](https://circleci.com/gh/android/sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/android/sunflower/tree/master)
-
 Introduction
 ------------
+
+[![CircleCI](https://circleci.com/gh/android/sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/android/sunflower/tree/master)
 
 Android Jetpack is a set of components, tools and guidance to make great Android apps. They bring
 together the existing Support Library and Architecture Components and arrange them into four
