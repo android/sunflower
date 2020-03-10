@@ -52,7 +52,7 @@ class PlantListViewModel internal constructor(
     fun isFiltered() = getSavedGrowZoneNumber().value != NO_GROW_ZONE
 
     private fun getSavedGrowZoneNumber(): MutableLiveData<Int> {
-        return savedStateHandle.getLiveData<Int>(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
+        return savedStateHandle.getLiveData(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
     }
 
     companion object {
