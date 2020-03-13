@@ -1,0 +1,47 @@
+<!--
+  ~ Copyright 2020 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <!-- Translatable resources -->
+    <string name="menu_filter_by_grow_zone">성장 지역별 분류</string>
+    <string name="plant_detail_image_content_description">식물 사진</string>
+    <string name="my_garden_title">내 정원</string>
+    <string name="plant_list_title">식물 목록</string>
+    <string name="available">선택할 수 있는 식물</string>
+    <string name="plant_details_title">식물의 세부 정보</string>
+    <string name="add_plant">식물 추가</string>
+    <string name="added_plant_to_garden">식물을 정원에 추가했습니다</string>
+    <string name="garden_empty">정원이 비어있습니다</string>
+    <string name="plant_date_header">심은 날</string>
+    <string name="watered_date_header">급수 날</string>
+    <string name="menu_item_share_plant">공유</string>
+    <string name="share_text_plant">%s 식물을 Sunflower 앱에서 확인하세요</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">급수 주기</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="other">%d일마다</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="other">%d일 후 물을 주세요</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">식물 사진</string>
+
+</resources>
