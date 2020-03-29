@@ -112,7 +112,7 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Inside the project root directory run:
 
-  `./ktlint --apply-to-idea-project --android`
+  `ktlint --apply-to-idea-project --android`
 
 - Start Android Studio
 
