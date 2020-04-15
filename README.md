@@ -11,8 +11,6 @@ case, please uninstall and re-install the app.
 Introduction
 ------------
 
-[![CircleCI](https://circleci.com/gh/android/sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/android/sunflower/tree/master)
-
 Android Jetpack is a set of components, tools and guidance to make great Android apps. They bring
 together the existing Support Library and Architecture Components and arrange them into four
 categories:
