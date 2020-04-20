@@ -19,6 +19,58 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: "org.sonarqube"
+apply plugin: "io.gitlab.arturbosch.detekt"
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "toga1209_sunflower"
+        property "sonar.organization", "toga1209"
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.login", "d0b6f2583c75a4e393494bb871cc5bf62f0c015b")
+        property("sonar.sources", "src/main")
+        property("sonar.tests", "src/test")
+        property("sonar.sourceEncoding", "UTF-8")
+        property("sonar.junit.reportPaths", "build/test-results/testDebugUnitTest")
+        property("sonar.java.coveragePlugin", "jacoco")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
+        property("sonar.kotlin.detekt.reportPaths", "build/reports/detekt/detekt.xml")
+        property("sonar.androidLint.reportPaths", "build/reports/lint-results-debug.xml")
+        property("sonar.scm.provider","git")
+    }
+}
+
+tasks.maybeCreate("sonarqube").configure {
+    dependsOn("jacocoTestReport")
+    dependsOn("detekt")
+    dependsOn("lintDebug")
+}
+
+task jacocoTestReport(type: JacocoReport) {
+    dependsOn "testDebugUnitTest"
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*Test*.*']
+    def debugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: "$buildDir", includes: ["jacoco/testDebugUnitTest.exec"])
+}
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
