@@ -18,6 +18,7 @@
 
     <style name="Theme.Sunflower" parent="Base.Theme.Sunflower">
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
 </resources>

@@ -21,12 +21,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
+import com.google.samples.apps.sunflower.utilities.doOnApplyWindowInsets
 
 class HomeViewPagerFragment : Fragment() {
 
@@ -39,7 +42,20 @@ class HomeViewPagerFragment : Fragment() {
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
+        binding.coordinatorLayout.doOnApplyWindowInsets { view, windowInsetsCompat, rect ->
+            view.updatePadding(
+                top = rect.top + windowInsetsCompat.systemWindowInsetTop,
+                bottom = rect.bottom - windowInsetsCompat.systemWindowInsetBottom
+            )
+            // Uses for interception on viewPager child fragments
+            ViewCompat.dispatchApplyWindowInsets(viewPager, windowInsetsCompat)
+            windowInsetsCompat
+        }
         viewPager.adapter = SunflowerPagerAdapter(this)
+        viewPager.doOnApplyWindowInsets { view, windowInsetsCompat, rect ->
+            view.updatePadding(bottom = rect.bottom + windowInsetsCompat.systemWindowInsetBottom)
+            windowInsetsCompat
+        }
 
         // Set the icon and text for each tab
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
