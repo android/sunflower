@@ -18,9 +18,9 @@ buildscript {
     // Define versions in a single place
     ext {
         // Sdk and tools
-        compileSdkVersion = 28
+        compileSdkVersion = 29
         minSdkVersion = 21
-        targetSdkVersion = 28
+        targetSdkVersion = 29
 
         // App dependencies
         appCompatVersion = '1.1.0'
@@ -58,11 +58,15 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+		classpath "org.jlleitschuh.gradle:ktlint-gradle:$ktlintVersion"
+
     }
 }
 
 plugins {
     id "com.diffplug.gradle.spotless" version "3.24.0"
+	id "org.jlleitschuh.gradle.ktlint" version "9.2.1"
+	id "org.jmailen.kotlinter" version "2.3.2"
 }
 
 allprojects {

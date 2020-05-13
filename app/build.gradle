@@ -19,6 +19,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+ktlint {
+   debug = true 
+}
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
