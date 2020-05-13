@@ -20,6 +20,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.google.samples.apps.sunflower.models.Plant
 import com.google.samples.apps.sunflower.utilities.getValue
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matchers.equalTo

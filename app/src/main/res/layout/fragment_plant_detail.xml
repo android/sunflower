@@ -19,7 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.google.samples.apps.sunflower.data.Plant"/>
+        <import type="com.google.samples.apps.sunflower.models.Plant"/>
         <variable
             name="viewModel"
             type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />

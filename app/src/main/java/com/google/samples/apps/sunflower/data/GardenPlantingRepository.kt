@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.data
 
+import com.google.samples.apps.sunflower.models.GardenPlanting
+
 class GardenPlantingRepository private constructor(
     private val gardenPlantingDao: GardenPlantingDao
 ) {

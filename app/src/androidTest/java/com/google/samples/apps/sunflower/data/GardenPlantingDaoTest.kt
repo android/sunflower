@@ -20,6 +20,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.platform.app.InstrumentationRegistry
+import com.google.samples.apps.sunflower.models.GardenPlanting
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testCalendar
 import com.google.samples.apps.sunflower.utilities.testGardenPlanting
@@ -57,9 +58,9 @@ class GardenPlantingDaoTest {
 
     @Test fun testGetGardenPlantings() = runBlocking {
         val gardenPlanting2 = GardenPlanting(
-            testPlants[1].plantId,
-            testCalendar,
-            testCalendar
+                testPlants[1].plantId,
+                testCalendar,
+                testCalendar
         ).also { it.gardenPlantingId = 2 }
         gardenPlantingDao.insertGardenPlanting(gardenPlanting2)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))

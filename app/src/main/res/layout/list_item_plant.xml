@@ -24,7 +24,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="plant"
-            type="com.google.samples.apps.sunflower.data.Plant"/>
+            type="com.google.samples.apps.sunflower.models.Plant"/>
     </data>
 
     <com.google.samples.apps.sunflower.views.MaskedCardView
