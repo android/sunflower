@@ -24,6 +24,8 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.google.samples.apps.sunflower.models.GardenPlanting
+import com.google.samples.apps.sunflower.models.Plant
 import com.google.samples.apps.sunflower.utilities.DATABASE_NAME
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
 

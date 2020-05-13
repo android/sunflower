@@ -22,6 +22,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import com.google.samples.apps.sunflower.models.GardenPlanting
+import com.google.samples.apps.sunflower.models.PlantAndGardenPlantings
 
 /**
  * The Data Access Object for the [GardenPlanting] class.

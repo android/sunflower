@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.models.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 
 /**
@@ -55,8 +55,8 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
         }
 
         private fun navigateToPlant(
-            plant: Plant,
-            view: View
+                plant: Plant,
+                view: View
         ) {
             val direction =
                 HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(

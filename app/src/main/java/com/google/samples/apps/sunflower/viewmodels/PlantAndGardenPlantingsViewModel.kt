@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.models.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
 

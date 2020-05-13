@@ -22,7 +22,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.models.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 
 /**
