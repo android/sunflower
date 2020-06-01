@@ -24,8 +24,6 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildFeatures {
         dataBinding = true
-        // for view binding :
-        // viewBinding = true
     }
     defaultConfig {
         applicationId "com.google.samples.apps.sunflower"
