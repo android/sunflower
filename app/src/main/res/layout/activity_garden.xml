@@ -25,7 +25,7 @@
 
         <fragment
             android:id="@+id/nav_host"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:name="com.google.samples.apps.sunflower.fragments.GardenNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
