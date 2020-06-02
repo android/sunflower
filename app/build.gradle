@@ -22,8 +22,9 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    dataBinding {
-        enabled = true
+    buildToolsVersion rootProject.buildToolsVersion
+    buildFeatures {
+        dataBinding  true
     }
     defaultConfig {
         applicationId "com.google.samples.apps.sunflower"
@@ -33,6 +34,11 @@ android {
         versionCode 1
         versionName "0.1.6"
         vectorDrawables.useSupportLibrary true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.incremental" : "true"]
+            }
+        }
     }
     buildTypes {
         release {
@@ -54,10 +60,14 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+    //noinspection GradleDependency
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    // The APIs in lifecycle-extensions have been deprecated.
+    // Instead, add dependencies for the specific Lifecycle artifacts you need.
+    // https://developer.android.com/jetpack/androidx/releases/lifecycle#declaring_dependencies
+    //implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
