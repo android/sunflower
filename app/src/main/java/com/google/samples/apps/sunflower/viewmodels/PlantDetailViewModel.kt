@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
  * The ViewModel used in [PlantDetailFragment].
  */
 class PlantDetailViewModel(
-    plantRepository: PlantRepository,
+    val plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,
     private val plantId: String
 ) : ViewModel() {
@@ -35,9 +35,17 @@ class PlantDetailViewModel(
     val isPlanted = gardenPlantingRepository.isPlanted(plantId)
     val plant = plantRepository.getPlant(plantId)
 
-    fun addPlantToGarden() {
-        viewModelScope.launch {
-            gardenPlantingRepository.createGardenPlanting(plantId)
-        }
+    //AS addPlantToGarden => doAddDeletePlantToGarden for fab +/-
+    var isAddDelete: Boolean = false
+    fun doAddDeletePlantToGarden() {
+        if (!isAddDelete)
+            viewModelScope.launch {
+                gardenPlantingRepository.createGardenPlanting(plantId)
+            }
+        else
+            viewModelScope.launch {
+                val gardenPlanting = gardenPlantingRepository.getGardenPlanting(plantId)
+                gardenPlantingRepository.removeGardenPlanting(gardenPlanting)
+            }
     }
 }

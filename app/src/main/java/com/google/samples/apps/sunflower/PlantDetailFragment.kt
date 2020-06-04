@@ -23,10 +23,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ShareCompat
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,17 +59,8 @@ class PlantDetailFragment : Fragment() {
         ).apply {
             viewModel = plantDetailViewModel
             lifecycleOwner = viewLifecycleOwner
-            callback = object : Callback {
-                override fun add(plant: Plant?) {
-                    plant?.let {
-                        hideAppBarFab(fab)
-                        plantDetailViewModel.addPlantToGarden()
-                        Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
-                            .show()
-                    }
-                }
-            }
 
+            // AS removed callback as an outdated java construct not corresponding to Jetpack and fixed xml
             var isToolbarShown = false
 
             // scroll change listener begins at Y = 0 when image is fully collapsed
@@ -108,6 +101,21 @@ class PlantDetailFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
+        // AS the fab value changes +/- and monitors the plant's condition
+        plantDetailViewModel.isPlanted.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                if (it!=plantDetailViewModel.isAddDelete)
+                    Snackbar.make(binding.root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+                plantDetailViewModel.isAddDelete = true
+                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_minus))
+            } else {
+                if (it!=plantDetailViewModel.isAddDelete)
+                    Snackbar.make(binding.root, R.string.deleted_plant_from_garden, Snackbar.LENGTH_LONG).show()
+                plantDetailViewModel.isAddDelete = false
+                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_plus))
+            }
+        })
+
         return binding.root
     }
 
@@ -115,6 +123,10 @@ class PlantDetailFragment : Fragment() {
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
     private fun createShareIntent() {
+        //AS два предложения как укоротить с Kotlin elvis:
+        //val shareText = getString(R.string.share_text_plant, plantDetailViewModel.plant.value)
+        //val shareText = plantDetailViewModel.plant.value?.let { plant ->
+        //     getString(R.string.share_text_plant, plant.name) }?:""
         val shareText = plantDetailViewModel.plant.value.let { plant ->
             if (plant == null) {
                 ""

@@ -47,4 +47,12 @@ interface GardenPlantingDao {
 
     @Delete
     suspend fun deleteGardenPlanting(gardenPlanting: GardenPlanting)
+
+    // AS (must be added to tests)
+    @Query("SELECT * FROM garden_plantings WHERE plant_id = :plantId")
+    suspend fun getGardenPlanting(plantId: String): GardenPlanting
+
+    // AS (must be added to tests)
+    @Query("DELETE FROM garden_plantings")
+    suspend fun clearGarden()
 }

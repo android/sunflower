@@ -47,5 +47,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Изображение растения</string>
+    <string name="deleted_plant_from_garden">Растение вырвано с корнем</string>
+    <string name="garden_cleared">Садик перекопан</string>
 
 </resources>

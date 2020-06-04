@@ -43,5 +43,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Bild der Pflanze</string>
+    <string name="deleted_plant_from_garden">Deleted plant from garden</string>
+    <string name="garden_cleared">Garden Cleared</string>
 
 </resources>

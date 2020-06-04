@@ -23,9 +23,6 @@
         <variable
             name="viewModel"
             type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
-        <variable
-            name="callback"
-            type="com.google.samples.apps.sunflower.PlantDetailFragment.Callback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -166,10 +163,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> callback.add(viewModel.plant)}"
+            android:onClick="@{() -> viewModel.doAddDeletePlantToGarden()}"
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
-            app:isGone="@{viewModel.isPlanted}"
+            android:visibility="visible"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />
