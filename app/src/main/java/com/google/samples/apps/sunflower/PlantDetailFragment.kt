@@ -123,7 +123,7 @@ class PlantDetailFragment : Fragment() {
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
     private fun createShareIntent() {
-        //AS два предложения как укоротить с Kotlin elvis:
+        //AS two sentences how to shorten с Kotlin elvis:
         //val shareText = getString(R.string.share_text_plant, plantDetailViewModel.plant.value)
         //val shareText = plantDetailViewModel.plant.value?.let { plant ->
         //     getString(R.string.share_text_plant, plant.name) }?:""
