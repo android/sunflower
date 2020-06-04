@@ -16,17 +16,24 @@
 
 package com.google.samples.apps.sunflower
 
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
+
 
 class HomeViewPagerFragment : Fragment() {
 
@@ -47,17 +54,69 @@ class HomeViewPagerFragment : Fragment() {
             tab.text = getTabTitle(position)
         }.attach()
 
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                tab?.let { tabSelected(it) }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                tab?.let { tabUnselected(it) }
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let { tabSelected(it) }
+            }
+        })
+
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
     }
 
-    private fun getTabIcon(position: Int): Int {
-        return when (position) {
-            MY_GARDEN_PAGE_INDEX -> R.drawable.garden_tab_selector
-            PLANT_LIST_PAGE_INDEX -> R.drawable.plant_list_tab_selector
+    private fun tabSelected(tab: TabLayout.Tab){
+        tab.icon = when(tab.position){
+            MY_GARDEN_PAGE_INDEX -> getDrawable(R.drawable.vad_garden_active_anim)
+            PLANT_LIST_PAGE_INDEX -> getDrawable(R.drawable.vad_plan_list_active)
             else -> throw IndexOutOfBoundsException()
         }
+
+        animateVectorDrawable(tab.icon!!)
+    }
+
+    private fun tabUnselected(tab: TabLayout.Tab){
+        tab.icon = when(tab.position){
+            MY_GARDEN_PAGE_INDEX -> getDrawable(R.drawable.vd_garden_inactive)
+            PLANT_LIST_PAGE_INDEX -> getDrawable(R.drawable.ic_plant_list_inactive)
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
+
+    private fun getDrawable(@DrawableRes id: Int): Drawable?{
+        return ContextCompat.getDrawable(requireActivity(), id)
+    }
+
+    private fun animateVectorDrawable(icon: Drawable){
+
+        when(icon){
+            is AnimatedVectorDrawable -> {
+                icon.start()
+            }
+
+            is AnimatedVectorDrawableCompat -> {
+                icon.start()
+            }
+        }
+    }
+
+    private fun getTabIcon(position: Int): Drawable? {
+        val id = when (position) {
+            MY_GARDEN_PAGE_INDEX -> R.drawable.vad_garden_active_anim
+            PLANT_LIST_PAGE_INDEX -> R.drawable.ic_plant_list_inactive
+            else -> throw IndexOutOfBoundsException()
+        }
+
+        return ContextCompat.getDrawable(requireActivity(), id)
     }
 
     private fun getTabTitle(position: Int): String? {

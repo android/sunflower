@@ -1,0 +1,63 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="21dp"
+            android:height="28dp"
+            android:viewportWidth="21"
+            android:viewportHeight="28">
+            <path
+                android:name="leaves"
+                android:pathData="M 9.51 19.69 L 9.89 23.85 L 8.51 23.17 C 9.63 21.23 6.32 19.75 4.73 19.75 C 4.73 19.75 1.33 19.82 0.72 21 C 0.51 22.17 3.76 25.46 5.54 25.63 C 7.15 25.83 7.86 24.73 8.05 24.67 C 8.39 24.56 9.47 25.11 9.57 25.5 C 9.9 25.93 9.77 27.86 9.77 27.86 L 11.28 27.83 L 11.25 23.77 L 12.86 22.48 C 15.39 24.89 18.84 21.54 20.19 18.95 C 18.78 18.53 14.26 16.97 12.32 20.19 C 12.42 21.26 11.43 21.83 11.16 22.02 C 11.16 22.02 11.67 22.43 11.02 19.39 C 10.53 19.77 9.51 19.69 9.51 19.69 Z M 18.59 19.5 C 18.52 20.57 15.21 23.29 14.01 21.79 C 14.57 21.52 16.99 20.91 16.77 20.35 C 16.93 19.25 14.1 20.35 13.67 20.53 C 14.11 18.46 17.48 19.59 18.59 19.5 Z M 7.25 22.37 C 6.79 22.19 4.18 21.63 4.46 22.32 C 4.58 22.86 6.61 23.7 7.15 23.95 C 6.6 24.6 3.02 24.11 2.33 21.45 C 4.55 20.44 7.44 21.16 7.25 22.37 Z"
+                android:fillColor="#fff443"
+                android:strokeWidth="0.5"/>
+            <group android:name="mrotation">
+                <path
+                    android:name="head"
+                    android:pathData="M 12.58 3.31 C 13.64 2.89 15.85 2.42 16.8 3.58 C 17.62 5.08 16.78 6.64 16.53 7.26 C 18.45 7.58 19.06 9 19.16 9.23 C 19.87 10.92 17.99 12.36 16.53 12.7 C 16.53 12.7 18.44 15.22 16.53 16.44 C 16.12 17.94 13.34 16.91 12.58 16.65 C 12.48 17.09 11.9 18.69 11.08 19 C 9.33 20.35 7.53 18.3 7.14 16.65 C 6.38 16.92 4.62 17.6 3.33 16.8 C 2.03 15.9 2.78 13.74 3.19 12.7 C 1.7 12.35 -0.11 10.95 0.57 9.23 C 0.67 8.99 1.59 7.41 3.19 7.26 C 2.68 6 2 3.99 3.46 3.05 C 5.07 2.21 6.47 3.04 7.14 3.31 C 7.34 1.47 8.94 0.75 9.18 0.66 C 10.81 0.45 12.24 1.84 12.58 3.31 Z M 9.94 4.98 C 8.22 4.98 6.06 6.25 5.32 7.87 C 4.21 10.31 5.21 13.22 7.61 14.42 C 10.13 16.1 13.12 13.84 13.57 13.31 C 15.8 10.69 14.97 5.52 9.94 4.98 Z"
+                    android:fillColor="#fff443"
+                    android:strokeWidth="0.5"/>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="mrotation">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:duration="800"
+                    android:valueFrom="0"
+                    android:valueTo="270"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/accelerate_interpolator"/>
+                <objectAnimator
+                    android:propertyName="pivotX"
+                    android:duration="800"
+                    android:valueFrom="9.8"
+                    android:valueTo="9.8"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="pivotY"
+                    android:duration="800"
+                    android:valueFrom="10"
+                    android:valueTo="10"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/accelerate_interpolator"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="leaves">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="strokeColor"
+                android:duration="800"
+                android:valueFrom="#fff443"
+                android:valueTo="#fff443"
+                android:valueType="colorType"
+                android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        </aapt:attr>
+    </target>
+</animated-vector>
