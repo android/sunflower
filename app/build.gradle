@@ -64,7 +64,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
-    // The APIs in lifecycle-extensions have been deprecated.
+  
     // Instead, add dependencies for the specific Lifecycle artifacts you need.
     // https://developer.android.com/jetpack/androidx/releases/lifecycle#declaring_dependencies
     //implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
