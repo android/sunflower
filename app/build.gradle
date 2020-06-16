@@ -33,6 +33,10 @@ android {
         versionCode 1
         versionName "0.1.6"
         vectorDrawables.useSupportLibrary true
+
+        // Consult the README on instructions for setting up Unsplash API keys
+        buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")
+        buildConfigField("String", "UNSPLASH_SECRET_KEY", "\"" + getUnsplashSecret() + "\"")
     }
     buildTypes {
         release {
@@ -84,4 +88,16 @@ dependencies {
     androidTestImplementation "androidx.work:work-testing:$rootProject.workVersion"
     androidTestImplementation "com.google.truth:truth:$rootProject.truthVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+}
+
+def getUnsplashAccess() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("unsplash_access_key")
+}
+
+def getUnsplashSecret() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("unsplash_secret_key")
 }
