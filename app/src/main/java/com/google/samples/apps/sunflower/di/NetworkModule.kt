@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels
+package com.google.samples.apps.sunflower.di
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.google.samples.apps.sunflower.data.UnsplashRepository
+import com.google.samples.apps.sunflower.api.UnsplashService
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import javax.inject.Singleton
 
-class GalleryViewModelFactory(
-    private val unsplashRepository: UnsplashRepository
-) : ViewModelProvider.Factory {
+@InstallIn(ApplicationComponent::class)
+@Module
+class NetworkModule {
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return GalleryViewModel(
-            unsplashRepository
-        ) as T
+    @Singleton
+    @Provides
+    fun provideUnsplashService(): UnsplashService {
+        return UnsplashService.create()
     }
 }

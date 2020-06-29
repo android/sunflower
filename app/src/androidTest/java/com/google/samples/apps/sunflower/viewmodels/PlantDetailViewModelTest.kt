@@ -24,30 +24,42 @@ import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import javax.inject.Inject
+import kotlin.jvm.Throws
 
+@HiltAndroidTest
 class PlantDetailViewModelTest {
 
     private lateinit var appDatabase: AppDatabase
     private lateinit var viewModel: PlantDetailViewModel
 
     @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Inject
+    lateinit var plantRepository: PlantRepository
+
+    @Inject
+    lateinit var gardenPlantRepository: GardenPlantingRepository
 
     @Before
     fun setUp() {
+        hiltRule.inject()
+
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
 
-        val plantRepo = PlantRepository.getInstance(appDatabase.plantDao())
-        val gardenPlantingRepo = GardenPlantingRepository.getInstance(
-            appDatabase.gardenPlantingDao()
-        )
-        viewModel = PlantDetailViewModel(plantRepo, gardenPlantingRepo, testPlant.plantId)
+        viewModel = PlantDetailViewModel(plantRepository, gardenPlantRepository, testPlant.plantId)
     }
 
     @After
