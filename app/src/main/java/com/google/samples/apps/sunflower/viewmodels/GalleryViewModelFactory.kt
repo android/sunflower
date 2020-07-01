@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,22 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import androidx.lifecycle.ViewModelProvider
+import com.google.samples.apps.sunflower.data.UnsplashRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
-class GardenPlantingListViewModel internal constructor(
-    gardenPlantingRepository: GardenPlantingRepository
-) : ViewModel() {
-    val plantAndGardenPlantings: LiveData<List<PlantAndGardenPlantings>> =
-            gardenPlantingRepository.getPlantedGardens()
+@ExperimentalCoroutinesApi
+@FlowPreview
+class GalleryViewModelFactory (
+    private val unsplashRepository: UnsplashRepository
+) : ViewModelProvider.Factory {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return GalleryViewModel(
+            unsplashRepository
+        ) as T
+    }
 }

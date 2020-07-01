@@ -36,7 +36,7 @@ interface UnsplashService {
         @Query("query") query: String,
         @Query("client_id") clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY,
         @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 10
+        @Query("per_page") perPage: Int = 20
     ) : UnsplashSearchResponse
 
     companion object {

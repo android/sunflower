@@ -105,6 +105,8 @@
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:gravity="center_horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:text="@{viewModel.plant.name}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     app:layout_constraintEnd_toEndOf="parent"

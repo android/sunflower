@@ -105,10 +105,21 @@ class PlantDetailFragment : Fragment() {
                     else -> false
                 }
             }
+
+            // TODO: add plant livedata, add button
+            plantDetailName.setOnClickListener {
+                navigateToGallery("sunflower", view!!)
+            }
         }
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    private fun navigateToGallery(plantName: String, view: View) {
+        val direction =
+            PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plantName)
+        view.findNavController().navigate(direction)
     }
 
     // Helper function for calling a share functionality.
