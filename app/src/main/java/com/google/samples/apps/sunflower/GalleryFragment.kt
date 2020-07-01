@@ -17,13 +17,13 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.adapters.GalleryAdapter
 import com.google.samples.apps.sunflower.data.UnsplashSearchResult
@@ -38,6 +38,7 @@ import kotlinx.coroutines.FlowPreview
 class GalleryFragment : Fragment() {
 
     private val adapter = GalleryAdapter()
+    private val args: GalleryFragmentArgs by navArgs()
     private val viewModel: GalleryViewModel by viewModels {
         InjectorUtils.provideGalleryViewModelFactory()
     }
@@ -50,11 +51,9 @@ class GalleryFragment : Fragment() {
         val binding = FragmentGalleryBinding.inflate(inflater, container, false)
         context ?: return binding.root
 
+        viewModel.searchPictures(args.plantName)
         binding.photoList.adapter = adapter
         subscribeUi(adapter, binding.root)
-
-        // TODO: replace with argument
-        viewModel.searchPictures("sunflower")
 
         return binding.root
     }

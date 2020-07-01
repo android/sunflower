@@ -106,9 +106,9 @@ class PlantDetailFragment : Fragment() {
                 }
             }
 
-            // TODO: add plant livedata, add button
+            // TODO: can !! be avoided here?
             plantDetailName.setOnClickListener {
-                navigateToGallery("sunflower", view!!)
+                navigateToGallery(plantDetailViewModel.plant.value!!.name, view!!)
             }
         }
         setHasOptionsMenu(true)
