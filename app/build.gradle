@@ -34,9 +34,8 @@ android {
         versionName "0.1.6"
         vectorDrawables.useSupportLibrary true
 
-        // Consult the README on instructions for setting up Unsplash API keys
+        // Consult the README on instructions for setting up Unsplash API key
         buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")
-        buildConfigField("String", "UNSPLASH_SECRET_KEY", "\"" + getUnsplashSecret() + "\"")
     }
     buildTypes {
         release {
@@ -97,10 +96,4 @@ def getUnsplashAccess() {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     return properties.getProperty("unsplash_access_key")
-}
-
-def getUnsplashSecret() {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    return properties.getProperty("unsplash_secret_key")
 }
