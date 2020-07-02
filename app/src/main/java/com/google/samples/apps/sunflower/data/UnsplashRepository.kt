@@ -40,7 +40,6 @@ class UnsplashRepository (private val service: UnsplashService) {
     private suspend fun requestData(query: String) {
         try {
             val response = service.searchPhotos(query)
-            Log.d("UnsplashRepository", "Response: $response")
             searchResult.offer(UnsplashSearchResult.Success(response))
         } catch (exception: IOException) {
             searchResult.offer(UnsplashSearchResult.Error(exception))

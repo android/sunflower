@@ -36,11 +36,6 @@ class GalleryAdapter : ListAdapter<UnsplashPhoto, ViewHolder>(GalleryDiffCallbac
     class GalleryViewHolder(
         private val binding: ListItemPhotoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.setClickListener {
-                // TODO: navigate to Unsplash page if needed
-            }
-        }
 
         fun bind(item: UnsplashPhoto) {
             binding.apply {
