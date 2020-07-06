@@ -28,6 +28,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -68,6 +69,8 @@ class PlantDetailFragment : Fragment() {
                 }
             }
 
+            galleryNav.setOnClickListener { navigateToGallery() }
+
             var isToolbarShown = false
 
             // scroll change listener begins at Y = 0 when image is fully collapsed
@@ -105,21 +108,18 @@ class PlantDetailFragment : Fragment() {
                     else -> false
                 }
             }
-
-            // TODO: can !! be avoided here?
-            plantDetailName.setOnClickListener {
-                navigateToGallery(plantDetailViewModel.plant.value!!.name, view!!)
-            }
         }
         setHasOptionsMenu(true)
 
         return binding.root
     }
 
-    private fun navigateToGallery(plantName: String, view: View) {
-        val direction =
-            PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plantName)
-        view.findNavController().navigate(direction)
+    private fun navigateToGallery() {
+        plantDetailViewModel.plant.value?.let { plant ->
+            val direction =
+                PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plant.name)
+            findNavController().navigate(direction)
+        }
     }
 
     // Helper function for calling a share functionality.

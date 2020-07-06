@@ -114,6 +114,14 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Apple" />
 
+                <Button
+                    android:id="@+id/gallery_nav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:isGone="@{!viewModel.hasValidUnspliashKey()}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
                 <TextView
                     android:id="@+id/plant_watering_header"
                     android:layout_width="0dp"
@@ -171,7 +179,7 @@
             android:onClick="@{() -> callback.add(viewModel.plant)}"
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
-            app:isGone="@{viewModel.isPlanted}"
+            app:isFabGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />
