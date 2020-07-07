@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.samples.apps.sunflower.GalleryFragment
+import com.google.samples.apps.sunflower.adapters.GalleryAdapter.GalleryViewHolder
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
 import com.google.samples.apps.sunflower.databinding.ListItemPhotoBinding
 
@@ -32,16 +32,16 @@ import com.google.samples.apps.sunflower.databinding.ListItemPhotoBinding
  * Adapter for the [RecyclerView] in [GalleryFragment].
  */
 
-class GalleryAdapter : ListAdapter<UnsplashPhoto, ViewHolder>(GalleryDiffCallback()) {
+class GalleryAdapter : ListAdapter<UnsplashPhoto, GalleryViewHolder>(GalleryDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         return GalleryViewHolder(ListItemPhotoBinding.inflate(
             LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
         val photo = getItem(position)
-        (holder as GalleryViewHolder).bind(photo)
+        holder.bind(photo)
     }
 
     class GalleryViewHolder(
