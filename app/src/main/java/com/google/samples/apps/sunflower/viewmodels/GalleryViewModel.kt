@@ -34,7 +34,7 @@ class GalleryViewModel internal constructor(
 
     val repoResult: LiveData<UnsplashSearchResult> = queryLiveData.switchMap { queryString ->
         liveData {
-            val repos = repository.getSearchResultStream(queryString).asLiveData(Dispatchers.Main)
+            val repos = repository.getSearchResultStream(queryString).asLiveData()
             emitSource(repos)
         }
     }
