@@ -26,5 +26,11 @@ import com.google.gson.annotations.SerializedName
  * [here](https://unsplash.com/documentation#get-a-users-public-profile).
  */
 data class UnsplashUser (
-    @field:SerializedName("name") val name: String
-)
+    @field:SerializedName("name") val name: String,
+    @field:SerializedName("username") val username: String
+) {
+    val attributionUrl: String
+        get() {
+            return "https://unsplash.com/$username?utm_source=sunflower&utm_medium=referral"
+        }
+}

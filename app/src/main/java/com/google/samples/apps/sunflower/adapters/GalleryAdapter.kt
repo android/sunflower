@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.adapters
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -32,19 +34,6 @@ import com.google.samples.apps.sunflower.databinding.ListItemPhotoBinding
 
 class GalleryAdapter : ListAdapter<UnsplashPhoto, ViewHolder>(GalleryDiffCallback()) {
 
-
-    class GalleryViewHolder(
-        private val binding: ListItemPhotoBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: UnsplashPhoto) {
-            binding.apply {
-                photo = item
-                executePendingBindings()
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return GalleryViewHolder(ListItemPhotoBinding.inflate(
             LayoutInflater.from(parent.context), parent, false))
@@ -53,6 +42,27 @@ class GalleryAdapter : ListAdapter<UnsplashPhoto, ViewHolder>(GalleryDiffCallbac
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val photo = getItem(position)
         (holder as GalleryViewHolder).bind(photo)
+    }
+
+    class GalleryViewHolder(
+        private val binding: ListItemPhotoBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.setClickListener { view ->
+                binding.photo?.let { photo ->
+                    val uri = Uri.parse(photo.user.attributionUrl)
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    view.context.startActivity(intent)
+                }
+            }
+        }
+
+        fun bind(item: UnsplashPhoto) {
+            binding.apply {
+                photo = item
+                executePendingBindings()
+            }
+        }
     }
 }
 
