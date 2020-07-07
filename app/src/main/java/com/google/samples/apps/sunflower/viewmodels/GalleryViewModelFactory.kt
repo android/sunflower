@@ -19,11 +19,7 @@ package com.google.samples.apps.sunflower.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.samples.apps.sunflower.data.UnsplashRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 class GalleryViewModelFactory (
     private val unsplashRepository: UnsplashRepository
 ) : ViewModelProvider.Factory {

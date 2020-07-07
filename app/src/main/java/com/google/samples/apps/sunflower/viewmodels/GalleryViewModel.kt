@@ -22,15 +22,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.google.samples.apps.sunflower.api.UnsplashService
 import com.google.samples.apps.sunflower.data.UnsplashRepository
 import com.google.samples.apps.sunflower.data.UnsplashSearchResult
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 class GalleryViewModel internal constructor(
     repository: UnsplashRepository
 ) : ViewModel() {

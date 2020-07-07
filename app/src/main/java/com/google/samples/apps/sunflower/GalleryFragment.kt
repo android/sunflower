@@ -31,11 +31,7 @@ import com.google.samples.apps.sunflower.data.UnsplashSearchResult
 import com.google.samples.apps.sunflower.databinding.FragmentGalleryBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GalleryViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 class GalleryFragment : Fragment() {
 
     private val adapter = GalleryAdapter()

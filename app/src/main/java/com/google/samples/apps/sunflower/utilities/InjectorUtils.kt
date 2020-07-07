@@ -27,7 +27,6 @@ import com.google.samples.apps.sunflower.viewmodels.GalleryViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -62,7 +61,6 @@ object InjectorUtils {
                 getGardenPlantingRepository(context), plantId)
     }
 
-    @ExperimentalCoroutinesApi
     fun provideGalleryViewModelFactory(): GalleryViewModelFactory {
         val repository = UnsplashRepository(UnsplashService.create())
         return GalleryViewModelFactory(repository)
