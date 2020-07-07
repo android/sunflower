@@ -152,7 +152,7 @@
                     android:contentDescription="@string/gallery_content_description"
                     android:focusable="true"
                     android:src="@drawable/ic_photo_library"
-                    app:isGone="@{!viewModel.hasValidUnspliashKey()}"
+                    app:isGone="@{!viewModel.hasValidUnsplashKey()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
 

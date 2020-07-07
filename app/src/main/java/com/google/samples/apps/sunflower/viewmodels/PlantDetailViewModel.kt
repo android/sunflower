@@ -42,5 +42,5 @@ class PlantDetailViewModel(
         }
     }
 
-    fun hasValidUnspliashKey() = (BuildConfig.UNSPLASH_ACCESS_KEY != "null")
+    fun hasValidUnsplashKey() = (BuildConfig.UNSPLASH_ACCESS_KEY != "null")
 }
