@@ -43,5 +43,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Imatge de la planta</string>
+    <string name="gallery_title">(translate me) Photos by Unsplash</string>
+    <string name="gallery_content_description">(translate me) Navigate to gallery screen</string>
 
 </resources>

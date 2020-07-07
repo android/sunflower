@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels
+package com.google.samples.apps.sunflower.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.gson.annotations.SerializedName
 
-class GardenPlantingListViewModel internal constructor(
-    gardenPlantingRepository: GardenPlantingRepository
-) : ViewModel() {
-    val plantAndGardenPlantings: LiveData<List<PlantAndGardenPlantings>> =
-            gardenPlantingRepository.getPlantedGardens()
-}
+/**
+ * Data class that represents a photo search response from Unsplash.
+ *
+ * Not all of the fields returned from the API are represented here; only the ones used in this
+ * project are listed below. For a full list of fields, consult the API documentation
+ * [here](https://unsplash.com/documentation#search-photos).
+ */
+data class UnsplashSearchResponse(
+    @field:SerializedName("results") val results: List<UnsplashPhoto>
+)
