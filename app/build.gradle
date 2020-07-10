@@ -98,7 +98,5 @@ dependencies {
 }
 
 def getUnsplashAccess() {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    return properties.getProperty("unsplash_access_key")
+    return project.findProperty("unsplash_access_key")
 }
