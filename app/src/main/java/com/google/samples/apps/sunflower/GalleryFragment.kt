@@ -69,9 +69,4 @@ class GalleryFragment : Fragment() {
             }
         }
     }
-
-    // Show placeholder if the list of pictures is empty
-    private fun showPlaceholder(isListEmpty: Boolean) {
-        // TODO: implement this
-    }
 }
