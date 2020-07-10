@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,9 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels
+package com.google.samples.apps.sunflower.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
-
-class GardenPlantingListViewModel internal constructor(
-    gardenPlantingRepository: GardenPlantingRepository
-) : ViewModel() {
-    val plantAndGardenPlantings: LiveData<List<PlantAndGardenPlantings>> =
-            gardenPlantingRepository.getPlantedGardens()
+sealed class UnsplashSearchResult {
+    data class Success(val data: UnsplashSearchResponse) : UnsplashSearchResult()
+    data class Error(val error: Exception) : UnsplashSearchResult()
 }

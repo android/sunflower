@@ -42,5 +42,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">植物圖片</string>
+    <string name="gallery_title">(translate me) Photos by Unsplash</string>
+    <string name="gallery_content_description">(translate me) Navigate to gallery screen</string>
 
 </resources>
