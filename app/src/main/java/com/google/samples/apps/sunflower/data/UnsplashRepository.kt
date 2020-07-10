@@ -16,30 +16,22 @@
 
 package com.google.samples.apps.sunflower.data
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.google.samples.apps.sunflower.api.UnsplashService
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import retrofit2.HttpException
-import java.io.IOException
 
 class UnsplashRepository (private val service: UnsplashService) {
 
-    private val searchResult = ConflatedBroadcastChannel<UnsplashSearchResult>()
-
-    suspend fun getSearchResultStream(query: String): Flow<UnsplashSearchResult> {
-        requestData(query)
-        return searchResult.asFlow()
+    fun getSearchResultStream(query: String): Flow<PagingData<UnsplashPhoto>> {
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE),
+            pagingSourceFactory = { UnsplashPagingSource(service, query) }
+        ).flow
     }
 
-    private suspend fun requestData(query: String) {
-        try {
-            val response = service.searchPhotos(query)
-            searchResult.offer(UnsplashSearchResult.Success(response))
-        } catch (exception: IOException) {
-            searchResult.offer(UnsplashSearchResult.Error(exception))
-        } catch (exception: HttpException) {
-            searchResult.offer(UnsplashSearchResult.Error(exception))
-        }
+    companion object {
+        private const val NETWORK_PAGE_SIZE = 25
     }
 }

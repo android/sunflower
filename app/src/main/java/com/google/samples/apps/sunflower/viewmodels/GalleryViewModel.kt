@@ -16,30 +16,29 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.google.samples.apps.sunflower.data.UnsplashPhoto
 import com.google.samples.apps.sunflower.data.UnsplashRepository
-import com.google.samples.apps.sunflower.data.UnsplashSearchResult
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 
 class GalleryViewModel internal constructor(
-    repository: UnsplashRepository
+    private val repository: UnsplashRepository
 ) : ViewModel() {
+    private var currentQueryValue: String? = null
+    private var currentSearchResult: Flow<PagingData<UnsplashPhoto>>? = null
 
-    private val queryLiveData = MutableLiveData<String>()
-
-    val repoResult: LiveData<UnsplashSearchResult> = queryLiveData.switchMap { queryString ->
-        liveData {
-            val repos = repository.getSearchResultStream(queryString).asLiveData()
-            emitSource(repos)
+    fun searchPictures(queryString: String): Flow<PagingData<UnsplashPhoto>> {
+        val lastResult = currentSearchResult
+        if (queryString == currentQueryValue && lastResult != null) {
+            return lastResult
         }
-    }
-
-    fun searchPictures(queryString: String) {
-        queryLiveData.postValue(queryString)
+        currentQueryValue = queryString
+        val newResult: Flow<PagingData<UnsplashPhoto>> =
+            repository.getSearchResultStream(queryString).cachedIn(viewModelScope)
+        currentSearchResult = newResult
+        return newResult
     }
 }

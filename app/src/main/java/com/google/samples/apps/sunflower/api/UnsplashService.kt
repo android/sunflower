@@ -34,8 +34,8 @@ interface UnsplashService {
     @GET("search/photos")
     suspend fun searchPhotos(
         @Query("query") query: String,
-        @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 20,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
         @Query("client_id") clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY
     ) : UnsplashSearchResponse
 

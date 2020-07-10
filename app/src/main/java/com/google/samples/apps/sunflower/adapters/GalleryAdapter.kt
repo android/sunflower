@@ -20,8 +20,8 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.GalleryFragment
 import com.google.samples.apps.sunflower.adapters.GalleryAdapter.GalleryViewHolder
@@ -32,7 +32,7 @@ import com.google.samples.apps.sunflower.databinding.ListItemPhotoBinding
  * Adapter for the [RecyclerView] in [GalleryFragment].
  */
 
-class GalleryAdapter : ListAdapter<UnsplashPhoto, GalleryViewHolder>(GalleryDiffCallback()) {
+class GalleryAdapter : PagingDataAdapter<UnsplashPhoto, GalleryViewHolder>(GalleryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         return GalleryViewHolder(ListItemPhotoBinding.inflate(
@@ -41,7 +41,9 @@ class GalleryAdapter : ListAdapter<UnsplashPhoto, GalleryViewHolder>(GalleryDiff
 
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
         val photo = getItem(position)
-        holder.bind(photo)
+        if (photo != null) {
+            holder.bind(photo)
+        }
     }
 
     class GalleryViewHolder(
