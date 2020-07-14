@@ -31,10 +31,6 @@ class GalleryViewModel internal constructor(
     private var currentSearchResult: Flow<PagingData<UnsplashPhoto>>? = null
 
     fun searchPictures(queryString: String): Flow<PagingData<UnsplashPhoto>> {
-        val lastResult = currentSearchResult
-        if (queryString == currentQueryValue && lastResult != null) {
-            return lastResult
-        }
         currentQueryValue = queryString
         val newResult: Flow<PagingData<UnsplashPhoto>> =
             repository.getSearchResultStream(queryString).cachedIn(viewModelScope)

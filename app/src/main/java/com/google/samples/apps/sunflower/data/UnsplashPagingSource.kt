@@ -18,8 +18,6 @@ package com.google.samples.apps.sunflower.data
 
 import androidx.paging.PagingSource
 import com.google.samples.apps.sunflower.api.UnsplashService
-import retrofit2.HttpException
-import java.io.IOException
 
 private const val UNSPLASH_STARTING_PAGE_INDEX = 1
 
@@ -38,9 +36,7 @@ class UnsplashPagingSource (
                 prevKey = if (page == UNSPLASH_STARTING_PAGE_INDEX) null else page - 1,
                 nextKey = if (page == response.totalPages) null else page + 1
             )
-        } catch (exception: IOException) {
-            LoadResult.Error(exception)
-        } catch (exception: HttpException) {
+        } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
     }
