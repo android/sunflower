@@ -41,7 +41,7 @@ buildscript {
         navigationVersion = '2.2.0'
         okhttpLoggingVersion = '4.7.2'
         pagingVersion = '3.0.0-alpha02'
-        recyclerViewVersion = '1.2.0-alpha03'
+        recyclerViewVersion = '1.2.0-alpha04'
         retrofitVersion = '2.9.0'
         roomVersion = '2.1.0'
         runnerVersion = '1.0.1'
