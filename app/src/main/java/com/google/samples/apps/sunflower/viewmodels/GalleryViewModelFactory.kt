@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,16 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.UnsplashRepository
 
-/**
- * Factory for creating a [GardenPlantingListViewModel] with a constructor that takes a
- * [GardenPlantingRepository].
- */
-class GardenPlantingListViewModelFactory(
-    private val repository: GardenPlantingRepository
+class GalleryViewModelFactory (
+    private val unsplashRepository: UnsplashRepository
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return GardenPlantingListViewModel(repository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return GalleryViewModel(
+            unsplashRepository
+        ) as T
     }
 }

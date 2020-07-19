@@ -1,12 +1,11 @@
-Android Sunflower (alpha)
-=========================
-[![CircleCI](https://circleci.com/gh/android/sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/android/sunflower/tree/master)
+Android Sunflower
+=================
 
 A gardening app illustrating Android development best practices with Android Jetpack.
 
 Android Sunflower is currently under heavy development.
 Note that some changes (such as database schema modifications) are not backwards
-compatible during this alpha period and may cause the app to crash. In this
+compatible and may cause the app to crash. In this
 case, please uninstall and re-install the app.
 
 Introduction
@@ -35,6 +34,21 @@ There are two Gradle tasks for testing the project:
 For more resources on learning Android development, visit the
 [Developer Guides](https://developer.android.com/guide/) at
 [developer.android.com](https://developer.android.com).
+
+### Unsplash API key
+
+Sunflower uses the [Unsplash API](https://unsplash.com/developers) to load pictures on the gallery
+screen. To use the API, you will need to obtain a free developer API key. See the
+[Unsplash API Documentation](https://unsplash.com/documentation) for instructions.
+
+Once you have the key, add this line to the `gradle.properties` file, either in your user home
+directory (usually `~/.gradle/gradle.properties` on Linux and Mac) or in the project's root folder:
+
+```
+unsplash_access_key=<your Unsplash access key>
+```
+
+The app is still usable without an API key, though you won't be able to navigate to the gallery screen.
 
 Screenshots
 -----------
@@ -107,11 +121,9 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Close Android Studio if it's open
 
-- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation)
+- Download ktlint using these [installation instructions](https://github.com/pinterest/ktlint/blob/master/README.md#installation)
 
-- Inside the project root directory run:
-
-  `./ktlint --apply-to-idea-project --android`
+- Apply ktlint settings to Android Studio using these [instructions](https://github.com/pinterest/ktlint/blob/master/README.md#-with-intellij-idea)
 
 - Start Android Studio
 

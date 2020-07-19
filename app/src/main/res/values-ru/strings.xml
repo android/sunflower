@@ -1,0 +1,53 @@
+<!--
+  ~ Copyright 2020 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="menu_filter_by_grow_zone">Отфильтровать по зоне выращивания</string>
+    <string name="plant_detail_image_content_description">Изображение растения</string>
+    <string name="my_garden_title">Мои сад</string>
+    <string name="plant_list_title">Растения</string>
+    <string name="available">Доступные растения</string>
+    <string name="add_plant">Добавить растение</string>
+    <string name="garden_empty">Ваш сад пуст</string>
+    <string name="menu_item_share_plant">Поделиться</string>
+    <string name="plant_details_title">О растении</string>
+    <string name="added_plant_to_garden">Растение добавлено в ваш сад</string>
+    <string name="plant_date_header">Посажен</string>
+    <string name="watered_date_header">Последний полив</string>
+    <string name="share_text_plant">Попробуйте %s в приложении Android Sunflower</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">Необходим полив</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">раз в %d день</item>
+        <item quantity="few">каждый %d дня</item>
+        <item quantity="many">каждые %d дней</item>
+        <item quantity="other">каждые %d дней</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one">полить через %d день</item>
+        <item quantity="few">полить через %d дня</item>
+        <item quantity="many">полить через %d дней</item>
+        <item quantity="other">полить через %d дней</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Изображение растения</string>
+    <string name="gallery_title">(translate me) Photos by Unsplash</string>
+    <string name="gallery_content_description">(translate me) Navigate to gallery screen</string>
+
+</resources>

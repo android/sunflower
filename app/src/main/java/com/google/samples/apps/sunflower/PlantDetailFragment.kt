@@ -17,16 +17,18 @@
 package com.google.samples.apps.sunflower
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ShareCompat
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -34,8 +36,6 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
-import androidx.navigation.findNavController
-import androidx.core.widget.NestedScrollView
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -68,6 +68,8 @@ class PlantDetailFragment : Fragment() {
                     }
                 }
             }
+
+            galleryNav.setOnClickListener { navigateToGallery() }
 
             var isToolbarShown = false
 
@@ -112,6 +114,14 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
 
+    private fun navigateToGallery() {
+        plantDetailViewModel.plant.value?.let { plant ->
+            val direction =
+                PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plant.name)
+            findNavController().navigate(direction)
+        }
+    }
+
     // Helper function for calling a share functionality.
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
@@ -123,22 +133,11 @@ class PlantDetailFragment : Fragment() {
                 getString(R.string.share_text_plant, plant.name)
             }
         }
-        val shareIntent = ShareCompat.IntentBuilder.from(activity)
+        val shareIntent = ShareCompat.IntentBuilder.from(requireActivity())
             .setText(shareText)
             .setType("text/plain")
             .createChooserIntent()
-            .apply {
-                // https://android-developers.googleblog.com/2012/02/share-with-intents.html
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    // If we're on Lollipop, we can open the intent as a document
-                    addFlags(
-                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-                    )
-                } else {
-                    // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                }
-            }
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         startActivity(shareIntent)
     }
 

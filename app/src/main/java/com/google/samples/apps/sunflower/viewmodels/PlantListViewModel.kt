@@ -18,6 +18,7 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.google.samples.apps.sunflower.PlantListFragment
@@ -27,11 +28,12 @@ import com.google.samples.apps.sunflower.data.PlantRepository
 /**
  * The ViewModel for [PlantListFragment].
  */
-class PlantListViewModel internal constructor(plantRepository: PlantRepository) : ViewModel() {
+class PlantListViewModel internal constructor(
+    plantRepository: PlantRepository,
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
-    private val growZoneNumber = MutableLiveData<Int>(NO_GROW_ZONE)
-
-    val plants: LiveData<List<Plant>> = growZoneNumber.switchMap {
+    val plants: LiveData<List<Plant>> = getSavedGrowZoneNumber().switchMap {
         if (it == NO_GROW_ZONE) {
             plantRepository.getPlants()
         } else {
@@ -40,16 +42,21 @@ class PlantListViewModel internal constructor(plantRepository: PlantRepository) 
     }
 
     fun setGrowZoneNumber(num: Int) {
-        growZoneNumber.value = num
+        savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, num)
     }
 
     fun clearGrowZoneNumber() {
-        growZoneNumber.value = NO_GROW_ZONE
+        savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
     }
 
-    fun isFiltered() = growZoneNumber.value != NO_GROW_ZONE
+    fun isFiltered() = getSavedGrowZoneNumber().value != NO_GROW_ZONE
+
+    private fun getSavedGrowZoneNumber(): MutableLiveData<Int> {
+        return savedStateHandle.getLiveData(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
+    }
 
     companion object {
         private const val NO_GROW_ZONE = -1
+        private const val GROW_ZONE_SAVED_STATE_KEY = "GROW_ZONE_SAVED_STATE_KEY"
     }
 }

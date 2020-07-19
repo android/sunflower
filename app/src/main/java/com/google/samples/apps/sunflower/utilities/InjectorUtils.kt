@@ -17,9 +17,13 @@
 package com.google.samples.apps.sunflower.utilities
 
 import android.content.Context
+import androidx.fragment.app.Fragment
+import com.google.samples.apps.sunflower.api.UnsplashService
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
+import com.google.samples.apps.sunflower.data.UnsplashRepository
+import com.google.samples.apps.sunflower.viewmodels.GalleryViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
@@ -42,13 +46,11 @@ object InjectorUtils {
     fun provideGardenPlantingListViewModelFactory(
         context: Context
     ): GardenPlantingListViewModelFactory {
-        val repository = getGardenPlantingRepository(context)
-        return GardenPlantingListViewModelFactory(repository)
+        return GardenPlantingListViewModelFactory(getGardenPlantingRepository(context))
     }
 
-    fun providePlantListViewModelFactory(context: Context): PlantListViewModelFactory {
-        val repository = getPlantRepository(context)
-        return PlantListViewModelFactory(repository)
+    fun providePlantListViewModelFactory(fragment: Fragment): PlantListViewModelFactory {
+        return PlantListViewModelFactory(getPlantRepository(fragment.requireContext()), fragment)
     }
 
     fun providePlantDetailViewModelFactory(
@@ -57,5 +59,10 @@ object InjectorUtils {
     ): PlantDetailViewModelFactory {
         return PlantDetailViewModelFactory(getPlantRepository(context),
                 getGardenPlantingRepository(context), plantId)
+    }
+
+    fun provideGalleryViewModelFactory(): GalleryViewModelFactory {
+        val repository = UnsplashRepository(UnsplashService.create())
+        return GalleryViewModelFactory(repository)
     }
 }
