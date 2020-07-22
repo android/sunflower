@@ -80,7 +80,7 @@ Libraries Used
   * [Fragment][34] - A basic unit of composable UI.
   * [Layout][35] - Lay out widgets using different algorithms.
 * Third party
-  * [Glide][90] for image loading
+  * [Coil][90] for image loading
   * [Kotlin Coroutines][91] for managing background threads with simplified code and reducing needs for callbacks
 
 [0]: https://developer.android.com/jetpack/components
@@ -99,7 +99,7 @@ Libraries Used
 [31]: https://developer.android.com/training/animation/
 [34]: https://developer.android.com/guide/components/fragments
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
-[90]: https://bumptech.github.io/glide/
+[90]: https://coil-kt.github.io/coil/getting_started/
 [91]: https://kotlinlang.org/docs/reference/coroutines-overview.html
 
 Upcoming features
