@@ -21,7 +21,7 @@ import com.google.samples.apps.sunflower.api.UnsplashService
 
 private const val UNSPLASH_STARTING_PAGE_INDEX = 1
 
-class UnsplashPagingSource (
+class UnsplashPagingSource(
     private val service: UnsplashService,
     private val query: String
 ) : PagingSource<Int, UnsplashPhoto>() {

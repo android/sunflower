@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  * project are listed below. For a full list of fields, consult the API documentation
  * [here](https://unsplash.com/documentation#get-a-users-public-profile).
  */
-data class UnsplashUser (
+data class UnsplashUser(
     @field:SerializedName("name") val name: String,
     @field:SerializedName("username") val username: String
 ) {
