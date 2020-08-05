@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.samples.apps.sunflower.data.UnsplashRepository
 
-class GalleryViewModelFactory (
+class GalleryViewModelFactory(
     private val unsplashRepository: UnsplashRepository
 ) : ViewModelProvider.Factory {
 
