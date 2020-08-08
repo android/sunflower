@@ -16,14 +16,12 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import androidx.hilt.lifecycle.ViewModelInject
 import com.google.samples.apps.sunflower.data.entity.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PlantAndGardenPlantingsViewModel @ViewModelInject constructor(
-        plantings: PlantAndGardenPlantings
-) {
+class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) {
+
     private val plant = checkNotNull(plantings.plant)
     private val gardenPlanting = plantings.gardenPlantings[0]
 
@@ -41,4 +39,5 @@ class PlantAndGardenPlantingsViewModel @ViewModelInject constructor(
     companion object {
         private val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.US)
     }
+
 }

@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.Flow
 class GalleryViewModel @ViewModelInject constructor(
     private val repository: UnsplashRepository
 ) : ViewModel() {
+
     private var currentQueryValue: String? = null
     private var currentSearchResult: Flow<PagingData<UnsplashPhoto>>? = null
 
@@ -38,4 +39,5 @@ class GalleryViewModel @ViewModelInject constructor(
         currentSearchResult = newResult
         return newResult
     }
+
 }
