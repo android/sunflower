@@ -54,8 +54,11 @@ class PlantDetailViewModelTest {
     @Before
     fun setUp() {
         hiltRule.inject()
-
-        viewModel = PlantDetailViewModel(plantRepository, gardenPlantingRepository, testPlant.plantId)
+        viewModel = PlantDetailViewModel(
+                plantRepository,
+                gardenPlantingRepository,
+                testPlant.plantId
+        )
     }
 
     @Test
