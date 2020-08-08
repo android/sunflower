@@ -16,28 +16,28 @@
 
 package com.google.samples.apps.sunflower.di
 
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.PlantRepository
-import com.google.samples.apps.sunflower.data.UnsplashRepository
+import com.google.samples.apps.sunflower.data.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.components.ApplicationComponent
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module abstract class RepositoryModule {
 
     @Binds
-    @ActivityScoped
-    abstract fun bindGardenPlantingRepository(): GardenPlantingRepository
+    abstract fun bindGardenPlantingRepository(
+            repository: GardenPlantingRepositoryImpl
+    ): GardenPlantingRepository
 
     @Binds
-    @ActivityScoped
-    abstract fun bindPlantRepository(): PlantRepository
+    abstract fun bindPlantRepository(
+            repository: PlantRepositoryImpl
+    ): PlantRepository
 
     @Binds
-    @ActivityScoped
-    abstract fun bindUnsplashRepository(): UnsplashRepository
+    abstract fun bindUnsplashRepository(
+            repository: UnsplashRepositoryImpl
+    ): UnsplashRepository
 
 }
