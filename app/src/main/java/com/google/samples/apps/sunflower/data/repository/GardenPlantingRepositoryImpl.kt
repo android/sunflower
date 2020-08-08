@@ -37,16 +37,4 @@ class GardenPlantingRepositoryImpl @Inject constructor(
 
     override fun getPlantedGardens() = gardenPlantingDao.getPlantedGardens()
 
-    companion object {
-
-        // For Singleton instantiation
-        @Volatile private var instance: GardenPlantingRepositoryImpl? = null
-
-        fun getInstance(gardenPlantingDao: GardenPlantingDao) =
-                instance
-                        ?: synchronized(this) {
-                    instance
-                            ?: GardenPlantingRepositoryImpl(gardenPlantingDao).also { instance = it }
-                }
-    }
 }

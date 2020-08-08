@@ -33,16 +33,4 @@ class PlantRepositoryImpl @Inject constructor(
     override fun getPlantsWithGrowZoneNumber(growZoneNumber: Int) =
             plantDao.getPlantsWithGrowZoneNumber(growZoneNumber)
 
-    companion object {
-
-        // For Singleton instantiation
-        @Volatile private var instance: PlantRepositoryImpl? = null
-
-        fun getInstance(plantDao: PlantDao) =
-                instance
-                        ?: synchronized(this) {
-                    instance
-                            ?: PlantRepositoryImpl(plantDao).also { instance = it }
-                }
-    }
 }
