@@ -20,8 +20,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.samples.apps.sunflower.data.AppDatabase
-import com.google.samples.apps.sunflower.data.repository.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.repository.PlantRepository
+import com.google.samples.apps.sunflower.data.repository.GardenPlantingRepositoryImpl
+import com.google.samples.apps.sunflower.data.repository.PlantRepositoryImpl
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
 import org.junit.After
@@ -43,8 +43,8 @@ class PlantDetailViewModelTest {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
 
-        val plantRepo = PlantRepository.getInstance(appDatabase.plantDao())
-        val gardenPlantingRepo = GardenPlantingRepository.getInstance(
+        val plantRepo = PlantRepositoryImpl.getInstance(appDatabase.plantDao())
+        val gardenPlantingRepo = GardenPlantingRepositoryImpl.getInstance(
                 appDatabase.gardenPlantingDao())
         viewModel = PlantDetailViewModel(plantRepo, gardenPlantingRepo, testPlant.plantId)
     }
