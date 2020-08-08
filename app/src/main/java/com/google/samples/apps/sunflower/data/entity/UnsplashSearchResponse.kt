@@ -17,7 +17,6 @@
 package com.google.samples.apps.sunflower.data.entity
 
 import com.google.gson.annotations.SerializedName
-import com.google.samples.apps.sunflower.data.entity.UnsplashPhoto
 
 /**
  * Data class that represents a photo search response from Unsplash.
@@ -27,6 +26,6 @@ import com.google.samples.apps.sunflower.data.entity.UnsplashPhoto
  * [here](https://unsplash.com/documentation#search-photos).
  */
 data class UnsplashSearchResponse(
-        @field:SerializedName("results") val results: List<UnsplashPhoto>,
-        @field:SerializedName("total_pages") val totalPages: Int
+    @field:SerializedName("results") val results: List<UnsplashPhoto>,
+    @field:SerializedName("total_pages") val totalPages: Int
 )

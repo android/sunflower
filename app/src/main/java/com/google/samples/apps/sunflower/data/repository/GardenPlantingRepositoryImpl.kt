@@ -36,5 +36,4 @@ class GardenPlantingRepositoryImpl @Inject constructor(
     override fun isPlanted(plantId: String) = gardenPlantingDao.isPlanted(plantId)
 
     override fun getPlantedGardens() = gardenPlantingDao.getPlantedGardens()
-
 }

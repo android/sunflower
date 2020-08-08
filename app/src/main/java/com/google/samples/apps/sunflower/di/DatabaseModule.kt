@@ -33,7 +33,7 @@ import javax.inject.Singleton
     @Provides
     @Singleton
     fun provideDatabase(
-            @ApplicationContext context: Context
+        @ApplicationContext context: Context
     ): AppDatabase {
         return AppDatabase.getInstance(context)
     }
@@ -47,5 +47,4 @@ import javax.inject.Singleton
     fun plantDao(db: AppDatabase): PlantDao {
         return db.plantDao()
     }
-
 }

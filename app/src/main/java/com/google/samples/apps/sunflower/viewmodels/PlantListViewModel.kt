@@ -31,8 +31,8 @@ import com.google.samples.apps.sunflower.data.repository.PlantRepository
  * The ViewModel for [PlantListFragment].
  */
 class PlantListViewModel @ViewModelInject constructor(
-        plantRepository: PlantRepository,
-        @Assisted private val savedStateHandle: SavedStateHandle
+    plantRepository: PlantRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     val plants: LiveData<List<Plant>> = getSavedGrowZoneNumber().switchMap {

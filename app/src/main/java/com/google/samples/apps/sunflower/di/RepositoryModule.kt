@@ -27,17 +27,16 @@ import dagger.hilt.android.components.ApplicationComponent
 
     @Binds
     abstract fun bindGardenPlantingRepository(
-            repository: GardenPlantingRepositoryImpl
+        repository: GardenPlantingRepositoryImpl
     ): GardenPlantingRepository
 
     @Binds
     abstract fun bindPlantRepository(
-            repository: PlantRepositoryImpl
+        repository: PlantRepositoryImpl
     ): PlantRepository
 
     @Binds
     abstract fun bindUnsplashRepository(
-            repository: UnsplashRepositoryImpl
+        repository: UnsplashRepositoryImpl
     ): UnsplashRepository
-
 }

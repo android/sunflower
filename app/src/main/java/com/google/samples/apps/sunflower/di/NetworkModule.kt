@@ -31,5 +31,4 @@ import javax.inject.Singleton
     fun provideNetworkService(): UnsplashService {
         return UnsplashService.create()
     }
-
 }

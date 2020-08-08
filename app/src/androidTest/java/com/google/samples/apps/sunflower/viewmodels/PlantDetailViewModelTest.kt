@@ -66,5 +66,4 @@ class PlantDetailViewModelTest {
     fun testDefaultValues() {
         assertFalse(getValue(viewModel.isPlanted))
     }
-
 }

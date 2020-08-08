@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UnsplashRepositoryImpl @Inject constructor(
-        private val service: UnsplashService
+    private val service: UnsplashService
 ) : UnsplashRepository {
 
     override fun getSearchResultStream(query: String): Flow<PagingData<UnsplashPhoto>> {

@@ -39,5 +39,4 @@ class GalleryViewModel @ViewModelInject constructor(
         currentSearchResult = newResult
         return newResult
     }
-
 }

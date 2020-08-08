@@ -23,7 +23,7 @@ import javax.inject.Inject
  * Repository module for handling data operations.
  */
 class PlantRepositoryImpl @Inject constructor(
-        private val plantDao: PlantDao
+    private val plantDao: PlantDao
 ) : PlantRepository {
 
     override fun getPlants() = plantDao.getPlants()
@@ -32,5 +32,4 @@ class PlantRepositoryImpl @Inject constructor(
 
     override fun getPlantsWithGrowZoneNumber(growZoneNumber: Int) =
             plantDao.getPlantsWithGrowZoneNumber(growZoneNumber)
-
 }

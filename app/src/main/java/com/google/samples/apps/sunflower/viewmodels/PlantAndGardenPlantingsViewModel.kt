@@ -39,5 +39,4 @@ class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) {
     companion object {
         private val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.US)
     }
-
 }
