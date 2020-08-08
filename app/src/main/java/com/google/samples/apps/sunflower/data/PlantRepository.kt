@@ -16,10 +16,14 @@
 
 package com.google.samples.apps.sunflower.data
 
+import javax.inject.Inject
+
 /**
  * Repository module for handling data operations.
  */
-class PlantRepository private constructor(private val plantDao: PlantDao) {
+class PlantRepository @Inject constructor(
+        private val plantDao: PlantDao
+) {
 
     fun getPlants() = plantDao.getPlants()
 
