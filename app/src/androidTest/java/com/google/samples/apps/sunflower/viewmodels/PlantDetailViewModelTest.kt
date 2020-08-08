@@ -17,41 +17,45 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.samples.apps.sunflower.data.AppDatabase
-import com.google.samples.apps.sunflower.data.repository.GardenPlantingRepositoryImpl
-import com.google.samples.apps.sunflower.data.repository.PlantRepositoryImpl
+import com.google.samples.apps.sunflower.data.repository.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.repository.PlantRepository
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
-import org.junit.After
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.RuleChain
+import org.junit.runner.RunWith
+import javax.inject.Inject
 
+@HiltAndroidTest
+@RunWith(AndroidJUnit4::class)
 class PlantDetailViewModelTest {
+
+    private val hiltRule: HiltAndroidRule by lazy { HiltAndroidRule(this) }
+    private val instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    val chain: RuleChain = RuleChain
+            .outerRule(hiltRule)
+            .around(instantTaskExecutorRule)
 
     private lateinit var appDatabase: AppDatabase
     private lateinit var viewModel: PlantDetailViewModel
 
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    @Inject lateinit var gardenPlantingRepository: GardenPlantingRepository
+    @Inject lateinit var plantRepository: PlantRepository
 
     @Before
     fun setUp() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        hiltRule.inject()
 
-        val plantRepo = PlantRepositoryImpl.getInstance(appDatabase.plantDao())
-        val gardenPlantingRepo = GardenPlantingRepositoryImpl.getInstance(
-                appDatabase.gardenPlantingDao())
-        viewModel = PlantDetailViewModel(plantRepo, gardenPlantingRepo, testPlant.plantId)
-    }
-
-    @After
-    fun tearDown() {
-        appDatabase.close()
+        viewModel = PlantDetailViewModel(plantRepository, gardenPlantingRepository, testPlant.plantId)
     }
 
     @Test
@@ -59,4 +63,5 @@ class PlantDetailViewModelTest {
     fun testDefaultValues() {
         assertFalse(getValue(viewModel.isPlanted))
     }
+
 }
