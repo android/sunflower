@@ -16,15 +16,16 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.google.samples.apps.sunflower.data.UnsplashPhoto
-import com.google.samples.apps.sunflower.data.UnsplashRepository
+import com.google.samples.apps.sunflower.data.entity.UnsplashPhoto
+import com.google.samples.apps.sunflower.data.repository.UnsplashRepository
 import kotlinx.coroutines.flow.Flow
 
-class GalleryViewModel internal constructor(
+class GalleryViewModel @ViewModelInject constructor(
     private val repository: UnsplashRepository
 ) : ViewModel() {
     private var currentQueryValue: String? = null

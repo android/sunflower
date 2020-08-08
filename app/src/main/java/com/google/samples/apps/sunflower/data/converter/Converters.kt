@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.converter
 
 import androidx.room.TypeConverter
 import java.util.Calendar

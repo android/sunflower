@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.google.samples.apps.sunflower.api.UnsplashService
+import com.google.samples.apps.sunflower.data.UnsplashPagingSource
+import com.google.samples.apps.sunflower.data.entity.UnsplashPhoto
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

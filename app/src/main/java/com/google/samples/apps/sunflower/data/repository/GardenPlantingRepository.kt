@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.repository
 
+import com.google.samples.apps.sunflower.data.entity.GardenPlanting
+import com.google.samples.apps.sunflower.data.GardenPlantingDao
 import javax.inject.Inject
 
 class GardenPlantingRepository @Inject constructor(
@@ -42,8 +44,10 @@ class GardenPlantingRepository @Inject constructor(
         @Volatile private var instance: GardenPlantingRepository? = null
 
         fun getInstance(gardenPlantingDao: GardenPlantingDao) =
-                instance ?: synchronized(this) {
-                    instance ?: GardenPlantingRepository(gardenPlantingDao).also { instance = it }
+                instance
+                        ?: synchronized(this) {
+                    instance
+                            ?: GardenPlantingRepository(gardenPlantingDao).also { instance = it }
                 }
     }
 }

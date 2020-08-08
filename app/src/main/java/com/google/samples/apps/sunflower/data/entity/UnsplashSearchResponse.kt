@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.entity
 
 import com.google.gson.annotations.SerializedName
+import com.google.samples.apps.sunflower.data.entity.UnsplashPhoto
 
 /**
- * Data class that represents a user from Unsplash.
+ * Data class that represents a photo search response from Unsplash.
  *
  * Not all of the fields returned from the API are represented here; only the ones used in this
  * project are listed below. For a full list of fields, consult the API documentation
- * [here](https://unsplash.com/documentation#get-a-users-public-profile).
+ * [here](https://unsplash.com/documentation#search-photos).
  */
-data class UnsplashUser(
-    @field:SerializedName("name") val name: String,
-    @field:SerializedName("username") val username: String
-) {
-    val attributionUrl: String
-        get() {
-            return "https://unsplash.com/$username?utm_source=sunflower&utm_medium=referral"
-        }
-}
+data class UnsplashSearchResponse(
+        @field:SerializedName("results") val results: List<UnsplashPhoto>,
+        @field:SerializedName("total_pages") val totalPages: Int
+)

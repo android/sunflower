@@ -21,8 +21,8 @@ import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
-import com.google.samples.apps.sunflower.data.GardenPlanting
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.entity.GardenPlanting
+import com.google.samples.apps.sunflower.data.entity.Plant
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
@@ -32,9 +32,9 @@ import java.util.Calendar
  * [Plant] objects used for tests.
  */
 val testPlants = arrayListOf(
-    Plant("1", "Apple", "A red fruit", 1),
-    Plant("2", "B", "Description B", 1),
-    Plant("3", "C", "Description C", 2)
+        Plant("1", "Apple", "A red fruit", 1),
+        Plant("2", "B", "Description B", 1),
+        Plant("3", "C", "Description C", 2)
 )
 val testPlant = testPlants[0]
 

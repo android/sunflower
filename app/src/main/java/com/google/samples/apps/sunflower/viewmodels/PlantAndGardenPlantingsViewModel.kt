@@ -16,11 +16,14 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import androidx.hilt.lifecycle.ViewModelInject
+import com.google.samples.apps.sunflower.data.entity.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) {
+class PlantAndGardenPlantingsViewModel @ViewModelInject constructor(
+        plantings: PlantAndGardenPlantings
+) {
     private val plant = checkNotNull(plantings.plant)
     private val gardenPlanting = plantings.gardenPlantings[0]
 

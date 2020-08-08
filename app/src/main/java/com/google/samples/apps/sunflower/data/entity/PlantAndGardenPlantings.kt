@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.entity
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.google.samples.apps.sunflower.data.entity.GardenPlanting
+import com.google.samples.apps.sunflower.data.entity.Plant
 
 /**
  * This class captures the relationship between a [Plant] and a user's [GardenPlanting], which is
  * used by Room to fetch the related entities.
  */
 data class PlantAndGardenPlantings(
-    @Embedded
+        @Embedded
     val plant: Plant,
 
-    @Relation(parentColumn = "id", entityColumn = "plant_id")
+        @Relation(parentColumn = "id", entityColumn = "plant_id")
     val gardenPlantings: List<GardenPlanting> = emptyList()
 )
