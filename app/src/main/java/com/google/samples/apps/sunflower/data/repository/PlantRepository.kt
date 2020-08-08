@@ -16,33 +16,11 @@
 
 package com.google.samples.apps.sunflower.data.repository
 
-import com.google.samples.apps.sunflower.data.PlantDao
-import javax.inject.Inject
+import androidx.lifecycle.LiveData
+import com.google.samples.apps.sunflower.data.entity.Plant
 
-/**
- * Repository module for handling data operations.
- */
-class PlantRepository @Inject constructor(
-        private val plantDao: PlantDao
-) {
-
-    fun getPlants() = plantDao.getPlants()
-
-    fun getPlant(plantId: String) = plantDao.getPlant(plantId)
-
-    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int) =
-            plantDao.getPlantsWithGrowZoneNumber(growZoneNumber)
-
-    companion object {
-
-        // For Singleton instantiation
-        @Volatile private var instance: PlantRepository? = null
-
-        fun getInstance(plantDao: PlantDao) =
-                instance
-                        ?: synchronized(this) {
-                    instance
-                            ?: PlantRepository(plantDao).also { instance = it }
-                }
-    }
+interface PlantRepository {
+    fun getPlants(): LiveData<List<Plant>>
+    fun getPlant(plantId: String): LiveData<Plant>
+    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): LiveData<List<Plant>>
 }
