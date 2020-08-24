@@ -21,14 +21,14 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import org.junit.Rule
 import org.junit.Test
 
 class GardenActivityTest {
 
     @Rule @JvmField
-    var activityTestRule = ActivityTestRule(GardenActivity::class.java)
+    var activityTestRule = ActivityScenarioRule(GardenActivity::class.java)
 
     @Test fun clickAddPlant_OpensPlantList() {
         // Given that no Plants are added to the user's garden

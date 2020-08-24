@@ -30,6 +30,8 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_extra_small">4dp</dimen>
 
+    <dimen name="padding_large">48dp</dimen>
+
     <dimen name="plant_item_image_height">95dp</dimen>
 
     <dimen name="card_side_margin">12dp</dimen>
