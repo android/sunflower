@@ -67,9 +67,9 @@ class GardenPlantingDaoTest {
 
     @Test fun testDeleteGardenPlanting() = runBlocking {
         val gardenPlanting2 = GardenPlanting(
-                testPlants[1].plantId,
-                testCalendar,
-                testCalendar
+            testPlants[1].plantId,
+            testCalendar,
+            testCalendar
         ).also { it.gardenPlantingId = 2 }
         gardenPlantingDao.insertGardenPlanting(gardenPlanting2)
         assertThat(getValue(gardenPlantingDao.getGardenPlantings()).size, equalTo(2))

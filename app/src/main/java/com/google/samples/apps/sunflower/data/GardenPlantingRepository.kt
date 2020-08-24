@@ -30,7 +30,7 @@ class GardenPlantingRepository private constructor(
     }
 
     fun isPlanted(plantId: String) =
-            gardenPlantingDao.isPlanted(plantId)
+        gardenPlantingDao.isPlanted(plantId)
 
     fun getPlantedGardens() = gardenPlantingDao.getPlantedGardens()
 
@@ -40,8 +40,8 @@ class GardenPlantingRepository private constructor(
         @Volatile private var instance: GardenPlantingRepository? = null
 
         fun getInstance(gardenPlantingDao: GardenPlantingDao) =
-                instance ?: synchronized(this) {
-                    instance ?: GardenPlantingRepository(gardenPlantingDao).also { instance = it }
-                }
+            instance ?: synchronized(this) {
+                instance ?: GardenPlantingRepository(gardenPlantingDao).also { instance = it }
+            }
     }
 }

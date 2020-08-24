@@ -21,21 +21,24 @@ buildscript {
         compileSdkVersion = 28
         minSdkVersion = 21
         targetSdkVersion = 28
+        composeSnapshot = '6765009'
 
         // App dependencies
+        accompanistVersion = "0.1.9"
         appCompatVersion = '1.1.0'
+        composeVersion = '0.1.0-dev17'
         constraintLayoutVersion = '2.0.0-beta3'
-        coreTestingVersion = '2.0.0'
-        coroutinesVersion = "1.3.0-M2"
-        espressoVersion = '3.1.1'
+        coreTestingVersion = '2.1.0'
+        coroutinesVersion = "1.3.9"
+        espressoVersion = '3.2.0'
         fragmentVersion = '1.1.0-alpha09'
         glideVersion = '4.10.0'
-        gradleVersion = '4.0.0'
+        gradleVersion = '4.2.0-alpha07'
         gsonVersion = '2.8.2'
-        junitVersion = '4.12'
-        kotlinVersion = '1.3.72'
-        ktlintVersion = '0.33.0'
-        ktxVersion = '1.0.2'
+        junitVersion = '4.13'
+        kotlinVersion = '1.4.0'
+        ktlintVersion = '0.37.2'
+        ktxVersion = '1.5.0-alpha02'
         lifecycleVersion = '2.2.0-alpha01'
         materialVersion = '1.1.0-alpha09'
         navigationVersion = '2.2.0'
@@ -52,6 +55,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -62,19 +66,34 @@ buildscript {
 }
 
 plugins {
-    id "com.diffplug.gradle.spotless" version "4.3.0"
+    id "com.diffplug.spotless" version "5.1.1"
 }
 
 allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        // Compose snapshots repo
+        maven { url "https://androidx.dev/snapshots/builds/$composeSnapshot/artifacts/ui/repository/" }
+        // Accompanist snapshots repo
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 
 spotless {
     kotlin {
         target "**/*.kt"
-        ktlint(ktlintVersion).userData(['max_line_length' : '100'])
+        targetExclude("$buildDir/**/*.kt")
+        targetExclude('bin/**/*.kt')
+        ktlint(ktlintVersion)
+    }
+}
+
+subprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
     }
 }
