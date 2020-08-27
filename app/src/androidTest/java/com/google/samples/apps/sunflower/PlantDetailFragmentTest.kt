@@ -27,11 +27,11 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.ui.test.android.AndroidComposeTestRule
+import androidx.ui.test.android.createAndroidComposeRule
 import androidx.ui.test.assertIsDisplayed
-import androidx.ui.test.doClick
-import androidx.ui.test.findByLabel
-import androidx.ui.test.findByText
+import androidx.ui.test.onNodeWithLabel
+import androidx.ui.test.onNodeWithText
+import androidx.ui.test.performClick
 import com.google.samples.apps.sunflower.utilities.chooser
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
@@ -43,7 +43,7 @@ import org.junit.runner.RunWith
 class PlantDetailFragmentTest {
 
     @get:Rule
-    val composeTestRule = AndroidComposeTestRule<GardenActivity>()
+    val composeTestRule = createAndroidComposeRule<GardenActivity>()
 
     @Before
     fun jumpToPlantDetailFragment() {
@@ -55,15 +55,15 @@ class PlantDetailFragmentTest {
 
     @Test
     fun screen_launches() {
-        findByText("Apple").assertIsDisplayed()
+        onNodeWithText("Apple").assertIsDisplayed()
     }
 
     @Test
     fun testShareTextIntent() {
         Intents.init()
 
-        findByText("Apple").assertIsDisplayed()
-        findByLabel("Share").assertIsDisplayed().doClick()
+        onNodeWithText("Apple").assertIsDisplayed()
+        onNodeWithLabel("Share").assertIsDisplayed().performClick()
 
         intended(
             chooser(

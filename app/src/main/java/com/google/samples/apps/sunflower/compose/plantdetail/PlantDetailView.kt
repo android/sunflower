@@ -79,6 +79,7 @@ import androidx.ui.tooling.preview.Preview
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
+import com.google.samples.apps.sunflower.compose.ProvideDisplayInsets
 import com.google.samples.apps.sunflower.compose.systemBarsPadding
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.utils.getQuantityString
@@ -437,13 +438,15 @@ private fun getFabOffset(imageHeight: Int, scrollState: ScrollState): Dp {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
-    MdcTheme {
-        Surface {
-            PlantDetails(
-                Plant("plantId", "Tomato", "HTML<br>description", 6),
-                true,
-                PlantDetailsCallbacks({ }, { }, { })
-            )
+    ProvideDisplayInsets {
+        MdcTheme {
+            Surface {
+                PlantDetails(
+                    Plant("plantId", "Tomato", "HTML<br>description", 6),
+                    true,
+                    PlantDetailsCallbacks({ }, { }, { })
+                )
+            }
         }
     }
 }
