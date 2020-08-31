@@ -22,7 +22,7 @@ import androidx.paging.PagingData
 import com.google.samples.apps.sunflower.api.UnsplashService
 import kotlinx.coroutines.flow.Flow
 
-class UnsplashRepository (private val service: UnsplashService) {
+class UnsplashRepository(private val service: UnsplashService) {
 
     fun getSearchResultStream(query: String): Flow<PagingData<UnsplashPhoto>> {
         return Pager(

@@ -35,12 +35,14 @@ object InjectorUtils {
 
     private fun getPlantRepository(context: Context): PlantRepository {
         return PlantRepository.getInstance(
-                AppDatabase.getInstance(context.applicationContext).plantDao())
+            AppDatabase.getInstance(context.applicationContext).plantDao()
+        )
     }
 
     private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
         return GardenPlantingRepository.getInstance(
-                AppDatabase.getInstance(context.applicationContext).gardenPlantingDao())
+            AppDatabase.getInstance(context.applicationContext).gardenPlantingDao()
+        )
     }
 
     fun provideGardenPlantingListViewModelFactory(
@@ -57,8 +59,11 @@ object InjectorUtils {
         context: Context,
         plantId: String
     ): PlantDetailViewModelFactory {
-        return PlantDetailViewModelFactory(getPlantRepository(context),
-                getGardenPlantingRepository(context), plantId)
+        return PlantDetailViewModelFactory(
+            getPlantRepository(context),
+            getGardenPlantingRepository(context),
+            plantId
+        )
     }
 
     fun provideGalleryViewModelFactory(): GalleryViewModelFactory {

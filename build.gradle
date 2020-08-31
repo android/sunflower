@@ -33,11 +33,11 @@ buildscript {
         gradleVersion = '4.0.0'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
-        kotlinVersion = '1.3.72'
-        ktlintVersion = '0.33.0'
+        kotlinVersion = '1.4.0'
+        ktlintVersion = '0.38.1'
         ktxVersion = '1.0.2'
         lifecycleVersion = '2.2.0'
-        materialVersion = '1.1.0-alpha09'
+        materialVersion = '1.2.0'
         navigationVersion = '2.2.0'
         okhttpLoggingVersion = '4.7.2'
         pagingVersion = '3.0.0-alpha02'
@@ -65,7 +65,7 @@ buildscript {
 }
 
 plugins {
-    id "com.diffplug.gradle.spotless" version "4.3.0"
+    id "com.diffplug.spotless" version "5.2.0"
 }
 
 allprojects {
