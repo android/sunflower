@@ -58,14 +58,12 @@ class PlantDetailFragment : Fragment() {
         ).apply {
             viewModel = plantDetailViewModel
             lifecycleOwner = viewLifecycleOwner
-            callback = object : Callback {
-                override fun add(plant: Plant?) {
-                    plant?.let {
-                        hideAppBarFab(fab)
-                        plantDetailViewModel.addPlantToGarden()
-                        Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
-                            .show()
-                    }
+            callback = Callback { plant ->
+                plant?.let {
+                    hideAppBarFab(fab)
+                    plantDetailViewModel.addPlantToGarden()
+                    Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
+                      .show()
                 }
             }
 
@@ -152,7 +150,7 @@ class PlantDetailFragment : Fragment() {
         fab.hide()
     }
 
-    interface Callback {
+    fun interface Callback {
         fun add(plant: Plant?)
     }
 }
