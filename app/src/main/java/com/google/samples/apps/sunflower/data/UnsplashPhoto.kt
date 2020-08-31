@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,17 @@
 
 package com.google.samples.apps.sunflower.data
 
-import androidx.room.TypeConverter
-import java.util.Calendar
+import com.google.gson.annotations.SerializedName
 
 /**
- * Type converters to allow Room to reference complex data types.
+ * Data class that represents a photo from Unsplash.
+ *
+ * Not all of the fields returned from the API are represented here; only the ones used in this
+ * project are listed below. For a full list of fields, consult the API documentation
+ * [here](https://unsplash.com/documentation#get-a-photo).
  */
-class Converters {
-    @TypeConverter fun calendarToDatestamp(calendar: Calendar): Long = calendar.timeInMillis
-
-    @TypeConverter fun datestampToCalendar(value: Long): Calendar =
-        Calendar.getInstance().apply { timeInMillis = value }
-}
+data class UnsplashPhoto(
+    @field:SerializedName("id") val id: String,
+    @field:SerializedName("urls") val urls: UnsplashPhotoUrls,
+    @field:SerializedName("user") val user: UnsplashUser
+)

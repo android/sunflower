@@ -24,8 +24,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
@@ -39,7 +39,9 @@ class GardenPlantingAdapter :
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_garden_planting, parent, false
+                R.layout.list_item_garden_planting,
+                parent,
+                false
             )
         )
     }

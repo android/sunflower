@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower
+package com.google.samples.apps.sunflower.viewmodels
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil.setContentView
-import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.google.samples.apps.sunflower.data.UnsplashRepository
 
-class GardenActivity : AppCompatActivity() {
+class GalleryViewModelFactory(
+    private val unsplashRepository: UnsplashRepository
+) : ViewModelProvider.Factory {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return GalleryViewModel(
+            unsplashRepository
+        ) as T
     }
 }
