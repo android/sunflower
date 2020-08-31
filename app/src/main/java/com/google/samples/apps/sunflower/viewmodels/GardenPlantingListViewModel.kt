@@ -25,5 +25,5 @@ class GardenPlantingListViewModel internal constructor(
     gardenPlantingRepository: GardenPlantingRepository
 ) : ViewModel() {
     val plantAndGardenPlantings: LiveData<List<PlantAndGardenPlantings>> =
-            gardenPlantingRepository.getPlantedGardens()
+        gardenPlantingRepository.getPlantedGardens()
 }

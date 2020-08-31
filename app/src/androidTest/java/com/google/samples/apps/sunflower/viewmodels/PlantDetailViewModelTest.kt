@@ -45,7 +45,8 @@ class PlantDetailViewModelTest {
 
         val plantRepo = PlantRepository.getInstance(appDatabase.plantDao())
         val gardenPlantingRepo = GardenPlantingRepository.getInstance(
-                appDatabase.gardenPlantingDao())
+            appDatabase.gardenPlantingDao()
+        )
         viewModel = PlantDetailViewModel(plantRepo, gardenPlantingRepo, testPlant.plantId)
     }
 

@@ -31,9 +31,9 @@ import com.google.samples.apps.sunflower.R
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
         Glide.with(view.context)
-                .load(imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(view)
+            .load(imageUrl)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(view)
     }
 }
 
@@ -59,8 +59,11 @@ fun bindRenderHtml(view: TextView, description: String?) {
 @BindingAdapter("wateringText")
 fun bindWateringText(textView: TextView, wateringInterval: Int) {
     val resources = textView.context.resources
-    val quantityString = resources.getQuantityString(R.plurals.watering_needs_suffix,
-        wateringInterval, wateringInterval)
+    val quantityString = resources.getQuantityString(
+        R.plurals.watering_needs_suffix,
+        wateringInterval,
+        wateringInterval
+    )
 
     textView.text = quantityString
 }
