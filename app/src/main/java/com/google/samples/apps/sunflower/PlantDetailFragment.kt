@@ -54,7 +54,10 @@ class PlantDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-            inflater, R.layout.fragment_plant_detail, container, false
+            inflater,
+            R.layout.fragment_plant_detail,
+            container,
+            false
         ).apply {
             viewModel = plantDetailViewModel
             lifecycleOwner = viewLifecycleOwner
@@ -63,7 +66,7 @@ class PlantDetailFragment : Fragment() {
                     hideAppBarFab(fab)
                     plantDetailViewModel.addPlantToGarden()
                     Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
-                      .show()
+                        .show()
                 }
             }
 
