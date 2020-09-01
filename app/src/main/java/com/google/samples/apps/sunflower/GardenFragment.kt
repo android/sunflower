@@ -18,7 +18,6 @@ package com.google.samples.apps.sunflower
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,8 +28,6 @@ import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 
 class GardenFragment : Fragment() {
 
-    private lateinit var binding: FragmentGardenBinding
-
     private val viewModel: GardenPlantingListViewModel by viewModels {
         InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
     }
@@ -39,12 +36,10 @@ class GardenFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentGardenBinding.inflate(inflater, container, false)
-        binding.adapter = GardenPlantingAdapter()
-        binding.parentViewPager = requireActivity().findViewById(R.id.view_pager)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = this@GardenFragment.viewModel
-        return binding.root
-    }
+    ) = FragmentGardenBinding.inflate(inflater, container, false).apply {
+        adapter = GardenPlantingAdapter()
+        parentViewPager = requireActivity().findViewById(R.id.view_pager)
+        lifecycleOwner = viewLifecycleOwner
+        viewModel = this@GardenFragment.viewModel
+    }.root
 }
