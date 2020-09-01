@@ -1,0 +1,51 @@
+<!--
+  ~ Copyright 2020 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <!-- Translatable resources -->
+    <string name="menu_filter_by_grow_zone">فیلتر براساس منطقه رشد</string>
+    <string name="my_garden_title">باغچه من</string>
+    <string name="plant_list_title">لیست گیاهان</string>
+    <string name="available">گیاهان در دسترس</string>
+    <string name="plant_details_title">مشخصات گیاه</string>
+    <string name="add_plant">اضافه کردن گیاه</string>
+    <string name="added_plant_to_garden">گیاه به باغچه اضافه شد!</string>
+    <string name="garden_empty">باغچه شما خالی است!</string>
+    <string name="plant_date_header">کاشته شد!</string>
+    <string name="watered_date_header">آخرین آبیاری شده</string>
+    <string name="menu_item_share_plant">به اشتراک گذاری</string>
+    <string name="share_text_plant">گیاه %s را در اپلیکیشن SunFlower گوگل را ببینید</string>
+    <string name="gallery_title">تصاویر از Unsplash</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">نیاز به آبیاری</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">هر روز</item>
+        <item quantity="other">هر %d روز</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one">فردا آبیاری</item>
+        <item quantity="other">آبیاری در روز %d</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">تصویر گیاه</string>
+    <string name="gallery_content_description">رفتن به گالری</string>
+    <string name="plant_detail_image_content_description">تصویر گیاه</string>
+
+</resources>
