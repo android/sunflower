@@ -22,9 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.viewpager2.widget.ViewPager2
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
-import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
@@ -44,17 +42,9 @@ class GardenFragment : Fragment() {
     ): View? {
         binding = FragmentGardenBinding.inflate(inflater, container, false)
         binding.adapter = GardenPlantingAdapter()
+        binding.parentViewPager = requireActivity().findViewById(R.id.view_pager)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = this@GardenFragment.viewModel
-        binding.addPlant.setOnClickListener {
-            navigateToPlantListPage()
-        }
         return binding.root
-    }
-
-    // TODO: convert to data binding if applicable
-    private fun navigateToPlantListPage() {
-        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
-            PLANT_LIST_PAGE_INDEX
     }
 }

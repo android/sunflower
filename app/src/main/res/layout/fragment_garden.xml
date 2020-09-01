@@ -20,9 +20,15 @@
 
     <data>
 
+        <import type="com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapterKt" />
+
         <variable
             name="adapter"
             type="com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter" />
+
+        <variable
+            name="parentViewPager"
+            type="androidx.viewpager2.widget.ViewPager2" />
 
         <variable
             name="viewModel"
@@ -67,6 +73,7 @@
                 android:id="@+id/add_plant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> parentViewPager.setCurrentItem(SunflowerPagerAdapterKt.PLANT_LIST_PAGE_INDEX)}"
                 android:text="@string/add_plant"
                 android:textColor="?attr/colorPrimary"
                 app:backgroundTint="?attr/colorOnPrimary"
