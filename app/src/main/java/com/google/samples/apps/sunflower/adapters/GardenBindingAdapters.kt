@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 
-@BindingAdapter("bindGardenPlantingAdapter", "bindGardenPlanting")
+@BindingAdapter("bindGardenPlantingAdapter", "bindGardenPlantings")
 fun bindPlantAndGardenPlantings(
     recyclerView: RecyclerView,
     adapter: ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>,

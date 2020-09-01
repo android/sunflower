@@ -43,22 +43,13 @@ class GardenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGardenBinding.inflate(inflater, container, false)
-        val adapter = GardenPlantingAdapter()
-        binding.gardenList.adapter = adapter
-
+        binding.adapter = GardenPlantingAdapter()
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = this@GardenFragment.viewModel
         binding.addPlant.setOnClickListener {
             navigateToPlantListPage()
         }
-
-        subscribeUi(adapter, binding)
         return binding.root
-    }
-
-    private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
-            binding.hasPlantings = !result.isNullOrEmpty()
-            adapter.submitList(result)
-        }
     }
 
     // TODO: convert to data binding if applicable
