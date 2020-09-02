@@ -1,0 +1,49 @@
+<!--
+  ~ Copyright 2019 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="menu_filter_by_grow_zone">Filtrar por zona de crecimiento</string>
+    <string name="plant_detail_image_content_description">Imagen de la planta</string>
+    <string name="my_garden_title">Mi jardín</string>
+    <string name="plant_list_title">Lista de plantas</string>
+    <string name="available">Plantas disponibles</string>
+    <string name="plant_details_title">Detalles de la planta</string>
+    <string name="add_plant">Añadir planta</string>
+    <string name="added_plant_to_garden">Planta añadida al jardín</string>
+    <string name="garden_empty">Tu jardín esta vacío</string>
+    <string name="plant_date_header">Plantada</string>
+    <string name="watered_date_header">Última vez regada</string>
+    <string name="menu_item_share_plant">Compartir</string>
+    <string name="share_text_plant">Revisa la planta %s en la aplicación Android Sunflower</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">Necesita ser regada</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">diariamente.</item>
+        <item quantity="other">cada %d días.</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one">regar mañana.</item>
+        <item quantity="other">regar en %d días.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Imagen de la planta</string>
+    <string name="gallery_title">(translate me) Photos by Unsplash</string>
+    <string name="gallery_content_description">(translate me) Navigate to gallery screen</string>
+
+</resources>

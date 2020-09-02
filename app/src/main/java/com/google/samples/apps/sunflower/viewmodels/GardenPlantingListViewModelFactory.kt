@@ -26,7 +26,7 @@ import com.google.samples.apps.sunflower.data.GardenPlantingRepository
  */
 class GardenPlantingListViewModelFactory(
     private val repository: GardenPlantingRepository
-) : ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

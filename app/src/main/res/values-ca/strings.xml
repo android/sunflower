@@ -1,0 +1,49 @@
+<!--
+  ~ Copyright 2019 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="menu_filter_by_grow_zone">Filtra per zona de creixement</string>
+    <string name="plant_detail_image_content_description">Imatge de la planta</string>
+    <string name="my_garden_title">El meu jardí</string>
+    <string name="plant_list_title">Llista de plantes</string>
+    <string name="available">Plantes disponibles</string>
+    <string name="plant_details_title">Detalls de la planta</string>
+    <string name="add_plant">Afegeix una planta</string>
+    <string name="added_plant_to_garden">La planta s\'ha afegit al jardí</string>
+    <string name="garden_empty">El jardí és buit</string>
+    <string name="plant_date_header">Plantada</string>
+    <string name="watered_date_header">Regada per darrera vegada</string>
+    <string name="menu_item_share_plant">Comparteix</string>
+    <string name="share_text_plant">Mira la planta %s a l\'aplicació Android Sunflower</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">Cal regar-la</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">diàriament</item>
+        <item quantity="other">cada %d dies</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one">cal regar-la demà.</item>
+        <item quantity="other">cal regar-la d\'aquí a %d dies.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Imatge de la planta</string>
+    <string name="gallery_title">(translate me) Photos by Unsplash</string>
+    <string name="gallery_content_description">(translate me) Navigate to gallery screen</string>
+
+</resources>

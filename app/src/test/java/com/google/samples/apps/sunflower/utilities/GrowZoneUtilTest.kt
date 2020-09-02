@@ -36,7 +36,7 @@ class GrowZoneUtilTest {
         assertEquals(1, getZoneForLatitude(-90.0))
     }
 
-    // Bugfix test for https://github.com/googlesamples/android-sunflower/issues/8
+    // Bugfix test for https://github.com/android/sunflower/issues/8
     @Test fun getZoneForLatitude_GitHub_issue8() {
         assertEquals(9, getZoneForLatitude(35.0))
         assertEquals(8, getZoneForLatitude(42.0))

@@ -1,21 +1,18 @@
-Android Sunflower (alpha)
-=========================
-[![CircleCI](https://circleci.com/gh/googlesamples/android-sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/googlesamples/android-sunflower/tree/master)
+Android Sunflower
+=================
 
 A gardening app illustrating Android development best practices with Android Jetpack.
 
-Android Sunflower is currently released as an alpha and is under heavy development. To view the
-latest changes, please visit the
-[Releases page](https://github.com/googlesamples/android-sunflower/releases).
+Android Sunflower is currently under heavy development.
 Note that some changes (such as database schema modifications) are not backwards
-compatible during this alpha period and may cause the app to crash. In this
+compatible and may cause the app to crash. In this
 case, please uninstall and re-install the app.
 
 Introduction
 ------------
 
 Android Jetpack is a set of components, tools and guidance to make great Android apps. They bring
-together the existing Support Library and Architecture Components and arranges them into four
+together the existing Support Library and Architecture Components and arrange them into four
 categories:
 
 ![Android Jetpack](screenshots/jetpack_donut.png "Android Jetpack Components")
@@ -37,6 +34,21 @@ There are two Gradle tasks for testing the project:
 For more resources on learning Android development, visit the
 [Developer Guides](https://developer.android.com/guide/) at
 [developer.android.com](https://developer.android.com).
+
+### Unsplash API key
+
+Sunflower uses the [Unsplash API](https://unsplash.com/developers) to load pictures on the gallery
+screen. To use the API, you will need to obtain a free developer API key. See the
+[Unsplash API Documentation](https://unsplash.com/documentation) for instructions.
+
+Once you have the key, add this line to the `gradle.properties` file, either in your user home
+directory (usually `~/.gradle/gradle.properties` on Linux and Mac) or in the project's root folder:
+
+```
+unsplash_access_key=<your Unsplash access key>
+```
+
+The app is still usable without an API key, though you won't be able to navigate to the gallery screen.
 
 Screenshots
 -----------
@@ -96,7 +108,7 @@ Updates will include incorporating additional Jetpack components and updating ex
 as the component libraries evolve.
 
 Interested in seeing a particular feature of the Android Framework or Jetpack implemented in this
-app? Please open a new [issue](https://github.com/googlesamples/android-sunflower/issues).
+app? Please open a new [issue](https://github.com/android/sunflower/issues).
 
 Android Studio IDE setup
 ------------------------
@@ -109,11 +121,9 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Close Android Studio if it's open
 
-- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation)
+- Download ktlint using these [installation instructions](https://github.com/pinterest/ktlint/blob/master/README.md#installation)
 
-- Inside the project root directory run:
-
-  `./ktlint --apply-to-idea-project --android`
+- Apply ktlint settings to Android Studio using these [instructions](https://github.com/pinterest/ktlint/blob/master/README.md#-with-intellij-idea)
 
 - Start Android Studio
 
@@ -121,9 +131,9 @@ Additional resources
 --------------------
 Check out these Wiki pages to learn more about Android Sunflower:
 
-- [Notable Community Contributions](https://github.com/googlesamples/android-sunflower/wiki/Notable-Community-Contributions)
+- [Notable Community Contributions](https://github.com/android/sunflower/wiki/Notable-Community-Contributions)
 
-- [Publications](https://github.com/googlesamples/android-sunflower/wiki/Sunflower-Publications)
+- [Publications](https://github.com/android/sunflower/wiki/Sunflower-Publications)
 
 Non-Goals
 ---------
@@ -144,7 +154,7 @@ Support
   - http://stackoverflow.com/questions/tagged/android-jetpack
 
 If you've found an error in this sample, please file an issue:
-https://github.com/googlesamples/android-sunflower/issues
+https://github.com/android/sunflower/issues
 
 Patches are encouraged, and may be submitted by forking this project and submitting a pull request
 through GitHub.

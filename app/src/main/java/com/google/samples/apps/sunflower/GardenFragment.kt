@@ -22,7 +22,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
@@ -56,18 +55,15 @@ class GardenFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        viewModel.gardenPlantings.observe(viewLifecycleOwner) { plantings ->
-            binding.hasPlantings = !plantings.isNullOrEmpty()
-        }
-
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
-            if (!result.isNullOrEmpty())
-                adapter.submitList(result)
+            binding.hasPlantings = !result.isNullOrEmpty()
+            adapter.submitList(result)
         }
     }
 
     // TODO: convert to data binding if applicable
     private fun navigateToPlantListPage() {
-        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem = PLANT_LIST_PAGE_INDEX
+        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
+            PLANT_LIST_PAGE_INDEX
     }
 }

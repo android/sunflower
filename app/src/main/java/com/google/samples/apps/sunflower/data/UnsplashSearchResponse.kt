@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,16 @@
 
 package com.google.samples.apps.sunflower.data
 
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import com.google.gson.annotations.SerializedName
 
-class PlantAndGardenPlantingTest {
-
-    @Test fun test_default_values() {
-        val p = PlantAndGardenPlantings()
-        assertTrue(p.gardenPlantings.isEmpty())
-    }
-}
+/**
+ * Data class that represents a photo search response from Unsplash.
+ *
+ * Not all of the fields returned from the API are represented here; only the ones used in this
+ * project are listed below. For a full list of fields, consult the API documentation
+ * [here](https://unsplash.com/documentation#search-photos).
+ */
+data class UnsplashSearchResponse(
+    @field:SerializedName("results") val results: List<UnsplashPhoto>,
+    @field:SerializedName("total_pages") val totalPages: Int
+)

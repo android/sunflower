@@ -19,13 +19,13 @@
     <string name="my_garden_title">Mon jardin</string>
     <string name="plant_detail_image_content_description">Image de plante</string>
     <string name="plant_list_title">Liste des plantes</string>
-    <string name="available">(translate me) Available Plants</string>
+    <string name="available">Plantes disponibles</string>
     <string name="plant_details_title">Détails sur la plante</string>
-    <string name="add_plant">(translate me) Add plant</string>
+    <string name="add_plant">Ajouter une plante</string>
     <string name="added_plant_to_garden">Plante ajoutée à votre jardin</string>
     <string name="garden_empty">Votre jardin est vide</string>
-    <string name="plant_date_header">(translate me) Planted</string>
-    <string name="watered_date_header">(translate me) Last Watered</string>
+    <string name="plant_date_header">Plantée</string>
+    <string name="watered_date_header">Dernier arrosage</string>
     <string name="menu_item_share_plant">Partager</string>
     <string name="share_text_plant">Regardez la plante %s sur l\'application Sunflower</string>
 
@@ -43,5 +43,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Image de plante</string>
+    <string name="gallery_title">(translate me) Photos by Unsplash</string>
+    <string name="gallery_content_description">(translate me) Navigate to gallery screen</string>
 
 </resources>
