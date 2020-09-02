@@ -31,6 +31,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.RuleChain
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
@@ -39,12 +40,13 @@ class PlantDetailViewModelTest {
 
     private lateinit var appDatabase: AppDatabase
     private lateinit var viewModel: PlantDetailViewModel
+    private val hiltRule = HiltAndroidRule(this)
+    private val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @get:Rule
-    val hiltRule = HiltAndroidRule(this)
-
-    @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+    val rule = RuleChain
+            .outerRule(hiltRule)
+            .around(instantTaskExecutorRule)
 
     @Inject
     lateinit var plantRepository: PlantRepository
