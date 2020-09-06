@@ -28,10 +28,12 @@ import androidx.navigation.fragment.navArgs
 import com.google.samples.apps.sunflower.adapters.GalleryAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGalleryBinding
 import com.google.samples.apps.sunflower.viewmodels.GalleryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
     private val adapter = GalleryAdapter()
