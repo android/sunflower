@@ -32,7 +32,7 @@ buildscript {
         espressoVersion = '3.2.0'
         fragmentVersion = '1.1.0-alpha09'
         glideVersion = '4.10.0'
-        gradleVersion = '4.2.0-alpha08'
+        gradleVersion = '4.2.0-alpha10'
         gsonVersion = '2.8.2'
         junitVersion = '4.13'
         kotlinVersion = '1.4.0'
