@@ -19,9 +19,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_plant_list_scene">
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/plant_list"
@@ -36,5 +37,5 @@
             tools:context="com.google.samples.apps.sunflower.GardenActivity"
             tools:listitem="@layout/list_item_plant"/>
 
-    </FrameLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
