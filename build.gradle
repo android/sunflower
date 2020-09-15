@@ -25,7 +25,8 @@ buildscript {
         // App dependencies
         accompanistVersion = "0.2.0"
         appCompatVersion = '1.1.0'
-        composeVersion = '1.0.0-alpha01'
+        composeVersion = '1.0.0-alpha02'
+        themeAdapterVersion = '0.1.0-dev17'
         constraintLayoutVersion = '2.0.0-beta3'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.3.9"
