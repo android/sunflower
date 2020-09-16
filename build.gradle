@@ -23,7 +23,7 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        accompanistVersion = "0.2.0"
+        accompanistVersion = "0.2.1"
         appCompatVersion = '1.1.0'
         composeVersion = '1.0.0-alpha02'
         themeAdapterVersion = '0.1.0-dev17'
