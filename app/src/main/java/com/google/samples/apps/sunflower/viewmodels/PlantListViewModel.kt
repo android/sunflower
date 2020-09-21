@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -28,9 +30,9 @@ import com.google.samples.apps.sunflower.data.PlantRepository
 /**
  * The ViewModel for [PlantListFragment].
  */
-class PlantListViewModel internal constructor(
+class PlantListViewModel @ViewModelInject internal constructor(
     plantRepository: PlantRepository,
-    private val savedStateHandle: SavedStateHandle
+    @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     val plants: LiveData<List<Plant>> = getSavedGrowZoneNumber().switchMap {
