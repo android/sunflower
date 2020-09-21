@@ -79,8 +79,9 @@ Libraries Used
   * [Animations & Transitions][31] - Move widgets and transition between screens.
   * [Fragment][34] - A basic unit of composable UI.
   * [Layout][35] - Lay out widgets using different algorithms.
-* Third party
+* Third party and miscellaneous libraries
   * [Glide][90] for image loading
+  * [Hilt][92]: for [dependency injection][93]
   * [Kotlin Coroutines][91] for managing background threads with simplified code and reducing needs for callbacks
 
 [0]: https://developer.android.com/jetpack/components
@@ -101,6 +102,8 @@ Libraries Used
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
 [90]: https://bumptech.github.io/glide/
 [91]: https://kotlinlang.org/docs/reference/coroutines-overview.html
+[92]: https://developer.android.com/training/dependency-injection/hilt-android
+[93]: https://developer.android.com/training/dependency-injection
 
 Upcoming features
 -----------------
@@ -139,12 +142,6 @@ Non-Goals
 ---------
 The focus of this project is on Android Jetpack and the Android framework.
 Thus, there are no immediate plans to implement features outside of this scope.
-
-A note on dependency injection - while many projects (such as
-[Plaid](https://github.com/nickbutcher/plaid)) use
-[Dagger 2](https://github.com/google/dagger) for DI, there are no plans to
-incorporate DI into Sunflower.  This allows developers unfamiliar with dependency
-injection to better understand Sunflower's code without having to learn DI.
 
 Support
 -------
