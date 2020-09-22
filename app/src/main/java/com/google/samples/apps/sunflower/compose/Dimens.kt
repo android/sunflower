@@ -48,4 +48,32 @@ object Dimens {
     val ToolbarIconPadding = 12.dp
 
     val ToolbarIconSize = 32.dp
+
+    //Card dimens
+    @Composable
+    val CornerRadius: Dp
+        get() = dimensionResource(R.dimen.card_corner_radius)
+
+    val CornerRadiusFlat = 0.dp
+
+    @Composable
+    val CardSideMargin: Dp
+        get() = dimensionResource(R.dimen.card_side_margin)
+
+    @Composable
+    val CardBottomMargin: Dp
+        get() = dimensionResource(R.dimen.card_bottom_margin)
+
+    @Composable
+    val CardElevation: Dp
+        get() = dimensionResource(R.dimen.card_elevation)
+
+    //Plant item dimens
+    @Composable
+    val PlantItemHeight: Dp
+        get() = dimensionResource(R.dimen.plant_item_image_height)
+
+    @Composable
+    val MarginNormal: Dp
+        get() = dimensionResource(R.dimen.margin_normal)
 }
