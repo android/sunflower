@@ -23,6 +23,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Layout
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -30,9 +32,30 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.accessibilityLabel
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.viewinterop.viewModel
+import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.compose.Dimens
 import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
+
+/**
+ * Stateless [PlantListScreen] that is responsible for just displaying data
+ */
+@Composable
+fun PlantListScreen(
+        plants: List<Plant>,
+        onClick: () -> Unit,
+        modifier: Modifier = Modifier
+) {
+    VerticalGridLayout(modifier = modifier) {
+        plants.forEach {
+            PlantListItem(plantName = it.name, imgUrl = it.imageUrl, onClick = onClick)
+        }
+    }
+}
 
 /**
  * displays the data in more than one column by default "2".
@@ -94,7 +117,7 @@ fun PlantListItem(
 ) {
     CardView(onClick = onClick, modifier) {
         //Also, we can use constraint layout instead of column here
-        Column(modifier = modifier.fillMaxWidth()
+        Column(modifier = Modifier.fillMaxWidth()
                 .wrapContentHeight()) {
             val plantImgDesc = stringResource(R.string.a11y_plant_item_image)
             CoilImageWithCrossfade(
