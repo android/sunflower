@@ -20,4 +20,5 @@
     <string name="menu_filter_by_grow_zone">Filtrar por zona de cultivo</string>
     <string name="my_garden_title">Meu jardim</string>
     <string name="plant_list_title">Lista de plantas</string>
+    <string name="available" >Plantas disponíveis</string>
 </resources>
