@@ -47,7 +47,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 @Composable
 fun PlantListScreen(
         fragment: PlantListFragment,
-        onClick: () -> Unit,
+        onClick: (String) -> Unit,
 ) {
     val viewModel = viewModel<PlantListViewModel>(
             factory = InjectorUtils.providePlantListViewModelFactory(fragment)
@@ -62,12 +62,12 @@ fun PlantListScreen(
 @Composable
 fun PlantListScreen(
         plants: List<Plant>,
-        onClick: () -> Unit,
+        onClick: (String) -> Unit,
         modifier: Modifier = Modifier
 ) {
     VerticalGridLayout(modifier = modifier.fillMaxWidth().padding(top = Dimens.HeaderMargin)) {
         plants.forEach {
-            PlantListItem(plantName = it.name, imgUrl = it.imageUrl, onClick = onClick)
+            PlantListItem(it, onClick = onClick)
         }
     }
 }
@@ -125,18 +125,17 @@ private fun VerticalGridLayout(
 
 @Composable
 fun PlantListItem(
-        plantName: String,
-        imgUrl: String,
-        onClick: () -> Unit,
+        plant: Plant,
+        onClick: (String) -> Unit,
         modifier: Modifier = Modifier
 ) {
-    CardView(onClick = onClick, modifier) {
+    CardView(modifier.clickable(onClick = { onClick(plant.plantId) })) {
         //Also, we can use constraint layout instead of column here
         Column(modifier = Modifier.fillMaxWidth()
                 .wrapContentHeight()) {
             val plantImgDesc = stringResource(R.string.a11y_plant_item_image)
             CoilImageWithCrossfade(
-                    data = imgUrl,
+                    data = plant.imageUrl,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.height(Dimens.PlantItemHeight)
                             .fillMaxWidth()
@@ -145,7 +144,7 @@ fun PlantListItem(
                             }
             )
             Text(
-                    text = plantName,
+                    text = plant.name,
                     //Mimics ?attr/textAppearanceListItem textAppearance
                     style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onSurface),
                     modifier = Modifier.padding(vertical = Dimens.MarginNormal)
@@ -159,17 +158,14 @@ fun PlantListItem(
 
 //Equivalent to MaskedCardView
 @Composable
-private fun CardView(onClick: () -> Unit,
-                     modifier: Modifier = Modifier,
-                     content: @Composable () -> Unit) {
+private fun CardView(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Card(
             modifier = modifier.padding(
                     start = Dimens.CardSideMargin,
                     end = Dimens.CardSideMargin,
                     bottom = Dimens.CardBottomMargin)
                     .fillMaxWidth()
-                    .wrapContentHeight()
-                    .clickable(onClick = onClick),
+                    .wrapContentHeight(),
             shape = RoundedCornerShape(
                     topLeft = Dimens.CornerRadiusFlat,
                     topRight = Dimens.CornerRadius,
