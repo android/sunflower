@@ -41,8 +41,8 @@
     </plurals>
 
     <plurals name="watering_next">
-        <item quantity="one" translation_description="Text indicating when the the plant should next be watered, singular. Used in conjunction with last watered date. 'May 24, 2018 - water tomorrow.'.">water tomorrow.</item>
-        <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">water in %d days.</item>
+        <item quantity="one" translation_description="Text indicating when the the plant should next be watered, singular. Used in conjunction with last watered date. 'May 24, 2018 - water tomorrow.'." tools:ignore="ImpliedQuantity">regar amanhã.</item>
+        <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">regar dentro de %d dias.</item>
     </plurals>
 
     <!-- Accessibility -->
