@@ -45,4 +45,5 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Foto da planta</string>
+    <string name="gallery_content_description">Navegue para a tela de galeria</string>
 </resources>
