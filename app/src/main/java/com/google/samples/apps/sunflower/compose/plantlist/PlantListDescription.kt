@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Layout
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -32,6 +33,57 @@ import androidx.compose.ui.text.style.TextAlign
 import com.google.samples.apps.sunflower.compose.Dimens
 import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 import com.google.samples.apps.sunflower.R
+
+/**
+ * displays the data in more than one column by default "2".
+ *
+ * Equivalent to Using StaggeredGridLayoutManager + app:spanCount="2" in xml/View system
+ * @param [columnsNum] control the number of columns
+ *
+ * This is highly inspired by Owl sample app's grid layout,
+ * @link https://github.com/android/compose-samples/blob/master/Owl/app/src/main/java/com/example/owl/ui/courses/FeaturedCourses.kt#L161
+ */
+@Composable
+private fun VerticalGridLayout(
+        columnsNum: Int = 2,
+        modifier: Modifier = Modifier,
+        item: @Composable () -> Unit
+) {
+    Layout(children = item, modifier = modifier) { measurables, constraints ->
+        check(constraints.hasBoundedWidth) {
+            error("layouts with unBounded width Unsupported yet")
+        }
+        val columnWidth = constraints.maxWidth / columnsNum
+        val itemConstraints = constraints.copy(maxWidth = columnWidth, minWidth = columnWidth / 2)
+        val columnsHeights = IntArray(columnsNum) { 0 } //track each column height For sake of measuring
+        //Beginning of measuring stage
+        val placeables = measurables.mapIndexed { itemIndex, measurable ->
+            val columnIndex = itemIndex % columnsNum
+            val placeable = measurable.measure(itemConstraints)
+            columnsHeights[columnIndex] += placeable.height
+            placeable
+        }
+        val layoutHeight = columnsHeights
+                .maxOrNull()
+                ?.coerceIn(constraints.minHeight, constraints.maxHeight) ?: constraints.minHeight
+        //Beginning of layouting stage
+        layout(
+                width = constraints.maxWidth,
+                height = layoutHeight
+        ) {
+            val itemY = IntArray(columnsNum) { 0 }
+            val itemX = IntArray(columnsNum) { it } //Initialize item x value based on index
+            placeables.forEachIndexed { index, placeable ->
+                val column = index % columnsNum
+                placeable.placeRelative(
+                        x = itemX[column] * columnWidth,
+                        y = itemY[column]
+                )
+                itemY[column] += placeable.height
+            }
+        }
+    }
+}
 
 @Composable
 fun PlantListItem(
