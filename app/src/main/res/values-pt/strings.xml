@@ -24,4 +24,5 @@
     <string name="plant_details_title">Detalhes da planta</string>
     <string name="add_plant" >Adicionar planta</string>
     <string name="added_plant_to_garden">Adicionou planta ao jardim</string>
+    <string name="garden_empty">Seu jardim esta vazio</string>
 </resources>
