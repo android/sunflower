@@ -42,6 +42,21 @@ import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
 /**
+ * Stateful [PlantListScreen] that is responsible for managing state of composables
+ */
+@Composable
+fun PlantListScreen(
+        fragment: PlantListFragment,
+        onClick: () -> Unit,
+) {
+    val viewModel = viewModel<PlantListViewModel>(
+            factory = InjectorUtils.providePlantListViewModelFactory(fragment)
+    )
+    val plants by viewModel.plants.observeAsState(listOf())
+    PlantListScreen(plants = plants, onClick = onClick)
+}
+
+/**
  * Stateless [PlantListScreen] that is responsible for just displaying data
  */
 @Composable
