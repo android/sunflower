@@ -22,4 +22,5 @@
     <string name="plant_list_title">Lista de plantas</string>
     <string name="available" >Plantas disponíveis</string>
     <string name="plant_details_title">Detalhes da planta</string>
+    <string name="add_plant" >Adicionar planta</string>
 </resources>
