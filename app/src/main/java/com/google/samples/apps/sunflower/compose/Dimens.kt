@@ -76,4 +76,8 @@ object Dimens {
     @Composable
     val MarginNormal: Dp
         get() = dimensionResource(R.dimen.margin_normal)
+
+    @Composable
+    val HeaderMargin: Dp
+        get() = dimensionResource(R.dimen.header_margin)
 }

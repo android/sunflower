@@ -65,7 +65,7 @@ fun PlantListScreen(
         onClick: () -> Unit,
         modifier: Modifier = Modifier
 ) {
-    VerticalGridLayout(modifier = modifier) {
+    VerticalGridLayout(modifier = modifier.fillMaxWidth().padding(top = Dimens.HeaderMargin)) {
         plants.forEach {
             PlantListItem(plantName = it.name, imgUrl = it.imageUrl, onClick = onClick)
         }
