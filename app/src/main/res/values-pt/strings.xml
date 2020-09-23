@@ -28,4 +28,5 @@
     <string name="plant_date_header">Plantada</string>
     <string name="watered_date_header">Regado pela última vez</string>
     <string name="menu_item_share_plant">Partilhar</string>
+    <string name="share_text_plant">Confira o %s da planta na aplicação Sunflower</string>
 </resources>
