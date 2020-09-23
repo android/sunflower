@@ -42,4 +42,7 @@
         <item quantity="one" tools:ignore="ImpliedQuantity">regar amanhã.</item>
         <item quantity="other">regar dentro de %d dias.</item>
     </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Foto da planta</string>
 </resources>
