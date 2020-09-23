@@ -37,4 +37,9 @@
         <item quantity="one" tools:ignore="ImpliedQuantity">todos dias</item>
         <item quantity="other">em cada %d dias</item>
     </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one" tools:ignore="ImpliedQuantity">regar amanhã.</item>
+        <item quantity="other">regar dentro de %d dias.</item>
+    </plurals>
 </resources>
