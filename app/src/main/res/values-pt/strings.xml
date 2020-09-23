@@ -33,4 +33,8 @@
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Necessidades de rega</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one" tools:ignore="ImpliedQuantity">todos dias</item>
+        <item quantity="other">em cada %d dias</item>
+    </plurals>
 </resources>
