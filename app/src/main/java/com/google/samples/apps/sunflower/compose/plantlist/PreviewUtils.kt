@@ -24,10 +24,7 @@ import com.google.samples.apps.sunflower.compose.ProvideDisplayInsets
 @Preview(showBackground = true, backgroundColor = 0xff49bb79)
 @Composable
 fun PreviewItem() {
-    PlantListItem(
-            plantName = "Tomato",
-            imgUrl = "https://upload.wikimedia.org/wikipedia/commons/1/17/Cherry_tomatoes_red_and_green_2009_16x9.jpg",
-            onClick = {})
+    PlantListItem(plants.random(), onClick = {})
 }
 
 @Preview(showBackground = true, backgroundColor = 0xff49bb79)
