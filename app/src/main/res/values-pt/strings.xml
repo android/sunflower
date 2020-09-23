@@ -29,4 +29,5 @@
     <string name="watered_date_header">Regado pela última vez</string>
     <string name="menu_item_share_plant">Partilhar</string>
     <string name="share_text_plant">Confira o %s da planta na aplicação Sunflower</string>
+    <string name="gallery_title">Fotos tirados em Unsplash</string>
 </resources>
