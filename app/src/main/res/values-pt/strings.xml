@@ -27,4 +27,5 @@
     <string name="garden_empty">Seu jardim esta vazio</string>
     <string name="plant_date_header">Plantada</string>
     <string name="watered_date_header">Regado pela última vez</string>
+    <string name="menu_item_share_plant">Partilhar</string>
 </resources>
