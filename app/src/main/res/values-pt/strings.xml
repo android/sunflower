@@ -18,5 +18,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Translated by Anselmo Alexandre -->
     <string name="menu_filter_by_grow_zone">Filtrar por zona de cultivo</string>
+    <string name="my_garden_title">Meu jardim</string>
 
 </resources>
