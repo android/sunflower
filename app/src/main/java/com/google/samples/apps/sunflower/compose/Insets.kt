@@ -19,7 +19,7 @@
 package com.google.samples.apps.sunflower.compose
 
 import android.view.View
-import androidx.compose.foundation.layout.InnerPadding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Providers
@@ -425,7 +425,7 @@ fun Modifier.navigationBarsWidthPlus(
 }
 
 /**
- * Returns the current insets converted into a [InnerPadding].
+ * Returns the current insets converted into a [PaddingValues].
  *
  * @param start Whether to apply the inset on the start dimension.
  * @param top Whether to apply the inset on the top dimension.
@@ -438,9 +438,9 @@ fun Insets.toInnerPadding(
     top: Boolean = true,
     end: Boolean = true,
     bottom: Boolean = true
-): InnerPadding = with(DensityAmbient.current) {
+): PaddingValues = with(DensityAmbient.current) {
     val layoutDirection = LayoutDirectionAmbient.current
-    InnerPadding(
+    PaddingValues(
         start = when {
             start && layoutDirection == LayoutDirection.Ltr -> this@toInnerPadding.left.toDp()
             start && layoutDirection == LayoutDirection.Rtl -> this@toInnerPadding.right.toDp()

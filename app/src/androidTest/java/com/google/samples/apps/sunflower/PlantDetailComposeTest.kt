@@ -45,15 +45,15 @@ class PlantDetailComposeTest {
     @Test
     fun plantDetails_checkIsNotPlanted() {
         startPlantDetails(isPlanted = false)
-        onNodeWithText("Apple").assertIsDisplayed()
-        onNodeWithLabel("Add plant").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
+        composeTestRule.onNodeWithLabel("Add plant").assertIsDisplayed()
     }
 
     @Test
     fun plantDetails_checkIsPlanted() {
         startPlantDetails(isPlanted = true)
-        onNodeWithText("Apple").assertIsDisplayed()
-        onNodeWithLabel("Add plant").assertDoesNotExist()
+        composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
+        composeTestRule.onNodeWithLabel("Add plant").assertDoesNotExist()
     }
 
     private fun startPlantDetails(isPlanted: Boolean) {

@@ -27,8 +27,8 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.ui.test.android.createAndroidComposeRule
 import androidx.ui.test.assertIsDisplayed
+import androidx.ui.test.createAndroidComposeRule
 import androidx.ui.test.onNodeWithLabel
 import androidx.ui.test.onNodeWithText
 import androidx.ui.test.performClick
@@ -55,15 +55,15 @@ class PlantDetailFragmentTest {
 
     @Test
     fun screen_launches() {
-        onNodeWithText("Apple").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
     }
 
     @Test
     fun testShareTextIntent() {
         Intents.init()
 
-        onNodeWithText("Apple").assertIsDisplayed()
-        onNodeWithLabel("Share").assertIsDisplayed().performClick()
+        composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
+        composeTestRule.onNodeWithLabel("Share").assertIsDisplayed().performClick()
 
         intended(
             chooser(
