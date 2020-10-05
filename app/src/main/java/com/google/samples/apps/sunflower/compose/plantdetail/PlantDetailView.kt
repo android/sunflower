@@ -20,16 +20,15 @@ import android.text.method.LinkMovementMethod
 import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.core.TransitionState
 import androidx.compose.animation.transition
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Stack
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -80,6 +79,7 @@ import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.compose.ProvideDisplayInsets
+import com.google.samples.apps.sunflower.compose.statusBarsPadding
 import com.google.samples.apps.sunflower.compose.systemBarsPadding
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.utils.getQuantityString
@@ -88,7 +88,7 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
-import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
+import dev.chrisbanes.accompanist.coil.CoilImage
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -157,7 +157,7 @@ fun PlantDetails(
 
     // Transition that fades in/out the header with the image and the Toolbar
     val transition = transition(toolbarTransitionDefinition, toolbarState)
-    Stack(modifier) {
+    Box(modifier) {
         PlantDetailsContent(
             scrollState = scrollState,
             toolbarState = toolbarState,
@@ -209,7 +209,7 @@ private fun PlantHeader(
     callbacks: PlantDetailsCallbacks,
     transitionState: TransitionState
 ) {
-    if (toolbarState == ToolbarState.SHOWN) {
+    if (toolbarState.isShown) {
         PlantDetailsToolbar(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
@@ -234,10 +234,10 @@ private fun PlantDetailsToolbar(
 ) {
     Surface {
         TopAppBar(
-            modifier = modifier.systemBarsPadding(),
+            modifier = modifier.statusBarsPadding(),
             backgroundColor = MaterialTheme.colors.surface
         ) {
-            IconButton(onBackClick, Modifier.gravity(Alignment.CenterVertically)) {
+            IconButton(onBackClick, Modifier.align(Alignment.CenterVertically)) {
                 Icon(Icons.Filled.ArrowBack)
             }
             Text(
@@ -252,7 +252,7 @@ private fun PlantDetailsToolbar(
             val shareAccessibilityLabel = stringResource(R.string.menu_item_share_plant)
             IconButton(
                 onShareClick,
-                Modifier.gravity(Alignment.CenterVertically).semantics {
+                Modifier.align(Alignment.CenterVertically).semantics {
                     accessibilityLabel = shareAccessibilityLabel
                 }
             ) {
@@ -272,7 +272,7 @@ private fun PlantImageHeader(
 ) {
     var imageHeight by remember { mutableStateOf(0) }
 
-    Stack(Modifier.fillMaxWidth()) {
+    Box(Modifier.fillMaxWidth()) {
         PlantImage(
             scrollState, imageUrl,
             transitionModifier.onPositioned {
@@ -282,7 +282,7 @@ private fun PlantImageHeader(
         if (!isPlanted) {
             val fabModifier = if (imageHeight != 0) {
                 Modifier
-                    .gravity(Alignment.TopEnd)
+                    .align(Alignment.TopEnd)
                     .padding(end = Dimens.PaddingSmall)
                     .offset(y = getFabOffset(imageHeight, scrollState))
                     .then(transitionModifier)
@@ -313,11 +313,12 @@ private fun PlantImage(
     val parallaxOffset = with(DensityAmbient.current) {
         scrollerParallaxOffset(this, scrollState)
     }
-    CoilImageWithCrossfade(
+    CoilImage(
         data = imageUrl,
         contentScale = ContentScale.Crop,
+        fadeIn = true,
         loading = {
-            Box(modifier = Modifier.fillMaxSize(), backgroundColor = placeholderColor)
+            Box(modifier = Modifier.fillMaxSize().background(placeholderColor))
         },
         modifier = modifier
             .fillMaxWidth()
@@ -382,7 +383,7 @@ private fun PlantInformation(
                     end = Dimens.PaddingSmall,
                     bottom = Dimens.PaddingNormal
                 )
-                .gravity(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally)
                 .onPositioned { onNamePosition(it.globalPosition.y) }
                 .visible { toolbarState == ToolbarState.HIDDEN }
         )
@@ -392,7 +393,7 @@ private fun PlantInformation(
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(horizontal = Dimens.PaddingSmall)
-                .gravity(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally)
         )
         ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
             Text(
@@ -403,7 +404,7 @@ private fun PlantInformation(
                         end = Dimens.PaddingSmall,
                         bottom = Dimens.PaddingNormal
                     )
-                    .gravity(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally)
             )
         }
         PlantDescription(description)

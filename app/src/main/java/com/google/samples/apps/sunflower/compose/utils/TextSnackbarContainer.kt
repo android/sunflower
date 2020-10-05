@@ -17,7 +17,7 @@
 package com.google.samples.apps.sunflower.compose.utils
 
 import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.Stack
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
@@ -41,7 +41,7 @@ fun TextSnackbarContainer(
     dismissTimeoutMs: Long = 5000,
     content: @Composable () -> Unit
 ) {
-    Stack(modifier) {
+    Box(modifier) {
         content()
         if (showSnackbar) {
             launchInComposition(showSnackbar) {
@@ -51,7 +51,7 @@ fun TextSnackbarContainer(
 
             Snackbar(
                 modifier = Modifier
-                    .gravity(Alignment.BottomCenter)
+                    .align(Alignment.BottomCenter)
                     .systemBarsPadding()
                     .padding(all = 8.dp),
                 text = { Text(snackbarText) },
