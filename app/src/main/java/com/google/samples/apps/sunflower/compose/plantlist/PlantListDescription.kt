@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.compose.plantlist
 
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -34,6 +35,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
+import com.google.samples.apps.sunflower.compose.navigationBarsPadding
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -61,10 +63,13 @@ fun PlantListScreen(
         onClick: (String) -> Unit,
         modifier: Modifier = Modifier
 ) {
-    VerticalGridLayout(modifier = modifier.fillMaxWidth().padding(top = Dimens.HeaderMargin)) {
-        plants.forEach {
-            PlantListItem(it, onClick = onClick)
-        }
+    ScrollableColumn(modifier = modifier.fillMaxWidth().padding(top = Dimens.HeaderMargin)) {
+        VerticalGridLayout {
+            plants.forEach {
+                PlantListItem(it, onClick = onClick)
+            }
+        }//Guard against displaying part of the last item off-screen
+        Spacer(modifier = Modifier.navigationBarsPadding().fillMaxWidth())
     }
 }
 
