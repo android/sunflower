@@ -92,7 +92,7 @@ private fun VerticalGridLayout(
             error("layouts with unBounded width Unsupported yet")
         }
         val columnWidth = constraints.maxWidth / columnsNum
-        val itemConstraints = constraints.copy(maxWidth = columnWidth, minWidth = columnWidth / 2)
+        val itemConstraints = constraints.copy(maxWidth = columnWidth, minWidth = columnWidth)
         val columnsHeights = IntArray(columnsNum) { 0 } //track each column height For sake of measuring
         //Beginning of measuring stage
         val placeables = measurables.mapIndexed { itemIndex, measurable ->
