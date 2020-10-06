@@ -36,7 +36,7 @@ class GardenActivityTest {
         // When the "Add Plant" button is clicked
         onView(withId(R.id.add_plant)).perform(click())
 
-        // Then the ViewPager should change to the Plant List page
-        onView(withId(R.id.plant_list)).check(matches(isDisplayed()))
+        // Then the ViewPager should change to the Plant List page, and compose_view should be displayed
+        onView(withId(R.id.compose_view)).check(matches(isDisplayed()))
     }
 }
