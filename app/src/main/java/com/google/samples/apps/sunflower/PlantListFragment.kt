@@ -54,7 +54,7 @@ class PlantListFragment : Fragment() {
             setContent {
                 MdcTheme {
                     ProvideDisplayInsets {
-                        PlantListScreen(fragment = this@PlantListFragment, onClick = { plantId ->
+                        PlantListScreen(viewModel = viewModel, onClick = { plantId ->
                             val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
                             this@PlantListFragment.findNavController().navigate(direction)
                         })

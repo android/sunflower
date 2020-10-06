@@ -23,8 +23,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Layout
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -32,26 +32,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.accessibilityLabel
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.viewinterop.viewModel
-import com.google.samples.apps.sunflower.PlantListFragment
-import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.data.Plant
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 /**
  * Stateful [PlantListScreen] that is responsible for managing state of composables
+ *
+ * //TODO: instansiate viewModel here Once you migrate HomeViewPagerFragment
  */
 @Composable
 fun PlantListScreen(
-        fragment: PlantListFragment,
+        viewModel: PlantListViewModel,
         onClick: (String) -> Unit,
 ) {
-    val viewModel = viewModel<PlantListViewModel>(
-            factory = InjectorUtils.providePlantListViewModelFactory(fragment)
-    )
     val plants by viewModel.plants.observeAsState(listOf())
     PlantListScreen(plants = plants, onClick = onClick)
 }
