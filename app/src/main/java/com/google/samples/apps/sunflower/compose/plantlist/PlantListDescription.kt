@@ -35,11 +35,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.viewinterop.viewModel
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.compose.Dimens
-import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
+import dev.chrisbanes.accompanist.coil.CoilImage
 
 /**
  * Stateful [PlantListScreen] that is responsible for managing state of composables
@@ -134,8 +134,9 @@ fun PlantListItem(
         Column(modifier = Modifier.fillMaxWidth()
                 .wrapContentHeight()) {
             val plantImgDesc = stringResource(R.string.a11y_plant_item_image)
-            CoilImageWithCrossfade(
+            CoilImage(
                     data = plant.imageUrl,
+                    fadeIn = true,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.height(Dimens.PlantItemHeight)
                             .fillMaxWidth()
