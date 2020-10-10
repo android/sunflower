@@ -39,6 +39,7 @@ buildscript {
         kotlinVersion = '1.4.0'
         ktlintVersion = '0.38.1'
         ktxVersion = '1.0.2'
+        leakCanaryVersion = '2.4'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.0'
         navigationVersion = '2.2.0'
