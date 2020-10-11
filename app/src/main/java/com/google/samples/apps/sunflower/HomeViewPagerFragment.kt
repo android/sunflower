@@ -41,7 +41,7 @@ class HomeViewPagerFragment : Fragment() {
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
-        viewPager.adapter = SunflowerPagerAdapter(this)
+        viewPager.adapter = SunflowerPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
 
         // Set the icon and text for each tab
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

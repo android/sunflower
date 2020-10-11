@@ -17,6 +17,8 @@
 package com.google.samples.apps.sunflower.adapters
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.samples.apps.sunflower.GardenFragment
 import com.google.samples.apps.sunflower.PlantListFragment
@@ -24,7 +26,10 @@ import com.google.samples.apps.sunflower.PlantListFragment
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
-class SunflowerPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class SunflowerPagerAdapter(
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     /**
      * Mapping of the ViewPager page indexes to their respective Fragments
