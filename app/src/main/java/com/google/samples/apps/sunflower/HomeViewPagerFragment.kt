@@ -69,4 +69,9 @@ class HomeViewPagerFragment : Fragment() {
             else -> null
         }
     }
+
+    override fun onDestroyView() {
+        (activity as AppCompatActivity).setSupportActionBar(null)
+        super.onDestroyView()
+    }
 }
