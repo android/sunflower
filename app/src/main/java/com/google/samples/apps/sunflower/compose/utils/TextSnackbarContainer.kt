@@ -22,7 +22,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.launchInComposition
+import androidx.compose.runtime.LaunchedTask
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -44,7 +44,7 @@ fun TextSnackbarContainer(
     Box(modifier) {
         content()
         if (showSnackbar) {
-            launchInComposition(showSnackbar) {
+            LaunchedTask(showSnackbar) {
                 delay(dismissTimeoutMs)
                 onDismissSnackbar()
             }

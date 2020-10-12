@@ -38,7 +38,7 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.EmphasisAmbient
+import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -61,7 +61,9 @@ import androidx.compose.ui.draw.drawOpacity
 import androidx.compose.ui.drawLayer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.globalPosition
+import androidx.compose.ui.onGloballyPositioned
 import androidx.compose.ui.onPositioned
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.DensityAmbient
@@ -275,7 +277,7 @@ private fun PlantImageHeader(
     Box(Modifier.fillMaxWidth()) {
         PlantImage(
             scrollState, imageUrl,
-            transitionModifier.onPositioned {
+            transitionModifier.onGloballyPositioned {
                 imageHeight = it.size.height
             }
         )
@@ -384,7 +386,7 @@ private fun PlantInformation(
                     bottom = Dimens.PaddingNormal
                 )
                 .align(Alignment.CenterHorizontally)
-                .onPositioned { onNamePosition(it.globalPosition.y) }
+                .onGloballyPositioned { onNamePosition(it.globalPosition.y) }
                 .visible { toolbarState == ToolbarState.HIDDEN }
         )
         Text(
@@ -395,7 +397,7 @@ private fun PlantInformation(
                 .padding(horizontal = Dimens.PaddingSmall)
                 .align(Alignment.CenterHorizontally)
         )
-        ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
             Text(
                 text = getQuantityString(R.plurals.watering_needs_suffix, wateringInterval),
                 modifier = Modifier
