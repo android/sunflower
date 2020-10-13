@@ -61,10 +61,10 @@ import androidx.compose.ui.draw.drawOpacity
 import androidx.compose.ui.drawLayer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.globalPosition
 import androidx.compose.ui.onGloballyPositioned
 import androidx.compose.ui.onPositioned
+import androidx.compose.ui.onSizeChanged
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.res.stringResource
@@ -277,9 +277,7 @@ private fun PlantImageHeader(
     Box(Modifier.fillMaxWidth()) {
         PlantImage(
             scrollState, imageUrl,
-            transitionModifier.onGloballyPositioned {
-                imageHeight = it.size.height
-            }
+            transitionModifier.onSizeChanged { imageHeight = it.height }
         )
         if (!isPlanted) {
             val fabModifier = if (imageHeight != 0) {

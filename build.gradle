@@ -82,11 +82,13 @@ allprojects {
     }
 }
 
-configurations.all {
-    resolutionStrategy.eachDependency { details ->
-        if (details.requested.group.startsWith('androidx.compose')
-                || details.requested.group.startsWith('androidx.ui')) {
-            details.useVersion "1.0.0-SNAPSHOT"
+subprojects {
+    configurations.configureEach {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group.startsWith('androidx.compose')
+                    || details.requested.group.startsWith('androidx.ui')) {
+                details.useVersion "1.0.0-SNAPSHOT"
+            }
         }
     }
 }

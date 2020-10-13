@@ -80,30 +80,14 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
     // Compose
-    implementation("androidx.compose.runtime:runtime:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
-    implementation("androidx.compose.ui:ui:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
-    implementation("androidx.compose.foundation:foundation:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
-    implementation("androidx.compose.foundation:foundation-layout:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
-    implementation("androidx.compose.material:material:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
-    implementation("androidx.compose.ui:ui-viewbinding:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
-    implementation("androidx.ui:ui-tooling:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
-    implementation("androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion") {
-        version { strictly '1.0.0-SNAPSHOT' }
-    }
+    implementation "androidx.compose.runtime:runtime:$rootProject.composeVersion"
+    implementation "androidx.compose.ui:ui:$rootProject.composeVersion"
+    implementation "androidx.compose.foundation:foundation:$rootProject.composeVersion"
+    implementation "androidx.compose.foundation:foundation-layout:$rootProject.composeVersion"
+    implementation "androidx.compose.material:material:$rootProject.composeVersion"
+    implementation "androidx.compose.ui:ui-viewbinding:$rootProject.composeVersion"
+    implementation "androidx.ui:ui-tooling:$rootProject.composeVersion"
+    implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
     implementation "com.google.android.material:compose-theme-adapter:1.0.0-alpha04"
     implementation "dev.chrisbanes.accompanist:accompanist-coil:$rootProject.accompanistVersion"
 
