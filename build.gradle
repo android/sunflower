@@ -23,10 +23,10 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        accompanistVersion = '0.3.1.compose-6891475-SNAPSHOT'
+        accompanistVersion = '0.3.1'
         appCompatVersion = '1.1.0'
-        composeVersion = '1.0.0-SNAPSHOT'
-        constraintLayoutVersion = '2.0.0-beta3'
+        composeVersion = '1.0.0-alpha05'
+        constraintLayoutVersion = '2.0.2'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.3.9"
         espressoVersion = '3.3.0'
@@ -70,26 +70,9 @@ plugins {
 
 allprojects {
     repositories {
-        maven {
-            url "https://androidx.dev/snapshots/builds/6891475/artifacts/ui/repository/"
-        }
-        maven { // Accompanist snapshot repo
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
         google()
         jcenter()
         mavenCentral()
-    }
-}
-
-subprojects {
-    configurations.configureEach {
-        resolutionStrategy.eachDependency { details ->
-            if (details.requested.group.startsWith('androidx.compose')
-                    || details.requested.group.startsWith('androidx.ui')) {
-                details.useVersion "1.0.0-SNAPSHOT"
-            }
-        }
     }
 }
 
