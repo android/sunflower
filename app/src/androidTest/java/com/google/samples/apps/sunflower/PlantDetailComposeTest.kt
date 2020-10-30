@@ -40,7 +40,7 @@ import org.junit.runner.RunWith
 class PlantDetailComposeTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule(disableTransitions = true)
+    val composeTestRule = createComposeRule()
 
     @Test
     fun plantDetails_checkIsNotPlanted() {
