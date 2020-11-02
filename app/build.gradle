@@ -20,6 +20,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'jacoco'
+
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -47,6 +49,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
+    }
+    testOptions {
+        animationsDisabled true
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        production {
+            dimension "version"
+
         }
     }
     compileOptions {
@@ -109,6 +125,75 @@ dependencies {
     androidTestImplementation "com.google.truth:truth:$rootProject.truthVersion"
     androidTestImplementation "com.google.dagger:hilt-android-testing:$rootProject.hiltVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+}
+
+jacoco {
+    toolVersion = '0.8.1' //Use latest version
+}
+
+project.afterEvaluate {
+    // Grab all build types and product flavors
+    def buildTypes = android.buildTypes.collect { type -> type.name }
+    def productFlavors = android.productFlavors.collect { flavor -> flavor.name }
+
+    // When no product flavors defined, use empty
+    if (!productFlavors) productFlavors.add('')
+
+    productFlavors.each { productFlavorName ->
+        buildTypes.each { buildTypeName ->
+            def sourceName, sourcePath
+            if (!productFlavorName) {
+                sourceName = sourcePath = "${buildTypeName}"
+            } else {
+                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
+                sourcePath = "${productFlavorName}/${buildTypeName}"
+            }
+            def testTaskName = "test${sourceName.capitalize()}UnitTest"
+
+            // Create coverage task of form 'testFlavorTypeCoverage' depending on 'testFlavorTypeUnitTest'
+            task "${testTaskName}Coverage" (type:JacocoReport, dependsOn: "$testTaskName") {
+                group = "Reporting"
+                description = "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
+
+                def excludes = [
+                        '**/R.class',
+                        '**/R$*.class',
+                        '**/Manifest*.*',
+                        'android/**/*.*',
+                        '**/BuildConfig.*',
+                        '**/*$ViewBinder*.*',
+                        '**/*$ViewInjector*.*',
+                        '**/Lambda$*.class',
+                        '**/Lambda.class',
+                        '**/*Lambda.class',
+                        '**/*Lambda*.class'
+                ]
+
+                getClassDirectories().from(fileTree(
+                        dir: "${project.buildDir}/intermediates/classes/${sourcePath}",
+                        excludes: excludes
+                ) + fileTree(
+                        dir: "${project.buildDir}/tmp/kotlin-classes/${sourceName}",
+                        excludes: excludes
+                ))
+
+                def coverageSourceDirs = [
+                        "src/main/java",
+                        "src/$productFlavorName/java",
+                        "src/$buildTypeName/java"
+                ]
+                getAdditionalSourceDirs().from(files(coverageSourceDirs))
+                getSourceDirectories().from(files(coverageSourceDirs))
+                getExecutionData().from(files("${project.buildDir}/jacoco/${testTaskName}.exec"))
+
+                reports {
+                    xml.enabled = true
+                    html.enabled = true
+                    csv.enabled = true
+                }
+            }
+        }
+    }
 }
 
 def getUnsplashAccess() {

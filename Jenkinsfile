@@ -7,13 +7,18 @@ pipeline {
         stage("Test") {
             steps {
                 echo 'Testing'
-                sh './gradlew testReleaseUnitTest'
+                sh './gradlew testProductionReleaseUnitTest'
             }
         }
         stage("Build") {
             steps {
                 echo 'Building apk'
-                sh './gradlew assembleRelease'
+                sh './gradlew assembleProductionRelease'
+            }
+        }
+        stage("Quality Control") {
+            steps {
+                sh './gradlew testProductionReleaseUnitTestCoverage'
             }
         }
         stage("Deploy") {
