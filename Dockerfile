@@ -9,7 +9,7 @@ RUN apt-get update \
 # Set Environment Variables
 ENV SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
     ANDROID_HOME="/usr/local/android-sdk" \
-    ANDROID_VERSION=29
+    ANDROID_VERSION=30
 
 RUN mkdir "$ANDROID_HOME" .android
 RUN useradd -ms /bin/bash admin
@@ -29,6 +29,6 @@ RUN cd "$ANDROID_HOME" \
 
 # Install Android Build Tool and Libraries
 RUN $ANDROID_HOME/tools/bin/sdkmanager --update
-RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;29.0.2" \
+RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;30.0.2" \
     "platforms;android-${ANDROID_VERSION}" \
     "platform-tools"
