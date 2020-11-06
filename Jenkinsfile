@@ -6,10 +6,10 @@ pipeline {
     stages {
         stage("Test") {
             steps {
-                echo 'Branch to build is: '${env.BRANCH_NAME}
-                echo 'Change branch is: '${env.CHANGE_BRANCH}
-                echo 'Target branch is: '${env.CHANGE_TARGET}
-                echo 'Build number: ' ${env.BUILD_NUMBER}
+                echo "Branch to build is: ${env.BRANCH_NAME}"
+                echo "Change branch is: ${env.CHANGE_BRANCH}"
+                echo "Target branch is: ${env.CHANGE_TARGET}"
+                echo "Build number: ${env.BUILD_NUMBER}"
 
                 echo 'Testing'
                 sh './gradlew testProductionReleaseUnitTest'
@@ -20,8 +20,8 @@ pipeline {
                 echo 'Building apk'
                 sh './gradlew assembleProductionRelease'
 
-                echo 'Successful build ' ${currentBuild.fullDisplayName}
-                echo 'Url: ' ${currentBuild.absoluteUrl}
+                echo "Successful build ${currentBuild.fullDisplayName}"
+                echo "Url:  ${currentBuild.absoluteUrl}"
             }
         }
         stage("Quality Control") {
