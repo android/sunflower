@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage("Test") {
             steps {
-                echo 'Branch to build is: {$env.BRANCH_NAME}'
-                echo 'Build number: {$env.BUILD_NUMBER}'
+                echo 'Branch to build is: ${env.BRANCH_NAME}'
+                echo 'Build number: ${env.BUILD_NUMBER}'
 
                 echo 'Testing'
                 sh './gradlew testProductionReleaseUnitTest'
