@@ -19,6 +19,11 @@ package com.google.samples.apps.sunflower
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.os.Bundle
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithLabel
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.navigation.Navigation.findNavController
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
@@ -27,11 +32,6 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.ui.test.assertIsDisplayed
-import androidx.ui.test.createAndroidComposeRule
-import androidx.ui.test.onNodeWithLabel
-import androidx.ui.test.onNodeWithText
-import androidx.ui.test.performClick
 import com.google.samples.apps.sunflower.utilities.chooser
 import org.hamcrest.Matchers.allOf
 import org.junit.Before

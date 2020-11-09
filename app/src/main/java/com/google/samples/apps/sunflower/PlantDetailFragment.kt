@@ -26,8 +26,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.composethemeadapter.MdcTheme
-import com.google.samples.apps.sunflower.compose.ProvideDisplayInsets
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -46,7 +46,7 @@ class PlantDetailFragment : Fragment() {
             // Create a Compose MaterialTheme inheriting the existing colors, typography
             // and shapes of the current View system's theme
             MdcTheme {
-                ProvideDisplayInsets {
+                ProvideWindowInsets {
                     PlantDetailsScreen(
                         args.plantId,
                         onBackClick = {

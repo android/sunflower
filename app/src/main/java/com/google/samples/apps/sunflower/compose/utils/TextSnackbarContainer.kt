@@ -16,17 +16,17 @@
 
 package com.google.samples.apps.sunflower.compose.utils
 
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedTask
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.samples.apps.sunflower.compose.systemBarsPadding
+import dev.chrisbanes.accompanist.insets.systemBarsPadding
 import kotlinx.coroutines.delay
 
 /**
@@ -44,7 +44,7 @@ fun TextSnackbarContainer(
     Box(modifier) {
         content()
         if (showSnackbar) {
-            LaunchedTask(showSnackbar) {
+            LaunchedEffect(showSnackbar) {
                 delay(dismissTimeoutMs)
                 onDismissSnackbar()
             }
