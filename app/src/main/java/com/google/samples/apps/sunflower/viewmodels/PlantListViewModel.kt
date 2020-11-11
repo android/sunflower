@@ -22,10 +22,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.asLiveData
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapLatest
 
 /**
  * The ViewModel for [PlantListFragment].
@@ -35,26 +38,38 @@ class PlantListViewModel @ViewModelInject internal constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    val plants: LiveData<List<Plant>> = getSavedGrowZoneNumber().switchMap {
-        if (it == NO_GROW_ZONE) {
-            plantRepository.getPlants()
-        } else {
-            plantRepository.getPlantsWithGrowZoneNumber(it)
-        }
+    private val growZoneChannel = ConflatedBroadcastChannel<Int>()
+
+    val plants: LiveData<List<Plant>> = growZoneChannel.asFlow()
+            .flatMapLatest { growZone ->
+                if (growZone == NO_GROW_ZONE) {
+                    plantRepository.getPlants()
+                } else {
+                    plantRepository.getPlantsWithGrowZoneNumber(growZone)
+                }
+            }.asLiveData()
+
+    init {
+        getSavedGrowZoneNumberOrDefault()
     }
 
     fun setGrowZoneNumber(num: Int) {
+        growZoneChannel.offer(num)
         savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, num)
     }
 
     fun clearGrowZoneNumber() {
+        growZoneChannel.offer(NO_GROW_ZONE)
         savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
     }
 
-    fun isFiltered() = getSavedGrowZoneNumber().value != NO_GROW_ZONE
+    fun isFiltered() = getSavedGrowZoneNumberOrDefault().value != NO_GROW_ZONE
 
-    private fun getSavedGrowZoneNumber(): MutableLiveData<Int> {
-        return savedStateHandle.getLiveData(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
+    /** @return saved Grow Zone (if available); otherwise return [NO_GROW_ZONE] as the default */
+    private fun getSavedGrowZoneNumberOrDefault(): MutableLiveData<Int> {
+        val liveData = savedStateHandle.getLiveData(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
+        growZoneChannel.offer(liveData.value ?: NO_GROW_ZONE)
+        return liveData
     }
 
     companion object {
