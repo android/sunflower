@@ -33,7 +33,6 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "com.google.samples.apps.sunflower.utilities.MainTestRunner"
-        versionCode 1
         versionName "0.1.6"
         vectorDrawables.useSupportLibrary true
 
@@ -44,6 +43,9 @@ android {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
             }
         }
+
+        versionCode System.getenv("BUILD_NUMBER") as Integer ?: 2
+        project.ext.set("archivesBaseName", "Sunflower-" + versionName + "-" + versionCode);
     }
     buildTypes {
         release {
