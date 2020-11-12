@@ -77,6 +77,21 @@ pipeline {
 
                     echo props.versionName
                     echo props.versionCode
+
+                    def userInput
+                    try {
+                        timeout(time: 60, unit: 'SECONDS') {
+                            userInput = input( id:'userInput', message: 'Override build parameters?', parameters: [
+                                    string(defaultValue: props.versionName, description: 'App version (without build number)', name: 'versionName'),
+                                    string(defaultValue: props.versionCode, description: 'Version code (for GooglePlay Store)', name: 'versionCode')
+                            ])
+                            logOverrides(userInput, props, "manual_override.log")
+                            props.putAll(userInput)
+                            echo("Parameters entered : ${userInput.toString()}")
+                        }
+                    } catch (Exception e) {
+                        echo "User input timed out or cancelled, continue with default values"
+                    }
                 }
             }
         }
