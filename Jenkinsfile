@@ -68,6 +68,12 @@ pipeline {
                 echo "Url:  ${currentBuild.absoluteUrl}"
                 echo "Workspace: ${env.WORKSPACE}"
                 echo "DIR: ${currentBuild.fullProjectName}"
+
+                def d = [versionName: 'unversioned', versionCode: '1']
+                // Read properties from file (Right now we only keep versionName and VersionCode there)
+                HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
+
+                echo props
             }
         }
 //        stage("Quality Control") {
