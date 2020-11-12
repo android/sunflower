@@ -61,44 +61,42 @@ pipeline {
         }
         stage("Build") {
             steps {
-                echo 'Building apk'
-                sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE}"
+//                echo 'Building apk'
+//                sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE}"
 
                 echo "Successful build ${currentBuild.fullDisplayName}"
                 echo "Url:  ${currentBuild.absoluteUrl}"
                 echo "Workspace: ${env.WORKSPACE}"
                 echo "DIR: ${currentBuild.fullProjectName}"
 
-                def d = [versionName: 'unversioned', versionCode: '1']
-                // Read properties from file (Right now we only keep versionName and VersionCode there)
-                HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
-
-                echo props
-            }
-        }
-//        stage("Quality Control") {
-//            steps {
-//                sh './gradlew testProductionReleaseUnitTestCoverage'
-//            }
-//        }
-        stage("Deploy") {
-            environment {
-                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/production/release/app-production-release-unsigned.apk"
-                newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
-            }
-            steps {
-                echo 'Deploy apk'
-                echo apkLocation
-                echo newApk
-
                 script {
-                    if (fileExists(apkLocation)) {
-                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
-                        echo 'Successfully renamed file'
-                    }
+                    def d = [versionName: 'unversioned', versionCode: '1']
+                    // Read properties from file (Right now we only keep versionName and VersionCode there)
+                    HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
+
+                    echo props
                 }
             }
         }
+
+//        stage("Deploy") {
+//            environment {
+//                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/production/release/app-production-release-unsigned.apk"
+//                newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
+//            }
+//            steps {
+//                echo 'Deploy apk'
+//                echo apkLocation
+//                echo newApk
+//
+//                script {
+//                    if (fileExists(apkLocation)) {
+//                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
+//                        echo 'Successfully renamed file'
+//                    }
+//                }
+//            }
+//        }
         stage("Post Actions") {
             steps {
                 echo 'Do after build things'
