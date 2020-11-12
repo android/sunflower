@@ -71,11 +71,11 @@ pipeline {
 
                 script {
                     def d = [versionName: 'unversioned', versionCode: '1']
-//                    echo d
+                    echo d.toString()
                     // Read properties from file (Right now we only keep versionName and VersionCode there)
-//                    HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
+                    HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
 
-//                    echo props
+                    echo props.toString()
                 }
             }
         }
