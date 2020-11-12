@@ -34,9 +34,9 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "com.google.samples.apps.sunflower.utilities.MainTestRunner"
-        versionName project.properties['versionName']
-        versionCode project.properties['versionCode']
+        versionName property('versionName')
         vectorDrawables.useSupportLibrary true
+        versionCode = 1
 
         // Consult the README on instructions for setting up Unsplash API key
         buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")

@@ -24,12 +24,17 @@ def initialiseBuildEnv() {
     }
 }
 
-def getApkFileName() {
-    env.FILE_NAME = "${appName}-${BUILD_TYPE}-${BUILD_NUMBER}.apk"
-    if (env.BUILD_FLAVOUR == Constants.FLAVOUR_PRODUCTION) {
-        env.FILE_NAME = "${appName}.apk"
-    } else if (env.BUILD_FLAVOUR == Constants.FLAVOUR_STAGING) {
-        env.FILE_NAME = "${appName}-Staging-${BUILD_NUMBER}.apk"
+def getApkFileName(version) {
+    switch (env.BUILD_FLAVOUR) {
+        case Constants.FLAVOUR_PRODUCTION:
+            env.FILE_NAME = "${appName}-$version.apk"
+            break
+        case Constants.FLAVOUR_STAGING:
+            env.FILE_NAME = "${appName}-$version-${BUILD_NUMBER}-uat.apk"
+            break
+        default:
+            env.FILE_NAME = "${appName}-$version-SNAPSHOT_${BUILD_NUMBER}.apk"
+            break
     }
 }
 
@@ -42,7 +47,6 @@ pipeline {
         stage("Initialise") {
             steps {
                 initialiseBuildEnv()
-                getApkFileName()
 
                 echo "Branch to build is: ${env.BRANCH_NAME}"
                 echo "Change branch is: ${env.CHANGE_BRANCH}"
@@ -78,15 +82,6 @@ pipeline {
                     echo "versionCode: ${props.versionCode}"
 
                     try {
-//                        timeout(time: 60, unit: 'SECONDS') {
-//                            userInput = input( id:'userInput', message: 'Override build parameters?', parameters: [
-//                                    string(defaultValue: props.versionName, description: 'App version (without build number)', name: 'versionName'),
-//                                    string(defaultValue: props.versionCode, description: 'Version code (for GooglePlay Store)', name: 'versionCode')
-//                            ])
-//                            logOverrides(userInput, props, "manual_override.log")
-//                            props.putAll(userInput)
-//                            echo("Parameters entered : ${userInput.toString()}")
-//                        }
                         props.versionName = '0.1.7'
                         props.versionCode = '2'
                         echo("Parameters changed")
@@ -98,6 +93,9 @@ pipeline {
 
                         sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
 
+                        getApkFileName(props.versionCode)
+                        echo env.FILE_NAME
+
                     } catch (Exception e) {
                         echo "User input timed out or cancelled, continue with default values"
                     }
@@ -105,27 +103,22 @@ pipeline {
             }
         }
 
-//        stage("Deploy") {
-//            environment {
-//                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/production/release/app-production-release-unsigned.apk"
-//                newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
-//            }
-//            steps {
-//                echo 'Deploy apk'
-//                echo apkLocation
-//                echo newApk
-//
-//                script {
-//                    if (fileExists(apkLocation)) {
-//                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
-//                        echo 'Successfully renamed file'
-//                    }
-//                }
-//            }
-//        }
-        post{
-            always{
-                echo "post-build will always run after build completed"
+        stage("Deploy") {
+            environment {
+                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/production/release/app-production-release-unsigned.apk"
+                newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
+            }
+            steps {
+                echo 'Deploy apk'
+                echo apkLocation
+                echo newApk
+
+                script {
+                    if (fileExists(apkLocation)) {
+                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
+                        echo 'Successfully renamed file'
+                    }
+                }
             }
         }
     }
