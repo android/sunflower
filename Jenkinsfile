@@ -75,20 +75,25 @@ pipeline {
                     // Read properties from file (Right now we only keep versionName and VersionCode there)
                     HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
 
-                    echo props.versionName
-                    echo props.versionCode
+                    echo "versionName: ${props.versionName}"
+                    echo "versionCode: ${props.versionCode}"
 
-                    def userInput
                     try {
-                        timeout(time: 60, unit: 'SECONDS') {
-                            userInput = input( id:'userInput', message: 'Override build parameters?', parameters: [
-                                    string(defaultValue: props.versionName, description: 'App version (without build number)', name: 'versionName'),
-                                    string(defaultValue: props.versionCode, description: 'Version code (for GooglePlay Store)', name: 'versionCode')
-                            ])
-                            logOverrides(userInput, props, "manual_override.log")
-                            props.putAll(userInput)
-                            echo("Parameters entered : ${userInput.toString()}")
-                        }
+//                        timeout(time: 60, unit: 'SECONDS') {
+//                            userInput = input( id:'userInput', message: 'Override build parameters?', parameters: [
+//                                    string(defaultValue: props.versionName, description: 'App version (without build number)', name: 'versionName'),
+//                                    string(defaultValue: props.versionCode, description: 'Version code (for GooglePlay Store)', name: 'versionCode')
+//                            ])
+//                            logOverrides(userInput, props, "manual_override.log")
+//                            props.putAll(userInput)
+//                            echo("Parameters entered : ${userInput.toString()}")
+//                        }
+                        props.versionName = "0.1.7"
+                        props.versionCode = "3"
+                        echo("Parameters changed")
+
+                        echo "versionName: ${props.versionName}"
+                        echo "versionCode: ${props.versionCode}"
                     } catch (Exception e) {
                         echo "User input timed out or cancelled, continue with default values"
                     }
