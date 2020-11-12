@@ -29,6 +29,7 @@ android {
         dataBinding = true
     }
     defaultConfig {
+        flavorDimensions "version"
         applicationId "com.google.samples.apps.sunflower"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
@@ -43,9 +44,6 @@ android {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
             }
         }
-
-        versionCode System.getenv("BUILD_NUMBER") as Integer ?: 2
-        project.ext.set("archivesBaseName", "Sunflower-" + versionName + "-" + versionCode);
     }
     buildTypes {
         release {
@@ -60,11 +58,16 @@ android {
             includeAndroidResources = true
         }
     }
-    flavorDimensions "version"
+
     productFlavors {
         production {
-            dimension "version"
 
+        }
+        staging {
+
+        }
+        development {
+            
         }
     }
     compileOptions {
