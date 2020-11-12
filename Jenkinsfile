@@ -27,13 +27,13 @@ def initialiseBuildEnv() {
 def getApkFileName(version) {
     switch (env.BUILD_FLAVOUR) {
         case Constants.FLAVOUR_PRODUCTION:
-            env.FILE_NAME = "${appName}-$version.apk"
+            env.FILE_NAME = "${appName}-v$version.apk"
             break
         case Constants.FLAVOUR_STAGING:
-            env.FILE_NAME = "${appName}-$version-${BUILD_NUMBER}-uat.apk"
+            env.FILE_NAME = "${appName}-v$version-${BUILD_NUMBER}-uat.apk"
             break
         default:
-            env.FILE_NAME = "${appName}-$version-SNAPSHOT_${BUILD_NUMBER}.apk"
+            env.FILE_NAME = "${appName}-v$version-SNAPSHOT_${BUILD_NUMBER}.apk"
             break
     }
 }
@@ -94,6 +94,7 @@ pipeline {
                         sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
 
                         getApkFileName(props.versionName)
+                        env.APP_VERSION = props.versionName
                         echo env.FILE_NAME
 
                     } catch (Exception e) {
@@ -109,7 +110,7 @@ pipeline {
                 newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
             }
             steps {
-                echo 'Deploy apk'
+                echo "Deploy apk ${env.APP_VERSION}"
                 echo apkLocation
                 echo newApk
 
