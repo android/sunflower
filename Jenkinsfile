@@ -70,7 +70,7 @@ pipeline {
                 echo "DIR: ${currentBuild.fullProjectName}"
 
                 script {
-                    def d = [versionName: 'unversioned', versionCode: '1']
+                    d = [versionName: 'unversioned', versionCode: '1']
                     echo d
                     // Read properties from file (Right now we only keep versionName and VersionCode there)
                     HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
