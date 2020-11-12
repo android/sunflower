@@ -22,7 +22,6 @@ import androidx.compose.animation.core.TransitionState
 import androidx.compose.animation.transition
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,19 +36,21 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.AmbientEmphasisLevels
+import androidx.compose.material.AmbientContentAlpha
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Providers
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -62,9 +63,8 @@ import androidx.compose.ui.drawLayer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.globalPosition
-import androidx.compose.ui.onGloballyPositioned
-import androidx.compose.ui.onPositioned
-import androidx.compose.ui.onSizeChanged
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.res.stringResource
@@ -80,9 +80,6 @@ import androidx.ui.tooling.preview.Preview
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
-import com.google.samples.apps.sunflower.compose.ProvideDisplayInsets
-import com.google.samples.apps.sunflower.compose.statusBarsPadding
-import com.google.samples.apps.sunflower.compose.systemBarsPadding
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.utils.getQuantityString
 import com.google.samples.apps.sunflower.compose.visible
@@ -91,6 +88,9 @@ import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
+import dev.chrisbanes.accompanist.insets.statusBarsPadding
+import dev.chrisbanes.accompanist.insets.systemBarsPadding
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -395,7 +395,7 @@ private fun PlantInformation(
                 .padding(horizontal = Dimens.PaddingSmall)
                 .align(Alignment.CenterHorizontally)
         )
-        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+        Providers(AmbientContentAlpha provides ContentAlpha.medium) {
             Text(
                 text = getQuantityString(R.plurals.watering_needs_suffix, wateringInterval),
                 modifier = Modifier
@@ -426,7 +426,7 @@ private fun PlantDescription(description: String) {
 /**
  * Calculates offset FAB needs to keep aligned in the middle of the bottom of the picture.
  *
- * As the [Modifier.onPositioned] in the image is invoked after scrollPosition has changed,
+ * As the [Modifier.onGloballyPositioned] in the image is invoked after scrollPosition has changed,
  * there's a frame delay.
  */
 @Composable
@@ -439,7 +439,7 @@ private fun getFabOffset(imageHeight: Int, scrollState: ScrollState): Dp {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
-    ProvideDisplayInsets {
+    ProvideWindowInsets {
         MdcTheme {
             Surface {
                 PlantDetails(

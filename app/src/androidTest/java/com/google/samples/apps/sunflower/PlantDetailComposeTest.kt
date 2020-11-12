@@ -21,17 +21,17 @@ import android.net.Uri
 import androidx.annotation.RawRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithLabel
+import androidx.compose.ui.test.onNodeWithText
 import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.ui.test.assertIsDisplayed
-import androidx.ui.test.createComposeRule
-import androidx.ui.test.onNodeWithLabel
-import androidx.ui.test.onNodeWithText
-import com.google.samples.apps.sunflower.compose.ProvideDisplayInsets
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetails
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsCallbacks
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.test.R
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -58,7 +58,7 @@ class PlantDetailComposeTest {
 
     private fun startPlantDetails(isPlanted: Boolean) {
         composeTestRule.setContent {
-            ProvideDisplayInsets {
+            ProvideWindowInsets {
                 PlantDetails(
                     plant = plantForTesting(),
                     isPlanted = isPlanted,
