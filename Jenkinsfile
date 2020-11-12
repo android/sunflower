@@ -62,7 +62,6 @@ pipeline {
         stage("Build") {
             steps {
 //                echo 'Building apk'
-//                sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE}"
 
                 echo "Successful build ${currentBuild.fullDisplayName}"
                 echo "Url:  ${currentBuild.absoluteUrl}"
@@ -94,6 +93,11 @@ pipeline {
 
                         echo "versionName: ${props.versionName}"
                         echo "versionCode: ${props.versionCode}"
+
+                        env.COMMON_BUILD_ARGS = " -PversionName=${props.versionName} -PversionCode=${props.versionCode}"
+
+                        sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
+
                     } catch (Exception e) {
                         echo "User input timed out or cancelled, continue with default values"
                     }
