@@ -93,7 +93,7 @@ pipeline {
 
                         sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
 
-                        getApkFileName(props.versionCode)
+                        getApkFileName(props.versionName)
                         echo env.FILE_NAME
 
                     } catch (Exception e) {
