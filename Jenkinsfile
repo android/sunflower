@@ -87,14 +87,14 @@ pipeline {
 //                            props.putAll(userInput)
 //                            echo("Parameters entered : ${userInput.toString()}")
 //                        }
-                        props.versionName = "0.1.7"
-                        props.versionCode = "3"
+                        props.versionName = '0.1.7'
+                        props.versionCode = '2'
                         echo("Parameters changed")
 
                         echo "versionName: ${props.versionName}"
                         echo "versionCode: ${props.versionCode}"
 
-                        env.COMMON_BUILD_ARGS = " -PversionName=${props.versionName} -PversionCode=${props.versionCode}"
+                        env.COMMON_BUILD_ARGS = "-PversionName=${props.versionName} -PversionCode=${props.versionCode}"
 
                         sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
 
@@ -123,9 +123,9 @@ pipeline {
 //                }
 //            }
 //        }
-        stage("Post Actions") {
-            steps {
-                echo 'Do after build things'
+        post{
+            always{
+                echo "post-build will always run after build completed"
             }
         }
     }
