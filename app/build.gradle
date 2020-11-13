@@ -53,6 +53,13 @@ android {
             testCoverageEnabled true
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "../../sunflower.apk"
+        }
+    }
+
     testOptions {
         animationsDisabled true
         unitTests {
@@ -199,6 +206,26 @@ project.afterEvaluate {
                 }
             }
         }
+    }
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name.startsWith("assemble")) {
+        def renameTaskName = "rename${task.name.capitalize()}Apk"
+        def flavor = task.name.substring("assemble".length()).uncapitalize()
+        def fileName = System.getenv('FILE_NAME') as String ?: "no_name"
+        println "${flavor}"
+        println "${fileName}"
+        tasks.create(renameTaskName, Copy) {
+            def path = "${buildDir}/outputs/apk/"
+            println "$path"
+            from(path)
+            include "sunflower.apk"
+            destinationDir file("${buildDir}/outputs/renamedApk/")
+            rename "sunflower.apk", "${fileName}.apk"
+        }
+
+        task.finalizedBy(renameTaskName)
     }
 }
 

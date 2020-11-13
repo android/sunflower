@@ -88,14 +88,15 @@ pipeline {
 
                         echo "versionName: ${props.versionName}"
                         echo "versionCode: ${props.versionCode}"
+                        getApkFileName(props.versionName)
+                        env.APP_VERSION = props.versionName
+                        echo env.FILE_NAME
 
                         env.COMMON_BUILD_ARGS = "-PversionName=${props.versionName} -PversionCode=${props.versionCode}"
 
                         sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
 
-                        getApkFileName(props.versionName)
-                        env.APP_VERSION = props.versionName
-                        echo env.FILE_NAME
+
 
                     } catch (Exception e) {
                         echo "User input timed out or cancelled, continue with default values"
@@ -114,7 +115,7 @@ pipeline {
                 echo apkLocation
                 echo newApk
 
-                sh "mv ${apkLocation} ${newApk}"
+//                sh "mv ${apkLocation} ${newApk}"
 
 //                script {
 //                    if (fileExists(apkLocation)) {
