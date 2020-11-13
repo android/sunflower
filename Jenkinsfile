@@ -42,6 +42,7 @@ pipeline {
     agent {dockerfile true}
     environment {
         appName = 'Sunflower'
+        FILE_NAME = "1.10"
     }
     stages {
         stage("Initialise") {
@@ -96,33 +97,10 @@ pipeline {
 
                         sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
 
-
-
                     } catch (Exception e) {
                         echo "User input timed out or cancelled, continue with default values"
                     }
                 }
-            }
-        }
-
-        stage("Deploy") {
-            environment {
-                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/sunflower.apk"
-                newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
-            }
-            steps {
-                echo "Deploy apk ${env.APP_VERSION}"
-                echo apkLocation
-                echo newApk
-
-//                sh "mv ${apkLocation} ${newApk}"
-
-//                script {
-//                    if (fileExists(apkLocation)) {
-////                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
-//                        echo 'Successfully renamed file'
-//                    }
-//                }
             }
         }
     }
