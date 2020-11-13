@@ -106,7 +106,7 @@ pipeline {
 
         stage("Deploy") {
             environment {
-                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/${BUILD_FLAVOUR}/${BUILD_TYPE}/app-development-debug.apk"
+                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/sunflower.apk"
                 newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
             }
             steps {
