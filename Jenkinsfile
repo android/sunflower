@@ -114,13 +114,14 @@ pipeline {
                 echo apkLocation
                 echo newApk
 
-                script {
-                    if (fileExists(apkLocation)) {
-                        sh "mv ${apkLocation} ${newApk}"
-//                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
-                        echo 'Successfully renamed file'
-                    }
-                }
+                sh "mv ${apkLocation} ${newApk}"
+
+//                script {
+//                    if (fileExists(apkLocation)) {
+////                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
+//                        echo 'Successfully renamed file'
+//                    }
+//                }
             }
         }
     }
