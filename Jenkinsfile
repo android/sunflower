@@ -1,3 +1,5 @@
+import com.sun.org.apache.xerces.internal.parsers.XMLParser
+
 class Constants {
     static final String MASTER_BRANCH = 'master'
     static final String DEVELOP_BRANCH = 'main'
@@ -111,7 +113,9 @@ pipeline {
                     def unitTestCoverageXML = readFile "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
 //                    echo unitTestCoverageXML
 
-                    def data = new XmlParser().parseText(unitTestCoverageXML).counter
+                    def parser = new XmlParser()
+                    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+                    def data = new XmlParser().parseText(unitTestCoverageXML)
                     echo "Done"
                     echo data
                 }
