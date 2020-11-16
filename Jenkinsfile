@@ -108,7 +108,7 @@ pipeline {
             steps {
 
                 script {
-                    def unitTestCoverageXML = "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
+                    def unitTestCoverageXML = "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
 
                     if (fileExists(unitTestCoverageXML)) {
                         echo "Coverage xml exists"
