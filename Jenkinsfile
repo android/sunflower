@@ -62,6 +62,7 @@ pipeline {
             steps {
                 echo 'Testing'
 //                sh './gradlew testProductionReleaseUnitTest'
+                sh ""./gradlew test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage"
             }
         }
         stage("Build") {
@@ -73,35 +74,56 @@ pipeline {
                 echo "Workspace: ${env.WORKSPACE}"
                 echo "DIR: ${currentBuild.fullProjectName}"
 
+//                script {
+//                    def d = [versionName: 'unversioned', versionCode: '1']
+//                    echo d.toString()
+//                    // Read properties from file (Right now we only keep versionName and VersionCode there)
+//                    HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
+//
+//                    echo "versionName: ${props.versionName}"
+//                    echo "versionCode: ${props.versionCode}"
+//
+//                    try {
+//                        props.versionName = '0.1.7'
+//                        props.versionCode = '2'
+//                        echo("Parameters changed")
+//
+//                        echo "versionName: ${props.versionName}"
+//                        echo "versionCode: ${props.versionCode}"
+//                        getApkFileName(props.versionName)
+//                        env.APP_VERSION = props.versionName
+//                        echo env.FILE_NAME
+//
+//                        env.COMMON_BUILD_ARGS = "-PversionName=${props.versionName} -PversionCode=${props.versionCode}"
+//
+//                        sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
+//
+//                    } catch (Exception e) {
+//                        echo "User input timed out or cancelled, continue with default values"
+//                    }
+//                }
+            }
+        }
+        stage("post-actions") {
+            steps {
+
                 script {
-                    def d = [versionName: 'unversioned', versionCode: '1']
-                    echo d.toString()
-                    // Read properties from file (Right now we only keep versionName and VersionCode there)
-                    HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
+                    def unitTestCoverageXML = "${env.WORKSPACE}/app/build/outputs/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
 
-                    echo "versionName: ${props.versionName}"
-                    echo "versionCode: ${props.versionCode}"
+                    if (fileExists(unitTestCoverageXML)) {
+                        echo "Coverage xml exists"
+                        def data = new XmlParser().parseText(unitTestCoverageXML)
 
-                    try {
-                        props.versionName = '0.1.7'
-                        props.versionCode = '2'
-                        echo("Parameters changed")
-
-                        echo "versionName: ${props.versionName}"
-                        echo "versionCode: ${props.versionCode}"
-                        getApkFileName(props.versionName)
-                        env.APP_VERSION = props.versionName
-                        echo env.FILE_NAME
-
-                        env.COMMON_BUILD_ARGS = "-PversionName=${props.versionName} -PversionCode=${props.versionCode}"
-
-                        sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
-
-                    } catch (Exception e) {
-                        echo "User input timed out or cancelled, continue with default values"
+                        println data
+                    } else {
+                        echo "Coverage xml does not exists"
                     }
+
+
                 }
+
             }
         }
     }
 }
+
