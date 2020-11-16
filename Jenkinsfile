@@ -109,17 +109,10 @@ pipeline {
 
                 script {
                     def unitTestCoverageXML = readFile "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
-                    echo unitTestCoverageXML
-                    if (fileExists(unitTestCoverageXML)) {
-                        echo "Coverage xml exists"
-                        def data = new XmlParser().parseText(unitTestCoverageXML)
+//                    echo unitTestCoverageXML
 
-                        println data
-                    } else {
-                        echo "Coverage xml does not exists"
-                    }
-
-
+                    def data = new XmlParser().parseText(unitTestCoverageXML)
+                    println data
                 }
 
             }
