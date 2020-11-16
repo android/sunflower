@@ -111,8 +111,9 @@ pipeline {
                     def unitTestCoverageXML = readFile "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
                     echo unitTestCoverageXML
 
-//                    def data = new XmlParser().parseText(unitTestCoverageXML)
+                    def data = new XmlParser().parseText(unitTestCoverageXML).counter
                     echo "Done"
+                    echo data
                 }
 
             }
