@@ -113,11 +113,15 @@ pipeline {
                     def unitTestCoverageXML = readFile "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
 //                    echo unitTestCoverageXML
 
-                    def parser = new XmlParser()
-                    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
-                    parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-                    def data = parser.parseText(unitTestCoverageXML)
-                    println data.stage
+                    def object = new JsonSlurper().parseText(unitTestCoverageXML)
+
+                    println  object
+
+//                    def parser = new XmlParser()XmlParser
+//                    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+//                    parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
+//                    def data = parser.parseText(unitTestCoverageXML)
+//                    println data
                 }
 
             }
