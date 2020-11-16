@@ -117,8 +117,8 @@ pipeline {
                     def parser = new XmlParser()
                     parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
                     parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-                    def report = parser.parse(unitTestCoverageXML)
-                    println report
+                    def report = parser.parseText(unitTestCoverageXML)
+                    println report['sessioninfo']
                 }
 
             }
