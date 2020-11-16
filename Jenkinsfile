@@ -62,7 +62,7 @@ pipeline {
             steps {
                 echo 'Testing'
 //                sh './gradlew testProductionReleaseUnitTest'
-                sh ""./gradlew test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage"
+                sh "./gradlew test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage"
             }
         }
         stage("Build") {
