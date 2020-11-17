@@ -47,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|snap"
+                app:statusBarScrim="?attr/colorPrimaryDark"
                 app:toolbarId="@id/toolbar">
 
                 <com.google.android.material.appbar.MaterialToolbar
