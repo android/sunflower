@@ -118,10 +118,10 @@ pipeline {
                     parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
                     parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
                     def report = parser.parseText(unitTestCoverageXML)
-                    def counters = report['counter']
-
-                    println counters
-
+                    report['counter']
+                            {
+                                println it
+                            }
                 }
 
             }
