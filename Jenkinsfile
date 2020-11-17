@@ -120,10 +120,8 @@ pipeline {
                     def report = parser.parseText(unitTestCoverageXML)
                     def counters = report['counter']
 
-                    report['counter'].each
-                            {
-                                println it.attributes
-                            }
+                    println report['counter']['attributes']
+
                 }
 
             }
