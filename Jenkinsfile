@@ -122,7 +122,7 @@ pipeline {
 
                     report['counter'].each
                             {
-                                println it
+                                println it.@attributes
                             }
                 }
 
