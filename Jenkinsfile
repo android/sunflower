@@ -115,7 +115,7 @@ pipeline {
 
                 script {
                 pullRequest.comment('This is a comment from Jenkins')
-                pullRequest.review(['approved'])
+                pullRequest.review({'approved'})
 
 //
 //                    //Get TestCoverage summary for posting
