@@ -112,7 +112,11 @@ pipeline {
                 echo 'Post-actions'
                 echo 'new step'
 
+
 //                script {
+                pullRequest.comment('This is a comment from Jenkins')
+                pullRequest.review('APPROVE')
+
 //
 //                    //Get TestCoverage summary for posting
 //                    def unitTestCoverageXML = readFile "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
