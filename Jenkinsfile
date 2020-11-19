@@ -110,6 +110,7 @@ pipeline {
         stage("post-actions") {
             steps {
                 echo 'Post-actions'
+                echo 'new step'
 
 //                script {
 //
