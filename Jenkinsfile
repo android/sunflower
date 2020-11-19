@@ -114,12 +114,6 @@ pipeline {
 
 
                 script {
-                    if (env.CHANGE_ID) {
-                        pullRequest.comment('This is a comment from Jenkins')
-                        pullRequest.addLabel('CI approved')
-                    }
-
-//
 //                    //Get TestCoverage summary for posting
 //                    def unitTestCoverageXML = readFile "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
 //                    def parser = new XmlParser()
@@ -130,6 +124,26 @@ pipeline {
 //                            {
 //                                println it
 //                            }
+                }
+            }
+        }
+
+        post {
+            always {
+                echo "Send out comms to Slack"
+
+            }
+            success {
+                if (env.CHANGE_ID) {
+                    pullRequest.comment('Built succsessfully by Jenkins')
+                    pullRequest.addLabel('CI reviewed')
+                }
+            }
+
+            failure {
+                if (env.CHANGE_ID) {
+                    pullRequest.comment('Built failure by Jenkins')
+                    pullRequest.addLabel('CI reviewed')
                 }
             }
         }
