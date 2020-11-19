@@ -1,3 +1,5 @@
+import com.sun.org.apache.xerces.internal.parsers.XMLParser
+
 class Constants {
     static final String MASTER_BRANCH = 'master'
     static final String DEVELOP_BRANCH = 'main'
@@ -24,25 +26,31 @@ def initialiseBuildEnv() {
     }
 }
 
-def getApkFileName() {
-    env.FILE_NAME = "${appName}-${BUILD_TYPE}-${BUILD_NUMBER}.apk"
-    if (env.BUILD_FLAVOUR == Constants.FLAVOUR_PRODUCTION) {
-        env.FILE_NAME = "${appName}.apk"
-    } else if (env.BUILD_FLAVOUR == Constants.FLAVOUR_STAGING) {
-        env.FILE_NAME = "${appName}-Staging-${BUILD_NUMBER}.apk"
+def getApkFileName(version) {
+    switch (env.BUILD_FLAVOUR) {
+        case Constants.FLAVOUR_PRODUCTION:
+            env.FILE_NAME = "${appName}-v$version.apk"
+            break
+        case Constants.FLAVOUR_STAGING:
+            env.FILE_NAME = "${appName}-v$version-${BUILD_NUMBER}-uat.apk"
+            break
+        default:
+            env.FILE_NAME = "${appName}-v$version-SNAPSHOT_${BUILD_NUMBER}.apk"
+            break
     }
 }
+
 
 pipeline {
     agent {dockerfile true}
     environment {
         appName = 'Sunflower'
+        FILE_NAME = "1.10"
     }
     stages {
         stage("Initialise") {
             steps {
                 initialiseBuildEnv()
-                getApkFileName()
 
                 echo "Branch to build is: ${env.BRANCH_NAME}"
                 echo "Change branch is: ${env.CHANGE_BRANCH}"
@@ -57,46 +65,67 @@ pipeline {
             steps {
                 echo 'Testing'
 //                sh './gradlew testProductionReleaseUnitTest'
+//                sh "./gradlew test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage"
             }
         }
         stage("Build") {
             steps {
-                echo 'Building apk'
-                sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE}"
+//                echo 'Building apk'
 
                 echo "Successful build ${currentBuild.fullDisplayName}"
                 echo "Url:  ${currentBuild.absoluteUrl}"
                 echo "Workspace: ${env.WORKSPACE}"
                 echo "DIR: ${currentBuild.fullProjectName}"
+
+//                script {
+//                    def d = [versionName: 'unversioned', versionCode: '1']
+//                    echo d.toString()
+//                    // Read properties from file (Right now we only keep versionName and VersionCode there)
+//                    HashMap<String, Object> props = readProperties defaults: d, file: 'gradle.properties'
+//
+//                    echo "versionName: ${props.versionName}"
+//                    echo "versionCode: ${props.versionCode}"
+//
+//                    try {
+//                        props.versionName = '0.1.7'
+//                        props.versionCode = '2'
+//                        echo("Parameters changed")
+//
+//                        echo "versionName: ${props.versionName}"
+//                        echo "versionCode: ${props.versionCode}"
+//                        getApkFileName(props.versionName)
+//                        env.APP_VERSION = props.versionName
+//                        echo env.FILE_NAME
+//
+//                        env.COMMON_BUILD_ARGS = "-PversionName=${props.versionName} -PversionCode=${props.versionCode}"
+//
+//                        sh "./gradlew clean assemble${BUILD_FLAVOUR}${BUILD_TYPE} ${env.COMMON_BUILD_ARGS}"
+//
+//                    } catch (Exception e) {
+//                        echo "User input timed out or cancelled, continue with default values"
+//                    }
+//                }
             }
         }
-//        stage("Quality Control") {
-//            steps {
-//                sh './gradlew testProductionReleaseUnitTestCoverage'
-//            }
-//        }
-        stage("Deploy") {
-            environment {
-                apkLocation = "${env.WORKSPACE}/app/build/outputs/apk/production/release/app-production-release-unsigned.apk"
-                newApk = "${env.WORKSPACE}/app/build/outputs/${env.FILE_NAME}"
-            }
+        stage("post-actions") {
             steps {
-                echo 'Deploy apk'
-                echo apkLocation
-                echo newApk
 
                 script {
-                    if (fileExists(apkLocation)) {
-                        writeFile(file: newApk, encoding: "UTF-8", text: readFile(file: apkLocation, encoding: "UTF-8"))
-                        echo 'Successfully renamed file'
-                    }
+
+                    //Get TestCoverage summary for posting
+                    def unitTestCoverageXML = readFile "${env.WORKSPACE}/app/build/reports/jacoco/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage/test${env.BUILD_FLAVOUR}${env.BUILD_TYPE}UnitTestCoverage.xml"
+                    def parser = new XmlParser()
+                    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+                    parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
+                    def report = parser.parseText(unitTestCoverageXML)
+                    report['counter']
+                            {
+                                println it
+                            }
                 }
-            }
-        }
-        stage("Post Actions") {
-            steps {
-                echo 'Do after build things'
+
             }
         }
     }
 }
+
