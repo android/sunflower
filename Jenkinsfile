@@ -113,7 +113,7 @@ pipeline {
                 echo 'new step'
 
 
-//                script {
+                script {
                 pullRequest.comment('This is a comment from Jenkins')
                 pullRequest.review('APPROVE')
 
@@ -128,8 +128,7 @@ pipeline {
 //                            {
 //                                println it
 //                            }
-//                }
-
+                }
             }
         }
     }
