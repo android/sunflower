@@ -114,8 +114,10 @@ pipeline {
 
 
                 script {
-                pullRequest.comment('This is a comment from Jenkins')
-                pullRequest.review("approved")
+                    if (env.CHANGE_ID) {
+                        pullRequest.comment('This is a comment from Jenkins')
+                        pullRequest.addLabel('CI approved')
+                    }
 
 //
 //                    //Get TestCoverage summary for posting
