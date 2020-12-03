@@ -58,25 +58,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawOpacity
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.globalPosition
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.ContextAmbient
-import androidx.compose.ui.platform.DensityAmbient
+import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.accessibilityLabel
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.compose.ui.viewinterop.viewModel
 import androidx.core.text.HtmlCompat
-import androidx.ui.tooling.preview.Preview
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -110,7 +110,7 @@ fun PlantDetailsScreen(
 ) {
     // ViewModel and LiveDatas needed to populate the plant details info on the screen
     val plantDetailsViewModel: PlantDetailViewModel = viewModel(
-        factory = InjectorUtils.providePlantDetailViewModelFactory(ContextAmbient.current, plantId)
+        factory = InjectorUtils.providePlantDetailViewModelFactory(AmbientContext.current, plantId)
     )
     val plant = plantDetailsViewModel.plant.observeAsState().value
     val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
@@ -123,7 +123,7 @@ fun PlantDetailsScreen(
                 showSnackbar = showSnackbar,
                 onDismissSnackbar = { plantDetailsViewModel.dismissSnackbar() }
             ) {
-                val context = ContextAmbient.current
+                val context = AmbientContext.current
                 PlantDetails(
                     plant, isPlanted,
                     PlantDetailsCallbacks(
@@ -155,7 +155,7 @@ fun PlantDetails(
     var plantScroller by remember {
         mutableStateOf(PlantDetailsScroller(scrollState, Float.MIN_VALUE))
     }
-    val toolbarState = plantScroller.getToolbarState(DensityAmbient.current)
+    val toolbarState = plantScroller.getToolbarState(AmbientDensity.current)
 
     // Transition that fades in/out the header with the image and the Toolbar
     val transition = transition(toolbarTransitionDefinition, toolbarState)
@@ -192,7 +192,7 @@ private fun PlantDetailsContent(
     ScrollableColumn(scrollState = scrollState) {
         PlantImageHeader(
             scrollState, plant.imageUrl, callbacks.onFabClick, isPlanted,
-            Modifier.drawLayer(alpha = transitionState[contentAlphaKey])
+            Modifier.graphicsLayer(alpha = transitionState[contentAlphaKey])
         )
         PlantInformation(
             name = plant.name,
@@ -216,13 +216,13 @@ private fun PlantHeader(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.drawOpacity(transitionState[toolbarAlphaKey])
+            modifier = Modifier.alpha(transitionState[toolbarAlphaKey])
         )
     } else {
         PlantHeaderActions(
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.drawOpacity(transitionState[contentAlphaKey])
+            modifier = Modifier.alpha(transitionState[contentAlphaKey])
         )
     }
 }
@@ -270,14 +270,14 @@ private fun PlantImageHeader(
     imageUrl: String,
     onFabClick: () -> Unit,
     isPlanted: Boolean,
-    transitionModifier: Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
     var imageHeight by remember { mutableStateOf(0) }
 
     Box(Modifier.fillMaxWidth()) {
         PlantImage(
             scrollState, imageUrl,
-            transitionModifier.onSizeChanged { imageHeight = it.height }
+            modifier.onSizeChanged { imageHeight = it.height }
         )
         if (!isPlanted) {
             val fabModifier = if (imageHeight != 0) {
@@ -285,7 +285,7 @@ private fun PlantImageHeader(
                     .align(Alignment.TopEnd)
                     .padding(end = Dimens.PaddingSmall)
                     .offset(y = getFabOffset(imageHeight, scrollState))
-                    .then(transitionModifier)
+                    .then(modifier)
             } else {
                 Modifier.visible { false }
             }
@@ -310,7 +310,7 @@ private fun PlantImage(
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
 ) {
-    val parallaxOffset = with(DensityAmbient.current) {
+    val parallaxOffset = with(AmbientDensity.current) {
         scrollerParallaxOffset(this, scrollState)
     }
     CoilImage(
@@ -431,7 +431,7 @@ private fun PlantDescription(description: String) {
  */
 @Composable
 private fun getFabOffset(imageHeight: Int, scrollState: ScrollState): Dp {
-    return with(DensityAmbient.current) {
+    return with(AmbientDensity.current) {
         imageHeight.toDp() + scrollerParallaxOffset(this, scrollState) - (56 / 2).dp
     }
 }
