@@ -22,12 +22,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_view_pager.view.*
 
 @AndroidEntryPoint
 class HomeViewPagerFragment : Fragment() {
@@ -38,8 +40,14 @@ class HomeViewPagerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
-        val tabLayout = binding.tabs
-        val viewPager = binding.viewPager
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val tabLayout = view.tabs
+        val viewPager = view.view_pager
 
         viewPager.adapter = SunflowerPagerAdapter(this)
 
@@ -49,9 +57,7 @@ class HomeViewPagerFragment : Fragment() {
             tab.text = getTabTitle(position)
         }.attach()
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-
-        return binding.root
+        (activity as AppCompatActivity).setSupportActionBar(view.toolbar)
     }
 
     private fun getTabIcon(position: Int): Int {
