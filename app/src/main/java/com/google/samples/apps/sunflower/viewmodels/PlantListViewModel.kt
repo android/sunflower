@@ -21,18 +21,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 /**
  * The ViewModel for [PlantListFragment].
@@ -42,7 +36,9 @@ class PlantListViewModel @ViewModelInject internal constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val growZone = MutableStateFlow(NO_GROW_ZONE)
+    private val growZone = MutableStateFlow(
+        savedStateHandle.get(GROW_ZONE_SAVED_STATE_KEY) ?: NO_GROW_ZONE
+    )
 
     val plants: LiveData<List<Plant>> = growZone.flatMapLatest { zone ->
         if (zone == NO_GROW_ZONE) {
@@ -51,10 +47,6 @@ class PlantListViewModel @ViewModelInject internal constructor(
             plantRepository.getPlantsWithGrowZoneNumber(zone)
         }
     }.asLiveData()
-
-    init {
-        getSavedGrowZoneNumberOrDefault()
-    }
 
     fun setGrowZoneNumber(num: Int) {
         growZone.value = num
@@ -66,14 +58,7 @@ class PlantListViewModel @ViewModelInject internal constructor(
         savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
     }
 
-    fun isFiltered() = getSavedGrowZoneNumberOrDefault().value != NO_GROW_ZONE
-
-    /** @return saved Grow Zone (if available); otherwise return [NO_GROW_ZONE] as the default */
-    private fun getSavedGrowZoneNumberOrDefault(): LiveData<Int> {
-        val liveData = savedStateHandle.getLiveData(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
-        growZone.value = liveData.value ?: NO_GROW_ZONE
-        return liveData
-    }
+    fun isFiltered() = growZone.value != NO_GROW_ZONE
 
     companion object {
         private const val NO_GROW_ZONE = -1
