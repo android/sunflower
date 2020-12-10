@@ -22,11 +22,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 /**
  * The ViewModel for [PlantListFragment].
@@ -36,7 +40,7 @@ class PlantListViewModel @ViewModelInject internal constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val growZone = MutableStateFlow(
+    private val growZone: MutableStateFlow<Int> = MutableStateFlow(
         savedStateHandle.get(GROW_ZONE_SAVED_STATE_KEY) ?: NO_GROW_ZONE
     )
 
@@ -48,14 +52,22 @@ class PlantListViewModel @ViewModelInject internal constructor(
         }
     }.asLiveData()
 
+    init {
+
+        // When `growZone` changes, store the new value in savedStateHandle
+        viewModelScope.launch {
+            growZone.onEach { newGrowZone ->
+                savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, newGrowZone)
+            }.collect()
+        }
+    }
+
     fun setGrowZoneNumber(num: Int) {
         growZone.value = num
-        savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, num)
     }
 
     fun clearGrowZoneNumber() {
         growZone.value = NO_GROW_ZONE
-        savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, NO_GROW_ZONE)
     }
 
     fun isFiltered() = growZone.value != NO_GROW_ZONE
