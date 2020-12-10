@@ -29,7 +29,6 @@ import com.google.samples.apps.sunflower.data.PlantRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 /**
@@ -54,11 +53,37 @@ class PlantListViewModel @ViewModelInject internal constructor(
 
     init {
 
-        // When `growZone` changes, store the new value in savedStateHandle
+        /**
+         * When `growZone` changes, store the new value in `savedStateHandle`.
+         *
+         * There are a few ways to write this; all of these are equivalent. (This info is from
+         * https://github.com/android/sunflower/pull/671#pullrequestreview-548900174)
+         *
+         * 1) A verbose version:
+         *
+         *    viewModelScope.launch {
+         *        growZone.onEach { newGrowZone ->
+         *            savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, newGrowZone)
+         *        }
+         *    }.collect()
+         *
+         * 2) A simpler version of 1). Since we're calling `collect`, we can consume
+         *    the elements in the `collect`'s lambda block instead of using the `onEach` operator.
+         *    This is the version that's used in the live code below.
+         *
+         * 3) We can avoid creating a new coroutine using the `launchIn` terminal operator. In this
+         *    case, `onEach` is needed because `launchIn` doesn't take a lambda to consume the new
+         *    element in the Flow; it takes a `CoroutineScope` that's used to create a coroutine
+         *    internally.
+         *
+         *    growZone.onEach { newGrowZone ->
+         *        savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, newGrowZone)
+         *    }.launchIn(viewModelScope)
+         */
         viewModelScope.launch {
-            growZone.onEach { newGrowZone ->
+            growZone.collect { newGrowZone ->
                 savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, newGrowZone)
-            }.collect()
+            }
         }
     }
 
