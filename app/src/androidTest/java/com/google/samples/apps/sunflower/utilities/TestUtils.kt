@@ -32,9 +32,9 @@ import java.util.Calendar
  * [Plant] objects used for tests.
  */
 val testPlants = arrayListOf(
-    Plant("1", "Apple", "A red fruit", 1),
-    Plant("2", "B", "Description B", 1),
-    Plant("3", "C", "Description C", 2)
+        Plant("1", "Apple", "A red fruit", 1),
+        Plant("2", "B", "Description B", 1),
+        Plant("3", "C", "Description C", 2)
 )
 val testPlant = testPlants[0]
 
@@ -56,7 +56,7 @@ val testGardenPlanting = GardenPlanting(testPlant.plantId, testCalendar, testCal
  * Returns the content description for the navigation button view in the toolbar.
  */
 fun getToolbarNavigationContentDescription(activity: Activity, toolbarId: Int) =
-    activity.findViewById<Toolbar>(toolbarId).navigationContentDescription as String
+        activity.findViewById<Toolbar>(toolbarId).navigationContentDescription as String
 
 /**
  * Simplify testing Intents with Chooser
@@ -64,6 +64,6 @@ fun getToolbarNavigationContentDescription(activity: Activity, toolbarId: Int) =
  * @param matcher the actual intent before wrapped by Chooser Intent
  */
 fun chooser(matcher: Matcher<Intent>): Matcher<Intent> = allOf(
-    hasAction(Intent.ACTION_CHOOSER),
-    hasExtra(`is`(Intent.EXTRA_INTENT), matcher)
+        hasAction(Intent.ACTION_CHOOSER),
+        hasExtra(`is`(Intent.EXTRA_INTENT), matcher)
 )

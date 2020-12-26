@@ -36,11 +36,11 @@ class GalleryAdapter : PagingDataAdapter<UnsplashPhoto, GalleryViewHolder>(Galle
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         return GalleryViewHolder(
-            ListItemPhotoBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+                ListItemPhotoBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                )
         )
     }
 
@@ -52,7 +52,7 @@ class GalleryAdapter : PagingDataAdapter<UnsplashPhoto, GalleryViewHolder>(Galle
     }
 
     class GalleryViewHolder(
-        private val binding: ListItemPhotoBinding
+            private val binding: ListItemPhotoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener { view ->

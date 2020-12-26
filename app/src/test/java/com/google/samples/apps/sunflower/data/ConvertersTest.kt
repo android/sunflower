@@ -32,11 +32,13 @@ class ConvertersTest {
         set(DAY_OF_MONTH, 4)
     }
 
-    @Test fun calendarToDatestamp() {
+    @Test
+    fun calendarToDatestamp() {
         assertEquals(cal.timeInMillis, Converters().calendarToDatestamp(cal))
     }
 
-    @Test fun datestampToCalendar() {
+    @Test
+    fun datestampToCalendar() {
         assertEquals(Converters().datestampToCalendar(cal.timeInMillis), cal)
     }
 }

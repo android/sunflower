@@ -35,12 +35,12 @@ import kotlinx.coroutines.launch
  * The ViewModel for [PlantListFragment].
  */
 class PlantListViewModel @ViewModelInject internal constructor(
-    plantRepository: PlantRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle
+        plantRepository: PlantRepository,
+        @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val growZone: MutableStateFlow<Int> = MutableStateFlow(
-        savedStateHandle.get(GROW_ZONE_SAVED_STATE_KEY) ?: NO_GROW_ZONE
+            savedStateHandle.get(GROW_ZONE_SAVED_STATE_KEY) ?: NO_GROW_ZONE
     )
 
     val plants: LiveData<List<Plant>> = growZone.flatMapLatest { zone ->

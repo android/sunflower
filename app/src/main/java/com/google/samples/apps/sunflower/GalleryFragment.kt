@@ -42,9 +42,9 @@ class GalleryFragment : Fragment() {
     private val viewModel: GalleryViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentGalleryBinding.inflate(inflater, container, false)
         context ?: return binding.root

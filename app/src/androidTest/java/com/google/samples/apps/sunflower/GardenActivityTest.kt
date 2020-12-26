@@ -36,10 +36,11 @@ class GardenActivityTest {
 
     @get:Rule
     val rule = RuleChain
-        .outerRule(hiltRule)
-        .around(activityTestRule)
+            .outerRule(hiltRule)
+            .around(activityTestRule)
 
-    @Test fun clickAddPlant_OpensPlantList() {
+    @Test
+    fun clickAddPlant_OpensPlantList() {
         // Given that no Plants are added to the user's garden
 
         // When the "Add Plant" button is clicked

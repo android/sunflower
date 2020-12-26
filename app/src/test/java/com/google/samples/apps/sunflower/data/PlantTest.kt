@@ -28,17 +28,20 @@ class PlantTest {
 
     private lateinit var plant: Plant
 
-    @Before fun setUp() {
+    @Before
+    fun setUp() {
         plant = Plant("1", "Tomato", "A red vegetable", 1, 2, "")
     }
 
-    @Test fun test_default_values() {
+    @Test
+    fun test_default_values() {
         val defaultPlant = Plant("2", "Apple", "Description", 1)
         assertEquals(7, defaultPlant.wateringInterval)
         assertEquals("", defaultPlant.imageUrl)
     }
 
-    @Test fun test_shouldBeWatered() {
+    @Test
+    fun test_shouldBeWatered() {
         Calendar.getInstance().let { now ->
             // Generate lastWateringDate from being as copy of now.
             val lastWateringDate = Calendar.getInstance()
@@ -61,7 +64,8 @@ class PlantTest {
         }
     }
 
-    @Test fun test_toString() {
+    @Test
+    fun test_toString() {
         assertEquals("Tomato", plant.toString())
     }
 }

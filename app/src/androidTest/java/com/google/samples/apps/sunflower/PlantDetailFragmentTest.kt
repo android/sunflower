@@ -61,26 +61,26 @@ class PlantDetailFragmentTest {
     @Test
     fun testShareTextIntent() {
         val shareText = activityTestRule.activity.getString(
-            R.string.share_text_plant,
-            testPlant.name
+                R.string.share_text_plant,
+                testPlant.name
         )
 
         Intents.init()
         onView(withId(R.id.action_share)).perform(click())
         intended(
-            chooser(
-                allOf(
-                    hasAction(Intent.ACTION_SEND),
-                    hasType("text/plain"),
-                    hasExtra(Intent.EXTRA_TEXT, shareText)
+                chooser(
+                        allOf(
+                                hasAction(Intent.ACTION_SEND),
+                                hasType("text/plain"),
+                                hasExtra(Intent.EXTRA_TEXT, shareText)
+                        )
                 )
-            )
         )
         Intents.release()
 
         // dismiss the Share Dialog
         InstrumentationRegistry.getInstrumentation()
-            .uiAutomation
-            .performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
+                .uiAutomation
+                .performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
     }
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,5 +16,5 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="?attr/colorOnPrimary" android:state_activated="true" />
-    <item android:color="?attr/colorPrimaryDark"/>
+    <item android:color="?attr/colorPrimaryDark" />
 </selector>

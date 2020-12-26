@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +18,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="clickListener"
-            type="android.view.View.OnClickListener"/>
+            type="android.view.View.OnClickListener" />
+
         <variable
             name="plant"
-            type="com.google.samples.apps.sunflower.data.Plant"/>
+            type="com.google.samples.apps.sunflower.data.Plant" />
     </data>
 
     <com.google.samples.apps.sunflower.views.MaskedCardView
@@ -38,37 +39,37 @@
         app:cardPreventCornerOverlap="false"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Sunflower.Card">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/plant_item_image"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/plant_item_image_height"
-                    android:contentDescription="@string/a11y_plant_item_image"
-                    android:scaleType="centerCrop"
-                    app:imageFromUrl="@{plant.imageUrl}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/plant_item_image"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/plant_item_image_height"
+                android:contentDescription="@string/a11y_plant_item_image"
+                android:scaleType="centerCrop"
+                app:imageFromUrl="@{plant.imageUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/plant_item_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:text="@{plant.name}"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:gravity="center_horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_item_image"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:text="Tomato"/>
+            <TextView
+                android:id="@+id/plant_item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@{plant.name}"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/plant_item_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Tomato" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.samples.apps.sunflower.views.MaskedCardView>
 

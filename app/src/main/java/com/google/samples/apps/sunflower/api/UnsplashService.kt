@@ -33,10 +33,10 @@ interface UnsplashService {
 
     @GET("search/photos")
     suspend fun searchPhotos(
-        @Query("query") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int,
-        @Query("client_id") clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY
+            @Query("query") query: String,
+            @Query("page") page: Int,
+            @Query("per_page") perPage: Int,
+            @Query("client_id") clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY
     ): UnsplashSearchResponse
 
     companion object {
@@ -46,15 +46,15 @@ interface UnsplashService {
             val logger = HttpLoggingInterceptor().apply { level = Level.BASIC }
 
             val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
+                    .addInterceptor(logger)
+                    .build()
 
             return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(UnsplashService::class.java)
+                    .baseUrl(BASE_URL)
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(UnsplashService::class.java)
         }
     }
 }

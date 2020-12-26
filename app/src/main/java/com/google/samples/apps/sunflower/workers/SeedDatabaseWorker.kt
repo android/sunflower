@@ -29,8 +29,8 @@ import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 import kotlinx.coroutines.coroutineScope
 
 class SeedDatabaseWorker(
-    context: Context,
-    workerParams: WorkerParameters
+        context: Context,
+        workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
     override suspend fun doWork(): Result = coroutineScope {
         try {
