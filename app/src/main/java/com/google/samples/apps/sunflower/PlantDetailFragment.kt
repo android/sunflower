@@ -28,23 +28,32 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A fragment representing a single Plant detail screen.
  */
+@AndroidEntryPoint
 class PlantDetailFragment : Fragment() {
 
     private val args: PlantDetailFragmentArgs by navArgs()
 
+    @Inject
+    lateinit var plantDetailViewModelFactory: PlantDetailViewModel.AssistedFactory
+
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
-        InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
+        PlantDetailViewModel.provideFactory(
+            plantDetailViewModelFactory,
+            args.plantId
+        )
     }
 
     override fun onCreateView(
@@ -53,20 +62,23 @@ class PlantDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-            inflater, R.layout.fragment_plant_detail, container, false
+            inflater,
+            R.layout.fragment_plant_detail,
+            container,
+            false
         ).apply {
             viewModel = plantDetailViewModel
             lifecycleOwner = viewLifecycleOwner
-            callback = object : Callback {
-                override fun add(plant: Plant?) {
-                    plant?.let {
-                        hideAppBarFab(fab)
-                        plantDetailViewModel.addPlantToGarden()
-                        Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
-                            .show()
-                    }
+            callback = Callback { plant ->
+                plant?.let {
+                    hideAppBarFab(fab)
+                    plantDetailViewModel.addPlantToGarden()
+                    Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
+                        .show()
                 }
             }
+
+            galleryNav.setOnClickListener { navigateToGallery() }
 
             var isToolbarShown = false
 
@@ -111,6 +123,14 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
 
+    private fun navigateToGallery() {
+        plantDetailViewModel.plant.value?.let { plant ->
+            val direction =
+                PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plant.name)
+            findNavController().navigate(direction)
+        }
+    }
+
     // Helper function for calling a share functionality.
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
@@ -122,7 +142,7 @@ class PlantDetailFragment : Fragment() {
                 getString(R.string.share_text_plant, plant.name)
             }
         }
-        val shareIntent = ShareCompat.IntentBuilder.from(activity)
+        val shareIntent = ShareCompat.IntentBuilder.from(requireActivity())
             .setText(shareText)
             .setType("text/plain")
             .createChooserIntent()
@@ -141,7 +161,7 @@ class PlantDetailFragment : Fragment() {
         fab.hide()
     }
 
-    interface Callback {
+    fun interface Callback {
         fun add(plant: Plant?)
     }
 }

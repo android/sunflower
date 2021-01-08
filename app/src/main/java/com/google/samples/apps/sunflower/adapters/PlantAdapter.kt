@@ -34,14 +34,19 @@ import com.google.samples.apps.sunflower.utilities.navigateSafe
  */
 class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return PlantViewHolder(
+            ListItemPlantBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val plant = getItem(position)
         (holder as PlantViewHolder).bind(plant)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PlantViewHolder(ListItemPlantBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
     }
 
     class PlantViewHolder(
@@ -57,13 +62,13 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
 
         private fun navigateToPlant(
             plant: Plant,
-            it: View
+            view: View
         ) {
             val direction =
                 HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
                     plant.plantId
                 )
-            it.findNavController().navigateSafe(direction)
+            view.findNavController().navigateSafe(direction)
         }
 
         fun bind(item: Plant) {
