@@ -23,26 +23,26 @@ buildscript {
         targetSdkVersion = 30
 
         // App dependencies
-        accompanistVersion = '0.4.0'
+        accompanistVersion = '0.4.1.compose-7067732-SNAPSHOT'
         appCompatVersion = '1.1.0'
-        composeVersion = '1.0.0-alpha08'
+        composeVersion = '1.0.0-SNAPSHOT'
         constraintLayoutVersion = '2.0.4'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.4.2"
         espressoVersion = '3.3.0'
         fragmentVersion = '1.2.5'
         glideVersion = '4.10.0'
-        gradleVersion = '7.0.0-alpha01'
+        gradleVersion = '7.0.0-alpha04'
         gsonVersion = '2.8.6'
         junitVersion = '4.13.1'
-        kotlinVersion = '1.4.20'
-        ktlintVersion = '0.39.0'
-        ktxVersion = '1.5.0-alpha05'
+        kotlinVersion = '1.4.21'
+        ktlintVersion = '0.40.0'
+        ktxVersion = '1.5.0-SNAPSHOT'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.1'
-        navigationVersion = '2.3.1'
+        navigationVersion = '2.3.2'
         recyclerViewVersion = '1.1.0-alpha05'
-        roomVersion = '2.2.5'
+        roomVersion = '2.2.6'
         runnerVersion = '1.0.1'
         truthVersion = '1.0.1'
         testExtJunit = '1.1.0'
@@ -70,9 +70,25 @@ plugins {
 
 allprojects {
     repositories {
+        maven { // Compose alpha10 snapshot
+            url "https://androidx.dev/snapshots/builds/7067732/artifacts/repository/"
+        }
         google()
         jcenter()
         mavenCentral()
+        maven { // Accompanist snapshots
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+}
+
+subprojects {
+    configurations.configureEach {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group.startsWith('androidx.compose')) {
+                details.useVersion project.composeVersion
+            }
+        }
     }
 }
 

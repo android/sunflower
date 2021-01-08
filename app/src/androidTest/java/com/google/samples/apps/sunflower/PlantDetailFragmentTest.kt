@@ -21,7 +21,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithLabel
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.Navigation.findNavController
@@ -63,7 +63,7 @@ class PlantDetailFragmentTest {
         Intents.init()
 
         composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
-        composeTestRule.onNodeWithLabel("Share").assertIsDisplayed().performClick()
+        composeTestRule.onNodeWithContentDescription("Share").assertIsDisplayed().performClick()
 
         intended(
             chooser(
