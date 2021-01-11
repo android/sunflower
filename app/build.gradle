@@ -23,7 +23,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildFeatures {
-        dataBinding = true
+        dataBinding true
     }
     defaultConfig {
         applicationId "com.google.samples.apps.sunflower"
