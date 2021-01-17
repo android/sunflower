@@ -20,10 +20,10 @@ import android.content.ContentResolver
 import android.net.Uri
 import androidx.annotation.RawRes
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithLabel
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -46,14 +46,14 @@ class PlantDetailComposeTest {
     fun plantDetails_checkIsNotPlanted() {
         startPlantDetails(isPlanted = false)
         composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
-        composeTestRule.onNodeWithLabel("Add plant").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Add plant").assertIsDisplayed()
     }
 
     @Test
     fun plantDetails_checkIsPlanted() {
         startPlantDetails(isPlanted = true)
         composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
-        composeTestRule.onNodeWithLabel("Add plant").assertDoesNotExist()
+        composeTestRule.onNodeWithContentDescription("Add plant").assertDoesNotExist()
     }
 
     private fun startPlantDetails(isPlanted: Boolean) {
@@ -86,6 +86,6 @@ private fun plantForTesting(): Plant {
  */
 @Composable
 private fun rawUri(@RawRes id: Int): Uri {
-    return "${ContentResolver.SCHEME_ANDROID_RESOURCE}://${ContextAmbient.current.packageName}/$id"
+    return "${ContentResolver.SCHEME_ANDROID_RESOURCE}://${AmbientContext.current.packageName}/$id"
         .toUri()
 }

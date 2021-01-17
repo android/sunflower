@@ -19,7 +19,6 @@ package com.google.samples.apps.sunflower.compose.utils
 import androidx.annotation.PluralsRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.ContextAmbient
 
 /**
  * Load a string with grammatically correct pluralization for the given quantity,

@@ -68,7 +68,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.accessibilityLabel
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -255,7 +255,7 @@ private fun PlantDetailsToolbar(
             IconButton(
                 onShareClick,
                 Modifier.align(Alignment.CenterVertically).semantics {
-                    accessibilityLabel = shareAccessibilityLabel
+                    contentDescription = shareAccessibilityLabel
                 }
             ) {
                 Icon(Icons.Filled.Share)
@@ -294,7 +294,7 @@ private fun PlantImageHeader(
                 onClick = onFabClick,
                 shape = MaterialTheme.shapes.small,
                 modifier = fabModifier.semantics {
-                    accessibilityLabel = fabAccessibilityLabel
+                    contentDescription = fabAccessibilityLabel
                 }
             ) {
                 Icon(Icons.Filled.Add)
@@ -357,7 +357,7 @@ private fun PlantHeaderActions(
                 .padding(end = Dimens.ToolbarIconPadding)
                 .then(iconModifier)
                 .semantics {
-                    accessibilityLabel = shareAccessibilityLabel
+                    contentDescription = shareAccessibilityLabel
                 }
         ) {
             Icon(Icons.Filled.Share)
