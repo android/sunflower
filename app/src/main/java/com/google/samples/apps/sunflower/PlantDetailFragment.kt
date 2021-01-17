@@ -35,6 +35,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -47,13 +48,10 @@ class PlantDetailFragment : Fragment() {
     private val args: PlantDetailFragmentArgs by navArgs()
 
     @Inject
-    lateinit var plantDetailViewModelFactory: PlantDetailViewModel.AssistedFactory
+    lateinit var plantDetailViewModelFactory: PlantDetailViewModelFactory
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
-        PlantDetailViewModel.provideFactory(
-            plantDetailViewModelFactory,
-            args.plantId
-        )
+        PlantDetailViewModel.provideFactory(plantDetailViewModelFactory, args.plantId)
     }
 
     override fun onCreateView(
@@ -61,6 +59,7 @@ class PlantDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
             inflater,
             R.layout.fragment_plant_detail,
