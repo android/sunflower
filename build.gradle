@@ -23,9 +23,9 @@ buildscript {
         targetSdkVersion = 30
 
         // App dependencies
-        accompanistVersion = '0.4.1.compose-7067732-SNAPSHOT'
+        accompanistVersion = '0.4.2'
         appCompatVersion = '1.1.0'
-        composeVersion = '1.0.0-SNAPSHOT'
+        composeVersion = '1.0.0-alpha10'
         constraintLayoutVersion = '2.0.4'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.4.2"
@@ -37,7 +37,7 @@ buildscript {
         junitVersion = '4.13.1'
         kotlinVersion = '1.4.21'
         ktlintVersion = '0.40.0'
-        ktxVersion = '1.5.0-SNAPSHOT'
+        ktxVersion = '1.5.0-beta01'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.1'
         navigationVersion = '2.3.2'
@@ -70,25 +70,9 @@ plugins {
 
 allprojects {
     repositories {
-        maven { // Compose alpha10 snapshot
-            url "https://androidx.dev/snapshots/builds/7067732/artifacts/repository/"
-        }
         google()
         jcenter()
         mavenCentral()
-        maven { // Accompanist snapshots
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-}
-
-subprojects {
-    configurations.configureEach {
-        resolutionStrategy.eachDependency { details ->
-            if (details.requested.group.startsWith('androidx.compose')) {
-                details.useVersion project.composeVersion
-            }
-        }
     }
 }
 
