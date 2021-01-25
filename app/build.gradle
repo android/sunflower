@@ -94,7 +94,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-viewbinding:$rootProject.composeVersion"
     implementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
-    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
+    implementation "com.google.android.material:compose-theme-adapter:1.0.0-alpha10"
     implementation "dev.chrisbanes.accompanist:accompanist-insets:$rootProject.accompanistVersion"
     implementation "dev.chrisbanes.accompanist:accompanist-coil:$rootProject.accompanistVersion"
 

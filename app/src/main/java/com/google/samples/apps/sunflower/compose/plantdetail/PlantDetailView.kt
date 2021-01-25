@@ -18,8 +18,6 @@ package com.google.samples.apps.sunflower.compose.plantdetail
 
 import android.text.method.LinkMovementMethod
 import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.core.TransitionState
-import androidx.compose.animation.transition
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.background
@@ -34,8 +32,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
@@ -51,6 +51,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Providers
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -62,9 +63,9 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.globalPosition
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.res.stringResource
@@ -158,7 +159,7 @@ fun PlantDetails(
     val toolbarState = plantScroller.getToolbarState(AmbientDensity.current)
 
     // Transition that fades in/out the header with the image and the Toolbar
-    val transition = transition(toolbarTransitionDefinition, toolbarState)
+    val (toolbarAlpha, contentAlpha) = toolbarTransition(plantScroller.toolbarTransitionState)
     Box(modifier) {
         PlantDetailsContent(
             scrollState = scrollState,
@@ -173,9 +174,9 @@ fun PlantDetails(
             plant = plant,
             isPlanted = isPlanted,
             callbacks = callbacks,
-            transitionState = transition
+            contentAlpha = contentAlpha
         )
-        PlantHeader(toolbarState, plant.name, callbacks, transition)
+        PlantHeader(toolbarState, plant.name, callbacks, toolbarAlpha, contentAlpha)
     }
 }
 
@@ -187,12 +188,12 @@ private fun PlantDetailsContent(
     isPlanted: Boolean,
     onNamePosition: (Float) -> Unit,
     callbacks: PlantDetailsCallbacks,
-    transitionState: TransitionState
+    contentAlpha: State<Float>
 ) {
-    ScrollableColumn(scrollState = scrollState) {
+    Column(Modifier.verticalScroll(scrollState)) {
         PlantImageHeader(
             scrollState, plant.imageUrl, callbacks.onFabClick, isPlanted,
-            Modifier.graphicsLayer(alpha = transitionState[contentAlphaKey])
+            Modifier.graphicsLayer(contentAlpha.value)
         )
         PlantInformation(
             name = plant.name,
@@ -209,20 +210,21 @@ private fun PlantHeader(
     toolbarState: ToolbarState,
     plantName: String,
     callbacks: PlantDetailsCallbacks,
-    transitionState: TransitionState
+    toolbarAlpha: State<Float>,
+    contentAlpha: State<Float>
 ) {
     if (toolbarState.isShown) {
         PlantDetailsToolbar(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.alpha(transitionState[toolbarAlphaKey])
+            modifier = Modifier.alpha(toolbarAlpha.value)
         )
     } else {
         PlantHeaderActions(
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.alpha(transitionState[contentAlphaKey])
+            modifier = Modifier.alpha(contentAlpha.value)
         )
     }
 }
@@ -240,7 +242,10 @@ private fun PlantDetailsToolbar(
             backgroundColor = MaterialTheme.colors.surface
         ) {
             IconButton(onBackClick, Modifier.align(Alignment.CenterVertically)) {
-                Icon(Icons.Filled.ArrowBack)
+                Icon(
+                    Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.a11y_back)
+                )
             }
             Text(
                 text = plantName,
@@ -254,11 +259,16 @@ private fun PlantDetailsToolbar(
             val shareAccessibilityLabel = stringResource(R.string.menu_item_share_plant)
             IconButton(
                 onShareClick,
-                Modifier.align(Alignment.CenterVertically).semantics {
-                    contentDescription = shareAccessibilityLabel
-                }
+                Modifier
+                    .align(Alignment.CenterVertically)
+                    .semantics {
+                        contentDescription = shareAccessibilityLabel
+                    }
             ) {
-                Icon(Icons.Filled.Share)
+                Icon(
+                    Icons.Filled.Share,
+                    contentDescription = stringResource(id = R.string.a11y_share)
+                )
             }
         }
     }
@@ -297,7 +307,10 @@ private fun PlantImageHeader(
                     contentDescription = fabAccessibilityLabel
                 }
             ) {
-                Icon(Icons.Filled.Add)
+                Icon(
+                    Icons.Filled.Add,
+                    contentDescription = stringResource(id = R.string.a11y_add)
+                )
             }
         }
     }
@@ -317,8 +330,11 @@ private fun PlantImage(
         data = imageUrl,
         contentScale = ContentScale.Crop,
         fadeIn = true,
+        contentDescription = null,
         loading = {
-            Box(modifier = Modifier.fillMaxSize().background(placeholderColor))
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(placeholderColor))
         },
         modifier = modifier
             .fillMaxWidth()
@@ -346,9 +362,14 @@ private fun PlantHeaderActions(
 
         IconButton(
             onClick = onBackClick,
-            modifier = Modifier.padding(start = Dimens.ToolbarIconPadding).then(iconModifier)
+            modifier = Modifier
+                .padding(start = Dimens.ToolbarIconPadding)
+                .then(iconModifier)
         ) {
-            Icon(Icons.Filled.ArrowBack)
+            Icon(
+                Icons.Filled.ArrowBack,
+                contentDescription = stringResource(id = R.string.a11y_back)
+            )
         }
         val shareAccessibilityLabel = stringResource(R.string.menu_item_share_plant)
         IconButton(
@@ -360,7 +381,10 @@ private fun PlantHeaderActions(
                     contentDescription = shareAccessibilityLabel
                 }
         ) {
-            Icon(Icons.Filled.Share)
+            Icon(
+                Icons.Filled.Share,
+                contentDescription = stringResource(id = R.string.a11y_share)
+            )
         }
     }
 }
@@ -384,7 +408,7 @@ private fun PlantInformation(
                     bottom = Dimens.PaddingNormal
                 )
                 .align(Alignment.CenterHorizontally)
-                .onGloballyPositioned { onNamePosition(it.globalPosition.y) }
+                .onGloballyPositioned { onNamePosition(it.positionInWindow().y) }
                 .visible { toolbarState == ToolbarState.HIDDEN }
         )
         Text(

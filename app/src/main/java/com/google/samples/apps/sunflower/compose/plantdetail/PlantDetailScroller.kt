@@ -16,12 +16,14 @@
 
 package com.google.samples.apps.sunflower.compose.plantdetail
 
-import androidx.compose.animation.core.FloatPropKey
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.transitionDefinition
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.ScrollState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -36,12 +38,16 @@ data class PlantDetailsScroller(
     val scrollState: ScrollState,
     val namePosition: Float
 ) {
+    val toolbarTransitionState = MutableTransitionState(ToolbarState.HIDDEN)
+
     fun getToolbarState(density: Density): ToolbarState {
         return if (namePosition != 0f &&
             scrollState.value > (namePosition + getTransitionOffset(density))
         ) {
+            toolbarTransitionState.targetState = ToolbarState.SHOWN
             ToolbarState.SHOWN
         } else {
+            toolbarTransitionState.targetState = ToolbarState.HIDDEN
             ToolbarState.HIDDEN
         }
     }
@@ -57,26 +63,23 @@ enum class ToolbarState { HIDDEN, SHOWN }
 val ToolbarState.isShown
     get() = this == ToolbarState.SHOWN
 
-val toolbarAlphaKey = FloatPropKey()
-val contentAlphaKey = FloatPropKey()
 
-val toolbarTransitionDefinition = transitionDefinition<ToolbarState> {
-    state(ToolbarState.HIDDEN) {
-        this[toolbarAlphaKey] = 0f
-        this[contentAlphaKey] = 1f
+@Composable
+fun toolbarTransition(
+    transitionState: MutableTransitionState<ToolbarState>
+): Pair<State<Float>, State<Float>> {
+    val transition = updateTransition(transitionState)
+    val toolbarAlpha = transition.animateFloat(
+        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
+    ) {
+        if (it == ToolbarState.HIDDEN) 0f else 1f
     }
-    state(ToolbarState.SHOWN) {
-        this[toolbarAlphaKey] = 1f
-        this[contentAlphaKey] = 0f
+    val contentAlpha = transition.animateFloat(
+        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
+    ) {
+        if (it == ToolbarState.HIDDEN) 1f else 0f
     }
-    transition {
-        toolbarAlphaKey using spring(
-            stiffness = Spring.StiffnessLow
-        )
-        contentAlphaKey using spring(
-            stiffness = Spring.StiffnessLow
-        )
-    }
+    return Pair(toolbarAlpha, contentAlpha)
 }
 
 @Composable
