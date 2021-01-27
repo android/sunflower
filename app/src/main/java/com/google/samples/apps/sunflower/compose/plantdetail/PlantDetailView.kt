@@ -65,8 +65,6 @@ import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidViewBinding
@@ -249,18 +247,14 @@ private fun PlantFab(
     onFabClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val fabAccessibilityLabel = stringResource(R.string.add_plant)
     FloatingActionButton(
         onClick = onFabClick,
         shape = MaterialTheme.shapes.small,
         modifier = modifier
-            .semantics(mergeDescendants = true) {
-                contentDescription = fabAccessibilityLabel
-            }
     ) {
         Icon(
             Icons.Filled.Add,
-            contentDescription = null // using parent's accessibility label
+            contentDescription = stringResource(R.string.add_plant)
         )
     }
 }
@@ -316,18 +310,13 @@ private fun PlantDetailsToolbar(
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             )
-            val shareAccessibilityLabel = stringResource(R.string.menu_item_share_plant)
             IconButton(
                 onShareClick,
-                Modifier
-                    .align(Alignment.CenterVertically)
-                    .semantics(mergeDescendants = true) {
-                        contentDescription = shareAccessibilityLabel
-                    }
+                Modifier.align(Alignment.CenterVertically)
             ) {
                 Icon(
                     Icons.Filled.Share,
-                    contentDescription = null // using parent's accessibility label
+                    contentDescription = stringResource(R.string.menu_item_share_plant)
                 )
             }
         }
@@ -362,19 +351,15 @@ private fun PlantHeaderActions(
                 contentDescription = stringResource(id = R.string.a11y_back)
             )
         }
-        val shareAccessibilityLabel = stringResource(R.string.menu_item_share_plant)
         IconButton(
             onClick = onShareClick,
             modifier = Modifier
                 .padding(end = Dimens.ToolbarIconPadding)
                 .then(iconModifier)
-                .semantics(mergeDescendants = true) {
-                    contentDescription = shareAccessibilityLabel
-                }
         ) {
             Icon(
                 Icons.Filled.Share,
-                contentDescription = null // using parent's accessibility label
+                contentDescription = stringResource(R.string.menu_item_share_plant)
             )
         }
     }
