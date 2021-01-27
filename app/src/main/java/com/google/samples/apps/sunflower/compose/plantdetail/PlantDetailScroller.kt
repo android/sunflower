@@ -24,12 +24,12 @@ import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.ScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-private val HeaderTransitionOffset = 32.dp
-private const val ParallaxFactor = 2f
+// Value obtained empirically so that the header buttons don't surpass the header container
+private val HeaderTransitionOffset = 92.dp
 
 /**
  * Class that contains derived state for when the toolbar should be shown
@@ -41,8 +41,8 @@ data class PlantDetailsScroller(
     val toolbarTransitionState = MutableTransitionState(ToolbarState.HIDDEN)
 
     fun getToolbarState(density: Density): ToolbarState {
-        return if (namePosition != 0f &&
-            scrollState.value > (namePosition + getTransitionOffset(density))
+        return if (namePosition > 1f &&
+            scrollState.value > (namePosition - getTransitionOffset(density))
         ) {
             toolbarTransitionState.targetState = ToolbarState.SHOWN
             ToolbarState.SHOWN
@@ -65,7 +65,7 @@ val ToolbarState.isShown
 
 
 @Composable
-fun toolbarTransition(
+fun rememberToolbarTransition(
     transitionState: MutableTransitionState<ToolbarState>
 ): Pair<State<Float>, State<Float>> {
     val transition = updateTransition(transitionState)
@@ -79,11 +79,5 @@ fun toolbarTransition(
     ) {
         if (it == ToolbarState.HIDDEN) 1f else 0f
     }
-    return Pair(toolbarAlpha, contentAlpha)
+    return remember(transitionState) { Pair(toolbarAlpha, contentAlpha) }
 }
-
-@Composable
-fun scrollerParallaxOffset(density: Density, scrollState: ScrollState): Dp =
-    with(density) {
-        (scrollState.value / ParallaxFactor).toDp()
-    }
