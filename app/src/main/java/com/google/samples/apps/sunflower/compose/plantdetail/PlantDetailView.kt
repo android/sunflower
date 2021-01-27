@@ -49,7 +49,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Providers
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -167,9 +166,12 @@ fun PlantDetails(
             plant = plant,
             isPlanted = isPlanted,
             onFabClick = callbacks.onFabClick,
-            contentAlpha = contentAlpha
+            contentAlpha = { contentAlpha.value }
         )
-        PlantToolbar(toolbarState, plant.name, callbacks, toolbarAlpha, contentAlpha)
+        PlantToolbar(toolbarState, plant.name, callbacks,
+            toolbarAlpha = { toolbarAlpha.value },
+            contentAlpha = { contentAlpha.value }
+        )
     }
 }
 
@@ -181,7 +183,7 @@ private fun PlantDetailsContent(
     isPlanted: Boolean,
     onNamePosition: (Float) -> Unit,
     onFabClick: () -> Unit,
-    contentAlpha: State<Float>
+    contentAlpha: () -> Float
 ) {
     Column(Modifier.verticalScroll(scrollState)) {
         ConstraintLayout {
@@ -191,7 +193,7 @@ private fun PlantDetailsContent(
                 imageUrl = plant.imageUrl,
                 modifier = Modifier
                     .constrainAs(image) { top.linkTo(parent.top) }
-                    .alpha(contentAlpha.value)
+                    .alpha(contentAlpha())
             )
 
             if (!isPlanted) {
@@ -201,7 +203,7 @@ private fun PlantDetailsContent(
                         centerAround(image.bottom)
                         absoluteRight.linkTo(parent.absoluteRight, margin = fabEndMargin)
                     }
-                    .alpha(contentAlpha.value)
+                    .alpha(contentAlpha())
                 )
             }
 
@@ -264,21 +266,21 @@ private fun PlantToolbar(
     toolbarState: ToolbarState,
     plantName: String,
     callbacks: PlantDetailsCallbacks,
-    toolbarAlpha: State<Float>,
-    contentAlpha: State<Float>
+    toolbarAlpha: () -> Float,
+    contentAlpha: () -> Float
 ) {
     if (toolbarState.isShown) {
         PlantDetailsToolbar(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.alpha(toolbarAlpha.value)
+            modifier = Modifier.alpha(toolbarAlpha())
         )
     } else {
         PlantHeaderActions(
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.alpha(contentAlpha.value)
+            modifier = Modifier.alpha(contentAlpha())
         )
     }
 }

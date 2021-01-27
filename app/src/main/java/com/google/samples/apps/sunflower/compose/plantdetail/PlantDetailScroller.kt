@@ -41,6 +41,8 @@ data class PlantDetailsScroller(
     val toolbarTransitionState = MutableTransitionState(ToolbarState.HIDDEN)
 
     fun getToolbarState(density: Density): ToolbarState {
+        // When the namePosition is placed correctly on the screen (position > 1f) and it's
+        // position is close to the header, then show the toolbar.
         return if (namePosition > 1f &&
             scrollState.value > (namePosition - getTransitionOffset(density))
         ) {
