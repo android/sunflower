@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower.data
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.google.samples.apps.sunflower.api.UnsplashService
 
 private const val UNSPLASH_STARTING_PAGE_INDEX = 1
@@ -32,12 +33,14 @@ class UnsplashPagingSource(
             val response = service.searchPhotos(query, page, params.loadSize)
             val photos = response.results
             LoadResult.Page(
-                data = photos,
-                prevKey = if (page == UNSPLASH_STARTING_PAGE_INDEX) null else page - 1,
-                nextKey = if (page == response.totalPages) null else page + 1
+                    data = photos,
+                    prevKey = if (page == UNSPLASH_STARTING_PAGE_INDEX) null else page - 1,
+                    nextKey = if (page == response.totalPages) null else page + 1
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<Int, UnsplashPhoto>): Int? = null
 }
