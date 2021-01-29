@@ -23,16 +23,16 @@ buildscript {
         targetSdkVersion = 30
 
         // App dependencies
-        accompanistVersion = '0.4.3.compose-7094152-SNAPSHOT'
+        accompanistVersion = '0.5.0'
         appCompatVersion = '1.1.0'
-        composeVersion = '1.0.0-SNAPSHOT'
+        composeVersion = '1.0.0-alpha11'
         constraintLayoutVersion = '2.0.4'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.4.2"
         espressoVersion = '3.3.0'
         fragmentVersion = '1.2.5'
         glideVersion = '4.10.0'
-        gradleVersion = '7.0.0-alpha04'
+        gradleVersion = '7.0.0-alpha05'
         gsonVersion = '2.8.6'
         junitVersion = '4.13.1'
         kotlinVersion = '1.4.21-2'
