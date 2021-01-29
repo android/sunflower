@@ -18,24 +18,22 @@ package com.google.samples.apps.sunflower.compose.plantdetail
 
 import android.text.method.LinkMovementMethod
 import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.core.TransitionState
-import androidx.compose.animation.transition
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
@@ -60,20 +58,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.globalPosition
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.compose.ui.viewinterop.viewModel
 import androidx.core.text.HtmlCompat
@@ -155,10 +147,11 @@ fun PlantDetails(
     var plantScroller by remember {
         mutableStateOf(PlantDetailsScroller(scrollState, Float.MIN_VALUE))
     }
+    val transitionState = remember(plantScroller) { plantScroller.toolbarTransitionState }
     val toolbarState = plantScroller.getToolbarState(AmbientDensity.current)
-
     // Transition that fades in/out the header with the image and the Toolbar
-    val transition = transition(toolbarTransitionDefinition, toolbarState)
+    val (toolbarAlpha, contentAlpha) = rememberToolbarTransition(transitionState)
+
     Box(modifier) {
         PlantDetailsContent(
             scrollState = scrollState,
@@ -172,10 +165,13 @@ fun PlantDetails(
             },
             plant = plant,
             isPlanted = isPlanted,
-            callbacks = callbacks,
-            transitionState = transition
+            onFabClick = callbacks.onFabClick,
+            contentAlpha = { contentAlpha.value }
         )
-        PlantHeader(toolbarState, plant.name, callbacks, transition)
+        PlantToolbar(toolbarState, plant.name, callbacks,
+            toolbarAlpha = { toolbarAlpha.value },
+            contentAlpha = { contentAlpha.value }
+        )
     }
 }
 
@@ -186,43 +182,105 @@ private fun PlantDetailsContent(
     plant: Plant,
     isPlanted: Boolean,
     onNamePosition: (Float) -> Unit,
-    callbacks: PlantDetailsCallbacks,
-    transitionState: TransitionState
+    onFabClick: () -> Unit,
+    contentAlpha: () -> Float
 ) {
-    ScrollableColumn(scrollState = scrollState) {
-        PlantImageHeader(
-            scrollState, plant.imageUrl, callbacks.onFabClick, isPlanted,
-            Modifier.graphicsLayer(alpha = transitionState[contentAlphaKey])
-        )
-        PlantInformation(
-            name = plant.name,
-            wateringInterval = plant.wateringInterval,
-            description = plant.description,
-            onNamePosition = { onNamePosition(it) },
-            toolbarState = toolbarState
+    Column(Modifier.verticalScroll(scrollState)) {
+        ConstraintLayout {
+            val (image, fab, info) = createRefs()
+
+            PlantImage(
+                imageUrl = plant.imageUrl,
+                modifier = Modifier
+                    .constrainAs(image) { top.linkTo(parent.top) }
+                    .alpha(contentAlpha())
+            )
+
+            if (!isPlanted) {
+                val fabEndMargin = Dimens.PaddingSmall
+                PlantFab(onFabClick = onFabClick, modifier = Modifier
+                    .constrainAs(fab) {
+                        centerAround(image.bottom)
+                        absoluteRight.linkTo(parent.absoluteRight, margin = fabEndMargin)
+                    }
+                    .alpha(contentAlpha())
+                )
+            }
+
+            PlantInformation(
+                name = plant.name,
+                wateringInterval = plant.wateringInterval,
+                description = plant.description,
+                onNamePosition = { onNamePosition(it) },
+                toolbarState = toolbarState,
+                modifier = Modifier.constrainAs(info) {
+                    top.linkTo(image.bottom)
+                }
+            )
+        }
+    }
+}
+
+
+@Composable
+private fun PlantImage(
+    imageUrl: String,
+    modifier: Modifier = Modifier,
+    placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
+) {
+    CoilImage(
+        data = imageUrl,
+        contentScale = ContentScale.Crop,
+        fadeIn = true,
+        contentDescription = null,
+        loading = {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(placeholderColor))
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .preferredHeight(Dimens.PlantDetailAppBarHeight)
+    )
+}
+
+@Composable
+private fun PlantFab(
+    onFabClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    FloatingActionButton(
+        onClick = onFabClick,
+        shape = MaterialTheme.shapes.small,
+        modifier = modifier
+    ) {
+        Icon(
+            Icons.Filled.Add,
+            contentDescription = stringResource(R.string.add_plant)
         )
     }
 }
 
 @Composable
-private fun PlantHeader(
+private fun PlantToolbar(
     toolbarState: ToolbarState,
     plantName: String,
     callbacks: PlantDetailsCallbacks,
-    transitionState: TransitionState
+    toolbarAlpha: () -> Float,
+    contentAlpha: () -> Float
 ) {
     if (toolbarState.isShown) {
         PlantDetailsToolbar(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.alpha(transitionState[toolbarAlphaKey])
+            modifier = Modifier.alpha(toolbarAlpha())
         )
     } else {
         PlantHeaderActions(
             onBackClick = callbacks.onBackClick,
             onShareClick = callbacks.onShareClick,
-            modifier = Modifier.alpha(transitionState[contentAlphaKey])
+            modifier = Modifier.alpha(contentAlpha())
         )
     }
 }
@@ -240,7 +298,10 @@ private fun PlantDetailsToolbar(
             backgroundColor = MaterialTheme.colors.surface
         ) {
             IconButton(onBackClick, Modifier.align(Alignment.CenterVertically)) {
-                Icon(Icons.Filled.ArrowBack)
+                Icon(
+                    Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.a11y_back)
+                )
             }
             Text(
                 text = plantName,
@@ -251,80 +312,17 @@ private fun PlantDetailsToolbar(
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             )
-            val shareAccessibilityLabel = stringResource(R.string.menu_item_share_plant)
             IconButton(
                 onShareClick,
-                Modifier.align(Alignment.CenterVertically).semantics {
-                    contentDescription = shareAccessibilityLabel
-                }
+                Modifier.align(Alignment.CenterVertically)
             ) {
-                Icon(Icons.Filled.Share)
+                Icon(
+                    Icons.Filled.Share,
+                    contentDescription = stringResource(R.string.menu_item_share_plant)
+                )
             }
         }
     }
-}
-
-@Composable
-private fun PlantImageHeader(
-    scrollState: ScrollState,
-    imageUrl: String,
-    onFabClick: () -> Unit,
-    isPlanted: Boolean,
-    modifier: Modifier = Modifier
-) {
-    var imageHeight by remember { mutableStateOf(0) }
-
-    Box(Modifier.fillMaxWidth()) {
-        PlantImage(
-            scrollState, imageUrl,
-            modifier.onSizeChanged { imageHeight = it.height }
-        )
-        if (!isPlanted) {
-            val fabModifier = if (imageHeight != 0) {
-                Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(end = Dimens.PaddingSmall)
-                    .offset(y = getFabOffset(imageHeight, scrollState))
-                    .then(modifier)
-            } else {
-                Modifier.visible { false }
-            }
-            val fabAccessibilityLabel = stringResource(R.string.add_plant)
-            FloatingActionButton(
-                onClick = onFabClick,
-                shape = MaterialTheme.shapes.small,
-                modifier = fabModifier.semantics {
-                    contentDescription = fabAccessibilityLabel
-                }
-            ) {
-                Icon(Icons.Filled.Add)
-            }
-        }
-    }
-}
-
-@Composable
-private fun PlantImage(
-    scrollState: ScrollState,
-    imageUrl: String,
-    modifier: Modifier = Modifier,
-    placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
-) {
-    val parallaxOffset = with(AmbientDensity.current) {
-        scrollerParallaxOffset(this, scrollState)
-    }
-    CoilImage(
-        data = imageUrl,
-        contentScale = ContentScale.Crop,
-        fadeIn = true,
-        loading = {
-            Box(modifier = Modifier.fillMaxSize().background(placeholderColor))
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(top = parallaxOffset)
-            .preferredHeight(Dimens.PlantDetailAppBarHeight)
-    )
 }
 
 @Composable
@@ -346,21 +344,25 @@ private fun PlantHeaderActions(
 
         IconButton(
             onClick = onBackClick,
-            modifier = Modifier.padding(start = Dimens.ToolbarIconPadding).then(iconModifier)
+            modifier = Modifier
+                .padding(start = Dimens.ToolbarIconPadding)
+                .then(iconModifier)
         ) {
-            Icon(Icons.Filled.ArrowBack)
+            Icon(
+                Icons.Filled.ArrowBack,
+                contentDescription = stringResource(id = R.string.a11y_back)
+            )
         }
-        val shareAccessibilityLabel = stringResource(R.string.menu_item_share_plant)
         IconButton(
             onClick = onShareClick,
             modifier = Modifier
                 .padding(end = Dimens.ToolbarIconPadding)
                 .then(iconModifier)
-                .semantics {
-                    contentDescription = shareAccessibilityLabel
-                }
         ) {
-            Icon(Icons.Filled.Share)
+            Icon(
+                Icons.Filled.Share,
+                contentDescription = stringResource(R.string.menu_item_share_plant)
+            )
         }
     }
 }
@@ -371,9 +373,10 @@ private fun PlantInformation(
     wateringInterval: Int,
     description: String,
     onNamePosition: (Float) -> Unit,
-    toolbarState: ToolbarState
+    toolbarState: ToolbarState,
+    modifier: Modifier = Modifier
 ) {
-    Column(modifier = Modifier.padding(Dimens.PaddingLarge)) {
+    Column(modifier = modifier.padding(Dimens.PaddingLarge)) {
         Text(
             text = name,
             style = MaterialTheme.typography.h5,
@@ -384,7 +387,7 @@ private fun PlantInformation(
                     bottom = Dimens.PaddingNormal
                 )
                 .align(Alignment.CenterHorizontally)
-                .onGloballyPositioned { onNamePosition(it.globalPosition.y) }
+                .onGloballyPositioned { onNamePosition(it.positionInWindow().y) }
                 .visible { toolbarState == ToolbarState.HIDDEN }
         )
         Text(
@@ -420,19 +423,6 @@ private fun PlantDescription(description: String) {
         )
         plantDescription.movementMethod = LinkMovementMethod.getInstance()
         plantDescription.linksClickable = true
-    }
-}
-
-/**
- * Calculates offset FAB needs to keep aligned in the middle of the bottom of the picture.
- *
- * As the [Modifier.onGloballyPositioned] in the image is invoked after scrollPosition has changed,
- * there's a frame delay.
- */
-@Composable
-private fun getFabOffset(imageHeight: Int, scrollState: ScrollState): Dp {
-    return with(AmbientDensity.current) {
-        imageHeight.toDp() + scrollerParallaxOffset(this, scrollState) - (56 / 2).dp
     }
 }
 
