@@ -32,7 +32,7 @@ buildscript {
         glideVersion = '4.10.0'
         gradleVersion = '4.1.1'
         gsonVersion = '2.8.2'
-        hiltVersion = '2.31-alpha'
+        hiltVersion = '2.31.2-alpha'
         junitVersion = '4.12'
         kotlinVersion = '1.4.21'
         ktlintVersion = '0.38.1'
