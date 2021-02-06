@@ -24,8 +24,9 @@ import com.google.samples.apps.sunflower.BuildConfig
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 
 /**
@@ -48,14 +49,9 @@ class PlantDetailViewModel @AssistedInject constructor(
 
     fun hasValidUnsplashKey() = (BuildConfig.UNSPLASH_ACCESS_KEY != "null")
 
-    @AssistedInject.Factory
-    interface AssistedFactory {
-        fun create(plantId: String): PlantDetailViewModel
-    }
-
     companion object {
         fun provideFactory(
-            assistedFactory: AssistedFactory,
+            assistedFactory: PlantDetailViewModelFactory,
             plantId: String
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
@@ -64,4 +60,9 @@ class PlantDetailViewModel @AssistedInject constructor(
             }
         }
     }
+}
+
+@AssistedFactory
+interface PlantDetailViewModelFactory {
+    fun create(plantId: String): PlantDetailViewModel
 }
