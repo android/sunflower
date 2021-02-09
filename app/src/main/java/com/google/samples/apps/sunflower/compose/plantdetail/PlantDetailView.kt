@@ -158,13 +158,13 @@ fun PlantDetails(
     val transition = updateTransition(transitionState)
     val toolbarAlpha = transition.animateFloat(
         transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
-    ) {
-        if (it == ToolbarState.HIDDEN) 0f else 1f
+    ) { toolbarTransitionState ->
+        if (toolbarTransitionState == ToolbarState.HIDDEN) 0f else 1f
     }
     val contentAlpha = transition.animateFloat(
         transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
-    ) {
-        if (it == ToolbarState.HIDDEN) 1f else 0f
+    ) { toolbarTransitionState ->
+        if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
     }
 
     Box(modifier) {
