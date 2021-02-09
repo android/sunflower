@@ -86,6 +86,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
     // Compose
+    implementation "androidx.activity:activity-compose:1.3.0-SNAPSHOT"
     implementation "androidx.compose.runtime:runtime:$rootProject.composeVersion"
     implementation "androidx.compose.ui:ui:$rootProject.composeVersion"
     implementation "androidx.compose.foundation:foundation:$rootProject.composeVersion"
@@ -94,7 +95,9 @@ dependencies {
     implementation "androidx.compose.ui:ui-viewbinding:$rootProject.composeVersion"
     implementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
-    implementation "com.google.android.material:compose-theme-adapter:1.0.0-alpha10"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-SNAPSHOT"
+//    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
+    implementation "com.github.material-components:material-components-android-compose-theme-adapter:snapshot-SNAPSHOT"
     implementation "dev.chrisbanes.accompanist:accompanist-insets:$rootProject.accompanistVersion"
     implementation "dev.chrisbanes.accompanist:accompanist-coil:$rootProject.accompanistVersion"
 

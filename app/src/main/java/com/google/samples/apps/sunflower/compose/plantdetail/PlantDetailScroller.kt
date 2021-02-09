@@ -17,14 +17,7 @@
 package com.google.samples.apps.sunflower.compose.plantdetail
 
 import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.ScrollState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 
@@ -64,22 +57,3 @@ enum class ToolbarState { HIDDEN, SHOWN }
 
 val ToolbarState.isShown
     get() = this == ToolbarState.SHOWN
-
-
-@Composable
-fun rememberToolbarTransition(
-    transitionState: MutableTransitionState<ToolbarState>
-): Pair<State<Float>, State<Float>> {
-    val transition = updateTransition(transitionState)
-    val toolbarAlpha = transition.animateFloat(
-        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
-    ) {
-        if (it == ToolbarState.HIDDEN) 0f else 1f
-    }
-    val contentAlpha = transition.animateFloat(
-        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
-    ) {
-        if (it == ToolbarState.HIDDEN) 1f else 0f
-    }
-    return remember(transitionState) { Pair(toolbarAlpha, contentAlpha) }
-}

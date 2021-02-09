@@ -18,7 +18,7 @@ package com.google.samples.apps.sunflower.compose.utils
 
 import androidx.annotation.PluralsRes
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.LocalContext
 
 /**
  * Load a string with grammatically correct pluralization for the given quantity,
@@ -34,6 +34,6 @@ import androidx.compose.ui.platform.AmbientContext
  */
 @Composable
 fun getQuantityString(@PluralsRes id: Int, quantity: Int): String {
-    val context = AmbientContext.current
+    val context = LocalContext.current
     return context.resources.getQuantityString(id, quantity, quantity)
 }
