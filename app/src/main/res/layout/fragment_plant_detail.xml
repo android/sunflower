@@ -70,7 +70,7 @@
                     app:imageFromUrl="@{viewModel.plant.imageUrl}"
                     app:layout_collapseMode="parallax" />
 
-                <androidx.appcompat.widget.Toolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"

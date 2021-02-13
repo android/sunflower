@@ -18,13 +18,15 @@ package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.BuildConfig
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 
 /**
@@ -36,8 +38,8 @@ class PlantDetailViewModel @AssistedInject constructor(
     @Assisted private val plantId: String
 ) : ViewModel() {
 
-    val isPlanted = gardenPlantingRepository.isPlanted(plantId)
-    val plant = plantRepository.getPlant(plantId)
+    val isPlanted = gardenPlantingRepository.isPlanted(plantId).asLiveData()
+    val plant = plantRepository.getPlant(plantId).asLiveData()
 
     fun addPlantToGarden() {
         viewModelScope.launch {
@@ -47,14 +49,9 @@ class PlantDetailViewModel @AssistedInject constructor(
 
     fun hasValidUnsplashKey() = (BuildConfig.UNSPLASH_ACCESS_KEY != "null")
 
-    @AssistedInject.Factory
-    interface AssistedFactory {
-        fun create(plantId: String): PlantDetailViewModel
-    }
-
     companion object {
         fun provideFactory(
-            assistedFactory: AssistedFactory,
+            assistedFactory: PlantDetailViewModelFactory,
             plantId: String
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
@@ -63,4 +60,9 @@ class PlantDetailViewModel @AssistedInject constructor(
             }
         }
     }
+}
+
+@AssistedFactory
+interface PlantDetailViewModelFactory {
+    fun create(plantId: String): PlantDetailViewModel
 }
