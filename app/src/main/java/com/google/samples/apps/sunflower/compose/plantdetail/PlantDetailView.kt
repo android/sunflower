@@ -18,12 +18,15 @@ package com.google.samples.apps.sunflower.compose.plantdetail
 
 import android.text.method.LinkMovementMethod
 import androidx.annotation.VisibleForTesting
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,11 +37,11 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -61,14 +64,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.AmbientDensity
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidViewBinding
-import androidx.compose.ui.viewinterop.viewModel
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -102,7 +106,7 @@ fun PlantDetailsScreen(
 ) {
     // ViewModel and LiveDatas needed to populate the plant details info on the screen
     val plantDetailsViewModel: PlantDetailViewModel = viewModel(
-        factory = InjectorUtils.providePlantDetailViewModelFactory(AmbientContext.current, plantId)
+        factory = InjectorUtils.providePlantDetailViewModelFactory(LocalContext.current, plantId)
     )
     val plant = plantDetailsViewModel.plant.observeAsState().value
     val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
@@ -115,7 +119,7 @@ fun PlantDetailsScreen(
                 showSnackbar = showSnackbar,
                 onDismissSnackbar = { plantDetailsViewModel.dismissSnackbar() }
             ) {
-                val context = AmbientContext.current
+                val context = LocalContext.current
                 PlantDetails(
                     plant, isPlanted,
                     PlantDetailsCallbacks(
@@ -148,9 +152,20 @@ fun PlantDetails(
         mutableStateOf(PlantDetailsScroller(scrollState, Float.MIN_VALUE))
     }
     val transitionState = remember(plantScroller) { plantScroller.toolbarTransitionState }
-    val toolbarState = plantScroller.getToolbarState(AmbientDensity.current)
+    val toolbarState = plantScroller.getToolbarState(LocalDensity.current)
+
     // Transition that fades in/out the header with the image and the Toolbar
-    val (toolbarAlpha, contentAlpha) = rememberToolbarTransition(transitionState)
+    val transition = updateTransition(transitionState)
+    val toolbarAlpha = transition.animateFloat(
+        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
+    ) { toolbarTransitionState ->
+        if (toolbarTransitionState == ToolbarState.HIDDEN) 0f else 1f
+    }
+    val contentAlpha = transition.animateFloat(
+        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
+    ) { toolbarTransitionState ->
+        if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
+    }
 
     Box(modifier) {
         PlantDetailsContent(
@@ -398,7 +413,7 @@ private fun PlantInformation(
                 .padding(horizontal = Dimens.PaddingSmall)
                 .align(Alignment.CenterHorizontally)
         )
-        Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+        Providers(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
                 text = getQuantityString(R.plurals.watering_needs_suffix, wateringInterval),
                 modifier = Modifier
