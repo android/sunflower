@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower.workers
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import com.google.samples.apps.sunflower.GardenActivity
 import com.google.samples.apps.sunflower.R
 
@@ -26,12 +27,11 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        var i2 = 0
-        for (i in 1..1000) {
-            i2++
-        }
-        val i = Intent(this, GardenActivity::class.java)
-        startActivity(i)
+        Handler().postDelayed({
+            val i = Intent(this, GardenActivity::class.java)
+            startActivity(i)
+            finish()
+        }, 7000)
     }
 
     fun onClick()  {
