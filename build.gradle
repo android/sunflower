@@ -51,6 +51,7 @@ buildscript {
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
         workVersion = '2.1.0'
+        kotlin_version = '1.4.21'
     }
 
     repositories {
