@@ -31,19 +31,16 @@ import com.google.samples.apps.sunflower.R
  */
 object Dimens {
 
-    @get:Composable
     val PaddingSmall: Dp
-        get() = dimensionResource(R.dimen.margin_small)
+        @Composable get() = dimensionResource(R.dimen.margin_small)
 
-    @get:Composable
     val PaddingNormal: Dp
-        get() = dimensionResource(R.dimen.margin_normal)
+        @Composable get() = dimensionResource(R.dimen.margin_normal)
 
     val PaddingLarge: Dp = 24.dp
 
-    @get:Composable
     val PlantDetailAppBarHeight: Dp
-        get() = dimensionResource(R.dimen.plant_detail_app_bar_height)
+        @Composable get() = dimensionResource(R.dimen.plant_detail_app_bar_height)
 
     val ToolbarIconPadding = 12.dp
 

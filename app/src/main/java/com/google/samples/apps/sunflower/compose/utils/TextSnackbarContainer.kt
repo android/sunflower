@@ -20,9 +20,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
-import androidx.compose.material.Text
+import androidx.compose.material.SnackbarData
+import androidx.compose.material.SnackbarDuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -49,12 +51,23 @@ fun TextSnackbarContainer(
                 onDismissSnackbar()
             }
 
+            val snackbarData = remember(snackbarText) {
+                object : SnackbarData {
+                    override val message: String = snackbarText
+                    override val actionLabel: String? = null
+                    override val duration: SnackbarDuration = SnackbarDuration.Long
+
+                    override fun dismiss() { }
+                    override fun performAction() { }
+                }
+            }
+
             Snackbar(
+                snackbarData = snackbarData,
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .systemBarsPadding()
                     .padding(all = 8.dp),
-                text = { Text(snackbarText) },
                 shape = RoundedCornerShape(4.dp)
             )
         }
