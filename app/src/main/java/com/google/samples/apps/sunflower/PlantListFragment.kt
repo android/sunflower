@@ -48,7 +48,6 @@ class PlantListFragment : Fragment() {
         binding.plantList.adapter = adapter
         subscribeUi(adapter)
 
-        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -69,6 +68,10 @@ class PlantListFragment : Fragment() {
     private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.plants.observe(viewLifecycleOwner) { plants ->
             adapter.submitList(plants)
+        }
+
+        viewModel.hasOptionsMenu.observe(viewLifecycleOwner) { hasOptionsMenu ->
+            setHasOptionsMenu(hasOptionsMenu)
         }
     }
 
