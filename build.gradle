@@ -28,7 +28,7 @@ buildscript {
         appCompatVersion = '1.1.0'
         composeVersion = '1.0.0-beta01'
         constraintLayoutVersion = '2.1.0-alpha2'
-        constraintLayoutComposeVersion = '1.0.0-SNAPSHOT'
+        constraintLayoutComposeVersion = '1.0.0-alpha03'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.4.2"
         espressoVersion = '3.3.0'
@@ -57,7 +57,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        mavenCentral()
     }
 
     dependencies {
@@ -75,9 +74,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-
-        maven { url 'https://jitpack.io' } // Compose's MDC Theme adapter snapshots
-        maven { url "http://androidx.dev/storage/repository/androidx/constraintlayout" }
     }
 }
 

@@ -85,8 +85,7 @@ dependencies {
 
     // Compose
     implementation "androidx.activity:activity-compose:$rootProject.activityComposeVersion"
-//    implementation "androidx.constraintlayout:constraintlayout-compose:$rootProject.constraintLayoutComposeVersion"
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-SNAPSHOT"
+    implementation "androidx.constraintlayout:constraintlayout-compose:$rootProject.constraintLayoutComposeVersion"
     implementation "androidx.compose.runtime:runtime:$rootProject.composeVersion"
     implementation "androidx.compose.ui:ui:$rootProject.composeVersion"
     implementation "androidx.compose.foundation:foundation:$rootProject.composeVersion"
@@ -96,8 +95,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.viewModelComposeVersion"
-//    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
-    implementation 'com.github.material-components:material-components-android-compose-theme-adapter:snapshot-SNAPSHOT'
+    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
     implementation "dev.chrisbanes.accompanist:accompanist-insets:$rootProject.accompanistVersion"
     implementation "dev.chrisbanes.accompanist:accompanist-coil:$rootProject.accompanistVersion"
 
