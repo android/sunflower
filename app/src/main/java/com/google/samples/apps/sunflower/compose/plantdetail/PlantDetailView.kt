@@ -30,8 +30,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
@@ -51,7 +51,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Providers
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -183,7 +183,8 @@ fun PlantDetails(
             onFabClick = callbacks.onFabClick,
             contentAlpha = { contentAlpha.value }
         )
-        PlantToolbar(toolbarState, plant.name, callbacks,
+        PlantToolbar(
+            toolbarState, plant.name, callbacks,
             toolbarAlpha = { toolbarAlpha.value },
             contentAlpha = { contentAlpha.value }
         )
@@ -213,12 +214,14 @@ private fun PlantDetailsContent(
 
             if (!isPlanted) {
                 val fabEndMargin = Dimens.PaddingSmall
-                PlantFab(onFabClick = onFabClick, modifier = Modifier
-                    .constrainAs(fab) {
-                        centerAround(image.bottom)
-                        absoluteRight.linkTo(parent.absoluteRight, margin = fabEndMargin)
-                    }
-                    .alpha(contentAlpha())
+                PlantFab(
+                    onFabClick = onFabClick,
+                    modifier = Modifier
+                        .constrainAs(fab) {
+                            centerAround(image.bottom)
+                            absoluteRight.linkTo(parent.absoluteRight, margin = fabEndMargin)
+                        }
+                        .alpha(contentAlpha())
                 )
             }
 
@@ -236,7 +239,6 @@ private fun PlantDetailsContent(
     }
 }
 
-
 @Composable
 private fun PlantImage(
     imageUrl: String,
@@ -249,13 +251,15 @@ private fun PlantImage(
         fadeIn = true,
         contentDescription = null,
         loading = {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(placeholderColor))
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(placeholderColor)
+            )
         },
         modifier = modifier
             .fillMaxWidth()
-            .preferredHeight(Dimens.PlantDetailAppBarHeight)
+            .height(Dimens.PlantDetailAppBarHeight)
     )
 }
 
@@ -413,7 +417,7 @@ private fun PlantInformation(
                 .padding(horizontal = Dimens.PaddingSmall)
                 .align(Alignment.CenterHorizontally)
         )
-        Providers(LocalContentAlpha provides ContentAlpha.medium) {
+        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
                 text = getQuantityString(R.plurals.watering_needs_suffix, wateringInterval),
                 modifier = Modifier

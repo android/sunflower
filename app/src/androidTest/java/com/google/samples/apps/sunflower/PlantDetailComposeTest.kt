@@ -20,7 +20,7 @@ import android.content.ContentResolver
 import android.net.Uri
 import androidx.annotation.RawRes
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -86,6 +86,6 @@ private fun plantForTesting(): Plant {
  */
 @Composable
 private fun rawUri(@RawRes id: Int): Uri {
-    return "${ContentResolver.SCHEME_ANDROID_RESOURCE}://${AmbientContext.current.packageName}/$id"
+    return "${ContentResolver.SCHEME_ANDROID_RESOURCE}://${LocalContext.current.packageName}/$id"
         .toUri()
 }
