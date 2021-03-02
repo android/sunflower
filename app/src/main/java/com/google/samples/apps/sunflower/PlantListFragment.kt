@@ -59,7 +59,7 @@ class PlantListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.filter_zone -> {
-                updateData()
+                viewModel.updatePlantFilter(growZoneNumber = 9)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -69,16 +69,6 @@ class PlantListFragment : Fragment() {
     private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.plants.observe(viewLifecycleOwner) { plants ->
             adapter.submitList(plants)
-        }
-    }
-
-    private fun updateData() {
-        with(viewModel) {
-            if (isFiltered()) {
-                clearGrowZoneNumber()
-            } else {
-                setGrowZoneNumber(9)
-            }
         }
     }
 }

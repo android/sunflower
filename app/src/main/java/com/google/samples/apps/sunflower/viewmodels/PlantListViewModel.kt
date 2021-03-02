@@ -88,15 +88,23 @@ class PlantListViewModel @Inject internal constructor(
         }
     }
 
-    fun setGrowZoneNumber(num: Int) {
+    fun updatePlantFilter(growZoneNumber: Int) {
+        if (isFiltered()) {
+            clearGrowZoneNumber()
+        } else {
+            setGrowZoneNumber(growZoneNumber)
+        }
+    }
+
+    private fun setGrowZoneNumber(num: Int) {
         growZone.value = num
     }
 
-    fun clearGrowZoneNumber() {
+    private fun clearGrowZoneNumber() {
         growZone.value = NO_GROW_ZONE
     }
 
-    fun isFiltered() = growZone.value != NO_GROW_ZONE
+    private fun isFiltered() = growZone.value != NO_GROW_ZONE
 
     companion object {
         private const val NO_GROW_ZONE = -1
