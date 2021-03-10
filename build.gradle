@@ -37,7 +37,7 @@ buildscript {
         gradleVersion = '7.0.0-alpha09'
         gsonVersion = '2.8.6'
         junitVersion = '4.13.1'
-        kotlinVersion = '1.4.30'
+        kotlinVersion = '1.4.31'
         ktlintVersion = '0.40.0'
         ktxVersion = '1.5.0-beta03'
         lifecycleVersion = '2.3.0'
