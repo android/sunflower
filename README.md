@@ -75,13 +75,13 @@ Libraries Used
   * [ViewModel][17] - Store UI-related data that isn't destroyed on app rotations. Easily schedule
      asynchronous tasks for optimal execution.
   * [WorkManager][18] - Manage your Android background jobs.
-* [UI][30] - Details on why and how to use UI Components in your apps - together or separate
+* [UI][30] - Details on why and how to use UI Components in your apps - together or separate.
   * [Animations & Transitions][31] - Move widgets and transition between screens.
   * [Fragment][34] - A basic unit of composable UI.
   * [Layout][35] - Lay out widgets using different algorithms.
-* Third party and miscellaneous libraries
+* Third party and miscellaneous libraries.
   * [Glide][90] for image loading
-  * [Hilt][92]: for [dependency injection][93]
+  * [Hilt][92] for [dependency injection][93]
   * [Kotlin Coroutines][91] for managing background threads with simplified code and reducing needs for callbacks
 
 [0]: https://developer.android.com/jetpack/components
