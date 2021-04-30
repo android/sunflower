@@ -70,7 +70,7 @@
                     app:imageFromUrl="@{viewModel.plant.imageUrl}"
                     app:layout_collapseMode="parallax" />
 
-                <androidx.appcompat.widget.Toolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -105,6 +105,8 @@
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:gravity="center_horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:text="@{viewModel.plant.name}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -140,6 +142,20 @@
                     app:wateringText="@{viewModel.plant.wateringInterval}"
                     tools:text="every 7 days" />
 
+                <ImageView
+                    android:id="@+id/gallery_nav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:clickable="true"
+                    android:contentDescription="@string/gallery_content_description"
+                    android:focusable="true"
+                    android:src="@drawable/ic_photo_library"
+                    app:isGone="@{!viewModel.hasValidUnsplashKey()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
+
                 <TextView
                     android:id="@+id/plant_description"
                     style="?android:attr/textAppearanceMedium"
@@ -169,7 +185,7 @@
             android:onClick="@{() -> callback.add(viewModel.plant)}"
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
-            app:isGone="@{viewModel.isPlanted}"
+            app:isFabGone="@{viewModel.isPlanted}"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />

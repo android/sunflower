@@ -52,6 +52,6 @@ class SeedDatabaseWorker(
     }
 
     companion object {
-        private val TAG = SeedDatabaseWorker::class.java.simpleName
+        private const val TAG = "SeedDatabaseWorker"
     }
 }

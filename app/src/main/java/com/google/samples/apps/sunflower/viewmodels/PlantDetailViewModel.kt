@@ -16,28 +16,42 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.samples.apps.sunflower.BuildConfig
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * The ViewModel used in [PlantDetailFragment].
  */
-class PlantDetailViewModel(
+@HiltViewModel
+class PlantDetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,
-    private val plantId: String
 ) : ViewModel() {
 
-    val isPlanted = gardenPlantingRepository.isPlanted(plantId)
-    val plant = plantRepository.getPlant(plantId)
+    val plantId: String = savedStateHandle.get<String>(PLANT_ID_SAVED_STATE_KEY)!!
+
+    val isPlanted = gardenPlantingRepository.isPlanted(plantId).asLiveData()
+    val plant = plantRepository.getPlant(plantId).asLiveData()
 
     fun addPlantToGarden() {
         viewModelScope.launch {
             gardenPlantingRepository.createGardenPlanting(plantId)
         }
+    }
+
+    fun hasValidUnsplashKey() = (BuildConfig.UNSPLASH_ACCESS_KEY != "null")
+
+    companion object {
+        private const val PLANT_ID_SAVED_STATE_KEY = "plantId"
     }
 }
