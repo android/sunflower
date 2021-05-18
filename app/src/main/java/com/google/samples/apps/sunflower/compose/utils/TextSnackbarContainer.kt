@@ -32,7 +32,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.chrisbanes.accompanist.insets.systemBarsPadding
+import com.google.accompanist.insets.systemBarsPadding
 
 /**
  * Simple API to display a Snackbar with text on the screen

@@ -27,11 +27,11 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetails
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsCallbacks
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.test.R
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -96,8 +96,8 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.viewModelComposeVersion"
     implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
-    implementation "dev.chrisbanes.accompanist:accompanist-insets:$rootProject.accompanistVersion"
-    implementation "dev.chrisbanes.accompanist:accompanist-coil:$rootProject.accompanistVersion"
+    implementation "com.google.accompanist:accompanist-insets:$rootProject.accompanistVersion"
+    implementation "com.google.accompanist:accompanist-coil:$rootProject.accompanistVersion"
 
     // Testing dependencies
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"

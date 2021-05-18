@@ -22,6 +22,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -67,12 +68,19 @@ import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.coil.rememberCoilPainter
+import com.google.accompanist.imageloading.ImageLoadState
+import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.insets.statusBarsPadding
+import com.google.accompanist.insets.systemBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -83,10 +91,6 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
-import dev.chrisbanes.accompanist.coil.CoilImage
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
-import dev.chrisbanes.accompanist.insets.statusBarsPadding
-import dev.chrisbanes.accompanist.insets.systemBarsPadding
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -245,22 +249,26 @@ private fun PlantImage(
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
 ) {
-    CoilImage(
-        data = imageUrl,
-        contentScale = ContentScale.Crop,
-        fadeIn = true,
-        contentDescription = null,
-        loading = {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(Dimens.PlantDetailAppBarHeight)
+    ) {
+        val painter = rememberCoilPainter(request = imageUrl, fadeIn = true)
+        Image(
+            painter = painter,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize(),
+        )
+        if (painter.loadState is ImageLoadState.Loading) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(placeholderColor)
             )
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .height(Dimens.PlantDetailAppBarHeight)
-    )
+        }
+    }
 }
 
 @Composable
@@ -268,14 +276,17 @@ private fun PlantFab(
     onFabClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val addPlantContentDescription = stringResource(R.string.add_plant)
     FloatingActionButton(
         onClick = onFabClick,
         shape = MaterialTheme.shapes.small,
-        modifier = modifier
+        modifier = modifier.semantics {
+            contentDescription = addPlantContentDescription
+        }
     ) {
         Icon(
             Icons.Filled.Add,
-            contentDescription = stringResource(R.string.add_plant)
+            contentDescription = null
         )
     }
 }
@@ -331,13 +342,16 @@ private fun PlantDetailsToolbar(
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             )
+            val shareContentDescription = stringResource(R.string.menu_item_share_plant)
             IconButton(
                 onShareClick,
-                Modifier.align(Alignment.CenterVertically)
+                Modifier
+                    .align(Alignment.CenterVertically)
+                    .semantics { contentDescription = shareContentDescription }
             ) {
                 Icon(
                     Icons.Filled.Share,
-                    contentDescription = stringResource(R.string.menu_item_share_plant)
+                    contentDescription = null
                 )
             }
         }
@@ -372,15 +386,19 @@ private fun PlantHeaderActions(
                 contentDescription = stringResource(id = R.string.a11y_back)
             )
         }
+        val shareContentDescription = stringResource(R.string.menu_item_share_plant)
         IconButton(
             onClick = onShareClick,
             modifier = Modifier
                 .padding(end = Dimens.ToolbarIconPadding)
                 .then(iconModifier)
+                .semantics {
+                    contentDescription = shareContentDescription
+                }
         ) {
             Icon(
                 Icons.Filled.Share,
-                contentDescription = stringResource(R.string.menu_item_share_plant)
+                contentDescription = null
             )
         }
     }
