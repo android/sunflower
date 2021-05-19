@@ -159,14 +159,14 @@ fun PlantDetails(
     val toolbarState = plantScroller.getToolbarState(LocalDensity.current)
 
     // Transition that fades in/out the header with the image and the Toolbar
-    val transition = updateTransition(transitionState)
+    val transition = updateTransition(transitionState, label = "")
     val toolbarAlpha = transition.animateFloat(
-        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
+        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }, label = ""
     ) { toolbarTransitionState ->
         if (toolbarTransitionState == ToolbarState.HIDDEN) 0f else 1f
     }
     val contentAlpha = transition.animateFloat(
-        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }
+        transitionSpec = { spring(stiffness = Spring.StiffnessLow) }, label = ""
     ) { toolbarTransitionState ->
         if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
     }
@@ -259,12 +259,12 @@ private fun PlantImage(
             painter = painter,
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.matchParentSize(),
         )
         if (painter.loadState is ImageLoadState.Loading) {
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .matchParentSize()
                     .background(placeholderColor)
             )
         }
@@ -280,6 +280,7 @@ private fun PlantFab(
     FloatingActionButton(
         onClick = onFabClick,
         shape = MaterialTheme.shapes.small,
+        // Semantics in parent due to https://issuetracker.google.com/184825850
         modifier = modifier.semantics {
             contentDescription = addPlantContentDescription
         }
@@ -347,6 +348,7 @@ private fun PlantDetailsToolbar(
                 onShareClick,
                 Modifier
                     .align(Alignment.CenterVertically)
+                    // Semantics in parent due to https://issuetracker.google.com/184825850
                     .semantics { contentDescription = shareContentDescription }
             ) {
                 Icon(
@@ -392,6 +394,7 @@ private fun PlantHeaderActions(
             modifier = Modifier
                 .padding(end = Dimens.ToolbarIconPadding)
                 .then(iconModifier)
+                // Semantics in parent due to https://issuetracker.google.com/184825850
                 .semantics {
                     contentDescription = shareContentDescription
                 }
