@@ -32,8 +32,9 @@ android {
         testInstrumentationRunner "com.google.samples.apps.sunflower.utilities.MainTestRunner"
         versionCode 1
         versionName "0.1.6"
-        vectorDrawables.useSupportLibrary true
-
+        vectorDrawables {
+            useSupportLibrary true
+        }
         // Consult the README on instructions for setting up Unsplash API key
         buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")
         javaCompileOptions {
@@ -77,7 +78,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
