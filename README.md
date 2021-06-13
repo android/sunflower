@@ -1,7 +1,7 @@
 Android Sunflower
 =================
 
-A gardening app illustrating Android development best practices with Android Jetpack.
+Android Sunflower is a gardening app illustrating Android development best practices with Android Jetpack.
 
 Android Sunflower is currently under heavy development.
 Note that some changes (such as database schema modifications) are not backwards
@@ -11,8 +11,7 @@ case, please uninstall and re-install the app.
 Introduction
 ------------
 
-Android Jetpack is a set of components, tools and guidance to make great Android apps. They bring
-together the existing Support Library and Architecture Components and arrange them into four
+Android Jetpack is a set of components, tools and guidance to help developers follow best practices, reduce boilerplate code and make great Android apps. They bring together the existing Support Library and Architecture Components and arrange them into four
 categories:
 
 ![Android Jetpack](screenshots/jetpack_donut.png "Android Jetpack Components")
@@ -63,6 +62,7 @@ Libraries Used
   multidex and automated testing.
   * [AppCompat][1] - Degrade gracefully on older versions of Android.
   * [Android KTX][2] - Write more concise, idiomatic Kotlin code.
+  * [Multidex][3] - Provide support for multiple dex files for apps.
   * [Test][4] - An Android testing framework for unit and runtime UI tests.
 * [Architecture][10] - A collection of libraries that help you design robust, testable, and
   maintainable apps. Start with classes for managing your UI component lifecycle and handling data
@@ -79,6 +79,7 @@ Libraries Used
   * [Animations & Transitions][31] - Move widgets and transition between screens.
   * [Fragment][34] - A basic unit of composable UI.
   * [Layout][35] - Lay out widgets using different algorithms.
+  * [Palette][36] - Pull useful information from color palette.
 * Third party and miscellaneous libraries
   * [Glide][90] for image loading
   * [Hilt][92]: for [dependency injection][93]
@@ -87,6 +88,7 @@ Libraries Used
 [0]: https://developer.android.com/jetpack/components
 [1]: https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
 [2]: https://developer.android.com/kotlin/ktx
+[3]: https://developer.android.com/topic/libraries/support-library/packages#multidex
 [4]: https://developer.android.com/training/testing/
 [10]: https://developer.android.com/jetpack/arch/
 [11]: https://developer.android.com/topic/libraries/data-binding/
@@ -100,6 +102,7 @@ Libraries Used
 [31]: https://developer.android.com/training/animation/
 [34]: https://developer.android.com/guide/components/fragments
 [35]: https://developer.android.com/guide/topics/ui/declaring-layout
+[36]: https://developer.android.com/training/material/palette-colors
 [90]: https://bumptech.github.io/glide/
 [91]: https://kotlinlang.org/docs/reference/coroutines-overview.html
 [92]: https://developer.android.com/training/dependency-injection/hilt-android
