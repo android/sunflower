@@ -20,7 +20,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.google.samples.apps.sunflower.utilities.getValue
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
@@ -54,8 +54,8 @@ class PlantDaoTest {
         database.close()
     }
 
-    @Test fun testGetPlants() {
-        val plantList = getValue(plantDao.getPlants())
+    @Test fun testGetPlants() = runBlocking {
+        val plantList = plantDao.getPlants().first()
         assertThat(plantList.size, equalTo(3))
 
         // Ensure plant list is sorted by name
@@ -64,18 +64,18 @@ class PlantDaoTest {
         assertThat(plantList[2], equalTo(plantC))
     }
 
-    @Test fun testGetPlantsWithGrowZoneNumber() {
-        val plantList = getValue(plantDao.getPlantsWithGrowZoneNumber(1))
+    @Test fun testGetPlantsWithGrowZoneNumber() = runBlocking {
+        val plantList = plantDao.getPlantsWithGrowZoneNumber(1).first()
         assertThat(plantList.size, equalTo(2))
-        assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(2)).size, equalTo(1))
-        assertThat(getValue(plantDao.getPlantsWithGrowZoneNumber(3)).size, equalTo(0))
+        assertThat(plantDao.getPlantsWithGrowZoneNumber(2).first().size, equalTo(1))
+        assertThat(plantDao.getPlantsWithGrowZoneNumber(3).first().size, equalTo(0))
 
         // Ensure plant list is sorted by name
         assertThat(plantList[0], equalTo(plantA))
         assertThat(plantList[1], equalTo(plantB))
     }
 
-    @Test fun testGetPlant() {
-        assertThat(getValue(plantDao.getPlant(plantA.plantId)), equalTo(plantA))
+    @Test fun testGetPlant() = runBlocking {
+        assertThat(plantDao.getPlant(plantA.plantId).first(), equalTo(plantA))
     }
 }
