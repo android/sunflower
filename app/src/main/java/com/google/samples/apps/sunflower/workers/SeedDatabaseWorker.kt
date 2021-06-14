@@ -25,25 +25,31 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
-import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class SeedDatabaseWorker(
-    context: Context,
-    workerParams: WorkerParameters
+        context: Context,
+        workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
-    override suspend fun doWork(): Result = coroutineScope {
+    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
-            applicationContext.assets.open(PLANT_DATA_FILENAME).use { inputStream ->
-                JsonReader(inputStream.reader()).use { jsonReader ->
-                    val plantType = object : TypeToken<List<Plant>>() {}.type
-                    val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
+            val filename = inputData.getString(KEY_FILENAME)
+            if (filename != null) {
+                applicationContext.assets.open(filename).use { inputStream ->
+                    JsonReader(inputStream.reader()).use { jsonReader ->
+                        val plantType = object : TypeToken<List<Plant>>() {}.type
+                        val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
 
-                    val database = AppDatabase.getInstance(applicationContext)
-                    database.plantDao().insertAll(plantList)
+                        val database = AppDatabase.getInstance(applicationContext)
+                        database.plantDao().insertAll(plantList)
 
-                    Result.success()
+                        Result.success()
+                    }
                 }
+            } else {
+                Log.e(TAG, "Error seeding database - no valid filename")
+                Result.failure()
             }
         } catch (ex: Exception) {
             Log.e(TAG, "Error seeding database", ex)
@@ -53,5 +59,6 @@ class SeedDatabaseWorker(
 
     companion object {
         private const val TAG = "SeedDatabaseWorker"
+        const val KEY_FILENAME = "PLANT_DATA_FILENAME"
     }
 }
