@@ -22,9 +22,12 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
 import com.google.samples.apps.sunflower.data.UnsplashRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GalleryViewModel internal constructor(
+@HiltViewModel
+class GalleryViewModel @Inject constructor(
     private val repository: UnsplashRepository
 ) : ViewModel() {
     private var currentQueryValue: String? = null

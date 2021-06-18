@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels
+package com.google.samples.apps.sunflower
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.google.samples.apps.sunflower.data.UnsplashRepository
+import android.app.Application
+import androidx.work.Configuration
+import dagger.hilt.android.HiltAndroidApp
 
-class GalleryViewModelFactory(
-    private val unsplashRepository: UnsplashRepository
-) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return GalleryViewModel(
-            unsplashRepository
-        ) as T
-    }
+@HiltAndroidApp
+class MainApplication : Application(), Configuration.Provider {
+    override fun getWorkManagerConfiguration(): Configuration =
+                Configuration.Builder()
+                        .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
+                        .build()
 }

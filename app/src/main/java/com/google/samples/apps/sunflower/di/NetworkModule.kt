@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.di
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import com.google.samples.apps.sunflower.api.UnsplashService
-import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-class UnsplashRepository @Inject constructor(private val service: UnsplashService) {
+@InstallIn(SingletonComponent::class)
+@Module
+class NetworkModule {
 
-    fun getSearchResultStream(query: String): Flow<PagingData<UnsplashPhoto>> {
-        return Pager(
-            config = PagingConfig(enablePlaceholders = false, pageSize = NETWORK_PAGE_SIZE),
-            pagingSourceFactory = { UnsplashPagingSource(service, query) }
-        ).flow
-    }
-
-    companion object {
-        private const val NETWORK_PAGE_SIZE = 25
+    @Singleton
+    @Provides
+    fun provideUnsplashService(): UnsplashService {
+        return UnsplashService.create()
     }
 }

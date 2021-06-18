@@ -27,26 +27,25 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.samples.apps.sunflower.adapters.GalleryAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGalleryBinding
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GalleryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
     private val adapter = GalleryAdapter()
     private val args: GalleryFragmentArgs by navArgs()
     private var searchJob: Job? = null
-    private val viewModel: GalleryViewModel by viewModels {
-        InjectorUtils.provideGalleryViewModelFactory()
-    }
+    private val viewModel: GalleryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentGalleryBinding.inflate(inflater, container, false)
         context ?: return binding.root
 

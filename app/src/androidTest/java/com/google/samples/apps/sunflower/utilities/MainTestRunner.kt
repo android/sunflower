@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower
+package com.google.samples.apps.sunflower.utilities
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil.setContentView
-import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
-import dagger.hilt.android.AndroidEntryPoint
+import android.app.Application
+import android.content.Context
+import androidx.test.runner.AndroidJUnitRunner
+import dagger.hilt.android.testing.HiltTestApplication
 
-@AndroidEntryPoint
-class GardenActivity : AppCompatActivity() {
+// A custom runner to set up the instrumented application class for tests.
+class MainTestRunner : AndroidJUnitRunner() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+    override fun newApplication(cl: ClassLoader?, name: String?, context: Context?): Application {
+        return super.newApplication(cl, HiltTestApplication::class.java.name, context)
     }
 }
