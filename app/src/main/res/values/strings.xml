@@ -20,8 +20,8 @@
     <string name="app_name" translatable="false">Sunflower</string>
 
     <!-- Translatable resources -->
-    <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">ग्रो ज़ोन द्वारा फ़िल्टर करें</string>
-    <string name="my_garden_title" translation_description="Title for the 'My garden' screen where the user can see the list of plants that have been added to their garden.">मेरा बाग</string>
+    <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">Filter by grow zone</string>
+    <string name="my_garden_title" translation_description="Title for the 'My garden' screen where the user can see the list of plants that have been added to their garden.">My garden</string>
     <string name="plant_list_title" translation_description="Title for the plant list screen where the user can see a list of plants available to add to their garden.">Plant list</string>
     <string name="available" translation_description="Text for the header of the plant list page indicating the available plants for users to choose from.">Available Plants</string>
     <string name="plant_details_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">Plant details</string>
