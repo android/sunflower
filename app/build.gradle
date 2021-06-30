@@ -54,8 +54,9 @@ android {
     }
 
     kotlinOptions {
-        // work-runtime-ktx 2.1.0 and above now requires Java 8
+        // work-runtime-ktx 2.1.0 and above, and Compose require Java 8
         jvmTarget = "1.8"
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 
         // Enable Coroutines and Flow APIs
         freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
@@ -66,6 +67,14 @@ android {
         // our test APK to build (has no effect on our AARs)
         excludes += "/META-INF/AL2.0"
         excludes += "/META-INF/LGPL2.1"
+    }
+
+    buildFeatures {
+        // Enables Jetpack Compose for this module
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "$rootProject.composeVersion"
     }
 }
 
@@ -97,6 +106,15 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
     implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
+
+    // Compose
+    implementation "androidx.activity:activity-compose:$rootProject.activityComposeVersion"
+    implementation "androidx.compose.material:material:$rootProject.composeVersion"
+    implementation "androidx.compose.animation:animation:$rootProject.composeVersion"
+    implementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.viewModelComposeVersion"
+    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
+    implementation "com.google.accompanist:accompanist-glide:0.12.0"
 
     // Testing dependencies
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"

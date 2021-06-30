@@ -26,6 +26,7 @@
         <item name="colorSurface">@color/sunflower_gray_50</item>
         <item name="colorSecondary">@color/sunflower_yellow_500</item>
         <item name="android:colorBackground">@color/sunflower_green_500</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Sunflower.Card</item>
     </style>
 
     <style name="Theme.Sunflower" parent="Base.Theme.Sunflower"/>

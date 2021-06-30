@@ -23,18 +23,20 @@ buildscript {
         targetSdkVersion = 30
 
         // App dependencies
+        activityComposeVersion = '1.3.0-beta02'
         appCompatVersion = '1.1.0'
+        composeVersion = '1.0.0-beta09'
         constraintLayoutVersion = '2.0.0-beta3'
         coreTestingVersion = '2.0.0'
         coroutinesVersion = "1.4.2"
         espressoVersion = '3.1.1'
         fragmentVersion = '1.3.0'
         glideVersion = '4.10.0'
-        gradleVersion = '4.1.2'
+        gradleVersion = '7.0.0-beta03'
         gsonVersion = '2.8.2'
-        hiltVersion = '2.33-beta'
+        hiltVersion = '2.37'
         junitVersion = '4.12'
-        kotlinVersion = '1.4.30'
+        kotlinVersion = '1.5.10'
         ktlintVersion = '0.38.1'
         ktxVersion = '1.0.2'
         lifecycleVersion = '2.2.0'
@@ -49,13 +51,14 @@ buildscript {
         truthVersion = '0.42'
         testExtJunit = '1.1.0'
         uiAutomatorVersion = '2.2.0'
+        viewModelComposeVersion = '1.0.0-alpha07'
         viewPagerVersion = '1.0.0'
         workVersion = '2.4.0'
     }
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -73,7 +76,7 @@ plugins {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
