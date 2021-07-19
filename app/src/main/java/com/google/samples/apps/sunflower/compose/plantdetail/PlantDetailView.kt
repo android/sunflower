@@ -76,8 +76,9 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.accompanist.coil.rememberCoilPainter
-import com.google.accompanist.imageloading.ImageLoadState
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.insets.systemBarsPadding
@@ -243,31 +244,35 @@ private fun PlantDetailsContent(
     }
 }
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 private fun PlantImage(
     imageUrl: String,
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
 ) {
-    Box(
+    val painter = rememberImagePainter(
+        data = imageUrl,
+        builder = {
+            crossfade(true)
+        }
+    )
+
+    Image(
+        painter = painter,
+        contentScale = ContentScale.Crop,
+        contentDescription = null,
         modifier = modifier
             .fillMaxWidth()
             .height(Dimens.PlantDetailAppBarHeight)
-    ) {
-        val painter = rememberCoilPainter(request = imageUrl, fadeIn = true)
-        Image(
-            painter = painter,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.matchParentSize(),
+    )
+
+    if (painter.state is ImagePainter.State.Loading) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(placeholderColor)
         )
-        if (painter.loadState is ImageLoadState.Loading) {
-            Box(
-                modifier = Modifier
-                    .matchParentSize()
-                    .background(placeholderColor)
-            )
-        }
     }
 }
 
