@@ -25,7 +25,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
+import com.google.samples.apps.sunflower.ui.homepage.garden.adapter.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.ui.homepage.adapter.PLANT_LIST_PAGE_INDEX
 import dagger.hilt.android.AndroidEntryPoint

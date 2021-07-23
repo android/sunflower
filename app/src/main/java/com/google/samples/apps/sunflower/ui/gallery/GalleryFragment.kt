@@ -25,7 +25,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.samples.apps.sunflower.adapters.GalleryAdapter
+import com.google.samples.apps.sunflower.ui.gallery.adapter.GalleryAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGalleryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
