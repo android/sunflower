@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.api
+package com.google.samples.apps.sunflower.data.remote.api
 
 import com.google.samples.apps.sunflower.BuildConfig
 import com.google.samples.apps.sunflower.data.remote.entity.UnsplashSearchResponse

@@ -19,7 +19,7 @@ package com.google.samples.apps.sunflower.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.google.samples.apps.sunflower.api.UnsplashService
+import com.google.samples.apps.sunflower.data.remote.api.UnsplashService
 import com.google.samples.apps.sunflower.data.remote.UnsplashPagingSource
 import com.google.samples.apps.sunflower.data.remote.entity.UnsplashPhoto
 import kotlinx.coroutines.flow.Flow

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels
+package com.google.samples.apps.sunflower.ui.homepage.garden
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

@@ -17,7 +17,7 @@
 package com.google.samples.apps.sunflower.data.remote
 
 import androidx.paging.PagingSource
-import com.google.samples.apps.sunflower.api.UnsplashService
+import com.google.samples.apps.sunflower.data.remote.api.UnsplashService
 import com.google.samples.apps.sunflower.data.remote.entity.UnsplashPhoto
 
 private const val UNSPLASH_STARTING_PAGE_INDEX = 1

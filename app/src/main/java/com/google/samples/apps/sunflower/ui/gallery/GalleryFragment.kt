@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower
+package com.google.samples.apps.sunflower.ui.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,7 +27,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.samples.apps.sunflower.adapters.GalleryAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentGalleryBinding
-import com.google.samples.apps.sunflower.viewmodels.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

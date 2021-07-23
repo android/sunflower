@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower
+package com.google.samples.apps.sunflower.ui.homepage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,10 +23,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
-import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
-import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
+import com.google.samples.apps.sunflower.ui.homepage.adapter.MY_GARDEN_PAGE_INDEX
+import com.google.samples.apps.sunflower.ui.homepage.adapter.PLANT_LIST_PAGE_INDEX
+import com.google.samples.apps.sunflower.ui.homepage.adapter.SunflowerPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

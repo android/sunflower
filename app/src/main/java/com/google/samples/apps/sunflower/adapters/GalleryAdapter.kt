@@ -23,7 +23,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.GalleryFragment
+import com.google.samples.apps.sunflower.ui.gallery.GalleryFragment
 import com.google.samples.apps.sunflower.adapters.GalleryAdapter.GalleryViewHolder
 import com.google.samples.apps.sunflower.data.remote.entity.UnsplashPhoto
 import com.google.samples.apps.sunflower.databinding.ListItemPhotoBinding

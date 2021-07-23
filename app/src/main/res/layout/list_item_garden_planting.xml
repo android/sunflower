@@ -24,7 +24,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="viewModel"
-            type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel"/>
+            type="com.google.samples.apps.sunflower.ui.homepage.garden.PlantAndGardenPlantingsViewModel"/>
     </data>
 
     <com.google.samples.apps.sunflower.core.views.MaskedCardView

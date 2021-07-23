@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.di
 
-import com.google.samples.apps.sunflower.api.UnsplashService
+import com.google.samples.apps.sunflower.data.remote.api.UnsplashService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

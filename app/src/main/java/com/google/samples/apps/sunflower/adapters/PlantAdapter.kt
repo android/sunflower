@@ -23,10 +23,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
-import com.google.samples.apps.sunflower.PlantListFragment
+import com.google.samples.apps.sunflower.ui.homepage.plantlist.PlantListFragment
 import com.google.samples.apps.sunflower.data.local.entity.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
+import com.google.samples.apps.sunflower.ui.homepage.HomeViewPagerFragmentDirections
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
