@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.views
+package com.google.samples.apps.sunflower.core.views
 
 import android.annotation.SuppressLint
 import android.content.Context
