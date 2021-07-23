@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.repository
 
+import com.google.samples.apps.sunflower.data.local.database.PlantDao
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Repository module for handling data operations.
+ *
+ * Collecting from the Flows in [PlantDao] is main-safe.  Room supports Coroutines and moves the
+ * query execution off of the main thread.
+ */
 @Singleton
-class GardenPlantingRepository @Inject constructor(
-    private val gardenPlantingDao: GardenPlantingDao
-) {
+class PlantRepository @Inject constructor(private val plantDao: PlantDao) {
 
-    suspend fun createGardenPlanting(plantId: String) {
-        val gardenPlanting = GardenPlanting(plantId)
-        gardenPlantingDao.insertGardenPlanting(gardenPlanting)
-    }
+    fun getPlants() = plantDao.getPlants()
 
-    suspend fun removeGardenPlanting(gardenPlanting: GardenPlanting) {
-        gardenPlantingDao.deleteGardenPlanting(gardenPlanting)
-    }
+    fun getPlant(plantId: String) = plantDao.getPlant(plantId)
 
-    fun isPlanted(plantId: String) =
-        gardenPlantingDao.isPlanted(plantId)
-
-    fun getPlantedGardens() = gardenPlantingDao.getPlantedGardens()
+    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int) =
+        plantDao.getPlantsWithGrowZoneNumber(growZoneNumber)
 }

@@ -32,7 +32,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.PlantDetailFragment.Callback
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.local.entity.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
