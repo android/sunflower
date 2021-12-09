@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower.data
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.google.samples.apps.sunflower.api.UnsplashService
 
 private const val UNSPLASH_STARTING_PAGE_INDEX = 1
@@ -38,6 +39,16 @@ class UnsplashPagingSource(
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, UnsplashPhoto>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            // This loads starting from previous page, but since PagingConfig.initialLoadSize spans
+            // multiple pages, the initial load will still load items centered around
+            // anchorPosition. This also prevents needing to immediately launch prepend due to
+            // prefetchDistance.
+            state.closestPageToPosition(anchorPosition)?.prevKey
         }
     }
 }
