@@ -38,23 +38,4 @@ interface UnsplashService {
         @Query("per_page") perPage: Int,
         @Query("client_id") clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY
     ): UnsplashSearchResponse
-
-    companion object {
-        private const val BASE_URL = "https://api.unsplash.com/"
-
-        fun create(): UnsplashService {
-            val logger = HttpLoggingInterceptor().apply { level = Level.BASIC }
-
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
-
-            return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(UnsplashService::class.java)
-        }
-    }
 }

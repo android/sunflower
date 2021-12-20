@@ -31,8 +31,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import com.google.samples.apps.sunflower.utilities.chooser
-import com.google.samples.apps.sunflower.utilities.testPlant
+import com.google.samples.apps.sunflower.ui.GardenActivity
+import com.google.samples.apps.sunflower.utils.chooser
+import com.google.samples.apps.sunflower.utils.testPlant
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Before
 import org.junit.Ignore

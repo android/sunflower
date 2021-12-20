@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.di
 
+import com.google.samples.apps.sunflower.api.ApiManager
 import com.google.samples.apps.sunflower.api.UnsplashService
 import dagger.Module
 import dagger.Provides
@@ -30,6 +31,6 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideUnsplashService(): UnsplashService {
-        return UnsplashService.create()
+        return ApiManager.getApiService()
     }
 }

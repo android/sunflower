@@ -18,7 +18,6 @@ package com.google.samples.apps.sunflower.worker
 
 import android.content.Context
 import android.util.Log
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.work.Configuration
 import androidx.work.ListenableWorker.Result
@@ -27,7 +26,7 @@ import androidx.work.testing.SynchronousExecutor
 import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
 import androidx.work.workDataOf
-import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
+import com.google.samples.apps.sunflower.common.PLANT_DATA_FILENAME
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
