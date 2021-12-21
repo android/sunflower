@@ -43,7 +43,7 @@ class SeedDatabaseWorker(
                         val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
 
                         val database = AppDatabase.getInstance(applicationContext)
-                        database.plantDao().insertAll(plantList)
+                        database.getPlantDao().insertAll(plantList)
 
                         Result.success()
                     }

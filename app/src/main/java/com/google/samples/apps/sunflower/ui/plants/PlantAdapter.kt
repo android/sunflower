@@ -14,19 +14,23 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.adapters
+package com.google.samples.apps.sunflower.ui.plants
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.ui.plants.PlantListFragment
+import com.google.samples.apps.sunflower.MainApplication
+import com.google.samples.apps.sunflower.data.db.AppDatabase
 import com.google.samples.apps.sunflower.data.model.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 import com.google.samples.apps.sunflower.ui.HomeViewPagerFragmentDirections
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
@@ -57,6 +61,11 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
                     navigateToPlant(plant, it)
                 }
             }
+
+            binding.root.setOnLongClickListener {
+                showDialog()
+                true
+            }
         }
 
         private fun navigateToPlant(
@@ -75,6 +84,17 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
                 plant = item
                 executePendingBindings()
             }
+        }
+
+        private fun showDialog() {
+            AlertDialog.Builder(binding.root.context).setTitle("确定删除吗？").setPositiveButton("确定"
+            ) { dialog, which ->
+                GlobalScope.launch {
+                    AppDatabase.getInstance(MainApplication.context).getPlantDao().deletePlant(binding.plant?.plantId ?: "")
+                }
+            }.setNegativeButton("取消") {dialog, which -> {
+                dialog.dismiss()
+            }}.create().show()
         }
     }
 }

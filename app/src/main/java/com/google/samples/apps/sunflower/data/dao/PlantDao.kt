@@ -39,4 +39,7 @@ interface PlantDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(plants: List<Plant>)
+
+    @Query("DELETE FROM plants WHERE id=:plantId")
+    suspend fun deletePlant(plantId: String)
 }

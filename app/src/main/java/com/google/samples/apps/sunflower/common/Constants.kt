@@ -16,8 +16,10 @@
 
 package com.google.samples.apps.sunflower.common
 
+
 /**
- * Constants used throughout the app.
+ * APP的常量池
  */
-const val DATABASE_NAME = "sunflower-db"
+const val DB_VERSION = 1
+const val DB_NAME = "sunflower-db"
 const val PLANT_DATA_FILENAME = "plants.json"

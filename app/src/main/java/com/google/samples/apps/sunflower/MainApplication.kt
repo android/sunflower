@@ -16,14 +16,29 @@
 
 package com.google.samples.apps.sunflower
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class MainApplication : Application(), Configuration.Provider {
+
+
+    override fun onCreate() {
+        super.onCreate()
+        context = this
+    }
+
     override fun getWorkManagerConfiguration(): Configuration =
-                Configuration.Builder()
-                        .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
-                        .build()
+        Configuration.Builder()
+            .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
+            .build()
+
+
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        lateinit var context: Context
+    }
 }

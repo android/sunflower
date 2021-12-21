@@ -16,45 +16,39 @@
 
 package com.google.samples.apps.sunflower.data.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
-import java.util.Calendar
+import androidx.room.*
+import java.util.*
 
 /**
- * [GardenPlanting] represents when a user adds a [Plant] to their garden, with useful metadata.
- * Properties such as [lastWateringDate] are used for notifications (such as when to water the
- * plant).
- *
- * Declaring the column info allows for the renaming of variables without implementing a
- * database migration, as the column name would not change.
+ * 花园种植表
  */
-@Entity(
-    tableName = "garden_plantings",
-    foreignKeys = [
-        ForeignKey(entity = Plant::class, parentColumns = ["id"], childColumns = ["plant_id"])
-    ],
-    indices = [Index("plant_id")]
-)
+@Entity(tableName = "garden_plantings", indices = [Index("plant_id")])
 data class GardenPlanting(
-    @ColumnInfo(name = "plant_id") val plantId: String,
 
     /**
-     * Indicates when the [Plant] was planted. Used for showing notification when it's time
-     * to harvest the plant.
+     * 植物的id
      */
-    @ColumnInfo(name = "plant_date") val plantDate: Calendar = Calendar.getInstance(),
+    @ColumnInfo(name = "plant_id")
+    @ForeignKey(entity = Plant::class, parentColumns = ["id"], childColumns = ["plant_id"])
+    val plantId: String,
 
     /**
-     * Indicates when the [Plant] was last watered. Used for showing notification when it's
-     * time to water the plant.
+     * 植物被种植的时间，当植物该收获时，用于显示通知。
+     */
+    @ColumnInfo(name = "plant_date")
+    val plantDate: Calendar = Calendar.getInstance(),
+
+    /**
+     * 植物上次浇水的时间，当植物该浇水时，用于显示通知。
      */
     @ColumnInfo(name = "last_watering_date")
     val lastWateringDate: Calendar = Calendar.getInstance()
 ) {
-    @PrimaryKey(autoGenerate = true)
+
+    /**
+     * 花园种植中的植物唯一id
+     */
     @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true)
     var gardenPlantingId: Long = 0
 }

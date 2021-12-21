@@ -29,47 +29,56 @@ import com.google.samples.apps.sunflower.data.dao.GardenPlantingDao
 import com.google.samples.apps.sunflower.data.dao.PlantDao
 import com.google.samples.apps.sunflower.data.model.GardenPlanting
 import com.google.samples.apps.sunflower.data.model.Plant
-import com.google.samples.apps.sunflower.common.DATABASE_NAME
+import com.google.samples.apps.sunflower.common.DB_NAME
+import com.google.samples.apps.sunflower.common.DB_VERSION
 import com.google.samples.apps.sunflower.common.PLANT_DATA_FILENAME
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker.Companion.KEY_FILENAME
 
 /**
- * The Room database for this app
+ * App rom数据库
  */
-@Database(entities = [GardenPlanting::class, Plant::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
+@Database(entities = [GardenPlanting::class, Plant::class], version = DB_VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun gardenPlantingDao(): GardenPlantingDao
-    abstract fun plantDao(): PlantDao
 
     companion object {
-
-        // For Singleton instantiation
         @Volatile private var instance: AppDatabase? = null
 
+        /**
+         * 获取单例
+         */
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
                 instance ?: buildDatabase(context).also { instance = it }
             }
         }
 
-        // Create and pre-populate the database. See this article for more details:
-        // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
+        // 创建并预填充数据库。详情请参阅本文: https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                .addCallback(
-                    object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
-                                    .setInputData(workDataOf(KEY_FILENAME to PLANT_DATA_FILENAME))
-                                    .build()
-                            WorkManager.getInstance(context).enqueue(request)
-                        }
+            return Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
+                .addCallback(object : Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
+                            .setInputData(workDataOf(KEY_FILENAME to PLANT_DATA_FILENAME))
+                            .build()
+                        WorkManager.getInstance(context).enqueue(request)
                     }
-                )
+                })
+//                .allowMainThreadQueries()
                 .build()
         }
     }
+
+
+    /**
+     * 获取植物dao类
+     */
+    abstract fun getPlantDao(): PlantDao
+
+    /**
+     * 获取花园种植的dao类
+     */
+    abstract fun getGardenPlantingDao(): GardenPlantingDao
 }

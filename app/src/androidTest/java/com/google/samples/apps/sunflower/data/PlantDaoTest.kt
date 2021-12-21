@@ -47,7 +47,7 @@ class PlantDaoTest {
     @Before fun createDb() = runBlocking {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        plantDao = database.plantDao()
+        plantDao = database.getPlantDao()
 
         // Insert plants in non-alphabetical order to test that results are sorted by name
         plantDao.insertAll(listOf(plantB, plantC, plantA))
