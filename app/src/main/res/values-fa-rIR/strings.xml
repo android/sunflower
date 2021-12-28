@@ -33,4 +33,17 @@
     <string name="a11y_plant_item_image">تصویر گیاه</string>
     <string name="gallery_content_description">رفتن به گالری</string>
     <string name="plant_detail_image_content_description">عکس گیاه</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <plurals name="watering_needs_suffix">
+        <item quantity="one" translation_description="Suffix for the text describing how often a plant should be watered, singular. Used in combination with watering_needs_prefix: 'Watering needs: every day'.">هر روز</item>
+        <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered, plural. Used in combination with watering_needs_prefix: 'Watering needs: every 8 days'.">هر %d روز</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one" translation_description="Text indicating when the the plant should next be watered, singular. Used in conjunction with last watered date. 'May 24, 2018 - water tomorrow.'.">فردا آبیاری کنید.</item>
+        <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">بعد از %d روز آبیاری کنید.</item>
+    </plurals>
+
+
 </resources>
