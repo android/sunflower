@@ -59,8 +59,8 @@ abstract class AppDatabase : RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
                             val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
-                                    .setInputData(workDataOf(KEY_FILENAME to PLANT_DATA_FILENAME))
-                                    .build()
+                                .setInputData(workDataOf(KEY_FILENAME to PLANT_DATA_FILENAME))
+                                .build()
                             WorkManager.getInstance(context).enqueue(request)
                         }
                     }

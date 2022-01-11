@@ -18,7 +18,6 @@ package com.google.samples.apps.sunflower.worker
 
 import android.content.Context
 import android.util.Log
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.work.Configuration
 import androidx.work.ListenableWorker.Result
