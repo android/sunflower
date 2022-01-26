@@ -30,9 +30,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * The ViewModel for [PlantListFragment].
- */
+// 对ViewModel的注解，可直接使用 by viewModels()方式，而不需要@Inject成员变量。
 @HiltViewModel
 class PlantListViewModel @Inject internal constructor(
     plantRepository: PlantRepository,

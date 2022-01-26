@@ -23,16 +23,22 @@ import com.google.samples.apps.sunflower.data.dao.PlantDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
+// 表示提供依赖注入实例的模块
 @Module
-class DatabaseModule {
+// 把模块安装到的组件作用域：SingletonComponent全局可用、
+// ActivityComponent在Activity、Fragment、View可用、ViewComponent在View可用等
+@InstallIn(SingletonComponent::class)
+object DatabaseModule {
 
-    @Singleton
+
+    // 实现方法提供实例的注解@Provides；抽象方法自动提供实例的注解@Binds
     @Provides
+    @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getInstance(context)
     }

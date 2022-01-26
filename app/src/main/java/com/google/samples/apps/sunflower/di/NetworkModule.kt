@@ -16,21 +16,45 @@
 
 package com.google.samples.apps.sunflower.di
 
-import com.google.samples.apps.sunflower.api.ApiManager
 import com.google.samples.apps.sunflower.api.UnsplashService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
+    private val BASE_URL = "https://api.unsplash.com/"
 
-    @Singleton
     @Provides
-    fun provideUnsplashService(): UnsplashService {
-        return ApiManager.getApiService()
+    fun provideOkHttpClient(): OkHttpClient {
+        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+        return OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @Provides
+    fun provideRetrofit(client: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client).addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUnsplashService(retrofit: Retrofit): UnsplashService {
+        return retrofit.create(UnsplashService::class.java)
     }
 }

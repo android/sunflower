@@ -22,6 +22,7 @@ import android.content.Context
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
 
+// 使用hilt必须声明Application注入入口点
 @HiltAndroidApp
 class MainApplication : Application(), Configuration.Provider {
 

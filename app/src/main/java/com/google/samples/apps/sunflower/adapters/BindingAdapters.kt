@@ -27,3 +27,21 @@ fun bindIsGone(view: View, isGone: Boolean) {
         View.VISIBLE
     }
 }
+
+
+@BindingAdapter("android:isVisible")
+fun View.bindIsVisible(isVisible: Boolean) {
+    this.visibility = if (isVisible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("android:leftPadding")
+fun setPaddingLeft(view: View, oldPadding: Int, newPadding: Int) {
+    if (oldPadding != newPadding) {
+        view.setPadding(newPadding,
+            view.paddingTop,
+            view.paddingRight,
+            view.paddingBottom
+        )
+    }
+}
+

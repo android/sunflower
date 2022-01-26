@@ -24,6 +24,9 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+// 声明Activity注入入口点
+// Activity、Fragment、View、Service、BroadcastReceiver的入口点
+// 声明都是AndroidEntryPoint注解
 @AndroidEntryPoint
 class GardenActivity : AppCompatActivity() {
 

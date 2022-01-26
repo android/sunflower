@@ -16,8 +16,12 @@
 
 package com.google.samples.apps.sunflower.data.model
 
-import androidx.room.*
-import java.util.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
+import androidx.room.PrimaryKey
+import java.util.Calendar
 
 /**
  * 花园种植表
