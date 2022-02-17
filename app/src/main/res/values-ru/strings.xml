@@ -28,6 +28,10 @@
     <string name="plant_date_header">Посажен</string>
     <string name="watered_date_header">Последний полив</string>
     <string name="share_text_plant">Попробуйте %s в приложении Android Sunflower</string>
+    <string name="menu_item_select_theme">Выберите тему</string>
+    <string name="menu_item_follow_system">система</string>
+    <string name="menu_item_light_theme">Светлый</string>
+    <string name="menu_item_dark_theme">Темно</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Необходим полив</string>

@@ -17,13 +17,35 @@
 package com.google.samples.apps.sunflower
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.Configuration
+import com.google.samples.apps.sunflower.data.PreferenceRepository
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @HiltAndroidApp
 class MainApplication : Application(), Configuration.Provider {
+    @Inject lateinit var preferenceRepository: PreferenceRepository
+
     override fun getWorkManagerConfiguration(): Configuration =
                 Configuration.Builder()
                         .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
                         .build()
+
+    override fun onCreate() {
+        super.onCreate()
+        GlobalScope.launch {
+            preferenceRepository.nightMode.collect { mode ->
+                val nightMode = mode ?: AppCompatDelegate.MODE_NIGHT_UNSPECIFIED
+                withContext(Dispatchers.Main) {
+                    AppCompatDelegate.setDefaultNightMode(nightMode)
+                }
+            }
+        }
+    }
 }

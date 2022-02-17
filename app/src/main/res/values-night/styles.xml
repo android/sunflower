@@ -41,4 +41,6 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
+    <style name="Theme.Sunflower.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
+
 </resources>

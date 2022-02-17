@@ -16,18 +16,28 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.data.PreferenceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class GardenPlantingListViewModel @Inject internal constructor(
-    gardenPlantingRepository: GardenPlantingRepository
+    gardenPlantingRepository: GardenPlantingRepository,
+    private val prefRepository: PreferenceRepository,
 ) : ViewModel() {
     val plantAndGardenPlantings: LiveData<List<PlantAndGardenPlantings>> =
         gardenPlantingRepository.getPlantedGardens().asLiveData()
+
+    var nightMode: LiveData<Int?> = prefRepository.nightMode.distinctUntilChanged().asLiveData()
+
+    fun setNightMode(mode: Int) {
+        viewModelScope.launch {
+            prefRepository.saveNightMode(mode)
+        }
+    }
 }

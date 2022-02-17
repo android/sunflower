@@ -28,6 +28,10 @@
     <string name="watered_date_header">Zuletzt gegossen</string>
     <string name="menu_item_share_plant">Teilen</string>
     <string name="share_text_plant">Schau dir die %s Pflanze in der App "Sunflower" an</string>
+    <string name="menu_item_select_theme">Thema wählen</string>
+    <string name="menu_item_follow_system">System</string>
+    <string name="menu_item_light_theme">Hell</string>
+    <string name="menu_item_dark_theme">Dunkel</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">Wasserbedarf</string>
