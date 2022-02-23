@@ -18,9 +18,9 @@ buildscript {
     // Define versions in a single place
     ext {
         // Sdk and tools
-        compileSdkVersion = 30
+        compileSdkVersion = 31
         minSdkVersion = 21
-        targetSdkVersion = 30
+        targetSdkVersion = 31
 
         // App dependencies
         appCompatVersion = '1.1.0'
@@ -48,7 +48,7 @@ buildscript {
         testExtJunit = '1.1.0'
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
-        workVersion = '2.4.0'
+        workVersion = '2.7.0'
     }
 
     repositories {
