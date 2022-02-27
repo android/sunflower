@@ -1,0 +1,10 @@
+version: 2.1
+
+orbs:
+  android: circleci/android@2.0.0
+
+workflows:
+  test-build:
+    jobs:
+      - android/build:
+          executor: {name: android/android-docker, tag: '2022.01.1'}
