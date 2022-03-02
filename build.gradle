@@ -49,6 +49,7 @@ buildscript {
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
         workVersion = '2.7.0'
+        profileInstallerVersion = '1.2.0-alpha02'
     }
 
     repositories {

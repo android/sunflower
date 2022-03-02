@@ -45,6 +45,11 @@
             android:name="androidx.work.impl.WorkManagerInitializer"
             android:authorities="${applicationId}.workmanager-init"
             tools:node="remove" />
+
+        <profileable
+            android:shell="true"
+            tools:targetApi="q" />
+
     </application>
 
 </manifest>
