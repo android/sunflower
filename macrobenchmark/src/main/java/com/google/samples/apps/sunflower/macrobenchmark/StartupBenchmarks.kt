@@ -54,7 +54,7 @@ class StartupBenchmarks {
     private fun startup(compilationMode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = PACKAGE_NAME,
         metrics = listOf(StartupTimingMetric()),
-        iterations = 10,
+        iterations = 5,
         compilationMode = compilationMode,
         startupMode = StartupMode.COLD
     ) {
