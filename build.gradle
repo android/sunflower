@@ -32,7 +32,7 @@ buildscript {
         glideVersion = '4.10.0'
         gradleVersion = '4.1.2'
         gsonVersion = '2.8.2'
-        hiltVersion = '2.33-beta'
+        hiltVersion = '2.38.1'
         junitVersion = '4.12'
         kotlinVersion = '1.4.30'
         ktlintVersion = '0.38.1'
@@ -41,8 +41,7 @@ buildscript {
         materialVersion = '1.2.0'
         navigationVersion = '2.3.3'
         okhttpLoggingVersion = '4.7.2'
-        pagingVersion = '3.0.0-alpha02'
-        recyclerViewVersion = '1.2.0-alpha04'
+        pagingVersion = '3.0.1'
         retrofitVersion = '2.9.0'
         roomVersion = '2.2.5'
         runnerVersion = '1.0.1'
@@ -50,12 +49,12 @@ buildscript {
         testExtJunit = '1.1.0'
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
-        workVersion = '2.1.0'
+        workVersion = '2.4.0'
     }
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -73,7 +72,7 @@ plugins {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
