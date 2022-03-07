@@ -57,7 +57,9 @@ class GardenFragment : Fragment() {
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
             binding.hasPlantings = !result.isNullOrEmpty()
-            adapter.submitList(result)
+            adapter.submitList(result) {
+                activity?.reportFullyDrawn()
+            }
         }
     }
 

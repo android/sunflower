@@ -33,20 +33,20 @@ class PlantListBenchmarks {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun plantListCompilationNone() = benchmarkPlantList(CompilationMode.None())
+    fun openPlantList() = openPlantList(CompilationMode.None())
 
     @Test
-    fun plantListCompilationPartial() = benchmarkPlantList(CompilationMode.Partial())
+    fun plantListCompilationPartial() = openPlantList(CompilationMode.Partial())
 
     @Test
-    fun plantListCompilationFull() = benchmarkPlantList(CompilationMode.Full())
+    fun plantListCompilationFull() = openPlantList(CompilationMode.Full())
 
-    private fun benchmarkPlantList(compilationMode: CompilationMode) =
+    private fun openPlantList(compilationMode: CompilationMode) =
         benchmarkRule.measureRepeated(
             packageName = PACKAGE_NAME,
             metrics = listOf(FrameTimingMetric()),
             compilationMode = compilationMode,
-            iterations = 10,
+            iterations = 5,
             startupMode = StartupMode.COLD,
             setupBlock = {
                 pressHome()
