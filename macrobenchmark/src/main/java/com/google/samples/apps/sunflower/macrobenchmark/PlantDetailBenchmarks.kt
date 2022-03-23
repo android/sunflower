@@ -66,8 +66,7 @@ fun MacrobenchmarkScope.goToPlantDetail(index: Int? = null) {
     val currentChildIndex = index ?: ((iteration ?: 0) % recycler.childCount)
 
     val child = recycler.children[currentChildIndex]
-
     child.click()
-
+    // wait until plant list is gone
     device.wait(Until.gone(plantListSelector), 5_000)
 }

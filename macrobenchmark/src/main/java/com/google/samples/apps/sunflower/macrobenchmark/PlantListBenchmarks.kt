@@ -64,6 +64,6 @@ fun MacrobenchmarkScope.goToPlantListTab() {
     plantListTab.click()
     // wait until idle
     device.waitForIdle()
-    // another arbitrary wait because sometimes it skips the idle
+    // sleep for animations to settle
     Thread.sleep(500)
 }
