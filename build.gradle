@@ -49,9 +49,11 @@ buildscript {
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
         workVersion = '2.7.1'
-        profileInstallerVersion = '1.2.0-alpha02'
+        // profileInstallerVersion = '1.2.0-alpha02'
+        profileInstallerVersion = '1.2.0-SNAPSHOT'
         uiAutomatorVersion = '2.2.0'
-        benchmarkVersion = '1.1.0-beta05'
+        // benchmarkVersion = '1.1.0-beta06'
+        benchmarkVersion = '1.2.0-SNAPSHOT'
     }
 
     repositories {
@@ -75,6 +77,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://androidx.dev/snapshots/builds/8405702/artifacts/repository' }
     }
 }
 

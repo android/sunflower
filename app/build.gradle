@@ -48,8 +48,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         benchmark {
+            initWith buildTypes.release
             signingConfig signingConfigs.debug
             debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-rules-benchmark.pro'
         }
     }
     compileOptions {

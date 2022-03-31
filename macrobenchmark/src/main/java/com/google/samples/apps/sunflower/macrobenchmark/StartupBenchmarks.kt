@@ -21,6 +21,8 @@ import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.Until
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,7 +34,7 @@ import org.junit.runner.RunWith
  *
  * Before running this benchmark:
  * 1) switch your app's active build variant in the Studio (affects Studio runs only)
- * 2) add `<profileable shell=true>` to your app's manifest, within the `<application>` tag
+ * 2) add `<profileable android:shell="true">` to your app's manifest, within the `<application>` tag
  *
  * Run this benchmark from Studio to see startup measurements, and captured system traces
  * for investigating your app's performance.
@@ -43,7 +45,7 @@ class StartupBenchmarks {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startup() = startup(CompilationMode.None())
+    fun startupCompilationNone() = startup(CompilationMode.None())
 
     @Test
     fun startupCompilationPartial() = startup(CompilationMode.Partial())
@@ -51,13 +53,21 @@ class StartupBenchmarks {
     @Test
     fun startupCompilationFull() = startup(CompilationMode.Full())
 
-    private fun startup(compilationMode: CompilationMode) = benchmarkRule.measureRepeated(
-        packageName = PACKAGE_NAME,
-        metrics = listOf(StartupTimingMetric()),
-        iterations = 5,
-        compilationMode = compilationMode,
-        startupMode = StartupMode.COLD,
-    ) {
-        startActivityAndWait()
-    }
+    private fun startup(compilationMode: CompilationMode) =
+        benchmarkRule.measureRepeated(
+            packageName = PACKAGE_NAME,
+            metrics = listOf(StartupTimingMetric()),
+            iterations = 10,
+            compilationMode = compilationMode,
+            startupMode = StartupMode.COLD,
+            setupBlock = {
+                pressHome()
+            }
+        ) {
+            startActivityAndWait()
+
+            // wait for the content called by reportFullyDrawn is visible
+            val recyclerHasChild = By.hasChild(By.res(packageName, "garden_list"))
+            device.wait(Until.hasObject(recyclerHasChild), 5_000)
+        }
 }

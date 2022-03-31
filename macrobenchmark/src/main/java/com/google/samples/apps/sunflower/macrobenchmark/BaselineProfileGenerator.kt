@@ -43,6 +43,8 @@ class BaselineProfileGenerator {
             val plantListTab = device.findObject(By.descContains("Plant list"))
             plantListTab.click()
             device.waitForIdle()
+            // sleep for animations to settle
+            Thread.sleep(500)
 
             // go to plant detail flow
             val plantList = device.findObject(By.res(packageName, "plant_list"))
