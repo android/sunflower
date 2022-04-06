@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.macrobenchmark
 
+import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
@@ -51,13 +52,14 @@ class StartupBenchmarks {
     fun startupCompilationPartial() = startup(CompilationMode.Partial())
 
     @Test
-    fun startupCompilationFull() = startup(CompilationMode.Full())
+    fun startupCompilationWarmup() =
+        startup(CompilationMode.Partial(BaselineProfileMode.Disable, 2))
 
     private fun startup(compilationMode: CompilationMode) =
         benchmarkRule.measureRepeated(
             packageName = PACKAGE_NAME,
             metrics = listOf(StartupTimingMetric()),
-            iterations = 10,
+            iterations = 5,
             compilationMode = compilationMode,
             startupMode = StartupMode.COLD,
             setupBlock = {
