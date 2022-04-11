@@ -34,6 +34,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -79,9 +81,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.statusBarsPadding
-import com.google.accompanist.insets.systemBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -111,7 +110,10 @@ fun PlantDetailsScreen(
 ) {
     // ViewModel and LiveDatas needed to populate the plant details info on the screen
     val plantDetailsViewModel: PlantDetailViewModel = viewModel(
-        factory = InjectorUtils.providePlantDetailViewModelFactory(LocalContext.current, plantId)
+        factory = InjectorUtils.providePlantDetailViewModelFactory(
+            LocalContext.current,
+            plantId
+        )
     )
     val plant = plantDetailsViewModel.plant.observeAsState().value
     val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
@@ -133,7 +135,10 @@ fun PlantDetailsScreen(
                             plantDetailsViewModel.addPlantToGarden()
                         },
                         onShareClick = {
-                            val shareText = context.resources.getString(R.string.share_text_plant, plant.name)
+                            val shareText = context.resources.getString(
+                                R.string.share_text_plant,
+                                plant.name
+                            )
                             onShareClick(shareText)
                         }
                     )
@@ -156,7 +161,8 @@ fun PlantDetails(
     var plantScroller by remember {
         mutableStateOf(PlantDetailsScroller(scrollState, Float.MIN_VALUE))
     }
-    val transitionState = remember(plantScroller) { plantScroller.toolbarTransitionState }
+    val transitionState =
+        remember(plantScroller) { plantScroller.toolbarTransitionState }
     val toolbarState = plantScroller.getToolbarState(LocalDensity.current)
 
     // Transition that fades in/out the header with the image and the Toolbar
@@ -180,7 +186,8 @@ fun PlantDetails(
                 // Comparing to Float.MIN_VALUE as we are just interested on the original
                 // position of name on the screen
                 if (plantScroller.namePosition == Float.MIN_VALUE) {
-                    plantScroller = plantScroller.copy(namePosition = newNamePosition)
+                    plantScroller =
+                        plantScroller.copy(namePosition = newNamePosition)
                 }
             },
             plant = plant,
@@ -224,7 +231,10 @@ private fun PlantDetailsContent(
                     modifier = Modifier
                         .constrainAs(fab) {
                             centerAround(image.bottom)
-                            absoluteRight.linkTo(parent.absoluteRight, margin = fabEndMargin)
+                            absoluteRight.linkTo(
+                                parent.absoluteRight,
+                                margin = fabEndMargin
+                            )
                         }
                         .alpha(contentAlpha())
                 )
@@ -333,7 +343,10 @@ private fun PlantDetailsToolbar(
             modifier = modifier.statusBarsPadding(),
             backgroundColor = MaterialTheme.colors.surface
         ) {
-            IconButton(onBackClick, Modifier.align(Alignment.CenterVertically)) {
+            IconButton(
+                onBackClick,
+                Modifier.align(Alignment.CenterVertically)
+            ) {
                 Icon(
                     Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.a11y_back)
@@ -348,7 +361,8 @@ private fun PlantDetailsToolbar(
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             )
-            val shareContentDescription = stringResource(R.string.menu_item_share_plant)
+            val shareContentDescription =
+                stringResource(R.string.menu_item_share_plant)
             IconButton(
                 onShareClick,
                 Modifier
@@ -379,8 +393,14 @@ private fun PlantHeaderActions(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         val iconModifier = Modifier
-            .sizeIn(maxWidth = Dimens.ToolbarIconSize, maxHeight = Dimens.ToolbarIconSize)
-            .background(color = MaterialTheme.colors.surface, shape = CircleShape)
+            .sizeIn(
+                maxWidth = Dimens.ToolbarIconSize,
+                maxHeight = Dimens.ToolbarIconSize
+            )
+            .background(
+                color = MaterialTheme.colors.surface,
+                shape = CircleShape
+            )
 
         IconButton(
             onClick = onBackClick,
@@ -393,7 +413,8 @@ private fun PlantHeaderActions(
                 contentDescription = stringResource(id = R.string.a11y_back)
             )
         }
-        val shareContentDescription = stringResource(R.string.menu_item_share_plant)
+        val shareContentDescription =
+            stringResource(R.string.menu_item_share_plant)
         IconButton(
             onClick = onShareClick,
             modifier = Modifier
@@ -445,7 +466,10 @@ private fun PlantInformation(
         )
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
-                text = getQuantityString(R.plurals.watering_needs_suffix, wateringInterval),
+                text = getQuantityString(
+                    R.plurals.watering_needs_suffix,
+                    wateringInterval
+                ),
                 modifier = Modifier
                     .padding(
                         start = Dimens.PaddingSmall,
@@ -474,15 +498,13 @@ private fun PlantDescription(description: String) {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
-    ProvideWindowInsets {
-        MdcTheme {
-            Surface {
-                PlantDetails(
-                    Plant("plantId", "Tomato", "HTML<br>description", 6),
-                    true,
-                    PlantDetailsCallbacks({ }, { }, { })
-                )
-            }
+    MdcTheme {
+        Surface {
+            PlantDetails(
+                Plant("plantId", "Tomato", "HTML<br>description", 6),
+                true,
+                PlantDetailsCallbacks({ }, { }, { })
+            )
         }
     }
 }

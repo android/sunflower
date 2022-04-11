@@ -95,8 +95,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$rootProject.composeVersion"
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.viewModelComposeVersion"
-    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
-    implementation "com.google.accompanist:accompanist-insets:$rootProject.accompanistVersion"
+    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeThemeAdapterVersion"
     implementation "io.coil-kt:coil-compose:$rootProject.coilVersion"
     debugImplementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
 
