@@ -30,7 +30,7 @@ buildscript {
         espressoVersion = '3.4.0'
         fragmentVersion = '1.4.1'
         glideVersion = '4.13.1'
-        gradleVersion = '7.3.0-alpha07'
+        gradleVersion = '7.2.0-rc01'
         gsonVersion = '2.9.0'
         hiltVersion = '2.41'
         junitVersion = '4.13.2'
@@ -50,12 +50,11 @@ buildscript {
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
         workVersion = '2.7.1'
-        // profileInstallerVersion = '1.2.0-alpha02'
-        profileInstallerVersion = '1.2.0-SNAPSHOT'
+
+        profileInstallerVersion = '1.2.0-alpha02'
         uiAutomatorVersion = '2.2.0'
-        // benchmarkVersion = '1.1.0-beta06'
-        benchmarkVersion = '1.2.0-SNAPSHOT'
-        tracingVersion = '1.1.0-SNAPSHOT'
+        benchmarkVersion = '1.1.0-rc01'
+        tracingVersion = '1.1.0-beta01'
     }
 
     repositories {
@@ -79,25 +78,12 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://androidx.dev/snapshots/builds/8470909/artifacts/repository' }
-    }
-
-    configurations.all {
-        resolutionStrategy.eachDependency { details ->
-            if (details.requested.group == 'androidx.tracing' && details.requested.name == 'tracing-ktx') {
-                details.useVersion "1.1.0-SNAPSHOT"
-            }
-
-            if (details.requested.group == 'androidx.profileinstaller') {
-                details.useVersion "1.2.0-SNAPSHOT"
-            }
-        }
     }
 }
 
 spotless {
     kotlin {
         target "**/*.kt"
-        ktlint(ktlintVersion).userData(['max_line_length' : '100'])
+        ktlint(ktlintVersion).userData(['max_line_length': '100'])
     }
 }
