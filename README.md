@@ -1,7 +1,7 @@
 # Android Sunflower with Compose
 
-For more information about Sunflower, check out the `master` branch
-[README file](https://github.com/android/sunflower/blob/master/README.md).
+For more information about Sunflower, check out the `main` branch
+[README file](https://github.com/android/sunflower/blob/main/README.md).
 This branch has Sunflower partially built with
 [Jetpack Compose](https://developer.android.com/jetpack/compose).
 
@@ -32,7 +32,7 @@ As Compose cannot render HTML code in `Text` yet. The `AndroidViewBinding` API i
 
 ## Requirements
 
-[Android Studio 4.2](https://developer.android.com/studio/preview/index.html) or newer.
+[Android Studio Bumblebee 2021.1.1 Patch 2](https://developer.android.com/studio/preview/index.html) or newer.
 
 ## License
 
