@@ -27,7 +27,6 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetails
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsCallbacks
 import com.google.samples.apps.sunflower.data.Plant
@@ -58,13 +57,11 @@ class PlantDetailComposeTest {
 
     private fun startPlantDetails(isPlanted: Boolean) {
         composeTestRule.setContent {
-            ProvideWindowInsets {
-                PlantDetails(
-                    plant = plantForTesting(),
-                    isPlanted = isPlanted,
-                    callbacks = PlantDetailsCallbacks({ }, { }, { })
-                )
-            }
+            PlantDetails(
+                plant = plantForTesting(),
+                isPlanted = isPlanted,
+                callbacks = PlantDetailsCallbacks({ }, { }, { })
+            )
         }
     }
 }
