@@ -63,7 +63,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -74,6 +78,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
@@ -128,7 +133,8 @@ fun PlantDetailsScreen(
             ) {
                 val context = LocalContext.current
                 PlantDetails(
-                    plant, isPlanted,
+                    plant,
+                    isPlanted,
                     PlantDetailsCallbacks(
                         onBackClick = onBackClick,
                         onFabClick = {
@@ -178,7 +184,28 @@ fun PlantDetails(
         if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
     }
 
-    Box(modifier) {
+    val toolbarHeightPx = with(LocalDensity.current) {
+        Dimens.PlantDetailAppBarHeight.roundToPx().toFloat()
+    }
+    val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                val delta = available.y
+                val newOffset = toolbarOffsetHeightPx.value + delta
+                toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
+                return Offset.Zero
+            }
+        }
+    }
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .systemBarsPadding()
+            // attach as a parent to the nested scroll system
+            .nestedScroll(nestedScrollConnection)
+    ) {
         PlantDetailsContent(
             scrollState = scrollState,
             toolbarState = toolbarState,
@@ -192,6 +219,9 @@ fun PlantDetails(
             },
             plant = plant,
             isPlanted = isPlanted,
+            imageHeight = with(LocalDensity.current) {
+                Dimens.PlantDetailAppBarHeight + toolbarOffsetHeightPx.value.toDp()
+            },
             onFabClick = callbacks.onFabClick,
             contentAlpha = { contentAlpha.value }
         )
@@ -209,9 +239,10 @@ private fun PlantDetailsContent(
     toolbarState: ToolbarState,
     plant: Plant,
     isPlanted: Boolean,
+    imageHeight: Dp,
     onNamePosition: (Float) -> Unit,
     onFabClick: () -> Unit,
-    contentAlpha: () -> Float
+    contentAlpha: () -> Float,
 ) {
     Column(Modifier.verticalScroll(scrollState)) {
         ConstraintLayout {
@@ -219,6 +250,7 @@ private fun PlantDetailsContent(
 
             PlantImage(
                 imageUrl = plant.imageUrl,
+                imageHeight = imageHeight,
                 modifier = Modifier
                     .constrainAs(image) { top.linkTo(parent.top) }
                     .alpha(contentAlpha())
@@ -258,6 +290,7 @@ private fun PlantDetailsContent(
 @Composable
 private fun PlantImage(
     imageUrl: String,
+    imageHeight: Dp,
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
 ) {
@@ -274,7 +307,7 @@ private fun PlantImage(
         contentDescription = null,
         modifier = modifier
             .fillMaxWidth()
-            .height(Dimens.PlantDetailAppBarHeight)
+            .height(imageHeight)
     )
 
     if (painter.state is ImagePainter.State.Loading) {
