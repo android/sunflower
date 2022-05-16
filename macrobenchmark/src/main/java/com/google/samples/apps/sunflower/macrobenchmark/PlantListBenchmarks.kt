@@ -23,6 +23,7 @@ import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
+import androidx.test.uiautomator.Until
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,7 +51,7 @@ class PlantListBenchmarks {
             startupMode = StartupMode.COLD,
             setupBlock = {
                 pressHome()
-                // start the default activity, but don't measure the frames yet
+                // Start the default activity, but don't measure the frames yet
                 startActivityAndWait()
             }
         ) {
@@ -59,11 +60,14 @@ class PlantListBenchmarks {
 }
 
 fun MacrobenchmarkScope.goToPlantListTab() {
-    // find the tab with plants list
+    // Find the tab with plants list
     val plantListTab = device.findObject(By.descContains("Plant list"))
     plantListTab.click()
-    // wait until idle
+
+    // Wait until plant list has children
+    val recyclerHasChild = By.hasChild(By.res(packageName, "plant_list"))
+    device.wait(Until.hasObject(recyclerHasChild), 5_000)
+
+    // Wait until idle
     device.waitForIdle()
-    // sleep for animations to settle
-    Thread.sleep(500)
 }
