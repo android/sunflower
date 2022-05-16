@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,5 +14,6 @@
  * limitations under the License.
  */
 
-include ':app'
-include ':macrobenchmark'
+package com.google.samples.apps.sunflower.macrobenchmark
+
+const val PACKAGE_NAME = "com.google.samples.apps.sunflower"
