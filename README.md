@@ -32,7 +32,7 @@ As Compose cannot render HTML code in `Text` yet. The `AndroidViewBinding` API i
 
 ## Requirements
 
-[Android Studio Bumblebee 2021.1.1 Patch 2](https://developer.android.com/studio/preview/index.html) or newer.
+[Android Studio Chipmunk 2021.2.1](https://developer.android.com/studio) or newer.
 
 ## License
 
