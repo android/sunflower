@@ -24,11 +24,11 @@ import com.google.samples.apps.sunflower.MainCoroutineRule
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
-import com.google.samples.apps.sunflower.runBlockingTest
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Before
@@ -36,7 +36,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import javax.inject.Inject
-import kotlin.jvm.Throws
 
 @HiltAndroidTest
 class PlantDetailViewModelTest {
@@ -80,7 +79,7 @@ class PlantDetailViewModelTest {
     @Suppress("BlockingMethodInNonBlockingContext")
     @Test
     @Throws(InterruptedException::class)
-    fun testDefaultValues() = coroutineRule.runBlockingTest {
+    fun testDefaultValues() = runTest {
         assertFalse(getValue(viewModel.isPlanted))
     }
 }
