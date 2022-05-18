@@ -10,6 +10,7 @@ This sample showcases:
 * Integration with an existing architecture based on Jetpack libraries.
 * `CollapsingToolbarLayout` behavior implemented manually with Compose.
 * Showing [Snackbars](https://material.io/components/snackbars) with Compose.
+* Using Compose within a `RecyclerView` ([PR #763](https://github.com/android/sunflower/pull/763))
 
 ## Screenshots
 
@@ -18,17 +19,16 @@ This sample showcases:
 ## Features
 
 Sunflower's [plant details screen](app/src/main/java/com/google/samples/apps/sunflower/PlantDetailFragment.kt)
-is built with Compose. All Compose code can be found in the `compose`
+is built with Compose as well as the [plant list item](app/src/main/java/com/google/samples/apps/sunflower/compose/plantlist/PlantListItemView.kt)
+view within a `RecyclerView`.
+
+All Compose code can be found in the `compose`
 [folder](app/src/main/java/com/google/samples/apps/sunflower/compose).
 
-As Compose cannot render HTML code in `Text` yet. The `AndroidViewBinding` API is used to embed a
-`TextView` in Compose. See the PlantDescription composable in the
+**Note**: As Compose cannot render HTML code in `Text` yet. The 
+`AndroidViewBinding` API is used to embed a `TextView` in Compose. See the 
+`PlantDescription` composable in the
 [PlantDetailView file](app/src/main/java/com/google/samples/apps/sunflower/compose/plantdetail/PlantDetailView.kt).
-
-### Known issues
-
-* The replacement of the `CollapsingToolbarLayout` behavior should be done with
-`ConstraintLayout` after [this bug](https://issuetracker.google.com/159103817) is fixed.
 
 ## Requirements
 

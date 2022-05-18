@@ -84,8 +84,11 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.AsyncImagePainter
 import coil.compose.ImagePainter
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -286,7 +289,6 @@ private fun PlantDetailsContent(
     }
 }
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 private fun PlantImage(
     imageUrl: String,
@@ -294,11 +296,10 @@ private fun PlantImage(
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
 ) {
-    val painter = rememberImagePainter(
-        data = imageUrl,
-        builder = {
-            crossfade(true)
-        }
+    val painter = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(data = imageUrl)
+            .crossfade(true)
     )
 
     Image(
@@ -310,7 +311,7 @@ private fun PlantImage(
             .height(imageHeight)
     )
 
-    if (painter.state is ImagePainter.State.Loading) {
+    if (painter.state is AsyncImagePainter.State.Loading) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
