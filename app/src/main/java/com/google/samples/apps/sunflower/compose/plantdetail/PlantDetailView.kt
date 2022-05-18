@@ -34,6 +34,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -61,7 +63,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -72,6 +78,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
@@ -79,9 +86,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.statusBarsPadding
-import com.google.accompanist.insets.systemBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -111,7 +115,10 @@ fun PlantDetailsScreen(
 ) {
     // ViewModel and LiveDatas needed to populate the plant details info on the screen
     val plantDetailsViewModel: PlantDetailViewModel = viewModel(
-        factory = InjectorUtils.providePlantDetailViewModelFactory(LocalContext.current, plantId)
+        factory = InjectorUtils.providePlantDetailViewModelFactory(
+            LocalContext.current,
+            plantId
+        )
     )
     val plant = plantDetailsViewModel.plant.observeAsState().value
     val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
@@ -126,14 +133,18 @@ fun PlantDetailsScreen(
             ) {
                 val context = LocalContext.current
                 PlantDetails(
-                    plant, isPlanted,
+                    plant,
+                    isPlanted,
                     PlantDetailsCallbacks(
                         onBackClick = onBackClick,
                         onFabClick = {
                             plantDetailsViewModel.addPlantToGarden()
                         },
                         onShareClick = {
-                            val shareText = context.resources.getString(R.string.share_text_plant, plant.name)
+                            val shareText = context.resources.getString(
+                                R.string.share_text_plant,
+                                plant.name
+                            )
                             onShareClick(shareText)
                         }
                     )
@@ -156,7 +167,8 @@ fun PlantDetails(
     var plantScroller by remember {
         mutableStateOf(PlantDetailsScroller(scrollState, Float.MIN_VALUE))
     }
-    val transitionState = remember(plantScroller) { plantScroller.toolbarTransitionState }
+    val transitionState =
+        remember(plantScroller) { plantScroller.toolbarTransitionState }
     val toolbarState = plantScroller.getToolbarState(LocalDensity.current)
 
     // Transition that fades in/out the header with the image and the Toolbar
@@ -172,7 +184,28 @@ fun PlantDetails(
         if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
     }
 
-    Box(modifier) {
+    val toolbarHeightPx = with(LocalDensity.current) {
+        Dimens.PlantDetailAppBarHeight.roundToPx().toFloat()
+    }
+    val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                val delta = available.y
+                val newOffset = toolbarOffsetHeightPx.value + delta
+                toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
+                return Offset.Zero
+            }
+        }
+    }
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .systemBarsPadding()
+            // attach as a parent to the nested scroll system
+            .nestedScroll(nestedScrollConnection)
+    ) {
         PlantDetailsContent(
             scrollState = scrollState,
             toolbarState = toolbarState,
@@ -180,11 +213,15 @@ fun PlantDetails(
                 // Comparing to Float.MIN_VALUE as we are just interested on the original
                 // position of name on the screen
                 if (plantScroller.namePosition == Float.MIN_VALUE) {
-                    plantScroller = plantScroller.copy(namePosition = newNamePosition)
+                    plantScroller =
+                        plantScroller.copy(namePosition = newNamePosition)
                 }
             },
             plant = plant,
             isPlanted = isPlanted,
+            imageHeight = with(LocalDensity.current) {
+                Dimens.PlantDetailAppBarHeight + toolbarOffsetHeightPx.value.toDp()
+            },
             onFabClick = callbacks.onFabClick,
             contentAlpha = { contentAlpha.value }
         )
@@ -202,9 +239,10 @@ private fun PlantDetailsContent(
     toolbarState: ToolbarState,
     plant: Plant,
     isPlanted: Boolean,
+    imageHeight: Dp,
     onNamePosition: (Float) -> Unit,
     onFabClick: () -> Unit,
-    contentAlpha: () -> Float
+    contentAlpha: () -> Float,
 ) {
     Column(Modifier.verticalScroll(scrollState)) {
         ConstraintLayout {
@@ -212,6 +250,7 @@ private fun PlantDetailsContent(
 
             PlantImage(
                 imageUrl = plant.imageUrl,
+                imageHeight = imageHeight,
                 modifier = Modifier
                     .constrainAs(image) { top.linkTo(parent.top) }
                     .alpha(contentAlpha())
@@ -224,7 +263,10 @@ private fun PlantDetailsContent(
                     modifier = Modifier
                         .constrainAs(fab) {
                             centerAround(image.bottom)
-                            absoluteRight.linkTo(parent.absoluteRight, margin = fabEndMargin)
+                            absoluteRight.linkTo(
+                                parent.absoluteRight,
+                                margin = fabEndMargin
+                            )
                         }
                         .alpha(contentAlpha())
                 )
@@ -248,6 +290,7 @@ private fun PlantDetailsContent(
 @Composable
 private fun PlantImage(
     imageUrl: String,
+    imageHeight: Dp,
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
 ) {
@@ -264,7 +307,7 @@ private fun PlantImage(
         contentDescription = null,
         modifier = modifier
             .fillMaxWidth()
-            .height(Dimens.PlantDetailAppBarHeight)
+            .height(imageHeight)
     )
 
     if (painter.state is ImagePainter.State.Loading) {
@@ -333,7 +376,10 @@ private fun PlantDetailsToolbar(
             modifier = modifier.statusBarsPadding(),
             backgroundColor = MaterialTheme.colors.surface
         ) {
-            IconButton(onBackClick, Modifier.align(Alignment.CenterVertically)) {
+            IconButton(
+                onBackClick,
+                Modifier.align(Alignment.CenterVertically)
+            ) {
                 Icon(
                     Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.a11y_back)
@@ -348,7 +394,8 @@ private fun PlantDetailsToolbar(
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             )
-            val shareContentDescription = stringResource(R.string.menu_item_share_plant)
+            val shareContentDescription =
+                stringResource(R.string.menu_item_share_plant)
             IconButton(
                 onShareClick,
                 Modifier
@@ -379,8 +426,14 @@ private fun PlantHeaderActions(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         val iconModifier = Modifier
-            .sizeIn(maxWidth = Dimens.ToolbarIconSize, maxHeight = Dimens.ToolbarIconSize)
-            .background(color = MaterialTheme.colors.surface, shape = CircleShape)
+            .sizeIn(
+                maxWidth = Dimens.ToolbarIconSize,
+                maxHeight = Dimens.ToolbarIconSize
+            )
+            .background(
+                color = MaterialTheme.colors.surface,
+                shape = CircleShape
+            )
 
         IconButton(
             onClick = onBackClick,
@@ -393,7 +446,8 @@ private fun PlantHeaderActions(
                 contentDescription = stringResource(id = R.string.a11y_back)
             )
         }
-        val shareContentDescription = stringResource(R.string.menu_item_share_plant)
+        val shareContentDescription =
+            stringResource(R.string.menu_item_share_plant)
         IconButton(
             onClick = onShareClick,
             modifier = Modifier
@@ -445,7 +499,10 @@ private fun PlantInformation(
         )
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
-                text = getQuantityString(R.plurals.watering_needs_suffix, wateringInterval),
+                text = getQuantityString(
+                    R.plurals.watering_needs_suffix,
+                    wateringInterval
+                ),
                 modifier = Modifier
                     .padding(
                         start = Dimens.PaddingSmall,
@@ -474,15 +531,13 @@ private fun PlantDescription(description: String) {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
-    ProvideWindowInsets {
-        MdcTheme {
-            Surface {
-                PlantDetails(
-                    Plant("plantId", "Tomato", "HTML<br>description", 6),
-                    true,
-                    PlantDetailsCallbacks({ }, { }, { })
-                )
-            }
+    MdcTheme {
+        Surface {
+            PlantDetails(
+                Plant("plantId", "Tomato", "HTML<br>description", 6),
+                true,
+                PlantDetailsCallbacks({ }, { }, { })
+            )
         }
     }
 }

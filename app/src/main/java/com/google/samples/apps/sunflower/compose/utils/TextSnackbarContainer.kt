@@ -18,6 +18,7 @@ package com.google.samples.apps.sunflower.compose.utils
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Shapes
 import androidx.compose.material.Snackbar
@@ -32,7 +33,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.systemBarsPadding
 
 /**
  * Simple API to display a Snackbar with text on the screen

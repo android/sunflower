@@ -25,7 +25,6 @@ import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
 
@@ -46,17 +45,15 @@ class PlantDetailFragment : Fragment() {
             // Create a Compose MaterialTheme inheriting the existing colors, typography
             // and shapes of the current View system's theme
             MdcTheme {
-                ProvideWindowInsets {
-                    PlantDetailsScreen(
-                        args.plantId,
-                        onBackClick = {
-                            findNavController().navigateUp()
-                        },
-                        onShareClick = { textToShare ->
-                            createShareIntent(textToShare)
-                        }
-                    )
-                }
+                PlantDetailsScreen(
+                    args.plantId,
+                    onBackClick = {
+                        findNavController().navigateUp()
+                    },
+                    onShareClick = { textToShare ->
+                        createShareIntent(textToShare)
+                    }
+                )
             }
         }
     }
