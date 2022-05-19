@@ -300,6 +300,7 @@ private fun PlantImage(
         model = ImageRequest.Builder(LocalContext.current)
             .data(data = imageUrl)
             .crossfade(true)
+            .build()
     )
 
     Image(
