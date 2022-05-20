@@ -55,6 +55,7 @@ fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(plant.imageUrl)
                     .crossfade(true)
+                    .build()
             )
             Image(
                 painter = painter,
