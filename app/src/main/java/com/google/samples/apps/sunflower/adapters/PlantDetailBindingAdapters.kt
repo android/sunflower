@@ -35,8 +35,8 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     }
 }
 
-@BindingAdapter("isGone")
-fun bindIsGone(view: FloatingActionButton, isGone: Boolean?) {
+@BindingAdapter("isFabGone")
+fun bindIsFabGone(view: FloatingActionButton, isGone: Boolean?) {
     if (isGone == null || isGone) {
         view.hide()
     } else {
@@ -59,7 +59,8 @@ fun bindWateringText(textView: TextView, wateringInterval: Int) {
     val resources = textView.context.resources
     val quantityString = resources.getQuantityString(
         R.plurals.watering_needs_suffix,
-        wateringInterval, wateringInterval
+        wateringInterval,
+        wateringInterval
     )
 
     textView.text = quantityString

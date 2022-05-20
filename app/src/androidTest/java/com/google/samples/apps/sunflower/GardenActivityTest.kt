@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,23 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.RuleChain
+import kotlin.text.Typography.dagger
 
+@HiltAndroidTest
 class GardenActivityTest {
 
-    @Rule @JvmField
-    var activityTestRule = ActivityScenarioRule(GardenActivity::class.java)
+    private val hiltRule = HiltAndroidRule(this)
+    private val activityTestRule = ActivityScenarioRule(GardenActivity::class.java)
+
+    @get:Rule
+    val rule = RuleChain
+        .outerRule(hiltRule)
+        .around(activityTestRule)
 
     @Test fun clickAddPlant_OpensPlantList() {
         // Given that no Plants are added to the user's garden

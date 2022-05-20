@@ -23,17 +23,22 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
+import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlin.text.Typography.dagger
 
 /**
  * A fragment representing a single Plant detail screen.
  */
+@AndroidEntryPoint
 class PlantDetailFragment : Fragment() {
 
-    private val args: PlantDetailFragmentArgs by navArgs()
+    private val plantDetailViewModel: PlantDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,22 +51,37 @@ class PlantDetailFragment : Fragment() {
             // and shapes of the current View system's theme
             MdcTheme {
                 PlantDetailsScreen(
-                    args.plantId,
+                    plantDetailViewModel,
                     onBackClick = {
                         findNavController().navigateUp()
                     },
-                    onShareClick = { textToShare ->
-                        createShareIntent(textToShare)
+                    onShareClick = {
+                        createShareIntent()
                     }
                 )
             }
         }
     }
 
+    private fun navigateToGallery() {
+        plantDetailViewModel.plant.value?.let { plant ->
+            val direction =
+                PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plant.name)
+            findNavController().navigate(direction)
+        }
+    }
+
     // Helper function for calling a share functionality.
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
-    private fun createShareIntent(shareText: String) {
+    private fun createShareIntent() {
+        val shareText = plantDetailViewModel.plant.value.let { plant ->
+            if (plant == null) {
+                ""
+            } else {
+                getString(R.string.share_text_plant, plant.name)
+            }
+        }
         val shareIntent = ShareCompat.IntentBuilder.from(requireActivity())
             .setText(shareText)
             .setType("text/plain")

@@ -39,7 +39,9 @@ class GardenPlantingAdapter :
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_garden_planting, parent, false
+                R.layout.list_item_garden_planting,
+                parent,
+                false
             )
         )
     }

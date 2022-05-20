@@ -82,12 +82,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImagePainter
-import coil.compose.ImagePainter
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
@@ -97,7 +93,6 @@ import com.google.samples.apps.sunflower.compose.utils.getQuantityString
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -112,17 +107,10 @@ data class PlantDetailsCallbacks(
 
 @Composable
 fun PlantDetailsScreen(
-    plantId: String,
+    plantDetailsViewModel: PlantDetailViewModel,
     onBackClick: () -> Unit,
-    onShareClick: (String) -> Unit
+    onShareClick: () -> Unit
 ) {
-    // ViewModel and LiveDatas needed to populate the plant details info on the screen
-    val plantDetailsViewModel: PlantDetailViewModel = viewModel(
-        factory = InjectorUtils.providePlantDetailViewModelFactory(
-            LocalContext.current,
-            plantId
-        )
-    )
     val plant = plantDetailsViewModel.plant.observeAsState().value
     val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
     val showSnackbar = plantDetailsViewModel.showSnackbar.observeAsState().value
@@ -134,7 +122,6 @@ fun PlantDetailsScreen(
                 showSnackbar = showSnackbar,
                 onDismissSnackbar = { plantDetailsViewModel.dismissSnackbar() }
             ) {
-                val context = LocalContext.current
                 PlantDetails(
                     plant,
                     isPlanted,
@@ -143,13 +130,7 @@ fun PlantDetailsScreen(
                         onFabClick = {
                             plantDetailsViewModel.addPlantToGarden()
                         },
-                        onShareClick = {
-                            val shareText = context.resources.getString(
-                                R.string.share_text_plant,
-                                plant.name
-                            )
-                            onShareClick(shareText)
-                        }
+                        onShareClick = onShareClick
                     )
                 )
             }

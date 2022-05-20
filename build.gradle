@@ -21,32 +21,40 @@ buildscript {
         compileSdkVersion = 31
         minSdkVersion = 21
         targetSdkVersion = 31
-        // App dependencies
+
+         // App dependencies
         activityComposeVersion = '1.3.0-rc02'
-        appCompatVersion = '1.1.0'
+        appCompatVersion = '1.4.1'
+        benchmarkVersion = '1.1.0-rc02'
         coilVersion = '2.0.0'
-        composeVersion = '1.2.0-beta02'
         composeThemeAdapterVersion = '1.1.1'
-        constraintLayoutVersion = '2.1.0-alpha2'
+        composeVersion = '1.2.0-beta02'
         constraintLayoutComposeVersion = '1.0.0-alpha08'
+        constraintLayoutVersion = '2.1.3'
         coreTestingVersion = '2.1.0'
-        coroutinesVersion = "1.5.1"
-        espressoVersion = '3.3.0'
-        fragmentVersion = '1.3.0'
-        gradleVersion = '7.1.2'
-        gsonVersion = '2.8.6'
-        junitVersion = '4.13.1'
+        coroutinesVersion = "1.6.1"
+        espressoVersion = '3.4.0'
+        fragmentVersion = '1.4.1'
+        gradleVersion = '7.2.0'
+        gsonVersion = '2.9.0'
+        hiltVersion = '2.41'
+        junitVersion = '4.13.2'
         kotlinVersion = '1.6.21'
         ktlintVersion = '0.40.0'
-        ktxVersion = '1.5.0-beta03'
-        lifecycleVersion = '2.3.0'
-        materialVersion = '1.3.0'
+        ktxVersion = '1.7.0'
+        lifecycleVersion = '2.4.1'
+        materialVersion = '1.5.0'
         navigationVersion = '2.4.1'
+        okhttpLoggingVersion = '4.9.3'
+        pagingVersion = '3.1.1'
+        profileInstallerVersion = '1.2.0-beta01'
         recyclerViewVersion = '1.3.0-alpha02'
+        retrofitVersion = '2.9.0'
         roomVersion = '2.4.2'
         runnerVersion = '1.0.1'
-        truthVersion = '1.0.1'
-        testExtJunit = '1.1.0'
+        testExtJunit = '1.1.3'
+        tracingVersion = '1.1.0'
+        truthVersion = '1.1.3'
         uiAutomatorVersion = '2.2.0'
         viewModelComposeVersion = '1.0.0-alpha07'
         viewPagerVersion = '1.0.0'
@@ -62,11 +70,12 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
     }
 }
 
 plugins {
-    id "com.diffplug.spotless" version "5.1.1"
+    id "com.diffplug.spotless" version "6.4.1"
 }
 
 allprojects {
@@ -79,9 +88,7 @@ allprojects {
 spotless {
     kotlin {
         target "**/*.kt"
-        targetExclude("$buildDir/**/*.kt")
-        targetExclude('bin/**/*.kt')
-        ktlint(ktlintVersion)
+        ktlint(ktlintVersion).userData(['max_line_length': '100'])
     }
 }
 

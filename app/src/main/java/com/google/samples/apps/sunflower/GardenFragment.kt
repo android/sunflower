@@ -26,16 +26,15 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
-import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GardenFragment : Fragment() {
 
     private lateinit var binding: FragmentGardenBinding
 
-    private val viewModel: GardenPlantingListViewModel by viewModels {
-        InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
-    }
+    private val viewModel: GardenPlantingListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,8 +55,11 @@ class GardenFragment : Fragment() {
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
-            binding.hasPlantings = !result.isNullOrEmpty()
-            adapter.submitList(result)
+            binding.hasPlantings = result.isNotEmpty()
+            adapter.submitList(result) {
+                // At this point, the content should be drawn
+                activity?.reportFullyDrawn()
+            }
         }
     }
 
