@@ -53,9 +53,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
-                binding.plant?.let { plant ->
-                    navigateToPlant(plant, it)
-                }
+                navigateToPlant(binding.plant, it)
             }
         }
 
