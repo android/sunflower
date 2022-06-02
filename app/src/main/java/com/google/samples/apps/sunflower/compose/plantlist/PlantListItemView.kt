@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -29,11 +30,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.google.samples.apps.sunflower.R
@@ -45,7 +48,12 @@ fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         elevation = dimensionResource(id = R.dimen.card_elevation),
-        shape = MaterialTheme.shapes.large,
+        shape = RoundedCornerShape(
+            topStart = 0.dp,
+            topEnd = dimensionResource(id = R.dimen.card_corner_radius),
+            bottomStart = dimensionResource(id = R.dimen.card_corner_radius),
+            bottomEnd = 0.dp
+        ),
         modifier = Modifier
             .padding(horizontal = dimensionResource(id = R.dimen.card_side_margin))
             .padding(bottom = dimensionResource(id = R.dimen.card_bottom_margin))
