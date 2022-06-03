@@ -61,6 +61,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
@@ -73,6 +74,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -89,7 +91,6 @@ import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
-import com.google.samples.apps.sunflower.compose.utils.getQuantityString
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
@@ -449,6 +450,7 @@ private fun PlantHeaderActions(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun PlantInformation(
     name: String,
@@ -482,7 +484,7 @@ private fun PlantInformation(
         )
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
-                text = getQuantityString(
+                text = pluralStringResource(
                     R.plurals.watering_needs_suffix,
                     wateringInterval
                 ),
