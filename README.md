@@ -8,6 +8,8 @@ Note that some changes (such as database schema modifications) are not backwards
 compatible and may cause the app to crash. In this
 case, please uninstall and re-install the app.
 
+**Note**: The `views` branch contains the original Android View implementation of Sunflower. This branch was created after part of the UI in Sunflower was migrated to Compose and merged into `main` (done in [PR #769](https://github.com/android/sunflower/pull/769)).
+
 Introduction
 ------------
 
