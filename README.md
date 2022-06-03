@@ -10,6 +10,8 @@ This sample showcases:
 * Showing [Snackbars](https://material.io/components/snackbars) with Compose.
 * Using Compose within a `RecyclerView`
 
+**Note**: To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
+
 ## Screenshots
 
 <img src="screenshots/sunflower.gif"/>
