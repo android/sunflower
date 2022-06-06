@@ -27,6 +27,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
+import kotlin.text.Typography.dagger
 
 @HiltAndroidTest
 class GardenActivityTest {
@@ -35,7 +36,7 @@ class GardenActivityTest {
     private val activityTestRule = ActivityScenarioRule(GardenActivity::class.java)
 
     @get:Rule
-    val rule: RuleChain = RuleChain
+    val rule = RuleChain
         .outerRule(hiltRule)
         .around(activityTestRule)
 
