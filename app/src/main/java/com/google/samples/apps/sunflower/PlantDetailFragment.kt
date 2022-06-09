@@ -64,14 +64,6 @@ class PlantDetailFragment : Fragment() {
         }
     }
 
-    private fun navigateToGallery() {
-        plantDetailViewModel.plant.value?.let { plant ->
-            val direction =
-                PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plant.name)
-            findNavController().navigate(direction)
-        }
-    }
-
     // Helper function for calling a share functionality.
     // Should be used when user presses a share button/menu item.
     @Suppress("DEPRECATION")
