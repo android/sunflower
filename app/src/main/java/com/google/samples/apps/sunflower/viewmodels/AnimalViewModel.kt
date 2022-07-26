@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.utilities
+package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import com.google.samples.apps.sunflower.data.Animal
+import com.google.samples.apps.sunflower.data.AnimalRepository
+import javax.inject.Inject
 
-/**
- * Constants used throughout the app.
- */
-const val DATABASE_NAME = "sunflower-db"
-const val PLANT_DATA_FILENAME = "plants.json"
-const val ANIMAL_DATA_FILENAME = "animals.json"
+class AnimalViewModel @Inject internal constructor(
+        animalRepository: AnimalRepository,
+        private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+    val animals: List<Animal> =
+            animalRepository.getAnimals()
+}

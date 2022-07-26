@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower.di
 
 import android.content.Context
+import com.google.samples.apps.sunflower.data.AnimalDao
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingDao
 import com.google.samples.apps.sunflower.data.PlantDao
@@ -41,6 +42,13 @@ class DatabaseModule {
     fun providePlantDao(appDatabase: AppDatabase): PlantDao {
         return appDatabase.plantDao()
     }
+
+
+    @Provides
+    fun provideAnimalDao(appDatabase: AppDatabase): AnimalDao {
+        return appDatabase.animalDao()
+    }
+
 
     @Provides
     fun provideGardenPlantingDao(appDatabase: AppDatabase): GardenPlantingDao {

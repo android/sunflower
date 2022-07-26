@@ -25,24 +25,28 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
+import com.google.samples.apps.sunflower.utilities.ANIMAL_DATA_FILENAME
 import com.google.samples.apps.sunflower.utilities.DATABASE_NAME
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
+import com.google.samples.apps.sunflower.workers.AnimalWorker
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker.Companion.KEY_FILENAME
 
 /**
  * The Room database for this app
  */
-@Database(entities = [GardenPlanting::class, Plant::class], version = 1, exportSchema = false)
+@Database(entities = [GardenPlanting::class, Plant::class, Animal::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun gardenPlantingDao(): GardenPlantingDao
     abstract fun plantDao(): PlantDao
+    abstract fun animalDao(): AnimalDao
 
     companion object {
 
         // For Singleton instantiation
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
@@ -54,18 +58,23 @@ abstract class AppDatabase : RoomDatabase() {
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                .addCallback(
-                    object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
-                                    .setInputData(workDataOf(KEY_FILENAME to PLANT_DATA_FILENAME))
-                                    .build()
-                            WorkManager.getInstance(context).enqueue(request)
-                        }
-                    }
-                )
-                .build()
+                    .addCallback(
+                            object : RoomDatabase.Callback() {
+                                override fun onCreate(db: SupportSQLiteDatabase) {
+                                    super.onCreate(db)
+                                    val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
+                                            .setInputData(workDataOf(KEY_FILENAME to PLANT_DATA_FILENAME))
+                                            .build()
+                                    WorkManager.getInstance(context).enqueue(request)
+//                                    val requestAnimal = OneTimeWorkRequestBuilder<AnimalWorker>()
+//                                            .setInputData(workDataOf(KEY_FILENAME to ANIMAL_DATA_FILENAME))
+//                                            .build()
+//                                    WorkManager.getInstance(context).enqueue(requestAnimal)
+                                }
+                            }
+                    )
+//                    .fallbackToDestructiveMigration()
+                    .build()
         }
     }
 }

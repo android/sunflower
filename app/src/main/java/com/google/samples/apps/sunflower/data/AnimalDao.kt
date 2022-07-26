@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,20 @@
 
 package com.google.samples.apps.sunflower.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-/**
- * The Data Access Object for the Plant class.
- */
 @Dao
-interface PlantDao {
-    @Query("SELECT * FROM plants ORDER BY name")
-    fun getPlants(): Flow<List<Plant>>
+interface AnimalDao {
 
-    @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber ORDER BY name")
-    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): Flow<List<Plant>>
-
-    @Query("SELECT * FROM plants WHERE id = :plantId")
-    fun getPlant(plantId: String): Flow<Plant>
+    @Query("SELECT * FROM animals")
+    fun getAll(): List<Animal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(plants: List<Plant>)
+    fun insertAll(animals: List<Animal>)
 
 }

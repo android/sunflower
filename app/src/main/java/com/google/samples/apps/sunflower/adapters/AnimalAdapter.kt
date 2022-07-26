@@ -24,59 +24,51 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
-import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListItemView
 import com.google.samples.apps.sunflower.data.Animal
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.UnsplashPhoto
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
-class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
+class AnimalAdapter : ListAdapter<Animal, RecyclerView.ViewHolder>(AnimalDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PlantViewHolder(ComposeView(parent.context))
+        return AnimalViewHolder(ComposeView(parent.context))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val plant = getItem(position)
-        (holder as PlantViewHolder).bind(plant)
+        val animal = getItem(position)
+        (holder as AnimalViewHolder).bind(animal)
     }
 
-    class PlantViewHolder(
-        composeView: ComposeView
+    class AnimalViewHolder(
+            composeView: ComposeView
     ) : RecyclerView.ViewHolder(composeView) {
-        fun bind(plant: Plant) {
+        fun bind(animal: Animal) {
             (itemView as ComposeView).setContent {
                 MdcTheme {
-                    PlantListItemView(plant = plant ){
-                        navigateToPlant(plant)
+                    AnimalListItemView(animal = animal) {
+
                     }
                 }
             }
         }
 
-        private fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
+        private fun AnimalListItemView(animal: Animal, onClick: () -> Unit) {
 
-        }
-
-        private fun navigateToPlant(plant: Plant) {
-            val direction =
-                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-                    plant.plantId
-                )
-            itemView.findNavController().navigate(direction)
         }
     }
 }
 
-private class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
-
-    override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
-        return oldItem.plantId == newItem.plantId
+private class AnimalDiffCallback : DiffUtil.ItemCallback<Animal>() {
+    override fun areItemsTheSame(oldItem: Animal, newItem: Animal): Boolean {
+        return oldItem.animalName == newItem.animalName
     }
 
-    override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+    override fun areContentsTheSame(oldItem: Animal, newItem: Animal): Boolean {
         return oldItem == newItem
     }
 }
+

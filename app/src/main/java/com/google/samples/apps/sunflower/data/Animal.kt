@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.utilities
+package com.google.samples.apps.sunflower.data
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
-/**
- * Constants used throughout the app.
- */
-const val DATABASE_NAME = "sunflower-db"
-const val PLANT_DATA_FILENAME = "plants.json"
-const val ANIMAL_DATA_FILENAME = "animals.json"
+@Entity(tableName = "animals")
+data class Animal(
+        @PrimaryKey  @ColumnInfo (name = "id")
+        val animalName: String,
+)

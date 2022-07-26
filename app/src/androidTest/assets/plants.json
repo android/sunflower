@@ -134,5 +134,13 @@
     "growZoneNumber": 10,
     "wateringInterval": 21,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Paperflower_--_Bougainvillea_glabra.jpg"
+  },
+  {
+    "plantId": "megaptera-novaeangliae",
+    "name": "Humpback Whale",
+    "description": "The humpback whale is a species of baleen whale. It is a rorqual; a member of the family Balaenopteridae. Adults range in length from 14–17 m and weigh up to 40 metric tons. The humpback has a distinctive body shape, with long pectoral fins and a knobbly head.<br><br><br>(From <a href=\\\"https://en.wikipedia.org/wiki/Humpback_whale\\\">Wikipedia</a>)",
+    "growZoneNumber": 10,
+    "wateringInterval": 21,
+    "imageUrl": "https://res.cloudinary.com/dtpgi0zck/image/upload/s--Rwl8u11g--/c_fit,h_580,w_860/v1/EducationHub/photos/humpback-breaching.jpg"
   }
 ]

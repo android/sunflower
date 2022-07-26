@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.data.Animal
 import com.google.samples.apps.sunflower.data.Plant
 
 @OptIn(ExperimentalMaterialApi::class)
