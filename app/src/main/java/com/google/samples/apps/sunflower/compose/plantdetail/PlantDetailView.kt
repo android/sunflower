@@ -486,6 +486,7 @@ private fun PlantInformation(
             Text(
                 text = pluralStringResource(
                     R.plurals.watering_needs_suffix,
+                    wateringInterval,
                     wateringInterval
                 ),
                 modifier = Modifier

@@ -63,7 +63,6 @@ android {
     kotlinOptions {
         // work-runtime-ktx 2.1.0 and above now requires Java 8
         jvmTarget = "1.8"
-        useIR = true
 
         // Enable Coroutines and Flow APIs
         freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
@@ -74,7 +73,7 @@ android {
         dataBinding true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion rootProject.composeVersion
+        kotlinCompilerExtensionVersion rootProject.composeCompilerVersion
     }
     packagingOptions {
         // Multiple dependency bring these files in. Exclude them to enable
