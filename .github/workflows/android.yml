@@ -42,3 +42,31 @@ jobs:
         with:
           name: assemble
           path: assemble.zip
+
+  androidTest:
+    needs: build
+    runs-on: macOS-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+      - uses: actions/checkout@v3
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run instrumented tests with GMD
+        run: ./gradlew phoneAndTabletGroupDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: '*/build/reports/androidTests'

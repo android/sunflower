@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+
 /*
  * Copyright 2018 Google LLC
  *
@@ -81,6 +83,35 @@ android {
         // our test APK to build (has no effect on our AARs)
         excludes += "/META-INF/AL2.0"
         excludes += "/META-INF/LGPL2.1"
+    }
+
+    testOptions {
+        managedDevices {
+            devices {
+                pixel2api27 (ManagedVirtualDevice) {
+                    device = "Pixel 2"
+                    apiLevel = 27
+                    systemImageSource = "aosp"
+                }
+                pixel2api30 (ManagedVirtualDevice) {
+                    device = "Pixel 2"
+                    apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                }
+                pixelCapi30 (ManagedVirtualDevice) {
+                    device = "Pixel C"
+                    apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                }
+            }
+            groups {
+                phoneAndTablet {
+                    targetDevices.add(devices.pixel2api27)
+                    targetDevices.add(devices.pixel2api30)
+                    targetDevices.add(devices.pixelCapi30)
+                }
+            }
+        }
     }
 }
 
