@@ -92,22 +92,25 @@ android {
                     device = "Pixel 2"
                     apiLevel = 27
                     systemImageSource = "aosp"
+                    require64Bit = false
                 }
-                pixel2api30 (ManagedVirtualDevice) {
-                    device = "Pixel 2"
+                pixel4api30 (ManagedVirtualDevice) {
+                    device = "Pixel 4"
                     apiLevel = 30
                     systemImageSource = "aosp-atd"
+                    require64Bit = false
                 }
                 pixelCapi30 (ManagedVirtualDevice) {
                     device = "Pixel C"
                     apiLevel = 30
                     systemImageSource = "aosp-atd"
+                    require64Bit = false
                 }
             }
             groups {
                 phoneAndTablet {
                     targetDevices.add(devices.pixel2api27)
-                    targetDevices.add(devices.pixel2api30)
+                    targetDevices.add(devices.pixel4api30)
                     targetDevices.add(devices.pixelCapi30)
                 }
             }
