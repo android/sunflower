@@ -94,15 +94,21 @@ android {
                     systemImageSource = "aosp"
                     require64Bit = false
                 }
-                pixel4api30 (ManagedVirtualDevice) {
+                pixel4api29 (ManagedVirtualDevice) {
                     device = "Pixel 4"
-                    apiLevel = 30
+                    apiLevel = 29
                     systemImageSource = "aosp-atd"
                     require64Bit = false
                 }
-                pixelCapi30 (ManagedVirtualDevice) {
+                pixel4api33 (ManagedVirtualDevice) {
+                    device = "Pixel 4"
+                    apiLevel = 33
+                    systemImageSource = "aosp-atd"
+                    require64Bit = false
+                }
+                pixelCapi29 (ManagedVirtualDevice) {
                     device = "Pixel C"
-                    apiLevel = 30
+                    apiLevel = 29
                     systemImageSource = "aosp-atd"
                     require64Bit = false
                 }
@@ -110,8 +116,9 @@ android {
             groups {
                 phoneAndTablet {
                     targetDevices.add(devices.pixel2api27)
-                    targetDevices.add(devices.pixel4api30)
-                    targetDevices.add(devices.pixelCapi30)
+                    targetDevices.add(devices.pixel4api29)
+                    targetDevices.add(devices.pixel4api33)
+                    targetDevices.add(devices.pixelCapi29)
                 }
             }
         }
