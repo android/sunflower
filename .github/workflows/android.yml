@@ -64,12 +64,11 @@ jobs:
       - name: Run instrumented tests with GMD
         run: ./gradlew pixel2api27DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.experimental.testOptions.managedDevices.setupTimeoutMinutes=20 -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true --info
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-reports
-          path: '*/build/outputs/androidTest-results/**/*'
+          path: |
+            '*/build/outputs/androidTest-results/'
+            '!**/*"*'
