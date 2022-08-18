@@ -97,7 +97,7 @@ android {
                 pixel4api29 (ManagedVirtualDevice) {
                     device = "Pixel 4"
                     apiLevel = 29
-                    systemImageSource = "aosp-atd"
+                    systemImageSource = "aosp"
                     require64Bit = false
                 }
                 pixel4api32 (ManagedVirtualDevice) {
