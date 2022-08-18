@@ -100,10 +100,10 @@ android {
                     systemImageSource = "aosp-atd"
                     require64Bit = false
                 }
-                pixel4api33 (ManagedVirtualDevice) {
+                pixel4api32 (ManagedVirtualDevice) {
                     device = "Pixel 4"
-                    apiLevel = 33
-                    systemImageSource = "aosp-atd"
+                    apiLevel = 32
+                    systemImageSource = "google"
                     require64Bit = false
                 }
                 pixelCapi29 (ManagedVirtualDevice) {
@@ -117,7 +117,7 @@ android {
                 phoneAndTablet {
                     targetDevices.add(devices.pixel2api27)
                     targetDevices.add(devices.pixel4api29)
-                    targetDevices.add(devices.pixel4api33)
+                    targetDevices.add(devices.pixel4api32)
                     targetDevices.add(devices.pixelCapi29)
                 }
             }
