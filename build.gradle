@@ -36,7 +36,7 @@ buildscript {
         coroutinesVersion = "1.6.1"
         espressoVersion = '3.4.0'
         fragmentVersion = '1.4.1'
-        gradleVersion = '7.3.0-rc01'
+        gradleVersion = '7.2.0'
         gsonVersion = '2.9.0'
         hiltVersion = '2.41'
         junitVersion = '4.13.2'
