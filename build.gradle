@@ -24,6 +24,7 @@ buildscript {
 
          // App dependencies
         activityComposeVersion = '1.3.0-rc02'
+        accessibilityTestFrameworkVersion = '4.0.0'
         appCompatVersion = '1.4.1'
         benchmarkVersion = '1.1.0-rc02'
         coilVersion = '2.0.0'
