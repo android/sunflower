@@ -15,8 +15,8 @@
  */
 
 plugins {
-    id "com.android.test"
-    id "org.jetbrains.kotlin.android"
+    id("com.android.test")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -53,7 +53,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.test.ext.junit)
-    implementation(libs.android.text.espresso.core)
+    implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.test.uiautomator)
     implementation(libs.androidx.benchmark.macro.junit4)
 }
