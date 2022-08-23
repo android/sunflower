@@ -15,12 +15,12 @@
  */
 
 plugins {
-    id 'com.android.test'
-    id 'org.jetbrains.kotlin.android'
+    id("com.android.test")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
-    compileSdk rootProject.compileSdkVersion
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -32,19 +32,18 @@ android {
     }
 
     defaultConfig {
-        minSdk 23
-        targetSdk rootProject.targetSdkVersion
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         // This benchmark buildType is used for benchmarking, and should function like your
         // release build (for example, with minification on). It's signed with a debug key
         // for easy local/CI testing.
-        benchmark {
-            debuggable = true
-            signingConfig = debug.signingConfig
+        create("benchmark") {
+            isDebuggable = true
+            signingConfig = getByName("debug").signingConfig
         }
     }
 
@@ -53,14 +52,14 @@ android {
 }
 
 dependencies {
-    implementation "androidx.test.ext:junit:$testExtJunit"
-    implementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    implementation "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion"
-    implementation "androidx.benchmark:benchmark-macro-junit4:$benchmarkVersion"
+    implementation(libs.androidx.test.ext.junit)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.test.uiautomator)
+    implementation(libs.androidx.benchmark.macro.junit4)
 }
 
 androidComponents {
     beforeVariants(selector().all()) {
-        enabled = buildType == "benchmark"
+        it.enabled = it.buildType == "benchmark"
     }
 }
