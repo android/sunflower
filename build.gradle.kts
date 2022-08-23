@@ -32,26 +32,9 @@ plugins {
     id("com.diffplug.spotless") version "6.4.1"
 }
 
-//allprojects {
-//    repositories {
-//        google()
-//        mavenCentral()
-//    }
-//}
-
 spotless {
     kotlin {
         target("**/*.kt")
-        //ktlint(ktlintVersion).userData(["max_line_length": "100"])
+        ktlint(libs.versions.ktlint.get()).userData(mapOf("max_line_length" to "100"))
     }
 }
-
-//subprojects {
-//    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-//        kotlinOptions {
-//            jvmTarget = "1.8"
-//            // Use experimental APIs
-//            freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
-//        }
-//    }
-//}
