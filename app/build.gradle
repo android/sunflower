@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.ManagedVirtualDevice
-
 /*
  * Copyright 2018 Google LLC
  *
@@ -15,6 +13,8 @@ import com.android.build.api.dsl.ManagedVirtualDevice
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import com.android.build.api.dsl.ManagedVirtualDevice
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -93,32 +93,6 @@ android {
                     apiLevel = 27
                     systemImageSource = "aosp"
                     require64Bit = false
-                }
-                pixel4api29 (ManagedVirtualDevice) {
-                    device = "Pixel 4"
-                    apiLevel = 29
-                    systemImageSource = "aosp"
-                    require64Bit = false
-                }
-                pixel4api32 (ManagedVirtualDevice) {
-                    device = "Pixel 4"
-                    apiLevel = 32
-                    systemImageSource = "google"
-                    require64Bit = false
-                }
-                pixelCapi29 (ManagedVirtualDevice) {
-                    device = "Pixel C"
-                    apiLevel = 29
-                    systemImageSource = "aosp-atd"
-                    require64Bit = false
-                }
-            }
-            groups {
-                phoneAndTablet {
-                    targetDevices.add(devices.pixel2api27)
-                    targetDevices.add(devices.pixel4api29)
-                    targetDevices.add(devices.pixel4api32)
-                    targetDevices.add(devices.pixelCapi29)
                 }
             }
         }

@@ -62,7 +62,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run instrumented tests with GMD
-        run: ./gradlew pixel2api27DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.experimental.testOptions.managedDevices.setupTimeoutMinutes=20 -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true --info
+        run: ./gradlew pixel2api27DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true --info
 
       - name: Upload test reports
         if: always()
@@ -71,4 +71,4 @@ jobs:
           name: test-reports
           path: |
             '*/build/outputs/androidTest-results/'
-            '!**/*"*'
+            '!**/*"*' # Couldn't exclude a file with double quotation. Revisit the path once b/242988834 is fixed
