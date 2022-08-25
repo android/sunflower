@@ -19,6 +19,7 @@
     <!-- To see how these attributes are used, please visit https://material.io/develop/android/theming/color/ -->
     <style name="Base.Theme.Sunflower" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/sunflower_green_500</item>
+        <item name="colorPrimaryVariant">@color/sunflower_green_700</item>
         <item name="colorOnPrimary">@color/sunflower_yellow_500</item>
         <item name="colorPrimaryDark">@color/sunflower_green_700</item>
         <item name="colorOnSurface">@color/sunflower_black</item>
@@ -33,6 +34,10 @@
     <style name="Theme.Sunflower.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Sunflower.FAB</item>
     </style>
 
     <style name="Theme.Sunflower.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>

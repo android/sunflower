@@ -21,18 +21,19 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
+import kotlin.text.Typography.dagger
 
 @HiltAndroidTest
 class GardenActivityTest {
 
     private val hiltRule = HiltAndroidRule(this)
-    private val activityTestRule = ActivityTestRule(GardenActivity::class.java)
+    private val activityTestRule = ActivityScenarioRule(GardenActivity::class.java)
 
     @get:Rule
     val rule = RuleChain

@@ -32,6 +32,7 @@
         android:theme="@style/Theme.Sunflower">
         <activity
             android:name=".GardenActivity"
+            android:exported="true"
             android:theme="@style/Theme.Sunflower.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,11 +40,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name="androidx.activity.ComponentActivity" />
         <provider
-            android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="${applicationId}.workmanager-init"
-            tools:node="remove" />
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <!-- If you are using androidx.startup to initialize other components -->
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
+        <profileable
+            android:shell="true"
+            tools:targetApi="q" />
+
     </application>
 
 </manifest>
