@@ -94,7 +94,6 @@ android {
           device = "Pixel 2"
           apiLevel = 27
           systemImageSource = "aosp"
-          require64Bit = false
         }
       }
     }
