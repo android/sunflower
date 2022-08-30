@@ -86,6 +86,18 @@ android {
     resources.excludes += "/META-INF/AL2.0"
     resources.excludes += "/META-INF/LGPL2.1"
   }
+
+  testOptions {
+    managedDevices {
+      devices {
+        maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel2api27").apply {
+          device = "Pixel 2"
+          apiLevel = 27
+          systemImageSource = "aosp"
+        }
+      }
+    }
+  }
 }
 
 dependencies {

@@ -30,20 +30,26 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.samples.apps.sunflower.utilities.chooser
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.rules.RuleChain
 
-@RunWith(AndroidJUnit4::class)
-class PlantDetailFragmentTest {
+@HiltAndroidTest
+class PlantDetailFragmentTest2 {
+
+    private val hiltRule = HiltAndroidRule(this)
+    private val composeTestRule = createAndroidComposeRule<GardenActivity>()
 
     @get:Rule
-    val composeTestRule = createAndroidComposeRule<GardenActivity>()
+    val rule:RuleChain = RuleChain
+        .outerRule(hiltRule)
+        .around(composeTestRule)
 
     @Before
     fun jumpToPlantDetailFragment() {
