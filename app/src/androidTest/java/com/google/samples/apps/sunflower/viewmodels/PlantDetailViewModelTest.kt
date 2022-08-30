@@ -48,7 +48,7 @@ class PlantDetailViewModelTest {
     private val coroutineRule = MainCoroutineRule()
 
     @get:Rule
-    val rule = RuleChain
+    val rule: RuleChain = RuleChain
             .outerRule(hiltRule)
             .around(instantTaskExecutorRule)
             .around(coroutineRule)
