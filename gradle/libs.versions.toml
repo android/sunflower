@@ -16,10 +16,10 @@
 [versions]
 accessibilityTestFramework = "4.0.0"
 activityCompose = "1.3.0-rc02"
-androidGradlePlugin = "7.2.2"
+androidGradlePlugin = "7.3.0"
 appcompat = "1.4.1"
 benchmark = "1.1.0-rc02"
-coil = "2.2.0"
+coil = "2.2.1"
 # @keep
 compileSdk = "33"
 composeThemeAdapter = "1.1.1"
