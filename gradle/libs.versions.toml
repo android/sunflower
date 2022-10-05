@@ -23,7 +23,7 @@ coil = "2.2.0"
 # @keep
 compileSdk = "33"
 composeThemeAdapter = "1.1.1"
-compose = "1.3.0-rc01"
+compose = "1.2.1"
 compose-compiler = "1.3.2"
 constraintLayoutCompose = "1.0.0-alpha08"
 constraintLayout = "2.1.3"
