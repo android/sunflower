@@ -16,8 +16,10 @@
 
 package com.google.samples.apps.sunflower.compose.plantdetail
 
+import android.graphics.drawable.Drawable
 import android.text.method.LinkMovementMethod
 import androidx.annotation.VisibleForTesting
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.spring
@@ -59,6 +61,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -84,9 +87,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
+import androidx.test.core.app.ActivityScenario.launch
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -95,6 +102,9 @@ import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -175,10 +185,14 @@ fun PlantDetails(
     val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
-            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+            override fun onPreScroll(
+                available: Offset,
+                source: NestedScrollSource
+            ): Offset {
                 val delta = available.y
                 val newOffset = toolbarOffsetHeightPx.value + delta
-                toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
+                toolbarOffsetHeightPx.value =
+                    newOffset.coerceIn(-toolbarHeightPx, 0f)
                 return Offset.Zero
             }
         }
@@ -271,6 +285,7 @@ private fun PlantDetailsContent(
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun PlantImage(
     imageUrl: String,
@@ -278,28 +293,48 @@ private fun PlantImage(
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
 ) {
-    val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(data = imageUrl)
-            .crossfade(true)
-            .build()
-    )
-
-    Image(
-        painter = painter,
-        contentScale = ContentScale.Crop,
-        contentDescription = null,
-        modifier = modifier
+    var isLoading by remember { mutableStateOf(true) }
+    Box(
+        modifier
             .fillMaxWidth()
-            .height(imageHeight)
-    )
-
-    if (painter.state is AsyncImagePainter.State.Loading) {
-        Box(
+            .height(imageHeight)) {
+        if (isLoading) {
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .background(placeholderColor)
+            )
+        }
+        GlideImage(
+            model = imageUrl,
+            contentDescription = null,
             modifier = Modifier
-                .fillMaxSize()
-                .background(placeholderColor)
-        )
+                .fillMaxSize(),
+            contentScale = ContentScale.Crop,
+        ) {
+            it.addListener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    isLoading = false
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    isLoading = false
+                    return false
+                }
+            })
+        }
     }
 }
 
