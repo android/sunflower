@@ -17,21 +17,37 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.core.view.WindowCompat
-import androidx.databinding.DataBindingUtil.setContentView
-import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.google.samples.apps.sunflower.databinding.HomeViewPagerFragmentBinding
+import com.google.samples.apps.sunflower.databinding.PlantDetailFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GardenActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-        // Displaying edge-to-edge
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+    // Displaying edge-to-edge
+    WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+    //setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+    setContent {
+      val navController = rememberNavController()
+      NavHost(navController = navController, startDestination = "home") {
+        composable("home") {
+          AndroidViewBinding(factory = HomeViewPagerFragmentBinding::inflate)
+        }
+        composable("plant/{plantId}") {
+          AndroidViewBinding(factory = PlantDetailFragmentBinding::inflate)
+        }
+      }
     }
+  }
 }
