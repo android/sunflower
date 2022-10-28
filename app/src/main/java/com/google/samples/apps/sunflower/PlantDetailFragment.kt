@@ -54,7 +54,9 @@ class PlantDetailFragment : Fragment() {
                 PlantDetailsScreen(
                     plantDetailViewModel,
                     onBackClick = {
-                        findNavController().navigateUp()
+                        requireActivity()
+                            .supportFragmentManager
+                            .setFragmentResult("plantDetailBackRequestKey", Bundle())
                     },
                     onShareClick = {
                         createShareIntent()
@@ -65,6 +67,7 @@ class PlantDetailFragment : Fragment() {
     }
 
     private fun navigateToGallery() {
+        // TODO: https://github.com/android/sunflower/issues/773
         plantDetailViewModel.plant.value?.let { plant ->
             val direction =
                 PlantDetailFragmentDirections.actionPlantDetailFragmentToGalleryFragment(plant.name)

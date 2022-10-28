@@ -53,25 +53,44 @@ class GardenActivity : AppCompatActivity() {
             navController.navigate("plant/$plantId")
           }
         }
-        composable("plant/{plantId}",
+        composable(
+          "plant/{plantId}",
           arguments = listOf(navArgument("plantId") {
             type = NavType.StringType
           })
         ) { backStackEntry ->
           val plantId = backStackEntry.arguments?.getString("plantId")
-          PlantDetailScreen(supportFragmentManager, plantId)
+          PlantDetailScreen(supportFragmentManager, plantId) {
+            navController.navigateUp()
+          }
         }
       }
     }
   }
-}
 
-@Composable
-fun PlantDetailScreen(supportFragmentManager: FragmentManager, plantId: String?) {
-  AndroidViewBinding(factory = PlantDetailFragmentBinding::inflate) {
-    supportFragmentManager.commit {
-      val bundle = bundleOf("plantId" to plantId)
-      add<PlantDetailFragment>(R.id.plant_detail_fragment_container, args = bundle)
+  @Composable
+  fun PlantDetailScreen(
+    supportFragmentManager: FragmentManager,
+    plantId: String?,
+    onBackClicked: () -> Unit
+  ) {
+    val lifecycle = LocalLifecycleOwner.current
+    AndroidViewBinding(factory = { inflater, parent, attachToParent ->
+      supportFragmentManager.setFragmentResultListener(
+        "plantDetailBackRequestKey",
+        lifecycle
+      ) { _, _ ->
+        onBackClicked()
+      }
+      PlantDetailFragmentBinding.inflate(inflater, parent, attachToParent)
+    }) {
+      supportFragmentManager.commit {
+        val bundle = bundleOf("plantId" to plantId)
+        add<PlantDetailFragment>(
+          R.id.plant_detail_fragment_container,
+          args = bundle
+        )
+      }
     }
   }
 }
@@ -83,7 +102,10 @@ fun HomeViewPagerScreen(
 ) {
   val lifecycle = LocalLifecycleOwner.current
   AndroidViewBinding(factory = { inflater, parent, attachToParent ->
-    supportFragmentManager.setFragmentResultListener("plantDetailRequestKey", lifecycle) { _, bundle ->
+    supportFragmentManager.setFragmentResultListener(
+      "plantDetailRequestKey",
+      lifecycle
+    ) { _, bundle ->
       bundle.getString("plantId")?.let {
         onPlantClicked(it)
       }
