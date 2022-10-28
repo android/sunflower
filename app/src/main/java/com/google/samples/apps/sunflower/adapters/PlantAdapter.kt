@@ -33,34 +33,28 @@ import com.google.samples.apps.sunflower.data.Plant
  */
 class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
+    var onPlantClicked: ((Plant) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PlantViewHolder(ComposeView(parent.context))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val plant = getItem(position)
-        (holder as PlantViewHolder).bind(plant)
+        (holder as PlantViewHolder).bind(plant, onPlantClicked)
     }
 
     class PlantViewHolder(
         composeView: ComposeView
     ) : RecyclerView.ViewHolder(composeView) {
-        fun bind(plant: Plant) {
+        fun bind(plant: Plant, onPlantClicked: ((Plant) -> Unit)?) {
             (itemView as ComposeView).setContent {
                 MdcTheme {
                     PlantListItemView(plant = plant) {
-                        navigateToPlant(plant)
+                        onPlantClicked?.invoke(plant)
                     }
                 }
             }
-        }
-
-        private fun navigateToPlant(plant: Plant) {
-            val direction =
-                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-                    plant.plantId
-                )
-            itemView.findNavController().navigate(direction)
         }
     }
 }

@@ -24,6 +24,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.data.Plant
@@ -45,6 +46,12 @@ class PlantListFragment : Fragment() {
         context ?: return binding.root
 
         val adapter = PlantAdapter()
+        adapter.onPlantClicked = { plant ->
+            val bundle = Bundle().apply {
+                putString("plantId", plant.plantId)
+            }
+            requireActivity().supportFragmentManager.setFragmentResult("plantDetailRequestKey", bundle)
+        }
         binding.plantList.adapter = adapter
         subscribeUi(adapter)
 

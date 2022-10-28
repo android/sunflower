@@ -19,11 +19,17 @@ package com.google.samples.apps.sunflower
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.samples.apps.sunflower.databinding.HomeViewPagerFragmentBinding
 import com.google.samples.apps.sunflower.databinding.PlantDetailFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,12 +48,34 @@ class GardenActivity : AppCompatActivity() {
       val navController = rememberNavController()
       NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-          AndroidViewBinding(factory = HomeViewPagerFragmentBinding::inflate)
+          HomeViewPagerScreen(supportFragmentManager) { plantId ->
+            navController.navigate("plant/$plantId")
+          }
         }
-        composable("plant/{plantId}") {
+        composable("plant/{plantId}",
+          arguments = listOf(navArgument("plantId") {
+            type = NavType.StringType
+          })
+        ) {
           AndroidViewBinding(factory = PlantDetailFragmentBinding::inflate)
         }
       }
     }
   }
+}
+
+@Composable
+fun HomeViewPagerScreen(
+  supportFragmentManager: FragmentManager,
+  onPlantClicked: (String) -> Unit
+) {
+  val lifecycle = LocalLifecycleOwner.current
+  AndroidViewBinding(factory = { inflater, parent, attachToParent ->
+    supportFragmentManager.setFragmentResultListener("plantDetailRequestKey", lifecycle) { _, bundle ->
+      bundle.getString("plantId")?.let {
+        onPlantClicked(it)
+      }
+    }
+    HomeViewPagerFragmentBinding.inflate(inflater, parent, attachToParent)
+  })
 }
