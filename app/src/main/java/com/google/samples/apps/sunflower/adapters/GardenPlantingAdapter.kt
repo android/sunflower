@@ -17,14 +17,11 @@
 package com.google.samples.apps.sunflower.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
@@ -34,6 +31,8 @@ class GardenPlantingAdapter :
     ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(
         GardenPlantDiffCallback()
     ) {
+
+    var onPlantClicked: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -47,30 +46,25 @@ class GardenPlantingAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onPlantClicked)
     }
 
     class ViewHolder(
-        private val binding: ListItemGardenPlantingBinding
+        private val binding: ListItemGardenPlantingBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.setClickListener { view ->
-                binding.viewModel?.plantId?.let { plantId ->
-                    navigateToPlant(plantId, view)
-                }
-            }
-        }
 
-        private fun navigateToPlant(plantId: String, view: View) {
-            val direction = HomeViewPagerFragmentDirections
-                .actionViewPagerFragmentToPlantDetailFragment(plantId)
-            view.findNavController().navigate(direction)
-        }
-
-        fun bind(plantings: PlantAndGardenPlantings) {
+        fun bind(
+            plantings: PlantAndGardenPlantings,
+            onPlantClicked: ((String) -> Unit)?
+        ) {
             with(binding) {
                 viewModel = PlantAndGardenPlantingsViewModel(plantings)
                 executePendingBindings()
+                setClickListener { _ ->
+                    binding.viewModel?.plantId?.let { plantId ->
+                        onPlantClicked?.invoke(plantId)
+                    }
+                }
             }
         }
     }
