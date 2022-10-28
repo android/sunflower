@@ -22,9 +22,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidViewBinding
+import androidx.core.os.bundleOf
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -43,7 +45,6 @@ class GardenActivity : AppCompatActivity() {
     // Displaying edge-to-edge
     WindowCompat.setDecorFitsSystemWindows(window, false)
 
-    //setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
     setContent {
       val navController = rememberNavController()
       NavHost(navController = navController, startDestination = "home") {
@@ -56,10 +57,21 @@ class GardenActivity : AppCompatActivity() {
           arguments = listOf(navArgument("plantId") {
             type = NavType.StringType
           })
-        ) {
-          AndroidViewBinding(factory = PlantDetailFragmentBinding::inflate)
+        ) { backStackEntry ->
+          val plantId = backStackEntry.arguments?.getString("plantId")
+          PlantDetailScreen(supportFragmentManager, plantId)
         }
       }
+    }
+  }
+}
+
+@Composable
+fun PlantDetailScreen(supportFragmentManager: FragmentManager, plantId: String?) {
+  AndroidViewBinding(factory = PlantDetailFragmentBinding::inflate) {
+    supportFragmentManager.commit {
+      val bundle = bundleOf("plantId" to plantId)
+      add<PlantDetailFragment>(R.id.plant_detail_fragment_container, args = bundle)
     }
   }
 }

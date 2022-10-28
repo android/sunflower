@@ -23,6 +23,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -47,10 +48,10 @@ class PlantListFragment : Fragment() {
 
         val adapter = PlantAdapter()
         adapter.onPlantClicked = { plant ->
-            val bundle = Bundle().apply {
-                putString("plantId", plant.plantId)
-            }
-            requireActivity().supportFragmentManager.setFragmentResult("plantDetailRequestKey", bundle)
+            val bundle = bundleOf("plantId" to plant.plantId)
+            requireActivity()
+                .supportFragmentManager
+                .setFragmentResult("plantDetailRequestKey", bundle)
         }
         binding.plantList.adapter = adapter
         subscribeUi(adapter)
