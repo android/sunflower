@@ -18,11 +18,9 @@ package com.google.samples.apps.sunflower.adapters
 
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListItemView
 import com.google.samples.apps.sunflower.data.Plant
@@ -48,10 +46,8 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
     ) : RecyclerView.ViewHolder(composeView) {
         fun bind(plant: Plant, onPlantClicked: ((Plant) -> Unit)?) {
             (itemView as ComposeView).setContent {
-                MdcTheme {
-                    PlantListItemView(plant = plant) {
-                        onPlantClicked?.invoke(plant)
-                    }
+                PlantListItemView(plant = plant) {
+                    onPlantClicked?.invoke(plant)
                 }
             }
         }

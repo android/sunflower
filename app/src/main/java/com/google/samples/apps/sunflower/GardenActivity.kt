@@ -32,6 +32,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.databinding.HomeViewPagerFragmentBinding
 import com.google.samples.apps.sunflower.databinding.PlantDetailFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,22 +47,24 @@ class GardenActivity : AppCompatActivity() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
 
     setContent {
-      val navController = rememberNavController()
-      NavHost(navController = navController, startDestination = "home") {
-        composable("home") {
-          HomeViewPagerScreen(supportFragmentManager) { plantId ->
-            navController.navigate("plant/$plantId")
+      MdcTheme {
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = "home") {
+          composable("home") {
+            HomeViewPagerScreen(supportFragmentManager) { plantId ->
+              navController.navigate("plant/$plantId")
+            }
           }
-        }
-        composable(
-          "plant/{plantId}",
-          arguments = listOf(navArgument("plantId") {
-            type = NavType.StringType
-          })
-        ) { backStackEntry ->
-          val plantId = backStackEntry.arguments?.getString("plantId")
-          PlantDetailScreen(supportFragmentManager, plantId) {
-            navController.navigateUp()
+          composable(
+            "plant/{plantId}",
+            arguments = listOf(navArgument("plantId") {
+              type = NavType.StringType
+            })
+          ) { backStackEntry ->
+            val plantId = backStackEntry.arguments?.getString("plantId")
+            PlantDetailScreen(supportFragmentManager, plantId) {
+              navController.navigateUp()
+            }
           }
         }
       }

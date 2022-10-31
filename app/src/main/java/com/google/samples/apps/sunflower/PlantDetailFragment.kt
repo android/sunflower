@@ -25,13 +25,10 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.text.Typography.dagger
 
 /**
  * A fragment representing a single Plant detail screen.
@@ -50,19 +47,17 @@ class PlantDetailFragment : Fragment() {
         setContent {
             // Create a Compose MaterialTheme inheriting the existing colors, typography
             // and shapes of the current View system's theme
-            MdcTheme {
-                PlantDetailsScreen(
-                    plantDetailViewModel,
-                    onBackClick = {
-                        requireActivity()
-                            .supportFragmentManager
-                            .setFragmentResult("plantDetailBackRequestKey", Bundle())
-                    },
-                    onShareClick = {
-                        createShareIntent()
-                    }
-                )
-            }
+            PlantDetailsScreen(
+                plantDetailViewModel,
+                onBackClick = {
+                    requireActivity()
+                        .supportFragmentManager
+                        .setFragmentResult("plantDetailBackRequestKey", Bundle())
+                },
+                onShareClick = {
+                    createShareIntent()
+                }
+            )
         }
     }
 
