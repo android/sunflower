@@ -14,7 +14,7 @@ This sample showcases:
 
 ## Screenshots
 
-<img src="screenshots/sunflower.gif"/>
+<img src="screenshots/screenshots.png"/>
 
 ## Features
 
