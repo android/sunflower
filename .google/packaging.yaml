@@ -19,7 +19,13 @@
 ---
 status:       PUBLISHED
 technologies: [Android]
-categories:   [Getting Started, Jetpack]
+categories:
+  - Getting Started
+  - Jetpack
+  - AndroidTesting
+  - AndroidArchitecture
+  - AndroidArchitectureUILayer
+  - AndroidArchitectureDataLayer
 languages:    [Kotlin]
 solutions:    [Mobile]
 
