@@ -19,7 +19,6 @@ activityCompose = "1.6.0"
 androidGradlePlugin = "7.3.1"
 appcompat = "1.4.1"
 benchmark = "1.1.0-rc02"
-coil = "2.2.2"
 # @keep
 compileSdk = "33"
 composeThemeAdapter = "1.1.21"
@@ -31,6 +30,7 @@ coreTesting = "2.1.0"
 coroutines = "1.6.1"
 espresso = "3.4.0"
 fragment = "1.4.1"
+glide = "1.0.0-alpha.1"
 gradle = "7.2.0"
 gson = "2.9.0"
 hilt = "2.44"
@@ -101,7 +101,7 @@ androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version.ref = 
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewPager" }
 androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "work" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+glide = { module = "com.github.bumptech.glide:compose", version.ref = "glide" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
