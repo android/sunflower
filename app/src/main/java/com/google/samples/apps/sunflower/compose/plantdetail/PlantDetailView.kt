@@ -299,6 +299,8 @@ private fun PlantImage(
             .fillMaxWidth()
             .height(imageHeight)) {
         if (isLoading) {
+            // TODO: Update this implementation once Glide releases a version
+            // that contains this feature: https://github.com/bumptech/glide/pull/4934
             Box(
                 Modifier
                     .fillMaxSize()
