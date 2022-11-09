@@ -100,6 +100,14 @@ android {
   }
 }
 
+androidComponents {
+  onVariants(selector().withBuildType("release")) {
+    // Only exclude *.version files in release mode as debug mode requires
+    // these files for layout inspector to work.
+    it.packaging.resources.excludes.add("META-INF/*.version")
+  }
+}
+
 dependencies {
   kapt(libs.androidx.room.compiler)
   kapt(libs.hilt.android.compiler)
