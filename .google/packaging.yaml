@@ -18,7 +18,7 @@
 # End users may safely ignore this file. It has no relevance to other systems.
 ---
 status:       PUBLISHED
-technologies: [Android]
+technologies: [Android, JetpackCompose, Coroutines]
 categories:
   - Getting Started
   - Jetpack
@@ -26,16 +26,28 @@ categories:
   - AndroidArchitecture
   - AndroidArchitectureUILayer
   - AndroidArchitectureDataLayer
+  - AndroidArchitectureStateProduction
+  - AndroidArchitectureStateHolder
+  - AndroidArchitectureUIEvents
+  - JetpackComposeArchitectureAndState
+  - JetpackComposeMigrationAndInterop
+  - JetpackComposeDesignSystems
+  - JetpackComposeNavigation
+  - JetpackComposeAnimation
+  - JetpackComposeTesting
 languages:    [Kotlin]
-solutions:    [Mobile]
-
+solutions:
+  - Mobile
+  - Flow
+  - JetpackHilt
+  - JetpackRoom
+  - JetpackDataStore
+  - JetpackWorkManager
+  - JetpackNavigation
+  - JetpackLifecycle
 github:       android/sunflower
-
 level:        INTERMEDIATE
-
 icon:         screenshots/ic_launcher-web.png
-
 apiRefs:
     - android:android.support.constraint.ConstraintLayout
-
 license: apache2
