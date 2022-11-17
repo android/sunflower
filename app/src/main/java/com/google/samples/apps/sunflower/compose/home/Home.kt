@@ -17,6 +17,8 @@
 package com.google.samples.apps.sunflower.compose.home
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.fragment.app.FragmentManager
@@ -28,13 +30,14 @@ fun Home(
   onPlantClicked: (String) -> Unit
 ) {
   val lifecycle = LocalLifecycleOwner.current
+  val currentOnPlantClicked by rememberUpdatedState(newValue = onPlantClicked)
   AndroidViewBinding(factory = { inflater, parent, attachToParent ->
     supportFragmentManager.setFragmentResultListener(
       "plantDetailRequestKey",
       lifecycle
     ) { _, bundle ->
       bundle.getString("plantId")?.let {
-        onPlantClicked(it)
+        currentOnPlantClicked(it)
       }
     }
     HomeViewPagerFragmentBinding.inflate(inflater, parent, attachToParent)
