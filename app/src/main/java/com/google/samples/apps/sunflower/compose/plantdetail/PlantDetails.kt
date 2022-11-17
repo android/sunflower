@@ -17,12 +17,14 @@
 package com.google.samples.apps.sunflower.compose.plantdetail
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.databinding.PlantDetailFragmentBinding
@@ -34,18 +36,19 @@ fun PlantDetails(
   onBackClicked: () -> Unit
 ) {
   val lifecycle = LocalLifecycleOwner.current
+  val currentOnBackClicked by rememberUpdatedState(newValue = onBackClicked)
   AndroidViewBinding(factory = { inflater, parent, attachToParent ->
     supportFragmentManager.setFragmentResultListener(
       "plantDetailBackRequestKey",
       lifecycle
     ) { _, _ ->
-      onBackClicked()
+      currentOnBackClicked()
     }
     PlantDetailFragmentBinding.inflate(inflater, parent, attachToParent)
   }) {
     supportFragmentManager.commit {
       val bundle = bundleOf("plantId" to plantId)
-      add<PlantDetailFragment>(
+      replace<PlantDetailFragment>(
         R.id.plant_detail_fragment_container,
         args = bundle
       )
