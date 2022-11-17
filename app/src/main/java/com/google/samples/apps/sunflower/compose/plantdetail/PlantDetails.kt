@@ -44,8 +44,7 @@ fun PlantDetails(
     ) { _, _ ->
       currentOnBackClicked()
     }
-    PlantDetailFragmentBinding.inflate(inflater, parent, attachToParent)
-  }) {
+    val binding = PlantDetailFragmentBinding.inflate(inflater, parent, attachToParent)
     supportFragmentManager.commit {
       val bundle = bundleOf("plantId" to plantId)
       replace<PlantDetailFragment>(
@@ -53,5 +52,6 @@ fun PlantDetails(
         args = bundle
       )
     }
-  }
+    binding
+  })
 }
