@@ -19,22 +19,15 @@ package com.google.samples.apps.sunflower
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.viewinterop.AndroidViewBinding
-import androidx.core.os.bundleOf
 import androidx.core.view.WindowCompat
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.android.material.composethemeadapter.MdcTheme
-import com.google.samples.apps.sunflower.databinding.HomeViewPagerFragmentBinding
-import com.google.samples.apps.sunflower.databinding.PlantDetailFragmentBinding
+import com.google.samples.apps.sunflower.compose.home.Home
+import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetails
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,7 +44,7 @@ class GardenActivity : AppCompatActivity() {
         val navController = rememberNavController()
         NavHost(navController = navController, startDestination = "home") {
           composable("home") {
-            HomeViewPagerScreen(supportFragmentManager) { plantId ->
+            Home(supportFragmentManager) { plantId ->
               navController.navigate("plant/$plantId")
             }
           }
@@ -62,7 +55,7 @@ class GardenActivity : AppCompatActivity() {
             })
           ) { backStackEntry ->
             val plantId = backStackEntry.arguments?.getString("plantId")
-            PlantDetailScreen(supportFragmentManager, plantId) {
+            PlantDetails(supportFragmentManager, plantId) {
               navController.navigateUp()
             }
           }
@@ -70,49 +63,4 @@ class GardenActivity : AppCompatActivity() {
       }
     }
   }
-
-  @Composable
-  fun PlantDetailScreen(
-    supportFragmentManager: FragmentManager,
-    plantId: String?,
-    onBackClicked: () -> Unit
-  ) {
-    val lifecycle = LocalLifecycleOwner.current
-    AndroidViewBinding(factory = { inflater, parent, attachToParent ->
-      supportFragmentManager.setFragmentResultListener(
-        "plantDetailBackRequestKey",
-        lifecycle
-      ) { _, _ ->
-        onBackClicked()
-      }
-      PlantDetailFragmentBinding.inflate(inflater, parent, attachToParent)
-    }) {
-      supportFragmentManager.commit {
-        val bundle = bundleOf("plantId" to plantId)
-        add<PlantDetailFragment>(
-          R.id.plant_detail_fragment_container,
-          args = bundle
-        )
-      }
-    }
-  }
-}
-
-@Composable
-fun HomeViewPagerScreen(
-  supportFragmentManager: FragmentManager,
-  onPlantClicked: (String) -> Unit
-) {
-  val lifecycle = LocalLifecycleOwner.current
-  AndroidViewBinding(factory = { inflater, parent, attachToParent ->
-    supportFragmentManager.setFragmentResultListener(
-      "plantDetailRequestKey",
-      lifecycle
-    ) { _, bundle ->
-      bundle.getString("plantId")?.let {
-        onPlantClicked(it)
-      }
-    }
-    HomeViewPagerFragmentBinding.inflate(inflater, parent, attachToParent)
-  })
 }

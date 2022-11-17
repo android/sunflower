@@ -42,7 +42,6 @@ lifecycle = "2.4.1"
 material = "1.5.0"
 # @keep
 minSdk = "23"
-navigation = "2.5.2"
 navigation = "2.5.3"
 okhttpLogging = "4.9.3"
 paging = "3.1.1"
