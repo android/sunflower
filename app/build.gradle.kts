@@ -25,9 +25,6 @@ plugins {
 
 android {
   compileSdk = libs.versions.compileSdk.get().toInt()
-  buildFeatures {
-    dataBinding = true
-  }
   defaultConfig {
     applicationId = "com.google.samples.apps.sunflower"
     minSdk = libs.versions.minSdk.get().toInt()
@@ -76,6 +73,7 @@ android {
   buildFeatures {
     compose = true
     dataBinding = true
+    viewBinding = true
   }
   composeOptions {
     kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
@@ -117,6 +115,7 @@ dependencies {
   implementation(libs.androidx.fragment.ktx)
   implementation(libs.androidx.lifecycle.livedata.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
+  implementation(libs.androidx.navigation.compose)
   implementation(libs.androidx.navigation.fragment.ktx)
   implementation(libs.androidx.navigation.ui.ktx)
   implementation(libs.androidx.paging.runtime.ktx)

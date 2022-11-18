@@ -12,6 +12,12 @@ This sample showcases:
 
 **Note**: To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
 
+### Bottom-up vs. top-down migration
+
+The `main` branch of this sample follows the bottom-up approach of migrating a View-based app
+to Compose as described in the [migration strategy](https://developer.android.com/jetpack/compose/interop/migration-strategy).
+To see how you can do a top-down migration instead, checkout the [`top-down-migration`](https://github.com/android/sunflower/tree/top-down-migration) branch.
+
 ## Screenshots
 
 <img src="screenshots/screenshots.png"/>

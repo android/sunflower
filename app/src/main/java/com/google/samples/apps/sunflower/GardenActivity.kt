@@ -17,21 +17,23 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.databinding.DataBindingUtil.setContentView
-import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
+import com.google.samples.apps.sunflower.compose.SunflowerApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GardenActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-        // Displaying edge-to-edge
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+    // Displaying edge-to-edge
+    WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+    setContent {
+      SunflowerApp(fragmentManager = supportFragmentManager)
     }
+  }
 }
