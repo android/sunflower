@@ -22,17 +22,18 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.databinding.BindingAdapter
-import coil.load
+import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.samples.apps.sunflower.R
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
-    if (!imageUrl.isNullOrEmpty()) {
-        view.load(imageUrl) {
-            crossfade(true)
-        }
+    if (imageUrl.isNullOrEmpty()) {
+        return
     }
+    Glide.with(view)
+        .load(imageUrl)
+        .into(view)
 }
 
 @BindingAdapter("isFabGone")

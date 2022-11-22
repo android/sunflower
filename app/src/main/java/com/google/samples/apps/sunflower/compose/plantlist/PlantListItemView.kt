@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.compose.plantlist
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,24 +24,21 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
     Card(
@@ -59,19 +55,13 @@ fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
             .padding(bottom = dimensionResource(id = R.dimen.card_bottom_margin))
     ) {
         Column(Modifier.fillMaxWidth()) {
-            val painter = rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(plant.imageUrl)
-                    .crossfade(true)
-                    .build()
-            )
-            Image(
-                painter = painter,
-                contentScale = ContentScale.Crop,
+            GlideImage(
+                model = plant.imageUrl,
                 contentDescription = stringResource(R.string.a11y_plant_item_image),
-                modifier = Modifier
+                Modifier
                     .fillMaxWidth()
-                    .height(dimensionResource(id = R.dimen.plant_item_image_height))
+                    .height(dimensionResource(id = R.dimen.plant_item_image_height)),
+                contentScale = ContentScale.Crop
             )
             Text(
                 text = plant.name,
