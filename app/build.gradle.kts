@@ -135,6 +135,7 @@ dependencies {
   implementation(libs.androidx.tracing.ktx)
 
   // Compose
+  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.constraintlayout.compose)
   implementation(libs.androidx.compose.runtime)
@@ -152,6 +153,7 @@ dependencies {
 
   // Testing dependencies
   kaptAndroidTest(libs.hilt.android.compiler)
+  androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.arch.core.testing)
   androidTestImplementation(libs.androidx.espresso.contrib)
   androidTestImplementation(libs.androidx.espresso.core)
