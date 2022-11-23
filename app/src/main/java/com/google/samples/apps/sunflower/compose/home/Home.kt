@@ -16,30 +16,65 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.fragment.app.FragmentManager
-import com.google.samples.apps.sunflower.databinding.HomeViewPagerFragmentBinding
+import com.google.samples.apps.sunflower.HomeViewPagerFragment
+import com.google.samples.apps.sunflower.compose.AndroidFragment
 
 @Composable
 fun Home(
   supportFragmentManager: FragmentManager,
   onPlantClicked: (String) -> Unit
 ) {
-  val lifecycle = LocalLifecycleOwner.current
+  // Set listener
   val currentOnPlantClicked by rememberUpdatedState(newValue = onPlantClicked)
-  AndroidViewBinding(factory = { inflater, parent, attachToParent ->
-    supportFragmentManager.setFragmentResultListener(
-      "plantDetailRequestKey",
-      lifecycle
-    ) { _, bundle ->
-      bundle.getString("plantId")?.let {
-        currentOnPlantClicked(it)
-      }
+  supportFragmentManager.setFragmentResultListener(
+    "plantDetailRequestKey",
+    LocalLifecycleOwner.current
+  ) { _, bundle ->
+    bundle.getString("plantId")?.let {
+      currentOnPlantClicked(it)
     }
-    HomeViewPagerFragmentBinding.inflate(inflater, parent, attachToParent)
-  })
+  }
+
+  AndroidFragment(factory = {
+    HomeViewPagerFragment()
+  }, Modifier.fillMaxSize())
+
+//  var fragmentState: Fragment.SavedState? by rememberSaveable {
+//    mutableStateOf(null)
+//  }
+//
+//  AndroidViewBinding(factory = { inflater, parent, attachToParent ->
+//    val binding =
+//      HomeViewPagerFragmentBinding.inflate(inflater, parent, attachToParent)
+//
+//    val fragment = HomeViewPagerFragment()
+//    fragment.setInitialSavedState(fragmentState)
+//    supportFragmentManager.commit {
+//      replace(
+//        R.id.home_view_pager_fragment_container,
+//        fragment
+//      )
+//    }
+//
+//    binding
+//  })
+//
+//  DisposableEffect(supportFragmentManager) {
+//    onDispose {
+//      val fragment = supportFragmentManager.findFragmentById(R.id.home_view_pager_fragment_container)
+//      if (fragment != null) {
+//        fragmentState = supportFragmentManager.saveFragmentInstanceState(
+//          fragment
+//        )
+//      }
+//    }
+//  }
 }
+
