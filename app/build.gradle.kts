@@ -135,6 +135,7 @@ dependencies {
   implementation(libs.androidx.tracing.ktx)
 
   // Compose
+  implementation(libs.accompanist.themeadapter.material)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.constraintlayout.compose)
   implementation(libs.androidx.compose.runtime)
@@ -146,7 +147,6 @@ dependencies {
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.compose.runtime.livedata)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
-  implementation(libs.material.compose.theme.adapter)
   implementation(libs.glide)
   debugImplementation(libs.androidx.compose.ui.tooling)
 
