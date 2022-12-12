@@ -135,6 +135,7 @@ dependencies {
   implementation(libs.androidx.tracing.ktx)
 
   // Compose
+  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.accompanist.themeadapter.material)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.constraintlayout.compose)
