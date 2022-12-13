@@ -19,12 +19,10 @@ package com.google.samples.apps.sunflower.compose.plantdetail
 import android.graphics.drawable.Drawable
 import android.text.method.LinkMovementMethod
 import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -61,7 +59,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -75,7 +72,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -84,10 +80,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
-import androidx.test.core.app.ActivityScenario.launch
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.DataSource
@@ -102,9 +98,6 @@ import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -219,7 +212,11 @@ fun PlantDetails(
             plant = plant,
             isPlanted = isPlanted,
             imageHeight = with(LocalDensity.current) {
-                Dimens.PlantDetailAppBarHeight + toolbarOffsetHeightPx.value.toDp()
+                val candidateHeight =
+                    Dimens.PlantDetailAppBarHeight + toolbarOffsetHeightPx.value.toDp()
+                // FIXME: Remove this workaround when https://github.com/bumptech/glide/issues/4952
+                // is released
+                maxOf(candidateHeight, 1.dp)
             },
             onFabClick = callbacks.onFabClick,
             contentAlpha = { contentAlpha.value }
