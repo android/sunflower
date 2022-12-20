@@ -10,7 +10,7 @@ This sample showcases:
 * Integration with an existing architecture based on Jetpack libraries.
 * `CollapsingToolbarLayout` behavior implemented manually with Compose.
 * Showing [Snackbars](https://material.io/components/snackbars) with Compose.
-* Using Compose within a `RecyclerView` (#766)
+* Using Compose within a `RecyclerView` ([#766](https://github.com/android/sunflower/pull/766))
 
 **Note**: To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
 

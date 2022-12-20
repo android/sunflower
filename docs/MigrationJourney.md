@@ -28,10 +28,10 @@ The Sunflower app has 5 distinct screens. Each screen needs to be migrated to Co
 
 | Screen  | Status |
 | ------- | -------|
-| GalleryFragment | TODO #816 | 
-| GardenFragment | TODO #814 |  
-| HomeViewPagerFragment | TODO #813 |  
-| PlantDetailFragment | Done #638 |  
+| GalleryFragment | TODO [#816](https://github.com/android/sunflower/issues/816) |
+| GardenFragment | TODO [#814](https://github.com/android/sunflower/issues/814) |
+| HomeViewPagerFragment | TODO [#813](https://github.com/android/sunflower/issues/813) |
+| PlantDetailFragment | Done [#638](https://github.com/android/sunflower/pull/638) |
    
 ## #3 Migrate Navigation Component to Compose
 
