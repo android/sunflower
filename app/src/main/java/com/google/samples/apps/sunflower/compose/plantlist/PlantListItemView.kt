@@ -37,10 +37,21 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.UnsplashPhoto
+
+@Composable
+fun PlantListItem(plant: Plant, onClick: () -> Unit) {
+    ImageListItem(name = plant.name, imageUrl = plant.imageUrl, onClick = onClick)
+}
+
+@Composable
+fun PhotoListItem(photo: UnsplashPhoto, onClick: () -> Unit) {
+    ImageListItem(name = photo.user.name, imageUrl = photo.urls.small, onClick = onClick)
+}
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
 @Composable
-fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
+fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         elevation = dimensionResource(id = R.dimen.card_elevation),
@@ -56,7 +67,7 @@ fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
     ) {
         Column(Modifier.fillMaxWidth()) {
             GlideImage(
-                model = plant.imageUrl,
+                model = imageUrl,
                 contentDescription = stringResource(R.string.a11y_plant_item_image),
                 Modifier
                     .fillMaxWidth()
@@ -64,8 +75,9 @@ fun PlantListItemView(plant: Plant, onClick: () -> Unit) {
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = plant.name,
+                text = name,
                 textAlign = TextAlign.Center,
+                maxLines = 1,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = dimensionResource(id = R.dimen.margin_normal))

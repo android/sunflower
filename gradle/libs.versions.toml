@@ -45,6 +45,7 @@ minSdk = "23"
 navigation = "2.5.3"
 okhttpLogging = "4.9.3"
 paging = "3.1.1"
+pagingCompose = "1.0.0-alpha17"
 profileInstaller = "1.2.0-beta01"
 recyclerView = "1.3.0-alpha02"
 retrofit = "2.9.0"
@@ -92,6 +93,7 @@ androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-view
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
 androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profileInstaller" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
