@@ -70,6 +70,8 @@ fun GalleryScreen(
             modifier = Modifier.padding(padding),
             contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
         ) {
+            // TODO update this implementation once paging Compose supports LazyGridScope
+            // See: https://issuetracker.google.com/issues/178087310
             items(
                 count = pagingItems.itemCount,
             ) { index ->

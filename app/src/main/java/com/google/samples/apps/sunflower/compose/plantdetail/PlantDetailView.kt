@@ -584,6 +584,7 @@ private fun PlantDescription(description: String) {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
+    // FIXME: Preview is broken because of GlideImage. See: https://github.com/bumptech/glide/issues/4977
     MdcTheme {
         Surface {
             PlantDetails(
