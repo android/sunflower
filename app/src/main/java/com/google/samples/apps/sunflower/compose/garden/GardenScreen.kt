@@ -87,7 +87,7 @@ private fun GardenScreen(
 }
 
 @Composable
-fun GardenList(
+private fun GardenList(
     gardenPlants: List<PlantAndGardenPlantings>,
     onPlantClick: (PlantAndGardenPlantings) -> Unit
 ) {
@@ -110,7 +110,7 @@ fun GardenList(
     ExperimentalComposeUiApi::class
 )
 @Composable
-fun GardenListItem(
+private fun GardenListItem(
     plant: PlantAndGardenPlantings,
     onPlantClick: (PlantAndGardenPlantings) -> Unit
 ) {
@@ -192,7 +192,7 @@ fun GardenListItem(
 }
 
 @Composable
-fun EmptyGarden(onAddPlantClick: () -> Unit) {
+private fun EmptyGarden(onAddPlantClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -221,7 +221,7 @@ fun EmptyGarden(onAddPlantClick: () -> Unit) {
 
 @Preview
 @Composable
-fun GardenScreenPreview(
+private fun GardenScreenPreview(
     @PreviewParameter(GardenScreenPreviewParamProvider::class) gardenPlants: List<PlantAndGardenPlantings>
 ) {
     MdcTheme {
