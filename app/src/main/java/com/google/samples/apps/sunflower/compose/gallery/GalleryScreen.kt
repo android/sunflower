@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google LLC
+ * Copyright 2023 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.compose.plantdetail
+package com.google.samples.apps.sunflower.compose.gallery
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -32,19 +32,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.plantlist.PhotoListItem
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
+import com.google.samples.apps.sunflower.data.UnsplashPhotoUrls
+import com.google.samples.apps.sunflower.data.UnsplashUser
 import com.google.samples.apps.sunflower.viewmodels.GalleryViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun GalleryScreen(
     viewModel: GalleryViewModel = viewModel(),
     onPhotoClick: (UnsplashPhoto) -> Unit,
     onUpClick: () -> Unit,
+) {
+    GalleryScreen(
+        plantPictures = viewModel.plantPictures,
+        onPhotoClick = onPhotoClick,
+        onUpClick = onUpClick,
+    )
+}
+
+@Composable
+private fun GalleryScreen(
+    plantPictures: Flow<PagingData<UnsplashPhoto>>,
+    onPhotoClick: (UnsplashPhoto) -> Unit = {},
+    onUpClick: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -64,7 +85,7 @@ fun GalleryScreen(
             )
         },
     ) { padding ->
-        val pagingItems: LazyPagingItems<UnsplashPhoto> = viewModel.plantPictures.collectAsLazyPagingItems()
+        val pagingItems: LazyPagingItems<UnsplashPhoto> = plantPictures.collectAsLazyPagingItems()
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.padding(padding),
@@ -82,4 +103,36 @@ fun GalleryScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun GalleryScreenPreview(
+    @PreviewParameter(GalleryScreenPreviewParamProvider::class) plantPictures: Flow<PagingData<UnsplashPhoto>>
+) {
+    GalleryScreen(plantPictures = plantPictures)
+}
+
+private class GalleryScreenPreviewParamProvider :
+    PreviewParameterProvider<Flow<PagingData<UnsplashPhoto>>> {
+
+    override val values: Sequence<Flow<PagingData<UnsplashPhoto>>> =
+        sequenceOf(
+            flowOf(
+                PagingData.from(
+                    listOf(
+                        UnsplashPhoto(
+                            id = "1",
+                            urls = UnsplashPhotoUrls("https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max"),
+                            user = UnsplashUser("John Smith", "johnsmith")
+                        ),
+                        UnsplashPhoto(
+                            id = "2",
+                            urls = UnsplashPhotoUrls("https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max"),
+                            user = UnsplashUser("Sally Smith", "sallysmith")
+                        )
+                    )
+                )
+            ),
+        )
 }

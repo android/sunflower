@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.compose.card
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
 
@@ -55,12 +57,7 @@ fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         elevation = dimensionResource(id = R.dimen.card_elevation),
-        shape = RoundedCornerShape(
-            topStart = 0.dp,
-            topEnd = dimensionResource(id = R.dimen.card_corner_radius),
-            bottomStart = dimensionResource(id = R.dimen.card_corner_radius),
-            bottomEnd = 0.dp
-        ),
+        shape = MaterialTheme.shapes.card,
         modifier = Modifier
             .padding(horizontal = dimensionResource(id = R.dimen.card_side_margin))
             .padding(bottom = dimensionResource(id = R.dimen.card_bottom_margin))

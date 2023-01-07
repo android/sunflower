@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.accompanist.themeadapter.material.MdcTheme
-import com.google.samples.apps.sunflower.compose.plantdetail.GalleryScreen
+import com.google.samples.apps.sunflower.compose.gallery.GalleryScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
