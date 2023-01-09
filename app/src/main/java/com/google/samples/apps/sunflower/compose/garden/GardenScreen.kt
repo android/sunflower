@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -48,9 +49,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.card
@@ -58,6 +57,7 @@ import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 import java.util.*
 
@@ -104,15 +104,17 @@ private fun GardenList(
             vertical = dimensionResource(id = R.dimen.margin_normal)
         )
     ) {
-        items(count = gardenPlants.size) { index ->
-            val plant = gardenPlants[index]
-            GardenListItem(plant = plant, onPlantClick = onPlantClick)
+        items(
+            items = gardenPlants,
+            key = { it.plant.plantId }
+        ) {
+            GardenListItem(plant = it, onPlantClick = onPlantClick)
         }
     }
 }
 
 @OptIn(
-    ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class,
+    ExperimentalMaterialApi::class,
     ExperimentalComposeUiApi::class
 )
 @Composable

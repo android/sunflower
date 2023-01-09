@@ -49,7 +49,7 @@ fun PhotoListItem(photo: UnsplashPhoto, onClick: () -> Unit) {
     ImageListItem(name = photo.user.name, imageUrl = photo.urls.small, onClick = onClick)
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
     Card(
