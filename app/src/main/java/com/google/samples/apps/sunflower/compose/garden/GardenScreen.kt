@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.compose.garden
 
+import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -83,6 +84,11 @@ private fun GardenScreen(
         EmptyGarden(onAddPlantClick)
     } else {
         GardenList(gardenPlants, onPlantClick = onPlantClick)
+    }
+
+    // When gardenPlants is not null, the content should be fully drawn
+    ReportDrawnWhen {
+        gardenPlants != null
     }
 }
 
