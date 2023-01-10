@@ -17,20 +17,48 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayoutMediator
-import com.google.samples.apps.sunflower.adapters.MY_GARDEN_PAGE_INDEX
-import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
-import com.google.samples.apps.sunflower.adapters.SunflowerPagerAdapter
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.accompanist.themeadapter.material.MdcTheme
+import com.google.samples.apps.sunflower.compose.home.HomeScreen
+import com.google.samples.apps.sunflower.compose.home.SunflowerPage
+import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
+import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeViewPagerFragment : Fragment() {
+
+    private val viewModel: PlantListViewModel by viewModels()
+
+    private val menuProvider = object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.menu_plant_list, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            return when (menuItem.itemId) {
+                R.id.filter_zone -> {
+                    updateData()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,35 +66,38 @@ class HomeViewPagerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
-        val tabLayout = binding.tabs
-        val viewPager = binding.viewPager
-
-        viewPager.adapter = SunflowerPagerAdapter(this)
-
-        // Set the icon and text for each tab
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.setIcon(getTabIcon(position))
-            tab.text = getTabTitle(position)
-        }.attach()
-
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-
+        val menuHost: MenuHost = requireActivity()
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        binding.composeView.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                MdcTheme {
+                    HomeScreen(onPlantClick = {
+                        navigateToPlant(it)
+                    }, onPageChange = { page ->
+                        Log.d("HomeViewPagerFragment", "Page changed to $page")
+                        when (page) {
+                            SunflowerPage.MY_GARDEN -> menuHost.removeMenuProvider(menuProvider)
+                            SunflowerPage.PLANT_LIST -> menuHost.addMenuProvider(menuProvider, viewLifecycleOwner)
+                        }
+                    })
+                }
+            }
+        }
         return binding.root
     }
 
-    private fun getTabIcon(position: Int): Int {
-        return when (position) {
-            MY_GARDEN_PAGE_INDEX -> R.drawable.garden_tab_selector
-            PLANT_LIST_PAGE_INDEX -> R.drawable.plant_list_tab_selector
-            else -> throw IndexOutOfBoundsException()
-        }
+    private fun navigateToPlant(plant: Plant) {
+        val direction =
+            HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plant.plantId)
+        findNavController().navigate(direction)
     }
 
-    private fun getTabTitle(position: Int): String? {
-        return when (position) {
-            MY_GARDEN_PAGE_INDEX -> getString(R.string.my_garden_title)
-            PLANT_LIST_PAGE_INDEX -> getString(R.string.plant_list_title)
-            else -> null
+    private fun updateData() {
+        if (viewModel.isFiltered()) {
+            viewModel.clearGrowZoneNumber()
+        } else {
+            viewModel.setGrowZoneNumber(9)
         }
     }
 }

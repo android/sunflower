@@ -122,7 +122,6 @@ dependencies {
   implementation(libs.androidx.paging.compose)
   implementation(libs.androidx.paging.runtime.ktx)
   implementation(libs.androidx.room.ktx)
-  implementation(libs.androidx.viewpager2)
   implementation(libs.androidx.work.runtime.ktx)
   implementation(libs.material)
   implementation(libs.gson)
@@ -137,6 +136,7 @@ dependencies {
 
   // Compose
   implementation(platform(libs.androidx.compose.bom))
+  implementation(libs.accompanist.pager)
   implementation(libs.accompanist.themeadapter.material)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.constraintlayout.compose)

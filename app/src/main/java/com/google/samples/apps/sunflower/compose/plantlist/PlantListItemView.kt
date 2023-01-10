@@ -32,7 +32,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.card
 import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
