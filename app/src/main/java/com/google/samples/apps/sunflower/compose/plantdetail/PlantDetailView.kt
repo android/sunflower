@@ -35,7 +35,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -89,13 +88,14 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
+import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
@@ -319,7 +319,7 @@ private fun PlantImage(
                     .background(placeholderColor)
             )
         }
-        GlideImage(
+        SunflowerImage(
             model = imageUrl,
             contentDescription = null,
             modifier = Modifier
@@ -330,7 +330,7 @@ private fun PlantImage(
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    target: Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
                     isLoading = false
@@ -340,7 +340,7 @@ private fun PlantImage(
                 override fun onResourceReady(
                     resource: Drawable?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    target: Target<Drawable>?,
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
@@ -584,7 +584,6 @@ private fun PlantDescription(description: String) {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
-    // FIXME: Preview is broken because of GlideImage. See: https://github.com/bumptech/glide/issues/4977
     MdcTheme {
         Surface {
             PlantDetails(

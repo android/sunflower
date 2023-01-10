@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -33,7 +34,8 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -41,7 +43,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -50,10 +51,10 @@ import androidx.compose.ui.unit.dp
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.card
+import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
@@ -66,7 +67,7 @@ fun GardenScreen(
     onAddPlantClick: () -> Unit,
     onPlantClick: (PlantAndGardenPlantings) -> Unit
 ) {
-    val gardenPlants = viewModel.plantAndGardenPlantings.observeAsState().value
+    val gardenPlants by viewModel.plantAndGardenPlantings.collectAsState(initial = emptyList())
     GardenScreen(
         gardenPlants = gardenPlants,
         onAddPlantClick = onAddPlantClick,
@@ -85,11 +86,6 @@ private fun GardenScreen(
     } else {
         GardenList(gardenPlants, onPlantClick = onPlantClick)
     }
-
-    // When gardenPlants is not null, the content should be fully drawn
-    ReportDrawnWhen {
-        gardenPlants != null
-    }
 }
 
 @Composable
@@ -97,8 +93,12 @@ private fun GardenList(
     gardenPlants: List<PlantAndGardenPlantings>,
     onPlantClick: (PlantAndGardenPlantings) -> Unit
 ) {
+    // Call reportFullyDrawn when the garden list has been rendered
+    val gridState = rememberLazyGridState()
+    ReportDrawnWhen { gridState.layoutInfo.totalItemsCount > 0 }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
+        state = gridState,
         contentPadding = PaddingValues(
             horizontal = dimensionResource(id = R.dimen.card_side_margin),
             vertical = dimensionResource(id = R.dimen.margin_normal)
@@ -121,18 +121,23 @@ private fun GardenListItem(
     onPlantClick: (PlantAndGardenPlantings) -> Unit
 ) {
     val vm = PlantAndGardenPlantingsViewModel(plant)
+
+    // Dimensions
+    val cardSideMargin = dimensionResource(id = R.dimen.card_side_margin)
+    val marginNormal = dimensionResource(id = R.dimen.margin_normal)
+
     Card(
         onClick = { onPlantClick(plant) },
         modifier = Modifier.padding(
-            start = dimensionResource(id = R.dimen.card_side_margin),
-            end = dimensionResource(id = R.dimen.card_side_margin),
+            start = cardSideMargin,
+            end = cardSideMargin,
             bottom = dimensionResource(id = R.dimen.card_bottom_margin)
         ),
         elevation = dimensionResource(id = R.dimen.card_elevation),
         shape = MaterialTheme.shapes.card,
     ) {
         Column(Modifier.fillMaxWidth()) {
-            GlideImage(
+            SunflowerImage(
                 model = vm.imageUrl,
                 contentDescription = plant.plant.description,
                 Modifier
@@ -145,10 +150,7 @@ private fun GardenListItem(
             Text(
                 text = vm.plantName,
                 Modifier
-                    .padding(
-                        top = dimensionResource(id = R.dimen.margin_normal),
-                        bottom = dimensionResource(id = R.dimen.margin_normal),
-                    )
+                    .padding(vertical = marginNormal)
                     .align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.subtitle1,
             )
@@ -172,7 +174,7 @@ private fun GardenListItem(
                 text = stringResource(id = R.string.watered_date_header),
                 Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(top = dimensionResource(id = R.dimen.margin_normal)),
+                    .padding(top = marginNormal),
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.primaryVariant,
                 style = MaterialTheme.typography.subtitle2
@@ -190,7 +192,7 @@ private fun GardenListItem(
                 ),
                 Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(bottom = dimensionResource(id = R.dimen.margin_normal)),
+                    .padding(bottom = marginNormal),
                 style = MaterialTheme.typography.subtitle2
             )
         }
