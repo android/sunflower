@@ -201,6 +201,7 @@ private fun GardenListItem(
 
 @Composable
 private fun EmptyGarden(onAddPlantClick: () -> Unit) {
+    ReportDrawnWhen { true}
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
