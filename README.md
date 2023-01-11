@@ -3,12 +3,14 @@
 A gardening app illustrating Android development best practices with migrating
 a View-based app to Jetpack Compose.
 
+**To learn about how Sunflower was migrated to Compose, see the [migration journey](docs/MigrationJourney.md) document.**
+
 This sample showcases:
 * Compose working in an existing app: including integration with strings, resources, and themes and styles.
 * Integration with an existing architecture based on Jetpack libraries.
 * `CollapsingToolbarLayout` behavior implemented manually with Compose.
 * Showing [Snackbars](https://material.io/components/snackbars) with Compose.
-* Using Compose within a `RecyclerView`
+* Using Compose within a `RecyclerView` ([#766](https://github.com/android/sunflower/pull/766))
 
 **Note**: To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
 
