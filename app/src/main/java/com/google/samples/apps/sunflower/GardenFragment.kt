@@ -20,47 +20,43 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
+import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
-import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
-import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
+import com.google.samples.apps.sunflower.compose.garden.GardenScreen
+import com.google.samples.apps.sunflower.data.Plant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GardenFragment : Fragment() {
-
-    private lateinit var binding: FragmentGardenBinding
-
-    private val viewModel: GardenPlantingListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentGardenBinding.inflate(inflater, container, false)
-        val adapter = GardenPlantingAdapter()
-        binding.gardenList.adapter = adapter
-
-        binding.addPlant.setOnClickListener {
-            navigateToPlantListPage()
-        }
-
-        subscribeUi(adapter, binding)
-        return binding.root
-    }
-
-    private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
-            binding.hasPlantings = result.isNotEmpty()
-            adapter.submitList(result) {
-                // At this point, the content should be drawn
-                activity?.reportFullyDrawn()
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                MdcTheme {
+                    GardenScreen(onAddPlantClick = {
+                        navigateToPlantListPage()
+                    }, onPlantClick = {
+                        navigateToPlant(it.plant)
+                    })
+                }
             }
         }
+    }
+
+    private fun navigateToPlant(plant: Plant) {
+        val direction =
+            HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plant.plantId)
+        findNavController().navigate(direction)
     }
 
     // TODO: convert to data binding if applicable

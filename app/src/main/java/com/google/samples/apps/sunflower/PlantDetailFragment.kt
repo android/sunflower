@@ -58,6 +58,9 @@ class PlantDetailFragment : Fragment() {
                     },
                     onShareClick = {
                         createShareIntent()
+                    },
+                    onGalleryClick = {
+                        navigateToGallery()
                     }
                 )
             }
