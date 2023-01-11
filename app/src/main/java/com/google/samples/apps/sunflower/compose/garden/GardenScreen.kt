@@ -77,11 +77,11 @@ fun GardenScreen(
 
 @Composable
 private fun GardenScreen(
-    gardenPlants: List<PlantAndGardenPlantings>?,
+    gardenPlants: List<PlantAndGardenPlantings>,
     onAddPlantClick: () -> Unit = {},
     onPlantClick: (PlantAndGardenPlantings) -> Unit = {}
 ) {
-    if (gardenPlants == null || gardenPlants.isEmpty()) {
+    if (gardenPlants.isEmpty()) {
         EmptyGarden(onAddPlantClick)
     } else {
         GardenList(gardenPlants, onPlantClick = onPlantClick)
