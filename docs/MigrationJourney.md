@@ -10,7 +10,7 @@ The general steps followed to migrate Sunflower to Compose are:
 
 1. Planning the migration approach
 2. Migrate existing screens to Compose one by one
-3. Migrate Navigation Component to Compose
+3. Migrate Navigation Component to Compose and remove fragments
 
 ## #1 Planning the migration approach
 
@@ -38,5 +38,3 @@ The Sunflower app has 5 distinct screens. Each screen needs to be migrated to Co
 Status: TODO
 
 The last step in the migration process is to replace Fragment-based navigation with Jetpack Navigation, to use [Navigation Compose](https://developer.android.com/jetpack/compose/navigation).
-
-
