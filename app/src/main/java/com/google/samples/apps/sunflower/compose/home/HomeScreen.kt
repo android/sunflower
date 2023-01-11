@@ -18,17 +18,19 @@ package com.google.samples.apps.sunflower.compose.home
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
@@ -36,22 +38,14 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
@@ -67,7 +61,7 @@ enum class SunflowerPage(
     PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
 }
 
-@OptIn(ExperimentalPagerApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage) -> Unit) {
     val pagerState = rememberPagerState()
@@ -101,7 +95,7 @@ fun HomeScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage) -> U
 
         // Pages
         HorizontalPager(
-            count = SunflowerPage.values().size,
+            pageCount = SunflowerPage.values().size,
             state = pagerState,
             verticalAlignment = Alignment.Top
         ) { index ->
@@ -128,7 +122,7 @@ fun HomeScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage) -> U
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun HomeTopAppBar(pagerState: PagerState, onFilterClick: () -> Unit) {
     TopAppBar(
