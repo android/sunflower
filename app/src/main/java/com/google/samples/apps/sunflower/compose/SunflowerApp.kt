@@ -77,10 +77,9 @@ fun SunflowerApp() {
 
 // Helper function for calling a share functionality.
 // Should be used when user presses a share button/menu item.
-@Suppress("DEPRECATION")
 private fun createShareIntent(activity: Activity, plantName: String) {
     val shareText = activity.getString(R.string.share_text_plant, plantName)
-    val shareIntent = ShareCompat.IntentBuilder.from(activity)
+    val shareIntent = ShareCompat.IntentBuilder(activity)
         .setText(shareText)
         .setType("text/plain")
         .createChooserIntent()

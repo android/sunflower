@@ -36,7 +36,9 @@ The Sunflower app has 5 distinct screens. Each screen needs to be migrated to Co
    
 ## #3 Migrate Navigation Component to Compose and remove Fragments
 
-Status: TODO
+Status: Done ✅
+
+PR: [#827](https://github.com/android/sunflower/pull/827)
 
 The last step in the migration process is to replace Fragment-based navigation with Jetpack Navigation, to use [Navigation Compose](https://developer.android.com/jetpack/compose/navigation).
 Upon completing this step, all Fragments can be removed.
