@@ -23,6 +23,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -42,12 +44,13 @@ fun PlantListScreen(
 }
 
 @Composable
-private fun PlantListScreen(
+fun PlantListScreen(
     plants: List<Plant>,
     onPlantClick: (Plant) -> Unit = {},
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
+        modifier = Modifier.testTag("plant_list"),
         contentPadding = PaddingValues(
             horizontal = dimensionResource(id = R.dimen.card_side_margin),
             vertical = dimensionResource(id = R.dimen.header_margin)

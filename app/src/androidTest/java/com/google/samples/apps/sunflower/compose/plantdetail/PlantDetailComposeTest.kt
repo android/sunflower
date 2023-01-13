@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2023 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower
+package com.google.samples.apps.sunflower.compose.plantdetail
 
 import android.content.ContentResolver
 import android.net.Uri
@@ -55,19 +55,32 @@ class PlantDetailComposeTest {
         composeTestRule.onNodeWithContentDescription("Add plant").assertDoesNotExist()
     }
 
-    private fun startPlantDetails(isPlanted: Boolean) {
+    @Test
+    fun plantDetails_checkGalleryNotShown() {
+        startPlantDetails(isPlanted = true, hasUnsplashKey = false)
+        composeTestRule.onNodeWithContentDescription("Gallery Icon").assertDoesNotExist()
+    }
+
+    @Test
+    fun plantDetails_checkGalleryIsShown() {
+        startPlantDetails(isPlanted = true, hasUnsplashKey = true)
+        composeTestRule.onNodeWithContentDescription("Gallery Icon").assertIsDisplayed()
+    }
+
+    private fun startPlantDetails(isPlanted: Boolean, hasUnsplashKey: Boolean = false) {
         composeTestRule.setContent {
             PlantDetails(
                 plant = plantForTesting(),
                 isPlanted = isPlanted,
-                callbacks = PlantDetailsCallbacks({ }, { }, { })
+                callbacks = PlantDetailsCallbacks({ }, { }, { }, { }),
+                hasValidUnsplashKey = hasUnsplashKey
             )
         }
     }
 }
 
 @Composable
-private fun plantForTesting(): Plant {
+internal fun plantForTesting(): Plant {
     return Plant(
         plantId = "malus-pumila",
         name = "Apple",

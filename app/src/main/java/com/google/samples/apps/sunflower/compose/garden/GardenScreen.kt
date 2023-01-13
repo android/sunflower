@@ -76,7 +76,7 @@ fun GardenScreen(
 }
 
 @Composable
-private fun GardenScreen(
+fun GardenScreen(
     gardenPlants: List<PlantAndGardenPlantings>,
     onAddPlantClick: () -> Unit = {},
     onPlantClick: (PlantAndGardenPlantings) -> Unit = {}
