@@ -49,6 +49,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
@@ -64,7 +65,7 @@ import java.util.*
 @Composable
 fun GardenScreen(
     modifier: Modifier = Modifier,
-    viewModel: GardenPlantingListViewModel = viewModel(),
+    viewModel: GardenPlantingListViewModel = hiltViewModel(),
     onAddPlantClick: () -> Unit,
     onPlantClick: (PlantAndGardenPlantings) -> Unit
 ) {
