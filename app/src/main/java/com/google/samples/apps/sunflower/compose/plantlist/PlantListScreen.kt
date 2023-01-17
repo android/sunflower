@@ -24,10 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-<<<<<<< HEAD
 import androidx.compose.ui.platform.testTag
-=======
->>>>>>> f79850e (Migrate HomeViewPagerFragment to Compose.)
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
