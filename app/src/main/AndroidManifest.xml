@@ -31,7 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sunflower">
         <activity
-            android:name=".GardenActivity"
+            android:name=".presentation.GardenActivity"
             android:exported="true"
             android:theme="@style/Theme.Sunflower.NoActionBar">
             <intent-filter>

@@ -29,7 +29,7 @@ import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetails
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsCallbacks
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.entity.Plant
 import com.google.samples.apps.sunflower.test.R
 import org.junit.Rule
 import org.junit.Test

@@ -62,10 +62,10 @@
                 android:id="@+id/add_plant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorPrimary"
                 android:text="@string/add_plant"
+                android:textColor="#2E7D32"
                 app:backgroundTint="?attr/colorOnPrimary"
-                app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Add"/>
+                app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Add" />
 
         </LinearLayout>
 

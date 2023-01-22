@@ -17,9 +17,18 @@
 package com.google.samples.apps.sunflower.di
 
 import android.content.Context
-import com.google.samples.apps.sunflower.data.AppDatabase
-import com.google.samples.apps.sunflower.data.GardenPlantingDao
-import com.google.samples.apps.sunflower.data.PlantDao
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
+import com.google.samples.apps.sunflower.data.db.AppDatabase
+import com.google.samples.apps.sunflower.data.dao.GardenPlantingDao
+import com.google.samples.apps.sunflower.data.dao.PlantDao
+import com.google.samples.apps.sunflower.utilitie.DATABASE_NAME
+import com.google.samples.apps.sunflower.utilitie.PLANT_DATA_FILENAME
+import com.google.samples.apps.sunflower.worker.SeedDatabaseWorker
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,12 +38,22 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class DatabaseModule {
+object DatabaseModule {
 
     @Singleton
     @Provides
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
-        return AppDatabase.getInstance(context)
+        return Room.databaseBuilder(context,AppDatabase::class.java, DATABASE_NAME).addCallback(
+            object : RoomDatabase.Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
+                        .setInputData(workDataOf(SeedDatabaseWorker.KEY_FILENAME to PLANT_DATA_FILENAME))
+                        .build()
+                    WorkManager.getInstance(context).enqueue(request)
+                }
+            }
+        ).build()
     }
 
     @Provides

@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
+import com.google.samples.apps.sunflower.data.entity.GardenPlanting
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertEquals

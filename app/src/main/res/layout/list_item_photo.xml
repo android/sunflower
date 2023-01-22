@@ -27,7 +27,7 @@
             type="com.google.samples.apps.sunflower.data.UnsplashPhoto"/>
     </data>
 
-    <com.google.samples.apps.sunflower.views.MaskedCardView
+    <com.google.samples.apps.sunflower.custom.MaskedCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/card_side_margin"
@@ -51,7 +51,8 @@
                     app:imageFromUrl="@{photo.urls.small}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ImageContrastCheck" />
 
                 <TextView
                     android:id="@+id/photographer"
@@ -70,6 +71,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.samples.apps.sunflower.views.MaskedCardView>
+    </com.google.samples.apps.sunflower.custom.MaskedCardView>
 
 </layout>

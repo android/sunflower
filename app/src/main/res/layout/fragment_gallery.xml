@@ -50,7 +50,7 @@
             android:paddingTop="@dimen/gallery_header_margin"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="@integer/grid_columns"
-            tools:context="com.google.samples.apps.sunflower.GardenActivity"
+            tools:context="com.google.samples.apps.sunflower.presentation.GardenActivity"
             tools:listitem="@layout/list_item_photo"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

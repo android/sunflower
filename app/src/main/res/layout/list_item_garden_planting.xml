@@ -15,7 +15,8 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -24,10 +25,10 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="viewModel"
-            type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel"/>
+            type="com.google.samples.apps.sunflower.presentation.garden.PlantAndGardenPlantingsViewModel"/>
     </data>
 
-    <com.google.samples.apps.sunflower.views.MaskedCardView
+    <com.google.samples.apps.sunflower.custom.MaskedCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/card_side_margin"
@@ -51,7 +52,8 @@
                 app:imageFromUrl="@{viewModel.imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
                 android:id="@+id/plant_name"
@@ -133,6 +135,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.samples.apps.sunflower.views.MaskedCardView>
+    </com.google.samples.apps.sunflower.custom.MaskedCardView>
 
 </layout>

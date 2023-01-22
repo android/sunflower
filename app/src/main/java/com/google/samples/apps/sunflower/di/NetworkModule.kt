@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.di
 
-import com.google.samples.apps.sunflower.api.UnsplashService
+import com.google.samples.apps.sunflower.data.api.UnsplashService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,11 +25,13 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Singleton
     @Provides
     fun provideUnsplashService(): UnsplashService {
         return UnsplashService.create()
     }
+
+
 }
