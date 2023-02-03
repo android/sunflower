@@ -113,8 +113,8 @@ fun HomeScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage) -> U
                 }
                 SunflowerPage.PLANT_LIST -> {
                     PlantListScreen(
+                        onPlantClick = onPlantClick,
                         Modifier.fillMaxSize(),
-                        onPlantClick = onPlantClick
                     )
                 }
             }

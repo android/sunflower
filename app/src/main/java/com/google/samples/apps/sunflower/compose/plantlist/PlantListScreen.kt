@@ -36,9 +36,9 @@ import com.google.samples.apps.sunflower.data.Plant
 
 @Composable
 fun PlantListScreen(
+    onPlantClick: (Plant) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PlantListViewModel = viewModel(),
-    onPlantClick: (Plant) -> Unit,
 ) {
     val plants by viewModel.plants.observeAsState(initial = emptyList())
     PlantListScreen(plants = plants, modifier, onPlantClick = onPlantClick)
