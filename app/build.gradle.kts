@@ -154,6 +154,7 @@ dependencies {
 
   // Testing dependencies
   kaptAndroidTest(libs.hilt.android.compiler)
+  androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.arch.core.testing)
   androidTestImplementation(libs.androidx.espresso.contrib)
   androidTestImplementation(libs.androidx.espresso.core)

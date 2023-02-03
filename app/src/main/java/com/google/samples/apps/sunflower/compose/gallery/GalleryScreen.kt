@@ -95,6 +95,10 @@ private fun GalleryScreen(
             // See: https://issuetracker.google.com/issues/178087310
             items(
                 count = pagingItems.itemCount,
+                key = { index ->
+                    val photo = pagingItems[index]
+                    photo?.id ?: ""
+                }
             ) { index ->
                 val photo = pagingItems[index] ?: return@items
                 PhotoListItem(photo = photo) {
