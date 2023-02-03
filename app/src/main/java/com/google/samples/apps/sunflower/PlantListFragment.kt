@@ -30,7 +30,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
-import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

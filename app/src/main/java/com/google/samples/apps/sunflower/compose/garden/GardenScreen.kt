@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.compose.garden
 
+import androidx.activity.compose.ReportDrawn
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -208,7 +209,9 @@ private fun GardenListItem(
 
 @Composable
 private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier) {
-    ReportDrawnWhen { true}
+    // Calls reportFullyDrawn when this composable is composed.
+    ReportDrawn()
+
     Column(
         modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
