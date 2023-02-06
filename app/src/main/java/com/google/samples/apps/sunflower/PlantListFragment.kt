@@ -49,9 +49,11 @@ class PlantListFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MdcTheme {
-                    PlantListScreen(onPlantClick =  {
-                        navigateToPlant(plantId = it.plantId)
-                    })
+                    PlantListScreen(
+                        onPlantClick = {
+                            navigateToPlant(plantId = it.plantId)
+                        }
+                    )
                 }
             }
         }

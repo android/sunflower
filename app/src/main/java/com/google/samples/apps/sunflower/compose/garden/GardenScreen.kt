@@ -88,7 +88,7 @@ fun GardenScreen(
     if (gardenPlants.isEmpty()) {
         EmptyGarden(onAddPlantClick, modifier)
     } else {
-        GardenList(gardenPlants, onPlantClick = onPlantClick, modifier)
+        GardenList(gardenPlants = gardenPlants, onPlantClick = onPlantClick, modifier = modifier)
     }
 }
 
@@ -96,7 +96,7 @@ fun GardenScreen(
 private fun GardenList(
     gardenPlants: List<PlantAndGardenPlantings>,
     onPlantClick: (PlantAndGardenPlantings) -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier,
 ) {
     // Call reportFullyDrawn when the garden list has been rendered
     val gridState = rememberLazyGridState()
@@ -208,7 +208,7 @@ private fun GardenListItem(
 }
 
 @Composable
-private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier) {
+private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifier) {
     // Calls reportFullyDrawn when this composable is composed.
     ReportDrawn()
 

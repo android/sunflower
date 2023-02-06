@@ -52,7 +52,7 @@ class HomeViewPagerFragment : Fragment() {
         override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
             return when (menuItem.itemId) {
                 R.id.filter_zone -> {
-                    updateData()
+                    viewModel.updateData()
                     true
                 }
                 else -> false
@@ -72,15 +72,20 @@ class HomeViewPagerFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MdcTheme {
-                    HomeScreen(onPlantClick = {
-                        navigateToPlant(it)
-                    }, onPageChange = { page ->
-                        Log.d("HomeViewPagerFragment", "Page changed to $page")
-                        when (page) {
-                            SunflowerPage.MY_GARDEN -> menuHost.removeMenuProvider(menuProvider)
-                            SunflowerPage.PLANT_LIST -> menuHost.addMenuProvider(menuProvider, viewLifecycleOwner)
+                    HomeScreen(
+                        onPlantClick = {
+                            navigateToPlant(it)
+                        }, onPageChange = { page ->
+                            Log.d("HomeViewPagerFragment", "Page changed to $page")
+                            when (page) {
+                                SunflowerPage.MY_GARDEN -> menuHost.removeMenuProvider(menuProvider)
+                                SunflowerPage.PLANT_LIST -> menuHost.addMenuProvider(
+                                    menuProvider,
+                                    viewLifecycleOwner
+                                )
+                            }
                         }
-                    })
+                    )
                 }
             }
         }
@@ -91,13 +96,5 @@ class HomeViewPagerFragment : Fragment() {
         val direction =
             HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plant.plantId)
         findNavController().navigate(direction)
-    }
-
-    private fun updateData() {
-        if (viewModel.isFiltered()) {
-            viewModel.clearGrowZoneNumber()
-        } else {
-            viewModel.setGrowZoneNumber(9)
-        }
     }
 }
