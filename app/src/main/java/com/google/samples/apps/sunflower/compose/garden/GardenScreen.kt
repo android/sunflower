@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.compose.garden
 
+import androidx.activity.compose.ReportDrawn
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -50,7 +51,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.card
@@ -88,7 +88,7 @@ fun GardenScreen(
     if (gardenPlants.isEmpty()) {
         EmptyGarden(onAddPlantClick, modifier)
     } else {
-        GardenList(gardenPlants, onPlantClick = onPlantClick, modifier)
+        GardenList(gardenPlants = gardenPlants, onPlantClick = onPlantClick, modifier = modifier)
     }
 }
 
@@ -96,7 +96,7 @@ fun GardenScreen(
 private fun GardenList(
     gardenPlants: List<PlantAndGardenPlantings>,
     onPlantClick: (PlantAndGardenPlantings) -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier,
 ) {
     // Call reportFullyDrawn when the garden list has been rendered
     val gridState = rememberLazyGridState()
@@ -208,8 +208,10 @@ private fun GardenListItem(
 }
 
 @Composable
-private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier) {
-    ReportDrawnWhen { true}
+private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifier) {
+    // Calls reportFullyDrawn when this composable is composed.
+    ReportDrawn()
+
     Column(
         modifier,
         horizontalAlignment = Alignment.CenterHorizontally,

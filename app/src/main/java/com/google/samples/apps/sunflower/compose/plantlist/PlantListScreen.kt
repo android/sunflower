@@ -31,15 +31,14 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 
 @Composable
 fun PlantListScreen(
+    onPlantClick: (Plant) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PlantListViewModel = hiltViewModel(),
-    onPlantClick: (Plant) -> Unit,
 ) {
     val plants by viewModel.plants.observeAsState(initial = emptyList())
     PlantListScreen(plants = plants, modifier, onPlantClick = onPlantClick)

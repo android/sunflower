@@ -88,11 +88,7 @@ fun HomeScreen(
         override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
             return when (menuItem.itemId) {
                 R.id.filter_zone -> {
-                    if (viewModel.isFiltered()) {
-                        viewModel.clearGrowZoneNumber()
-                    } else {
-                        viewModel.setGrowZoneNumber(9)
-                    }
+                    viewModel.updateData()
                     true
                 }
                 else -> false
@@ -121,23 +117,29 @@ fun HomeScreen(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomePagerScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage) -> Unit) {
+fun HomePagerScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage) -> Unit,
+                    modifier: Modifier = Modifier,
+                    pages: Array<SunflowerPage> = SunflowerPage.values()
+) {
     val pagerState = rememberPagerState()
 
     LaunchedEffect(pagerState.currentPage) {
-        onPageChange(SunflowerPage.values()[pagerState.currentPage])
+        onPageChange(pages[pagerState.currentPage])
     }
 
+    // Use Modifier.nestedScroll + rememberNestedScrollInteropConnection() here so that this
+    // composable participates in the nested scroll hierarchy so that HomeScreen can be used in
+    // use cases like a collapsing toolbar
     Column(Modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
         val coroutineScope = rememberCoroutineScope()
 
         // Tab Row
         TabRow(selectedTabIndex = pagerState.currentPage) {
-            SunflowerPage.values().forEachIndexed { index, page ->
+            pages.forEachIndexed { index, page ->
                 val title = stringResource(id = page.titleResId)
                 Tab(
                     selected = pagerState.currentPage == index,
-                    onClick = { coroutineScope.launch { pagerState.scrollToPage(index) } },
+                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
                     text = { Text(text = title) },
                     icon = {
                         Icon(
@@ -153,11 +155,11 @@ fun HomePagerScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage)
 
         // Pages
         HorizontalPager(
-            pageCount = SunflowerPage.values().size,
+            pageCount = pages.size,
             state = pagerState,
             verticalAlignment = Alignment.Top
         ) { index ->
-            when (SunflowerPage.values()[index]) {
+            when (pages[index]) {
                 SunflowerPage.MY_GARDEN -> {
                     GardenScreen(
                         Modifier.fillMaxSize(),
@@ -165,14 +167,15 @@ fun HomePagerScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage)
                             coroutineScope.launch {
                                 pagerState.scrollToPage(SunflowerPage.PLANT_LIST.ordinal)
                             }
-                        }, onPlantClick = {
+                        },
+                        onPlantClick = {
                             onPlantClick(it.plant)
                         })
                 }
                 SunflowerPage.PLANT_LIST -> {
                     PlantListScreen(
-                        Modifier.fillMaxSize(),
-                        onPlantClick = onPlantClick
+                        onPlantClick = onPlantClick,
+                        modifier = Modifier.fillMaxSize(),
                     )
                 }
             }
@@ -182,7 +185,11 @@ fun HomePagerScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun HomeTopAppBar(pagerState: PagerState, onFilterClick: () -> Unit) {
+private fun HomeTopAppBar(
+    pagerState: PagerState,
+    onFilterClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     TopAppBar(
         title = {
             Row(
@@ -194,7 +201,7 @@ private fun HomeTopAppBar(pagerState: PagerState, onFilterClick: () -> Unit) {
                 )
             }
         },
-        Modifier.statusBarsPadding(),
+        modifier.statusBarsPadding(),
         actions = {
             if (pagerState.currentPage == SunflowerPage.PLANT_LIST.ordinal) {
                 IconButton(onClick = onFilterClick) {

@@ -36,7 +36,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -98,14 +97,17 @@ private fun GalleryScreen(
 }
 
 @Composable
-private fun GalleryTopBar(onUpClick: () -> Unit) {
+private fun GalleryTopBar(
+    onUpClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     TopAppBar(
         title = {
             Text(stringResource(id = R.string.gallery_title))
         },
-        Modifier.statusBarsPadding(),
+        modifier = modifier.statusBarsPadding(),
         navigationIcon = {
-            IconButton(onClick = { onUpClick() }) {
+            IconButton(onClick = onUpClick) {
                 Icon(
                     Icons.Filled.ArrowBack,
                     contentDescription = null
