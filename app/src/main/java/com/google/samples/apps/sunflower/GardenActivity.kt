@@ -17,14 +17,42 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.core.view.WindowCompat
-import androidx.databinding.DataBindingUtil.setContentView
-import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
+import com.google.accompanist.themeadapter.material.MdcTheme
+import com.google.samples.apps.sunflower.compose.SunflowerApp
+import com.google.samples.apps.sunflower.compose.home.SunflowerPage
+import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+// TODO: update the superclass to ComponentActivity https://github.com/android/sunflower/issues/829
 @AndroidEntryPoint
 class GardenActivity : AppCompatActivity() {
+
+    private val viewModel: PlantListViewModel by viewModels()
+
+    private val menuProvider = object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.menu_plant_list, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            return when (menuItem.itemId) {
+                R.id.filter_zone -> {
+                    viewModel.updateData()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +60,23 @@ class GardenActivity : AppCompatActivity() {
         // Displaying edge-to-edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+        setContent {
+            MdcTheme {
+                SunflowerApp(
+                    onAttached = { toolbar ->
+                        setSupportActionBar(toolbar)
+                    },
+                    onPageChange = { page ->
+                        when (page) {
+                            SunflowerPage.MY_GARDEN -> removeMenuProvider(menuProvider)
+                            SunflowerPage.PLANT_LIST -> addMenuProvider(
+                                menuProvider,
+                                this
+                            )
+                        }
+                    }
+                )
+            }
+        }
     }
 }

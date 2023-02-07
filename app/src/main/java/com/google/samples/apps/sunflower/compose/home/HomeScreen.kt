@@ -16,8 +16,14 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,16 +47,22 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidViewBinding
+import androidx.core.view.MenuProvider
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.databinding.HomeScreenBinding
 import kotlinx.coroutines.launch
 
 enum class SunflowerPage(
@@ -61,9 +73,27 @@ enum class SunflowerPage(
     PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
+    onPlantClick: (Plant) -> Unit = {},
+    onPageChange: (SunflowerPage) -> Unit = {},
+    onAttached: (Toolbar) -> Unit = {},
+) {
+    val activity = (LocalContext.current as AppCompatActivity)
+
+    AndroidViewBinding(factory = HomeScreenBinding::inflate, modifier = modifier) {
+        onAttached(toolbar)
+        activity.setSupportActionBar(toolbar)
+        composeView.setContent {
+            HomePagerScreen(onPlantClick = onPlantClick, onPageChange = onPageChange)
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun HomePagerScreen(
     onPlantClick: (Plant) -> Unit,
     onPageChange: (SunflowerPage) -> Unit,
     modifier: Modifier = Modifier,
@@ -123,7 +153,7 @@ fun HomeScreen(
                 SunflowerPage.PLANT_LIST -> {
                     PlantListScreen(
                         onPlantClick = onPlantClick,
-                        Modifier.fillMaxSize(),
+                        modifier = Modifier.fillMaxSize(),
                     )
                 }
             }
@@ -171,6 +201,6 @@ private fun HomeTopAppBar(
 @Composable
 private fun HomeScreenPreview() {
     MdcTheme {
-        HomeScreen(onPlantClick = {}, onPageChange = {})
+        HomePagerScreen(onPlantClick = {}, onPageChange = {})
     }
 }

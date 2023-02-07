@@ -87,6 +87,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -108,16 +109,16 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 data class PlantDetailsCallbacks(
     val onFabClick: () -> Unit,
     val onBackClick: () -> Unit,
-    val onShareClick: () -> Unit,
-    val onGalleryClick: () -> Unit
+    val onShareClick: (String) -> Unit,
+    val onGalleryClick: (Plant) -> Unit
 )
 
 @Composable
 fun PlantDetailsScreen(
-    plantDetailsViewModel: PlantDetailViewModel,
+    plantDetailsViewModel: PlantDetailViewModel = hiltViewModel(),
     onBackClick: () -> Unit,
-    onShareClick: () -> Unit,
-    onGalleryClick: () -> Unit,
+    onShareClick: (String) -> Unit,
+    onGalleryClick: (Plant) -> Unit,
 ) {
     val plant = plantDetailsViewModel.plant.observeAsState().value
     val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
@@ -227,7 +228,7 @@ fun PlantDetails(
                 maxOf(candidateHeight, 1.dp)
             },
             onFabClick = callbacks.onFabClick,
-            onGalleryClick = callbacks.onGalleryClick,
+            onGalleryClick = { callbacks.onGalleryClick(plant) },
             contentAlpha = { contentAlpha.value }
         )
         PlantToolbar(
@@ -379,17 +380,20 @@ private fun PlantToolbar(
     toolbarAlpha: () -> Float,
     contentAlpha: () -> Float
 ) {
+    val onShareClick = {
+        callbacks.onShareClick(plantName)
+    }
     if (toolbarState.isShown) {
         PlantDetailsToolbar(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
-            onShareClick = callbacks.onShareClick,
+            onShareClick = onShareClick,
             modifier = Modifier.alpha(toolbarAlpha())
         )
     } else {
         PlantHeaderActions(
             onBackClick = callbacks.onBackClick,
-            onShareClick = callbacks.onShareClick,
+            onShareClick = onShareClick,
             modifier = Modifier.alpha(contentAlpha())
         )
     }
