@@ -23,6 +23,7 @@ import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -62,7 +63,6 @@ import com.google.samples.apps.sunflower.compose.garden.GardenScreen
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.HomeScreenBinding
-import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import kotlinx.coroutines.launch
 
 enum class SunflowerPage(
@@ -75,51 +75,29 @@ enum class SunflowerPage(
 
 @Composable
 fun HomeScreen(
-    onPlantClick: (Plant) -> Unit,
-    viewModel: PlantListViewModel = hiltViewModel()
+    modifier: Modifier = Modifier,
+    onPlantClick: (Plant) -> Unit = {},
+    onPageChange: (SunflowerPage) -> Unit = {},
+    onAttached: (Toolbar) -> Unit = {},
 ) {
     val activity = (LocalContext.current as AppCompatActivity)
 
-    val menuProvider = object : MenuProvider {
-        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-            menuInflater.inflate(R.menu.menu_plant_list, menu)
-        }
-
-        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-            return when (menuItem.itemId) {
-                R.id.filter_zone -> {
-                    viewModel.updateData()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-    AndroidViewBinding(HomeScreenBinding::inflate)
-    {
+    AndroidViewBinding(factory = HomeScreenBinding::inflate, modifier = modifier) {
+        onAttached(toolbar)
         activity.setSupportActionBar(toolbar)
         composeView.setContent {
-            val lifecycleOwner = LocalLifecycleOwner.current
-            HomePagerScreen(onPlantClick = onPlantClick, onPageChange = { page ->
-                Log.d("HomeViewPagerFragment", "Page changed to $page")
-                when (page) {
-                    SunflowerPage.MY_GARDEN -> activity.removeMenuProvider(menuProvider)
-                    SunflowerPage.PLANT_LIST -> activity.addMenuProvider(
-                        menuProvider,
-                        lifecycleOwner
-                    )
-                }
-            })
+            HomePagerScreen(onPlantClick = onPlantClick, onPageChange = onPageChange)
         }
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomePagerScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage) -> Unit,
-                    modifier: Modifier = Modifier,
-                    pages: Array<SunflowerPage> = SunflowerPage.values()
+fun HomePagerScreen(
+    onPlantClick: (Plant) -> Unit,
+    onPageChange: (SunflowerPage) -> Unit,
+    modifier: Modifier = Modifier,
+    pages: Array<SunflowerPage> = SunflowerPage.values()
 ) {
     val pagerState = rememberPagerState()
 
@@ -130,7 +108,7 @@ fun HomePagerScreen(onPlantClick: (Plant) -> Unit, onPageChange: (SunflowerPage)
     // Use Modifier.nestedScroll + rememberNestedScrollInteropConnection() here so that this
     // composable participates in the nested scroll hierarchy so that HomeScreen can be used in
     // use cases like a collapsing toolbar
-    Column(Modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
+    Column(modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
         val coroutineScope = rememberCoroutineScope()
 
         // Tab Row

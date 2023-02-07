@@ -19,9 +19,12 @@ package com.google.samples.apps.sunflower.compose
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.widget.Toolbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,17 +33,38 @@ import androidx.navigation.navArgument
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.gallery.GalleryScreen
 import com.google.samples.apps.sunflower.compose.home.HomeScreen
+import com.google.samples.apps.sunflower.compose.home.SunflowerPage
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
 
 @Composable
-fun SunflowerApp() {
+fun SunflowerApp(
+    onPageChange: (SunflowerPage) -> Unit = {},
+    onAttached: (Toolbar) -> Unit = {},
+) {
     val navController = rememberNavController()
+    SunFlowerNavHost(
+        navController = navController,
+        onPageChange = onPageChange,
+        onAttached = onAttached
+    )
+}
+
+@Composable
+fun SunFlowerNavHost(
+    navController: NavHostController,
+    onPageChange: (SunflowerPage) -> Unit = {},
+    onAttached: (Toolbar) -> Unit = {},
+) {
     val activity = (LocalContext.current as Activity)
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreen(onPlantClick = {
-                navController.navigate("plantDetail/${it.plantId}")
-            })
+            HomeScreen(
+                onPlantClick = {
+                    navController.navigate("plantDetail/${it.plantId}")
+                },
+                onPageChange = onPageChange,
+                onAttached = onAttached
+            )
         }
         composable(
             "plantDetail/{plantId}",
@@ -64,13 +88,15 @@ fun SunflowerApp() {
                 type = NavType.StringType
             })
         ) {
-            GalleryScreen(onPhotoClick = {
-                val uri = Uri.parse(it.user.attributionUrl)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                activity.startActivity(intent)
-            }, onUpClick = {
-                navController.navigateUp()
-            })
+            GalleryScreen(
+                onPhotoClick = {
+                    val uri = Uri.parse(it.user.attributionUrl)
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    activity.startActivity(intent)
+                },
+                onUpClick = {
+                    navController.navigateUp()
+                })
         }
     }
 }
