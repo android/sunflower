@@ -69,20 +69,7 @@ private fun GalleryScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(stringResource(id = R.string.gallery_title))
-                },
-                Modifier.statusBarsPadding(),
-                navigationIcon = {
-                    IconButton(onClick = { onUpClick() }) {
-                        Icon(
-                            Icons.Filled.ArrowBack,
-                            contentDescription = null
-                        )
-                    }
-                },
-            )
+            GalleryTopBar(onUpClick = onUpClick)
         },
     ) { padding ->
         val pagingItems: LazyPagingItems<UnsplashPhoto> = plantPictures.collectAsLazyPagingItems()
@@ -107,6 +94,27 @@ private fun GalleryScreen(
             }
         }
     }
+}
+
+@Composable
+private fun GalleryTopBar(
+    onUpClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    TopAppBar(
+        title = {
+            Text(stringResource(id = R.string.gallery_title))
+        },
+        modifier = modifier.statusBarsPadding(),
+        navigationIcon = {
+            IconButton(onClick = onUpClick) {
+                Icon(
+                    Icons.Filled.ArrowBack,
+                    contentDescription = null
+                )
+            }
+        },
+    )
 }
 
 @Preview

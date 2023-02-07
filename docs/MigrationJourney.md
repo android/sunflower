@@ -10,7 +10,7 @@ The general steps followed to migrate Sunflower to Compose are:
 
 1. Planning the migration approach
 2. Migrate existing screens to Compose one by one
-3. Migrate Navigation Component to Compose and remove fragments
+3. Migrate Navigation Component to Compose and remove Fragments
 
 ## #1 Planning the migration approach
 
@@ -22,19 +22,21 @@ See [migration strategy](https://developer.android.com/jetpack/compose/interop/m
 
 ## #2 Migrate existing screens one by one
 
-Status: In Progress
+Status: Done ✅
 
 The Sunflower app has 5 distinct screens. Each screen needs to be migrated to Compose before moving to step 3. You can see the linked issues/pull requests below to follow progress or learn more about how each screen was migrated. 
 
-| Screen  | Status |
-| ------- | -------|
-| GalleryFragment | TODO [#816](https://github.com/android/sunflower/issues/816) |
-| GardenFragment | TODO [#814](https://github.com/android/sunflower/issues/814) |
-| HomeViewPagerFragment | TODO [#813](https://github.com/android/sunflower/issues/813) |
-| PlantDetailFragment | Done [#638](https://github.com/android/sunflower/pull/638) |
+| Screen                | Status                                                     |
+|-----------------------|------------------------------------------------------------|
+| GalleryFragment       | Done [#819](https://github.com/android/sunflower/pull/819) |
+| GardenFragment        | Done [#819](https://github.com/android/sunflower/pull/819) |
+| HomeViewPagerFragment | Done [#823](https://github.com/android/sunflower/pull/823) |
+| PlantListFragment     | Done [#822](https://github.com/android/sunflower/pull/822) |
+| PlantDetailFragment   | Done [#638](https://github.com/android/sunflower/pull/638) |
    
-## #3 Migrate Navigation Component to Compose
+## #3 Migrate Navigation Component to Compose and remove Fragments
 
 Status: TODO
 
 The last step in the migration process is to replace Fragment-based navigation with Jetpack Navigation, to use [Navigation Compose](https://developer.android.com/jetpack/compose/navigation).
+Upon completing this step, all Fragments can be removed.

@@ -30,7 +30,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
-import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,9 +49,11 @@ class PlantListFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MdcTheme {
-                    PlantListScreen {
-                        navigateToPlant(it)
-                    }
+                    PlantListScreen(
+                        onPlantClick = {
+                            navigateToPlant(plantId = it.plantId)
+                        }
+                    )
                 }
             }
         }
@@ -72,10 +73,10 @@ class PlantListFragment : Fragment() {
         }
     }
 
-    private fun navigateToPlant(plant: Plant) {
+    private fun navigateToPlant(plantId: String) {
         val direction =
             HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-                plant.plantId
+                plantId
             )
         findNavController().navigate(direction)
     }

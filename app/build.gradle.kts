@@ -122,7 +122,6 @@ dependencies {
   implementation(libs.androidx.paging.compose)
   implementation(libs.androidx.paging.runtime.ktx)
   implementation(libs.androidx.room.ktx)
-  implementation(libs.androidx.viewpager2)
   implementation(libs.androidx.work.runtime.ktx)
   implementation(libs.material)
   implementation(libs.gson)

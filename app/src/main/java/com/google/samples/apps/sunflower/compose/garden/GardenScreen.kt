@@ -64,6 +64,7 @@ import java.util.*
 
 @Composable
 fun GardenScreen(
+    modifier: Modifier = Modifier,
     viewModel: GardenPlantingListViewModel = viewModel(),
     onAddPlantClick: () -> Unit,
     onPlantClick: (PlantAndGardenPlantings) -> Unit
@@ -71,6 +72,7 @@ fun GardenScreen(
     val gardenPlants by viewModel.plantAndGardenPlantings.collectAsState(initial = emptyList())
     GardenScreen(
         gardenPlants = gardenPlants,
+        modifier = modifier,
         onAddPlantClick = onAddPlantClick,
         onPlantClick = onPlantClick
     )
@@ -79,26 +81,29 @@ fun GardenScreen(
 @Composable
 fun GardenScreen(
     gardenPlants: List<PlantAndGardenPlantings>,
+    modifier: Modifier = Modifier,
     onAddPlantClick: () -> Unit = {},
     onPlantClick: (PlantAndGardenPlantings) -> Unit = {}
 ) {
     if (gardenPlants.isEmpty()) {
-        EmptyGarden(onAddPlantClick)
+        EmptyGarden(onAddPlantClick, modifier)
     } else {
-        GardenList(gardenPlants, onPlantClick = onPlantClick)
+        GardenList(gardenPlants = gardenPlants, onPlantClick = onPlantClick, modifier = modifier)
     }
 }
 
 @Composable
 private fun GardenList(
     gardenPlants: List<PlantAndGardenPlantings>,
-    onPlantClick: (PlantAndGardenPlantings) -> Unit
+    onPlantClick: (PlantAndGardenPlantings) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     // Call reportFullyDrawn when the garden list has been rendered
     val gridState = rememberLazyGridState()
     ReportDrawnWhen { gridState.layoutInfo.totalItemsCount > 0 }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
+        modifier,
         state = gridState,
         contentPadding = PaddingValues(
             horizontal = dimensionResource(id = R.dimen.card_side_margin),
@@ -203,11 +208,12 @@ private fun GardenListItem(
 }
 
 @Composable
-private fun EmptyGarden(onAddPlantClick: () -> Unit) {
+private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifier) {
     // Calls reportFullyDrawn when this composable is composed.
     ReportDrawn()
 
     Column(
+        modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

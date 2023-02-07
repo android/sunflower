@@ -40,7 +40,9 @@
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Sunflower.FAB</item>
     </style>
 
-    <style name="Theme.Sunflower.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="Theme.Sunflower.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="elevation">0dp</item>
+    </style>
 
     <style name="TextAppearance.Sunflower.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
         <item name="android:textColor">?attr/colorOnSurface</item>

@@ -36,21 +36,23 @@ import com.google.samples.apps.sunflower.data.Plant
 
 @Composable
 fun PlantListScreen(
-    viewModel: PlantListViewModel = viewModel(),
     onPlantClick: (Plant) -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: PlantListViewModel = viewModel(),
 ) {
     val plants by viewModel.plants.observeAsState(initial = emptyList())
-    PlantListScreen(plants = plants, onPlantClick = onPlantClick)
+    PlantListScreen(plants = plants, modifier, onPlantClick = onPlantClick)
 }
 
 @Composable
 fun PlantListScreen(
     plants: List<Plant>,
+    modifier: Modifier = Modifier,
     onPlantClick: (Plant) -> Unit = {},
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.testTag("plant_list"),
+        modifier = modifier.testTag("plant_list"),
         contentPadding = PaddingValues(
             horizontal = dimensionResource(id = R.dimen.card_side_margin),
             vertical = dimensionResource(id = R.dimen.header_margin)
