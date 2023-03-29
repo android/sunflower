@@ -21,16 +21,18 @@ import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
 val Shapes = Shapes(
-    small = RoundedCornerShape(50.dp),
-    medium = RoundedCornerShape(bottomStart = 16.dp, topEnd = 16.dp)
+    // FAB
+    small = RoundedCornerShape(
+        topStart = 0.dp,
+        topEnd = 12.dp,
+        bottomStart = 12.dp,
+        bottomEnd = 0.dp
+    ),
+    // Card
+    medium = RoundedCornerShape(
+        topStart = 0.dp,
+        topEnd = 12.dp,
+        bottomStart = 12.dp,
+        bottomEnd = 0.dp
+    )
 )
-
-//val Shapes.card: CornerBasedShape
-//    get() = RoundedCornerShape(
-//        topStart = 0.dp,
-//        topEnd = 12.dp,
-//        bottomStart = 12.dp,
-//        bottomEnd = 0.dp
-//    )
-
-// TODO: Transition this into the shapes file in UI?

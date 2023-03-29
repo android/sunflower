@@ -21,8 +21,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +33,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.data.Plant
@@ -51,8 +54,7 @@ fun PhotoListItem(photo: UnsplashPhoto, onClick: () -> Unit) {
 fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
-//        elevation = dimensionResource(id = R.dimen.card_elevation),
-        //shape = MaterialTheme.shapes.card,
+        shape = MaterialTheme.shapes.medium,
         modifier = Modifier
             .padding(horizontal = dimensionResource(id = R.dimen.card_side_margin))
             .padding(bottom = dimensionResource(id = R.dimen.card_bottom_margin))

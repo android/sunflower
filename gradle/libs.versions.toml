@@ -15,7 +15,6 @@
 ##
 [versions]
 accessibilityTestFramework = "4.0.0"
-accompanist = "0.28.0"
 activityCompose = "1.7.0-alpha03"
 androidGradlePlugin = "7.3.1"
 appcompat = "1.6.0"
@@ -63,7 +62,6 @@ work = "2.7.1"
 
 [libraries]
 accessibility-test-framework = { module = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework", version.ref = "accessibilityTestFramework" }
-accompanist-themeadapter-material = { module = "com.google.accompanist:accompanist-themeadapter-material", version.ref = "accompanist" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }

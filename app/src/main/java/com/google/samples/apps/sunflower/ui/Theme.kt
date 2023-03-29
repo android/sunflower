@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.google.samples.apps.sunflower.compose.Shapes
 
 val LightColors = lightColorScheme(
     primary = sunflower_green_500,
@@ -78,7 +79,7 @@ fun SunflowerTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-       // shapes = Shapes,
+        shapes = Shapes,
 //        typography = Typography,
         content = content
     )

@@ -41,6 +41,7 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -90,7 +91,6 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
@@ -98,6 +98,7 @@ import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
+import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -357,9 +358,12 @@ private fun PlantFab(
     val addPlantContentDescription = stringResource(R.string.add_plant)
     FloatingActionButton(
         onClick = onFabClick,
+        // Transition this to the shapes file
         shape = MaterialTheme.shapes.small,
+        containerColor = MaterialTheme.colorScheme.tertiary,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         // Semantics in parent due to https://issuetracker.google.com/184825850
-        modifier = modifier.background(MaterialTheme.colorScheme.tertiary).semantics {
+        modifier = modifier.semantics {
             contentDescription = addPlantContentDescription
         }
     ) {
@@ -586,7 +590,7 @@ private fun PlantDescription(description: String) {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
-    MdcTheme {
+    SunflowerTheme {
         Surface {
             PlantDetails(
                 Plant("plantId", "Tomato", "HTML<br>description", 6),

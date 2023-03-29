@@ -58,12 +58,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.core.view.MenuProvider
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.HomeScreenBinding
+import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import kotlinx.coroutines.launch
 
 enum class SunflowerPage(
@@ -164,7 +164,7 @@ fun HomePagerScreen(
         }
     }
 }
-// TODO: delete?
+// TODO: delete since it wasn't used?
 //
 //@OptIn(ExperimentalFoundationApi::class)
 //@Composable
@@ -205,7 +205,7 @@ fun HomePagerScreen(
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    MdcTheme {
+    SunflowerTheme {
         HomePagerScreen(onPlantClick = {}, onPageChange = {})
     }
 }

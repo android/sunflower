@@ -140,8 +140,13 @@ private fun GardenListItem(
             end = cardSideMargin,
             bottom = dimensionResource(id = R.dimen.card_bottom_margin)
         ),
-       // elevation = CardElevation(defaultElevation = dimensionResource(id = R.dimen.card_elevation)),
-        //shape = MaterialTheme.shapes.card, TODO: update the shape
+        // TODO: update this to use shapes file
+        shape = RoundedCornerShape(
+            topStart = 0.dp,
+            topEnd = 12.dp,
+            bottomStart = 12.dp,
+            bottomEnd = 0.dp
+        )
     ) {
         Column(Modifier.fillMaxWidth()) {
             SunflowerImage(
@@ -221,17 +226,13 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
             style = MaterialTheme.typography.headlineSmall
         )
         Button(
-            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
-            shape = RoundedCornerShape(
-                topStart = 0.dp,
-                topEnd = dimensionResource(id = R.dimen.button_corner_radius),
-                bottomStart = dimensionResource(id = R.dimen.button_corner_radius),
-                bottomEnd = 0.dp,
-            ),
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.tertiary),
+            // TODO: update this to use Shapes file
+            shape = MaterialTheme.shapes.medium,
             onClick = onAddPlantClick
         ) {
             Text(
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.onSurface,
                 text = stringResource(id = R.string.add_plant)
             )
         }
