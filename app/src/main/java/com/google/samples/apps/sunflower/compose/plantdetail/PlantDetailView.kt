@@ -358,7 +358,6 @@ private fun PlantFab(
     val addPlantContentDescription = stringResource(R.string.add_plant)
     FloatingActionButton(
         onClick = onFabClick,
-        // Transition this to the shapes file
         shape = MaterialTheme.shapes.small,
         containerColor = MaterialTheme.colorScheme.tertiary,
         contentColor = MaterialTheme.colorScheme.onSurface,

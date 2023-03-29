@@ -140,13 +140,7 @@ private fun GardenListItem(
             end = cardSideMargin,
             bottom = dimensionResource(id = R.dimen.card_bottom_margin)
         ),
-        // TODO: update this to use shapes file
-        shape = RoundedCornerShape(
-            topStart = 0.dp,
-            topEnd = 12.dp,
-            bottomStart = 12.dp,
-            bottomEnd = 0.dp
-        )
+        shape = MaterialTheme.shapes.medium
     ) {
         Column(Modifier.fillMaxWidth()) {
             SunflowerImage(
