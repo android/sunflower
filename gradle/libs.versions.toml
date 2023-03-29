@@ -41,6 +41,7 @@ ktlint = "0.40.0"
 ktx = "1.7.0"
 lifecycle = "2.6.0-alpha04"
 material = "1.8.0-rc01"
+material3 = "1.0.1"
 # @keep
 minSdk = "23"
 navigation = "2.5.3"
@@ -72,6 +73,7 @@ androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = 
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeLatest" }
 androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "composeLatest" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "composeLatest" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeLatest" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeLatest" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "composeLatest" }

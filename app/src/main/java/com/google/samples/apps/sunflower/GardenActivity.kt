@@ -17,7 +17,6 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -26,9 +25,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.core.view.WindowCompat
-import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.compose.SunflowerApp
 import com.google.samples.apps.sunflower.compose.home.SunflowerPage
+import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,7 +60,8 @@ class GardenActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            MdcTheme {
+            SunflowerTheme {
+
                 SunflowerApp(
                     onAttached = { toolbar ->
                         setSupportActionBar(toolbar)

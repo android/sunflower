@@ -29,12 +29,12 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -51,13 +51,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.compose.card
 import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 import java.util.*
@@ -120,8 +119,8 @@ private fun GardenList(
 }
 
 @OptIn(
-    ExperimentalMaterialApi::class,
-    ExperimentalComposeUiApi::class
+    ExperimentalComposeUiApi::class,
+    ExperimentalMaterial3Api::class
 )
 @Composable
 private fun GardenListItem(
@@ -134,15 +133,15 @@ private fun GardenListItem(
     val cardSideMargin = dimensionResource(id = R.dimen.card_side_margin)
     val marginNormal = dimensionResource(id = R.dimen.margin_normal)
 
-    Card(
+    ElevatedCard(
         onClick = { onPlantClick(plant) },
         modifier = Modifier.padding(
             start = cardSideMargin,
             end = cardSideMargin,
             bottom = dimensionResource(id = R.dimen.card_bottom_margin)
         ),
-        elevation = dimensionResource(id = R.dimen.card_elevation),
-        shape = MaterialTheme.shapes.card,
+       // elevation = CardElevation(defaultElevation = dimensionResource(id = R.dimen.card_elevation)),
+        //shape = MaterialTheme.shapes.card, TODO: update the shape
     ) {
         Column(Modifier.fillMaxWidth()) {
             SunflowerImage(
@@ -160,7 +159,7 @@ private fun GardenListItem(
                 Modifier
                     .padding(vertical = marginNormal)
                     .align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.titleMedium,
             )
 
             // Planted date
@@ -168,13 +167,13 @@ private fun GardenListItem(
                 text = stringResource(id = R.string.plant_date_header),
                 Modifier.align(Alignment.CenterHorizontally),
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.primaryVariant,
-                style = MaterialTheme.typography.subtitle2
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.titleSmall
             )
             Text(
                 text = vm.plantDateString,
                 Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.typography.titleSmall
             )
 
             // Last Watered
@@ -184,13 +183,13 @@ private fun GardenListItem(
                     .align(Alignment.CenterHorizontally)
                     .padding(top = marginNormal),
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.primaryVariant,
-                style = MaterialTheme.typography.subtitle2
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.titleSmall
             )
             Text(
                 text = vm.waterDateString,
                 Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.typography.titleSmall
             )
             Text(
                 text = pluralStringResource(
@@ -201,7 +200,7 @@ private fun GardenListItem(
                 Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(bottom = marginNormal),
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.typography.titleSmall
             )
         }
     }
@@ -219,10 +218,10 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
     ) {
         Text(
             text = stringResource(id = R.string.garden_empty),
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.headlineSmall
         )
         Button(
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
             shape = RoundedCornerShape(
                 topStart = 0.dp,
                 topEnd = dimensionResource(id = R.dimen.button_corner_radius),
@@ -232,7 +231,7 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
             onClick = onAddPlantClick
         ) {
             Text(
-                color = MaterialTheme.colors.primary,
+                color = MaterialTheme.colorScheme.primary,
                 text = stringResource(id = R.string.add_plant)
             )
         }
@@ -244,7 +243,7 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
 private fun GardenScreenPreview(
     @PreviewParameter(GardenScreenPreviewParamProvider::class) gardenPlants: List<PlantAndGardenPlantings>
 ) {
-    MdcTheme {
+    SunflowerTheme {
         GardenScreen(gardenPlants)
     }
 }
