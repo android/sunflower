@@ -17,9 +17,9 @@
 accessibilityTestFramework = "4.0.0"
 accompanist = "0.28.0"
 activityCompose = "1.7.0"
-androidGradlePlugin = "7.3.1"
+androidGradlePlugin = "7.4.2"
 appcompat = "1.6.1"
-benchmark = "1.1.0"
+benchmark = "1.2.0-alpha13"
 # @keep
 compileSdk = "33"
 composeBom = "2023.04.01"

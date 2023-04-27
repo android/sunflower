@@ -50,16 +50,17 @@ class PlantDetailBenchmarks {
             iterations = 10,
             startupMode = StartupMode.COLD,
             setupBlock = {
-                startActivityAndWait()
-                goToPlantListTab()
+                pressHome()
             }
         ) {
+            startActivityAndWait()
+            goToPlantListTab()
             goToPlantDetail()
         }
 }
 
 fun MacrobenchmarkScope.goToPlantDetail(index: Int? = null) {
-    val plantListSelector = By.res(packageName, "plant_list")
+    val plantListSelector = By.res("plant_list")
     val recycler = device.findObject(plantListSelector)
 
     // select different item each iteration, but only from the visible ones
@@ -69,4 +70,16 @@ fun MacrobenchmarkScope.goToPlantDetail(index: Int? = null) {
     child.click()
     // wait until plant list is gone
     device.wait(Until.gone(plantListSelector), 5_000)
+
+//// second way to find plant detail
+//    device.wait(Until.hasObject(By.scrollable(true)), 5_000)
+//    val scrollableObject = device.findObject(By.scrollable(true))
+//
+//// select different item each iteration, but only from the visible ones
+//    val currentChildIndex = index ?: ((iteration ?: 0) % scrollableObject.childCount)
+//
+//    val child = scrollableObject.children[currentChildIndex]
+//    child.click()
+//    // wait until plant list is gone
+//    device.wait(Until.gone(By.res("Plant list tab")), 5_000)
 }

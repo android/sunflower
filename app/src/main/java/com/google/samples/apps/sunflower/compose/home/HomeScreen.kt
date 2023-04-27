@@ -16,10 +16,6 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
-import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -45,18 +41,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
-import androidx.core.view.MenuProvider
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
@@ -73,6 +70,7 @@ enum class SunflowerPage(
     PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -86,7 +84,14 @@ fun HomeScreen(
         onAttached(toolbar)
         activity.setSupportActionBar(toolbar)
         composeView.setContent {
-            HomePagerScreen(onPlantClick = onPlantClick, onPageChange = onPageChange)
+            HomePagerScreen(
+                modifier = Modifier.semantics {
+                    // Allows to use testTag() for UiAutomator's resource-id.
+                    // It can be enabled high in the compose hierarchy,
+                    // so that it's enabled for the whole subtree
+                    testTagsAsResourceId = true
+                },
+                onPlantClick = onPlantClick, onPageChange = onPageChange)
         }
     }
 }
@@ -116,6 +121,7 @@ fun HomePagerScreen(
             pages.forEachIndexed { index, page ->
                 val title = stringResource(id = page.titleResId)
                 Tab(
+                    modifier = Modifier.testTag("$title tab"),
                     selected = pagerState.currentPage == index,
                     onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
                     text = { Text(text = title) },

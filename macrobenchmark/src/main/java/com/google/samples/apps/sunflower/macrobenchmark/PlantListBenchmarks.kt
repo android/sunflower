@@ -20,6 +20,7 @@ import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.benchmark.macro.StartupMode
+import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
@@ -45,27 +46,26 @@ class PlantListBenchmarks {
     private fun openPlantList(compilationMode: CompilationMode) =
         benchmarkRule.measureRepeated(
             packageName = PACKAGE_NAME,
-            metrics = listOf(FrameTimingMetric()),
+            metrics = listOf(StartupTimingMetric(), FrameTimingMetric()),
             compilationMode = compilationMode,
-            iterations = 5,
+            iterations = 10,
             startupMode = StartupMode.COLD,
             setupBlock = {
                 pressHome()
-                // Start the default activity, but don't measure the frames yet
-                startActivityAndWait()
             }
         ) {
+            startActivityAndWait()
             goToPlantListTab()
         }
 }
 
 fun MacrobenchmarkScope.goToPlantListTab() {
     // Find the tab with plants list
-    val plantListTab = device.findObject(By.descContains("Plant list"))
+    val plantListTab = device.findObject(By.res("Plant list tab"))
     plantListTab.click()
 
     // Wait until plant list has children
-    val recyclerHasChild = By.hasChild(By.res(packageName, "plant_list"))
+    val recyclerHasChild = By.hasChild(By.res("plant_list"))
     device.wait(Until.hasObject(recyclerHasChild), 5_000)
 
     // Wait until idle

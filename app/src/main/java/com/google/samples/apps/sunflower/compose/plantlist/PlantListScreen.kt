@@ -64,6 +64,7 @@ fun PlantListScreen(
         ) { plant ->
             PlantListItem(plant = plant) {
                 onPlantClick(plant)
+                plant.name
             }
         }
     }
