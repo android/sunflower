@@ -16,10 +16,6 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
-import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -43,26 +39,32 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
-import androidx.core.view.MenuProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.HomeScreenBinding
+import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
+import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import kotlinx.coroutines.launch
 
 enum class SunflowerPage(
@@ -97,7 +99,31 @@ fun HomePagerScreen(
     onPlantClick: (Plant) -> Unit,
     onPageChange: (SunflowerPage) -> Unit,
     modifier: Modifier = Modifier,
-    pages: Array<SunflowerPage> = SunflowerPage.values()
+    pages: Array<SunflowerPage> = SunflowerPage.values(),
+    gardenPlantingListViewModel: GardenPlantingListViewModel = hiltViewModel(),
+    plantListViewModel: PlantListViewModel = hiltViewModel(),
+) {
+    val gardenPlants by gardenPlantingListViewModel.plantAndGardenPlantings.collectAsState(initial = emptyList())
+    val plants by plantListViewModel.plants.observeAsState(initial = emptyList())
+    HomePagerScreen(
+        onPlantClick = onPlantClick,
+        onPageChange = onPageChange,
+        modifier = modifier,
+        pages = pages,
+        gardenPlants = gardenPlants,
+        plants = plants
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun HomePagerScreen(
+    onPlantClick: (Plant) -> Unit,
+    onPageChange: (SunflowerPage) -> Unit,
+    modifier: Modifier = Modifier,
+    pages: Array<SunflowerPage> = SunflowerPage.values(),
+    gardenPlants: List<PlantAndGardenPlantings>,
+    plants: List<Plant>,
 ) {
     val pagerState = rememberPagerState()
 
@@ -140,6 +166,7 @@ fun HomePagerScreen(
             when (pages[index]) {
                 SunflowerPage.MY_GARDEN -> {
                     GardenScreen(
+                        gardenPlants = gardenPlants,
                         Modifier.fillMaxSize(),
                         onAddPlantClick = {
                             coroutineScope.launch {
@@ -150,8 +177,10 @@ fun HomePagerScreen(
                             onPlantClick(it.plant)
                         })
                 }
+
                 SunflowerPage.PLANT_LIST -> {
                     PlantListScreen(
+                        plants = plants,
                         onPlantClick = onPlantClick,
                         modifier = Modifier.fillMaxSize(),
                     )
@@ -199,8 +228,39 @@ private fun HomeTopAppBar(
 
 @Preview
 @Composable
-private fun HomeScreenPreview() {
+private fun HomeScreenPreview(
+    @PreviewParameter(HomeScreenPreviewParamProvider::class) param: HomePreviewParam
+) {
     MdcTheme {
-        HomePagerScreen(onPlantClick = {}, onPageChange = {})
+        HomePagerScreen(
+            onPlantClick = {},
+            onPageChange = {},
+            gardenPlants = param.gardenPlants,
+            plants = param.plants
+        )
     }
+}
+
+private data class HomePreviewParam(
+    val gardenPlants: List<PlantAndGardenPlantings>,
+    val plants: List<Plant>,
+)
+
+private class HomeScreenPreviewParamProvider : PreviewParameterProvider<HomePreviewParam> {
+    override val values: Sequence<HomePreviewParam> =
+        sequenceOf(
+            HomePreviewParam(
+                gardenPlants = emptyList(),
+                plants = emptyList()
+            ),
+            HomePreviewParam(
+                gardenPlants = emptyList(),
+                plants = listOf(
+                    Plant("1", "Apple", "Apple", growZoneNumber = 1),
+                    Plant("2", "Banana", "Banana", growZoneNumber = 2),
+                    Plant("3", "Carrot", "Carrot", growZoneNumber = 3),
+                    Plant("4", "Dill", "Dill", growZoneNumber = 3),
+                )
+            )
+        )
 }
