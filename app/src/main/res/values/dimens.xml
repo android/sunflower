@@ -50,4 +50,7 @@
     <!-- minimum height of plant detail page so that the collapsing toolbar can be shown on every page -->
     <dimen name="plant_description_min_height">555dp</dimen>
 
+    <!-- height of the plant detail page when the collapsing toolbar is expanded -->
+    <dimen name="status_bar_height">24dp</dimen>
+
 </resources>

@@ -25,7 +25,7 @@
       android:id="@+id/coordinator_layout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:fitsSystemWindows="true">
+      android:paddingTop="@dimen/status_bar_height">
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/compose_view"
@@ -37,7 +37,6 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:theme="@style/Theme.Sunflower.AppBarOverlay">
 
       <com.google.android.material.appbar.CollapsingToolbarLayout
