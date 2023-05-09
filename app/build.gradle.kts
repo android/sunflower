@@ -150,6 +150,7 @@ dependencies {
   debugImplementation(libs.androidx.compose.ui.tooling)
 
   // Testing dependencies
+  debugImplementation(libs.androidx.monitor)
   kaptAndroidTest(libs.hilt.android.compiler)
   androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.arch.core.testing)
@@ -160,6 +161,7 @@ dependencies {
   androidTestImplementation(libs.androidx.test.uiautomator)
   androidTestImplementation(libs.androidx.work.testing)
   androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+  androidTestImplementation(libs.guava)
   androidTestImplementation(libs.hilt.android.testing)
   androidTestImplementation(libs.accessibility.test.framework)
   androidTestImplementation(libs.kotlinx.coroutines.test)

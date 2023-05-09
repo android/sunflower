@@ -57,6 +57,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -121,7 +122,7 @@ fun PlantDetailsScreen(
     onGalleryClick: (Plant) -> Unit,
 ) {
     val plant = plantDetailsViewModel.plant.observeAsState().value
-    val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
+    val isPlanted = plantDetailsViewModel.isPlanted.collectAsState(initial = false).value
     val showSnackbar = plantDetailsViewModel.showSnackbar.observeAsState().value
 
     if (plant != null && isPlanted != null && showSnackbar != null) {
