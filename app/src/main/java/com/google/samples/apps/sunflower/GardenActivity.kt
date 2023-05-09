@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -33,25 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: update the superclass to ComponentActivity https://github.com/android/sunflower/issues/829
 @AndroidEntryPoint
-class GardenActivity : AppCompatActivity() {
-
-    private val viewModel: PlantListViewModel by viewModels()
-
-    private val menuProvider = object : MenuProvider {
-        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-            menuInflater.inflate(R.menu.menu_plant_list, menu)
-        }
-
-        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-            return when (menuItem.itemId) {
-                R.id.filter_zone -> {
-                    viewModel.updateData()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
+class GardenActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,21 +44,7 @@ class GardenActivity : AppCompatActivity() {
 
         setContent {
             SunflowerTheme {
-
-                SunflowerApp(
-                    onAttached = { toolbar ->
-                        setSupportActionBar(toolbar)
-                    },
-                    onPageChange = { page ->
-                        when (page) {
-                            SunflowerPage.MY_GARDEN -> removeMenuProvider(menuProvider)
-                            SunflowerPage.PLANT_LIST -> addMenuProvider(
-                                menuProvider,
-                                this
-                            )
-                        }
-                    }
-                )
+                SunflowerApp()
             }
         }
     }

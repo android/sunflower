@@ -62,8 +62,6 @@ fun SunFlowerNavHost(
                 onPlantClick = {
                     navController.navigate("plantDetail/${it.plantId}")
                 },
-                onPageChange = onPageChange,
-                onAttached = onAttached
             )
         }
         composable(

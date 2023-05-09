@@ -32,7 +32,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.google.samples.apps.sunflower.compose.Shapes
 
-val LightColors = lightColorScheme(
+private val LightColors = lightColorScheme(
     primary = sunflower_green_500,
     secondary = sunflower_green_700,
     onPrimary = sunflower_gray_50,

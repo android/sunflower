@@ -576,6 +576,7 @@ private fun PlantInformation(
 
 @Composable
 private fun PlantDescription(description: String) {
+    // This remains using AndroidViewBinding because this feature is not in Compose yet
     AndroidViewBinding(ItemPlantDescriptionBinding::inflate) {
         plantDescription.text = HtmlCompat.fromHtml(
             description,
