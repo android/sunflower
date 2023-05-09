@@ -200,11 +200,15 @@ private fun HomeTopAppBar(
     )
 }
 
-//@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
-//@Preview
-//@Composable
-//private fun HomeScreenPreview() {
-//    SunflowerTheme {
-//        HomePagerScreen(onPlantClick = {}, onPageChange = {})
-//    }
-//}
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+private fun HomeScreenPreview() {
+    SunflowerTheme {
+        HomePagerScreen(
+            onPlantClick = {},
+            pagerState = PagerState(),
+            scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+        )
+    }
+}

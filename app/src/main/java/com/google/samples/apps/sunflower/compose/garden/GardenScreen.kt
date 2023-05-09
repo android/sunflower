@@ -28,7 +28,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedCard
@@ -39,7 +38,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -49,7 +47,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
@@ -119,7 +116,6 @@ private fun GardenList(
 }
 
 @OptIn(
-    ExperimentalComposeUiApi::class,
     ExperimentalMaterial3Api::class
 )
 @Composable
@@ -221,7 +217,6 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
         )
         Button(
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.tertiary),
-            // TODO: update this to use Shapes file
             shape = MaterialTheme.shapes.medium,
             onClick = onAddPlantClick
         ) {
