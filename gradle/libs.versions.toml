@@ -22,7 +22,7 @@ appcompat = "1.6.1"
 benchmark = "1.1.0"
 # @keep
 compileSdk = "33"
-composeBom = "2023.04.01"
+composeBom = "2023.05.01"
 compose-compiler = "1.4.6"
 constraintLayoutCompose = "1.0.1"
 constraintLayout = "2.1.4"
