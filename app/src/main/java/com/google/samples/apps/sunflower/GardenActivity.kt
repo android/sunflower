@@ -24,7 +24,6 @@ import com.google.samples.apps.sunflower.compose.SunflowerApp
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: update the superclass to ComponentActivity https://github.com/android/sunflower/issues/829
 @AndroidEntryPoint
 class GardenActivity : ComponentActivity() {
 

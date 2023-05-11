@@ -88,18 +88,16 @@ fun HomeScreen(
         HomePagerScreen(
             onPlantClick = onPlantClick,
             pagerState = pagerState,
-            scrollBehavior = scrollBehavior,
             modifier = Modifier.padding(it)
         )
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomePagerScreen(
     onPlantClick: (Plant) -> Unit,
     pagerState: PagerState,
-    scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier,
     pages: Array<SunflowerPage> = SunflowerPage.values()
 ) {
@@ -107,7 +105,7 @@ fun HomePagerScreen(
     // Use Modifier.nestedScroll + rememberNestedScrollInteropConnection() here so that this
     // composable participates in the nested scroll hierarchy so that HomeScreen can be used in
     // use cases like a collapsing toolbar
-    Column(modifier.nestedScroll(scrollBehavior.nestedScrollConnection)) {
+    Column(modifier) {
         val coroutineScope = rememberCoroutineScope()
 
         // Tab Row
@@ -200,7 +198,7 @@ private fun HomeTopAppBar(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
 private fun HomeScreenPreview() {
@@ -208,7 +206,6 @@ private fun HomeScreenPreview() {
         HomePagerScreen(
             onPlantClick = {},
             pagerState = PagerState(),
-            scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
         )
     }
 }
