@@ -237,7 +237,6 @@ private fun GardenScreenPreview(
         GardenScreen(gardenPlants)
     }
 }
-
 private class GardenScreenPreviewParamProvider :
     PreviewParameterProvider<List<PlantAndGardenPlantings>> {
     override val values: Sequence<List<PlantAndGardenPlantings>> =

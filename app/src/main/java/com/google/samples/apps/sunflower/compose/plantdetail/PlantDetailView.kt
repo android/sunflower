@@ -118,7 +118,7 @@ fun PlantDetailsScreen(
     onGalleryClick: (Plant) -> Unit,
 ) {
     val plant = plantDetailsViewModel.plant.observeAsState().value
-    val isPlanted = plantDetailsViewModel.isPlanted.observeAsState().value
+    val isPlanted = plantDetailsViewModel.isPlanted.collectAsState(initial = false).value
     val showSnackbar = plantDetailsViewModel.showSnackbar.observeAsState().value
 
     if (plant != null && isPlanted != null && showSnackbar != null) {
