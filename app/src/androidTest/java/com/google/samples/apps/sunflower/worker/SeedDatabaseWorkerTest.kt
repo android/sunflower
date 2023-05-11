@@ -69,6 +69,6 @@ class RefreshMainDataWorkTest {
         val future = worker.startWork()
         val result = future.get()
 
-        assertThat(result, `is`(Result.success()))
+        assertThat(result, `is`(Result.Success()))
     }
 }
