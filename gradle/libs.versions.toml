@@ -15,7 +15,6 @@
 ##
 [versions]
 accessibilityTestFramework = "4.0.0"
-accompanist = "0.28.0"
 activityCompose = "1.7.0-alpha03"
 androidGradlePlugin = "7.3.1"
 appcompat = "1.6.0"
@@ -23,8 +22,8 @@ benchmark = "1.1.0-rc02"
 # @keep
 compileSdk = "33"
 composeLatest = "1.4.0-alpha03"
-composeBom = "2023.01.00"
-compose-compiler = "1.3.2"
+composeBom = "2023.04.00"
+compose-compiler = "1.4.1"
 constraintLayoutCompose = "1.0.1"
 constraintLayout = "2.1.4"
 coreTesting = "2.1.0"
@@ -36,11 +35,12 @@ gson = "2.9.0"
 hilt = "2.44"
 hiltNavigationCompose = "1.0.0"
 junit = "4.13.2"
-kotlin = "1.7.20"
+kotlin = "1.8.0"
 ktlint = "0.40.0"
 ktx = "1.7.0"
 lifecycle = "2.6.0-alpha04"
 material = "1.8.0-rc01"
+material3 = "1.0.1"
 # @keep
 minSdk = "23"
 navigation = "2.5.3"
@@ -62,7 +62,6 @@ work = "2.7.1"
 
 [libraries]
 accessibility-test-framework = { module = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework", version.ref = "accessibilityTestFramework" }
-accompanist-themeadapter-material = { module = "com.google.accompanist:accompanist-themeadapter-material", version.ref = "accompanist" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -72,6 +71,7 @@ androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = 
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeLatest" }
 androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "composeLatest" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "composeLatest" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeLatest" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeLatest" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "composeLatest" }

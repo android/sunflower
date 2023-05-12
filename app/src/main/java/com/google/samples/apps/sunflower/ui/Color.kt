@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.compose
+package com.google.samples.apps.sunflower.ui
 
-import androidx.compose.foundation.shape.CornerBasedShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
 
-val Shapes.card: CornerBasedShape
-    get() = RoundedCornerShape(
-        topStart = 0.dp,
-        topEnd = 12.dp,
-        bottomStart = 12.dp,
-        bottomEnd = 0.dp
-    )
+val sunflower_white = Color(0xdeffffff)
+val sunflower_gray_50 = Color(0xfffafafa)
+val sunflower_yellow_300 = Color(0xfff8f99f)
+val sunflower_yellow_500 = Color(0xffffff63)
+val sunflower_green_300 = Color(0xff6dc790)
+val sunflower_green_500 = Color(0xff49bb79)
+val sunflower_green_700 = Color(0xff005d2b)
+val sunflower_green_900 = Color(0xff1a231e)
+val sunflower_black = Color(0xde000000)
