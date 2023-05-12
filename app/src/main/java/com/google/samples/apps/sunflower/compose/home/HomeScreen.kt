@@ -18,52 +18,42 @@ package com.google.samples.apps.sunflower.compose.home
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
 import com.google.samples.apps.sunflower.data.Plant
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
-import com.google.samples.apps.sunflower.databinding.HomeScreenBinding
-import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
+import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import kotlinx.coroutines.launch
 
@@ -75,70 +65,54 @@ enum class SunflowerPage(
     PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
 }
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onPlantClick: (Plant) -> Unit = {},
-    onPageChange: (SunflowerPage) -> Unit = {},
-    onAttached: (Toolbar) -> Unit = {},
-) {
-    val activity = (LocalContext.current as AppCompatActivity)
-
-    AndroidViewBinding(factory = HomeScreenBinding::inflate, modifier = modifier) {
-        onAttached(toolbar)
-        activity.setSupportActionBar(toolbar)
-        composeView.setContent {
-            HomePagerScreen(onPlantClick = onPlantClick, onPageChange = onPageChange)
-        }
-    }
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun HomePagerScreen(
-    onPlantClick: (Plant) -> Unit,
-    onPageChange: (SunflowerPage) -> Unit,
-    modifier: Modifier = Modifier,
-    pages: Array<SunflowerPage> = SunflowerPage.values(),
-    gardenPlantingListViewModel: GardenPlantingListViewModel = hiltViewModel(),
-    plantListViewModel: PlantListViewModel = hiltViewModel(),
-) {
-    val gardenPlants by gardenPlantingListViewModel.plantAndGardenPlantings.collectAsState(initial = emptyList())
-    val plants by plantListViewModel.plants.observeAsState(initial = emptyList())
-    HomePagerScreen(
-        onPlantClick = onPlantClick,
-        onPageChange = onPageChange,
-        modifier = modifier,
-        pages = pages,
-        gardenPlants = gardenPlants,
-        plants = plants
-    )
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun HomePagerScreen(
-    onPlantClick: (Plant) -> Unit,
-    onPageChange: (SunflowerPage) -> Unit,
-    modifier: Modifier = Modifier,
-    pages: Array<SunflowerPage> = SunflowerPage.values(),
-    gardenPlants: List<PlantAndGardenPlantings>,
-    plants: List<Plant>,
+    viewModel: PlantListViewModel = hiltViewModel()
 ) {
     val pagerState = rememberPagerState()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    LaunchedEffect(pagerState.currentPage) {
-        onPageChange(pages[pagerState.currentPage])
+    Scaffold(
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            HomeTopAppBar(
+                pagerState = pagerState,
+                onFilterClick = { viewModel.updateData() },
+                scrollBehavior = scrollBehavior
+            )
+        }
+    ) {
+        HomePagerScreen(
+            onPlantClick = onPlantClick,
+            pagerState = pagerState,
+            modifier = Modifier.padding(it)
+        )
     }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun HomePagerScreen(
+    onPlantClick: (Plant) -> Unit,
+    pagerState: PagerState,
+    modifier: Modifier = Modifier,
+    pages: Array<SunflowerPage> = SunflowerPage.values()
+) {
 
     // Use Modifier.nestedScroll + rememberNestedScrollInteropConnection() here so that this
     // composable participates in the nested scroll hierarchy so that HomeScreen can be used in
     // use cases like a collapsing toolbar
-    Column(modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
+    Column(modifier) {
         val coroutineScope = rememberCoroutineScope()
 
         // Tab Row
-        TabRow(selectedTabIndex = pagerState.currentPage) {
+        TabRow(
+            selectedTabIndex = pagerState.currentPage,
+            containerColor = MaterialTheme.colorScheme.background,
+        ) {
             pages.forEachIndexed { index, page ->
                 val title = stringResource(id = page.titleResId)
                 Tab(
@@ -151,8 +125,8 @@ fun HomePagerScreen(
                             contentDescription = title
                         )
                     },
-                    unselectedContentColor = MaterialTheme.colors.primaryVariant,
-                    selectedContentColor = MaterialTheme.colors.secondary,
+                    unselectedContentColor = MaterialTheme.colorScheme.secondary,
+                    selectedContentColor = MaterialTheme.colorScheme.tertiary,
                 )
             }
         }
@@ -166,7 +140,6 @@ fun HomePagerScreen(
             when (pages[index]) {
                 SunflowerPage.MY_GARDEN -> {
                     GardenScreen(
-                        gardenPlants = gardenPlants,
                         Modifier.fillMaxSize(),
                         onAddPlantClick = {
                             coroutineScope.launch {
@@ -180,7 +153,6 @@ fun HomePagerScreen(
 
                 SunflowerPage.PLANT_LIST -> {
                     PlantListScreen(
-                        plants = plants,
                         onPlantClick = onPlantClick,
                         modifier = Modifier.fillMaxSize(),
                     )
@@ -190,11 +162,12 @@ fun HomePagerScreen(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeTopAppBar(
     pagerState: PagerState,
     onFilterClick: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
@@ -208,7 +181,7 @@ private fun HomeTopAppBar(
                 )
             }
         },
-        modifier.statusBarsPadding(),
+        modifier = modifier.statusBarsPadding(),
         actions = {
             if (pagerState.currentPage == SunflowerPage.PLANT_LIST.ordinal) {
                 IconButton(onClick = onFilterClick) {
@@ -217,50 +190,23 @@ private fun HomeTopAppBar(
                         contentDescription = stringResource(
                             id = R.string.menu_filter_by_grow_zone
                         ),
-                        tint = MaterialTheme.colors.onPrimary
+                        tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
         },
-        elevation = 0.dp
+        scrollBehavior = scrollBehavior
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
-private fun HomeScreenPreview(
-    @PreviewParameter(HomeScreenPreviewParamProvider::class) param: HomePreviewParam
-) {
-    MdcTheme {
+private fun HomeScreenPreview() {
+    SunflowerTheme {
         HomePagerScreen(
             onPlantClick = {},
-            onPageChange = {},
-            gardenPlants = param.gardenPlants,
-            plants = param.plants
+            pagerState = PagerState(),
         )
     }
-}
-
-private data class HomePreviewParam(
-    val gardenPlants: List<PlantAndGardenPlantings>,
-    val plants: List<Plant>,
-)
-
-private class HomeScreenPreviewParamProvider : PreviewParameterProvider<HomePreviewParam> {
-    override val values: Sequence<HomePreviewParam> =
-        sequenceOf(
-            HomePreviewParam(
-                gardenPlants = emptyList(),
-                plants = emptyList()
-            ),
-            HomePreviewParam(
-                gardenPlants = emptyList(),
-                plants = listOf(
-                    Plant("1", "Apple", "Apple", growZoneNumber = 1),
-                    Plant("2", "Banana", "Banana", growZoneNumber = 2),
-                    Plant("3", "Carrot", "Carrot", growZoneNumber = 3),
-                    Plant("4", "Dill", "Dill", growZoneNumber = 3),
-                )
-            )
-        )
 }

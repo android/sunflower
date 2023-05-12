@@ -42,21 +42,19 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -64,7 +62,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
@@ -93,7 +90,6 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.accompanist.themeadapter.material.MdcTheme
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
@@ -101,6 +97,7 @@ import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
+import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
 /**
@@ -302,7 +299,7 @@ private fun PlantImage(
     imageUrl: String,
     imageHeight: Dp,
     modifier: Modifier = Modifier,
-    placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
+    placeholderColor: Color = MaterialTheme.colorScheme.onSurface.copy(0.2f)
 ) {
     var isLoading by remember { mutableStateOf(true) }
     Box(
@@ -361,6 +358,8 @@ private fun PlantFab(
     FloatingActionButton(
         onClick = onFabClick,
         shape = MaterialTheme.shapes.small,
+        containerColor = MaterialTheme.colorScheme.tertiary,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         // Semantics in parent due to https://issuetracker.google.com/184825850
         modifier = modifier.semantics {
             contentDescription = addPlantContentDescription
@@ -400,6 +399,7 @@ private fun PlantToolbar(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun PlantDetailsToolbar(
     plantName: String,
@@ -409,42 +409,44 @@ private fun PlantDetailsToolbar(
 ) {
     Surface {
         TopAppBar(
-            modifier = modifier.statusBarsPadding(),
-            backgroundColor = MaterialTheme.colors.surface
-        ) {
-            IconButton(
-                onBackClick,
-                Modifier.align(Alignment.CenterVertically)
-            ) {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(id = R.string.a11y_back)
-                )
+            modifier = modifier.statusBarsPadding().background(color = MaterialTheme.colorScheme.surface),
+            title = {
+                Row {
+                    IconButton(
+                        onBackClick,
+                        Modifier.align(Alignment.CenterVertically)
+                    ) {
+                        Icon(
+                            Icons.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.a11y_back)
+                        )
+                    }
+                    Text(
+                        text = plantName,
+                        style = MaterialTheme.typography.titleLarge,
+                        // As title in TopAppBar has extra inset on the left, need to do this: b/158829169
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxSize()
+                            .wrapContentSize(Alignment.Center)
+                    )
+                    val shareContentDescription =
+                        stringResource(R.string.menu_item_share_plant)
+                    IconButton(
+                        onShareClick,
+                        Modifier
+                            .align(Alignment.CenterVertically)
+                            // Semantics in parent due to https://issuetracker.google.com/184825850
+                            .semantics { contentDescription = shareContentDescription }
+                    ) {
+                        Icon(
+                            Icons.Filled.Share,
+                            contentDescription = null
+                        )
+                    }
+                }
             }
-            Text(
-                text = plantName,
-                style = MaterialTheme.typography.h6,
-                // As title in TopAppBar has extra inset on the left, need to do this: b/158829169
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxSize()
-                    .wrapContentSize(Alignment.Center)
-            )
-            val shareContentDescription =
-                stringResource(R.string.menu_item_share_plant)
-            IconButton(
-                onShareClick,
-                Modifier
-                    .align(Alignment.CenterVertically)
-                    // Semantics in parent due to https://issuetracker.google.com/184825850
-                    .semantics { contentDescription = shareContentDescription }
-            ) {
-                Icon(
-                    Icons.Filled.Share,
-                    contentDescription = null
-                )
-            }
-        }
+        )
     }
 }
 
@@ -467,7 +469,7 @@ private fun PlantHeaderActions(
                 maxHeight = Dimens.ToolbarIconSize
             )
             .background(
-                color = MaterialTheme.colors.surface,
+                color = MaterialTheme.colorScheme.surface,
                 shape = CircleShape
             )
 
@@ -502,7 +504,6 @@ private fun PlantHeaderActions(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun PlantInformation(
     name: String,
@@ -517,7 +518,7 @@ private fun PlantInformation(
     Column(modifier = modifier.padding(Dimens.PaddingLarge)) {
         Text(
             text = name,
-            style = MaterialTheme.typography.h5,
+            style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier
                 .padding(
                     start = Dimens.PaddingSmall,
@@ -540,23 +541,22 @@ private fun PlantInformation(
             Column(Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(id = R.string.watering_needs_prefix),
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(horizontal = Dimens.PaddingSmall)
                         .align(Alignment.CenterHorizontally)
                 )
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    Text(
-                        text = pluralStringResource(
-                            R.plurals.watering_needs_suffix,
-                            wateringInterval,
-                            wateringInterval
-                        ),
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                    )
-                }
+
+                val wateringIntervalText = pluralStringResource(
+                    R.plurals.watering_needs_suffix, wateringInterval, wateringInterval
+                )
+
+                Text(
+                    text = wateringIntervalText,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                )
             }
             if (hasValidUnsplashKey) {
                 Image(
@@ -574,6 +574,7 @@ private fun PlantInformation(
 
 @Composable
 private fun PlantDescription(description: String) {
+    // This remains using AndroidViewBinding because this feature is not in Compose yet
     AndroidViewBinding(ItemPlantDescriptionBinding::inflate) {
         plantDescription.text = HtmlCompat.fromHtml(
             description,
@@ -587,7 +588,7 @@ private fun PlantDescription(description: String) {
 @Preview
 @Composable
 private fun PlantDetailContentPreview() {
-    MdcTheme {
+    SunflowerTheme {
         Surface {
             PlantDetails(
                 Plant("plantId", "Tomato", "HTML<br>description", 6),
