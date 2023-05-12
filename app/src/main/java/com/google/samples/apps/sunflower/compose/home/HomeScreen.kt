@@ -48,14 +48,12 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import kotlinx.coroutines.launch
 
@@ -94,28 +92,6 @@ fun HomeScreen(
         )
     }
 }
-
-//@OptIn(ExperimentalFoundationApi::class)
-//@Composable
-//fun HomePagerScreen(
-//    onPlantClick: (Plant) -> Unit,
-//    pagerState: PagerState,
-//    modifier: Modifier = Modifier,
-//    pages: Array<SunflowerPage> = SunflowerPage.values(),
-//    gardenPlantingListViewModel: GardenPlantingListViewModel = hiltViewModel(),
-//    plantListViewModel: PlantListViewModel = hiltViewModel(),
-//) {
-//    val gardenPlants by gardenPlantingListViewModel.plantAndGardenPlantings.collectAsState(initial = emptyList())
-//    val plants by plantListViewModel.plants.observeAsState(initial = emptyList())
-//    HomePagerScreen(
-//        onPlantClick = onPlantClick,
-//        onPageChange = onPageChange,
-//        modifier = modifier,
-//        pages = pages,
-//        gardenPlants = gardenPlants,
-//        plants = plants
-//    )
-//}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
