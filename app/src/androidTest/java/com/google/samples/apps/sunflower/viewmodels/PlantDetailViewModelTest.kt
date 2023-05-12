@@ -29,7 +29,6 @@ import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.flow.first
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Before
@@ -82,6 +81,6 @@ class PlantDetailViewModelTest {
     @Test
     @Throws(InterruptedException::class)
     fun testDefaultValues() = coroutineRule.runBlockingTest {
-        assertFalse(viewModel.isPlanted.first())
+        assertFalse(getValue(viewModel.isPlanted))
     }
 }
