@@ -74,7 +74,8 @@ class GardenActivity : AppCompatActivity() {
                                 this
                             )
                         }
-                    }
+                    },
+                    plantListViewModel = viewModel,
                 )
             }
         }

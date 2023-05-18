@@ -81,6 +81,7 @@ fun HomeScreen(
     onPlantClick: (Plant) -> Unit = {},
     onPageChange: (SunflowerPage) -> Unit = {},
     onAttached: (Toolbar) -> Unit = {},
+    plantListViewModel: PlantListViewModel = hiltViewModel()
 ) {
     val activity = (LocalContext.current as AppCompatActivity)
 
@@ -88,7 +89,11 @@ fun HomeScreen(
         onAttached(toolbar)
         activity.setSupportActionBar(toolbar)
         composeView.setContent {
-            HomePagerScreen(onPlantClick = onPlantClick, onPageChange = onPageChange)
+            HomePagerScreen(
+                onPlantClick = onPlantClick,
+                onPageChange = onPageChange,
+                plantListViewModel = plantListViewModel
+            )
         }
     }
 }
