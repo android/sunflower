@@ -23,6 +23,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -34,14 +36,17 @@ import com.google.samples.apps.sunflower.compose.gallery.GalleryScreen
 import com.google.samples.apps.sunflower.compose.home.HomeScreen
 import com.google.samples.apps.sunflower.compose.home.SunflowerPage
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
+import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
 @Composable
 fun SunflowerApp(
     onPageChange: (SunflowerPage) -> Unit = {},
     onAttached: (Toolbar) -> Unit = {},
+    plantListViewModel: PlantListViewModel = hiltViewModel(),
 ) {
     val navController = rememberNavController()
     SunFlowerNavHost(
+        plantListViewModel = plantListViewModel,
         navController = navController,
         onPageChange = onPageChange,
         onAttached = onAttached
@@ -53,6 +58,7 @@ fun SunFlowerNavHost(
     navController: NavHostController,
     onPageChange: (SunflowerPage) -> Unit = {},
     onAttached: (Toolbar) -> Unit = {},
+    plantListViewModel: PlantListViewModel = hiltViewModel(),
 ) {
     val activity = (LocalContext.current as Activity)
     NavHost(navController = navController, startDestination = "home") {
@@ -62,7 +68,8 @@ fun SunFlowerNavHost(
                     navController.navigate("plantDetail/${it.plantId}")
                 },
                 onPageChange = onPageChange,
-                onAttached = onAttached
+                onAttached = onAttached,
+                plantListViewModel = plantListViewModel
             )
         }
         composable(
