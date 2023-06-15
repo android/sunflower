@@ -20,7 +20,9 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.widget.Toolbar
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -64,6 +66,7 @@ fun SunFlowerNavHost(
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
             HomeScreen(
+                modifier = Modifier.systemBarsPadding(),
                 onPlantClick = {
                     navController.navigate("plantDetail/${it.plantId}")
                 },
