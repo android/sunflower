@@ -71,9 +71,6 @@ class GardenActivity : ComponentActivity() {
             setContent {
                 MdcTheme {
                     SunflowerApp(
-                        onAttached = { toolbar ->
-                          //  setSupportActionBar(toolbar)
-                        },
                         onPageChange = { page ->
                             when (page) {
                                 SunflowerPage.MY_GARDEN -> removeMenuProvider(menuProvider)
