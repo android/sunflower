@@ -21,6 +21,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: update the superclass to ComponentActivity https://github.com/android/sunflower/issues/829
 @AndroidEntryPoint
-class GardenActivity : AppCompatActivity() {
+class GardenActivity : ComponentActivity() {
 
     private val viewModel: PlantListViewModel by viewModels()
 
@@ -72,7 +73,7 @@ class GardenActivity : AppCompatActivity() {
                 MdcTheme {
                     SunflowerApp(
                         onAttached = { toolbar ->
-                            setSupportActionBar(toolbar)
+                          //  setSupportActionBar(toolbar)
                         },
                         onPageChange = { page ->
                             when (page) {
