@@ -27,6 +27,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.calculatePan
+import androidx.compose.foundation.gestures.calculateZoom
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,6 +43,7 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -62,6 +67,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -69,9 +75,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -86,6 +95,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -98,10 +108,13 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
+import com.google.samples.apps.sunflower.compose.utils.setScrolling
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.launch
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -230,7 +243,7 @@ fun PlantDetails(
             },
             onFabClick = callbacks.onFabClick,
             onGalleryClick = { callbacks.onGalleryClick(plant) },
-            contentAlpha = { contentAlpha.value }
+            contentAlpha = { contentAlpha.value },
         )
         PlantToolbar(
             toolbarState, plant.name, callbacks,
@@ -253,16 +266,58 @@ private fun PlantDetailsContent(
     onGalleryClick: () -> Unit,
     contentAlpha: () -> Float,
 ) {
+    val scale = remember { mutableStateOf(1f) }
+    val offsetX = remember { mutableStateOf(1f) }
+    val offsetY = remember { mutableStateOf(1f) }
+    val plantImageZIndex = remember { mutableStateOf(1f) }
+    val maxScale = remember { mutableStateOf(1f) }
+    val minScale = remember { mutableStateOf(3f) }
+
     Column(Modifier.verticalScroll(scrollState)) {
         ConstraintLayout {
             val (image, fab, info) = createRefs()
+            val coroutineScope = rememberCoroutineScope()
 
             PlantImage(
                 imageUrl = plant.imageUrl,
                 imageHeight = imageHeight,
                 modifier = Modifier
+                    .zIndex(plantImageZIndex.value)
                     .constrainAs(image) { top.linkTo(parent.top) }
                     .alpha(contentAlpha())
+                    .pointerInput(Unit) {
+                        awaitEachGesture {
+                            awaitFirstDown()
+                            do {
+                                val event = awaitPointerEvent()
+                                scale.value *= event.calculateZoom()
+                                if (scale.value > 1) {
+                                    coroutineScope.launch {
+                                        scrollState.setScrolling(false)
+                                    }
+                                    plantImageZIndex.value = 5f
+                                    val offset = event.calculatePan()
+                                    offsetX.value += offset.x
+                                    offsetY.value += offset.y
+                                    coroutineScope.launch {
+                                        scrollState.setScrolling(true)
+                                    }
+                                }
+                            } while (event.changes.any { it.pressed })
+                            if (currentEvent.type == PointerEventType.Release) {
+                                scale.value = 1f
+                                offsetX.value = 1f
+                                offsetY.value = 1f
+                                plantImageZIndex.value = 1f
+                            }
+                        }
+                    }
+                    .graphicsLayer {
+                        scaleX = maxOf(maxScale.value, minOf(minScale.value, scale.value))
+                        scaleY = maxOf(maxScale.value, minOf(minScale.value, scale.value))
+                        translationX = offsetX.value
+                        translationY = offsetY.value
+                    }
             )
 
             if (!isPlanted) {
@@ -270,6 +325,7 @@ private fun PlantDetailsContent(
                 PlantFab(
                     onFabClick = onFabClick,
                     modifier = Modifier
+                        .zIndex(2f)
                         .constrainAs(fab) {
                             centerAround(image.bottom)
                             absoluteRight.linkTo(
