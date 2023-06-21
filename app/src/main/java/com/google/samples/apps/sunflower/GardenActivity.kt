@@ -61,29 +61,29 @@ class GardenActivity : ComponentActivity() {
 
         // Displaying edge-to-edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        setContentView(ComposeView(this).apply {
-            // Provide a different ComposeView instead of using ComponentActivity's setContent
-            // method so that the `consumeWindowInsets` property can be set to `false`. This is
-            // needed so that insets can be properly applied to `HomeScreen` which uses View interop
-            // This can likely be changed when `HomeScreen` is fully in Compose.
-            consumeWindowInsets = false
-            setContent {
-                MdcTheme {
-                    SunflowerApp(
+        setContent {
+            MdcTheme {
+                SunflowerApp(
                         onPageChange = { page ->
                             when (page) {
                                 SunflowerPage.MY_GARDEN -> removeMenuProvider(menuProvider)
                                 SunflowerPage.PLANT_LIST -> addMenuProvider(
-                                    menuProvider,
-                                    this@GardenActivity
+                                        menuProvider,
+                                        this@GardenActivity
                                 )
                             }
                         },
                         plantListViewModel = viewModel,
-                    )
-                }
+                )
             }
-        })
+        }
+
+//        setContentView(ComposeView(this).apply {
+//            // Provide a different ComposeView instead of using ComponentActivity's setContent
+//            // method so that the `consumeWindowInsets` property can be set to `false`. This is
+//            // needed so that insets can be properly applied to `HomeScreen` which uses View interop
+//            // This can likely be changed when `HomeScreen` is fully in Compose.
+//            consumeWindowInsets = false
+//        })
     }
 }
