@@ -33,6 +33,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
@@ -80,20 +81,25 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onPlantClick: (Plant) -> Unit = {},
     onPageChange: (SunflowerPage) -> Unit = {},
-    onAttached: (Toolbar) -> Unit = {},
     plantListViewModel: PlantListViewModel = hiltViewModel()
 ) {
     val activity = (LocalContext.current as AppCompatActivity)
 
     AndroidViewBinding(factory = HomeScreenBinding::inflate, modifier = modifier) {
-        onAttached(toolbar)
         activity.setSupportActionBar(toolbar)
         composeView.setContent {
-            HomePagerScreen(
-                onPlantClick = onPlantClick,
-                onPageChange = onPageChange,
-                plantListViewModel = plantListViewModel
-            )
+            Scaffold(
+                    topBar = {
+
+                    }
+            ) { _ ->
+                HomePagerScreen(
+                        onPlantClick = onPlantClick,
+                        onPageChange = onPageChange,
+                        plantListViewModel = plantListViewModel
+                )
+            }
+
         }
     }
 }

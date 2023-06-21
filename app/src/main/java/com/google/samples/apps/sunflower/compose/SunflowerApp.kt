@@ -41,7 +41,6 @@ import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 @Composable
 fun SunflowerApp(
     onPageChange: (SunflowerPage) -> Unit = {},
-    onAttached: (Toolbar) -> Unit = {},
     plantListViewModel: PlantListViewModel = hiltViewModel(),
 ) {
     val navController = rememberNavController()
@@ -49,7 +48,6 @@ fun SunflowerApp(
         plantListViewModel = plantListViewModel,
         navController = navController,
         onPageChange = onPageChange,
-        onAttached = onAttached
     )
 }
 
@@ -57,7 +55,6 @@ fun SunflowerApp(
 fun SunFlowerNavHost(
     navController: NavHostController,
     onPageChange: (SunflowerPage) -> Unit = {},
-    onAttached: (Toolbar) -> Unit = {},
     plantListViewModel: PlantListViewModel = hiltViewModel(),
 ) {
     val activity = (LocalContext.current as Activity)
@@ -68,7 +65,6 @@ fun SunFlowerNavHost(
                     navController.navigate("plantDetail/${it.plantId}")
                 },
                 onPageChange = onPageChange,
-                onAttached = onAttached,
                 plantListViewModel = plantListViewModel
             )
         }
