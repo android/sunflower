@@ -302,7 +302,7 @@ private fun PlantImage(
     imageUrl: String,
     imageHeight: Dp,
     modifier: Modifier = Modifier,
-    placeholderColor: Color = MaterialTheme.colors.onSurface.copy(0.2f)
+    placeholderColor: Color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface.copy(0.2f)
 ) {
     var isLoading by remember { mutableStateOf(true) }
     Box(
@@ -410,7 +410,7 @@ private fun PlantDetailsToolbar(
     Surface {
         TopAppBar(
             modifier = modifier.statusBarsPadding(),
-            backgroundColor = MaterialTheme.colors.surface
+            backgroundColor = androidx.compose.material3.MaterialTheme.colorScheme.surface
         ) {
             IconButton(
                 onBackClick,
@@ -467,7 +467,7 @@ private fun PlantHeaderActions(
                 maxHeight = Dimens.ToolbarIconSize
             )
             .background(
-                color = MaterialTheme.colors.surface,
+                color = androidx.compose.material3.MaterialTheme.colorScheme.surface,
                 shape = CircleShape
             )
 
@@ -540,7 +540,7 @@ private fun PlantInformation(
             Column(Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(id = R.string.watering_needs_prefix),
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(horizontal = Dimens.PaddingSmall)

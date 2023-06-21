@@ -168,7 +168,7 @@ private fun GardenListItem(
                 text = stringResource(id = R.string.plant_date_header),
                 Modifier.align(Alignment.CenterHorizontally),
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.primaryVariant,
+                color = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.subtitle2
             )
             Text(
@@ -184,7 +184,7 @@ private fun GardenListItem(
                     .align(Alignment.CenterHorizontally)
                     .padding(top = marginNormal),
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.primaryVariant,
+                color = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.subtitle2
             )
             Text(
@@ -232,7 +232,7 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
             onClick = onAddPlantClick
         ) {
             Text(
-                color = MaterialTheme.colors.primary,
+                color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
                 text = stringResource(id = R.string.add_plant)
             )
         }
