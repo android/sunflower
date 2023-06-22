@@ -84,7 +84,7 @@ private fun GalleryScreen(
                 count = pagingItems.itemCount,
                 key = { index ->
                     val photo = pagingItems[index]
-                    photo?.id ?: ""
+                   "${photo?.id}${index}"
                 }
             ) { index ->
                 val photo = pagingItems[index] ?: return@items
