@@ -58,7 +58,7 @@ class PlantDetailViewModelTest {
     lateinit var plantRepository: PlantRepository
 
     @Inject
-    lateinit var gardenPlantRepository: GardenPlantingRepository
+    lateinit var gardenPlantingRepository: GardenPlantingRepository
 
     @Before
     fun setUp() {
@@ -70,7 +70,7 @@ class PlantDetailViewModelTest {
         val savedStateHandle: SavedStateHandle = SavedStateHandle().apply {
             set("plantId", testPlant.plantId)
         }
-        viewModel = PlantDetailViewModel(savedStateHandle, plantRepository, gardenPlantRepository)
+        viewModel = PlantDetailViewModel(savedStateHandle, plantRepository, gardenPlantingRepository)
     }
 
     @After
