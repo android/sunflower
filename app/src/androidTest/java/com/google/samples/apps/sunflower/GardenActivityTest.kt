@@ -16,14 +16,21 @@
 
 package com.google.samples.apps.sunflower
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.rule.ActivityTestRule
+import android.util.Log
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.printToLog
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.work.Configuration
+import androidx.work.testing.SynchronousExecutor
+import androidx.work.testing.WorkManagerTestInitHelper
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -32,20 +39,39 @@ import org.junit.rules.RuleChain
 class GardenActivityTest {
 
     private val hiltRule = HiltAndroidRule(this)
-    private val activityTestRule = ActivityTestRule(GardenActivity::class.java)
+    private val composeTestRule = createAndroidComposeRule<GardenActivity>()
 
     @get:Rule
-    val rule = RuleChain
+    val rule: RuleChain = RuleChain
         .outerRule(hiltRule)
-        .around(activityTestRule)
+        .around(composeTestRule)
+
+    @Before
+    fun setup() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val config = Configuration.Builder()
+            .setMinimumLoggingLevel(Log.DEBUG)
+            .setExecutor(SynchronousExecutor())
+            .build()
+
+        WorkManagerTestInitHelper.initializeTestWorkManager(context, config)
+    }
 
     @Test fun clickAddPlant_OpensPlantList() {
         // Given that no Plants are added to the user's garden
 
         // When the "Add Plant" button is clicked
-        onView(withId(R.id.add_plant)).perform(click())
+        with(composeTestRule.onNodeWithText("Add plant")) {
+            assertExists()
+            assertIsDisplayed()
+            performClick()
+        }
 
-        // Then the ViewPager should change to the Plant List page
-        onView(withId(R.id.plant_list)).check(matches(isDisplayed()))
+        composeTestRule.waitForIdle()
+
+        // Then the pager should change to the Plant List page
+        with(composeTestRule.onNodeWithTag("plant_list")) {
+            assertExists()
+        }
     }
 }

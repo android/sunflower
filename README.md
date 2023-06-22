@@ -1,39 +1,38 @@
-Android Sunflower
-=================
+# Android Sunflower with Compose
 
-A gardening app illustrating Android development best practices with Android Jetpack.
+A gardening app illustrating Android development best practices with migrating
+a View-based app to Jetpack Compose.
 
-Android Sunflower is currently under heavy development.
-Note that some changes (such as database schema modifications) are not backwards
-compatible and may cause the app to crash. In this
-case, please uninstall and re-install the app.
+**To learn about how Sunflower was migrated to Compose, see the [migration journey](docs/MigrationJourney.md) document.**
 
-Introduction
-------------
+This sample showcases:
+* Compose working in an existing app: including integration with strings, resources, and themes and styles.
+* Integration with an existing architecture based on Jetpack libraries.
+* `CollapsingToolbarLayout` behavior implemented manually with Compose.
+* Showing [Snackbars](https://material.io/components/snackbars) with Compose.
+* Using Compose within a `RecyclerView` ([#766](https://github.com/android/sunflower/pull/766))
 
-Android Jetpack is a set of components, tools and guidance to make great Android apps. They bring
-together the existing Support Library and Architecture Components and arrange them into four
-categories:
+**Note**: To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
 
-![Android Jetpack](screenshots/jetpack_donut.png "Android Jetpack Components")
+## Screenshots
 
-Android Sunflower demonstrates utilizing these components to create a simple gardening app.
-Read the
-[Introducing Android Sunflower](https://medium.com/androiddevelopers/introducing-android-sunflower-e421b43fe0c2)
-article for a walkthrough of the app.
+<img src="screenshots/screenshots.png"/>
 
-Getting Started
----------------
-This project uses the Gradle build system. To build this project, use the
-`gradlew build` command or use "Import Project" in Android Studio.
+## Features
 
-There are two Gradle tasks for testing the project:
-* `connectedAndroidTest` - for running Espresso on a connected device
-* `test` - for running unit tests
+Sunflower's [plant details screen](app/src/main/java/com/google/samples/apps/sunflower/PlantDetailFragment.kt)
+is built with Compose as well as the [plant list item](app/src/main/java/com/google/samples/apps/sunflower/compose/plantlist/PlantListItemView.kt)
+view within a `RecyclerView`.
 
-For more resources on learning Android development, visit the
-[Developer Guides](https://developer.android.com/guide/) at
-[developer.android.com](https://developer.android.com).
+All Compose code can be found in the `compose`
+[folder](app/src/main/java/com/google/samples/apps/sunflower/compose).
+
+**Note**: As Compose cannot render HTML code in `Text` yet. The 
+`AndroidViewBinding` API is used to embed a `TextView` in Compose. See the 
+`PlantDescription` composable in the
+[PlantDetailView file](app/src/main/java/com/google/samples/apps/sunflower/compose/plantdetail/PlantDetailView.kt).
+
+## Requirements
 
 ### Unsplash API key
 
@@ -49,69 +48,6 @@ unsplash_access_key=<your Unsplash access key>
 ```
 
 The app is still usable without an API key, though you won't be able to navigate to the gallery screen.
-
-Screenshots
------------
-
-![List of plants](screenshots/phone_plant_list.png "A list of plants")
-![Plant details](screenshots/phone_plant_detail.png "Details for a specific plant")
-![My Garden](screenshots/phone_my_garden.png "Plants that have been added to your garden")
-
-Libraries Used
---------------
-* [Foundation][0] - Components for core system capabilities, Kotlin extensions and support for
-  multidex and automated testing.
-  * [AppCompat][1] - Degrade gracefully on older versions of Android.
-  * [Android KTX][2] - Write more concise, idiomatic Kotlin code.
-  * [Test][4] - An Android testing framework for unit and runtime UI tests.
-* [Architecture][10] - A collection of libraries that help you design robust, testable, and
-  maintainable apps. Start with classes for managing your UI component lifecycle and handling data
-  persistence.
-  * [Data Binding][11] - Declaratively bind observable data to UI elements.
-  * [Lifecycles][12] - Create a UI that automatically responds to lifecycle events.
-  * [LiveData][13] - Build data objects that notify views when the underlying database changes.
-  * [Navigation][14] - Handle everything needed for in-app navigation.
-  * [Room][16] - Access your app's SQLite database with in-app objects and compile-time checks.
-  * [ViewModel][17] - Store UI-related data that isn't destroyed on app rotations. Easily schedule
-     asynchronous tasks for optimal execution.
-  * [WorkManager][18] - Manage your Android background jobs.
-* [UI][30] - Details on why and how to use UI Components in your apps - together or separate
-  * [Animations & Transitions][31] - Move widgets and transition between screens.
-  * [Fragment][34] - A basic unit of composable UI.
-  * [Layout][35] - Lay out widgets using different algorithms.
-* Third party and miscellaneous libraries
-  * [Glide][90] for image loading
-  * [Hilt][92]: for [dependency injection][93]
-  * [Kotlin Coroutines][91] for managing background threads with simplified code and reducing needs for callbacks
-
-[0]: https://developer.android.com/jetpack/components
-[1]: https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
-[2]: https://developer.android.com/kotlin/ktx
-[4]: https://developer.android.com/training/testing/
-[10]: https://developer.android.com/jetpack/arch/
-[11]: https://developer.android.com/topic/libraries/data-binding/
-[12]: https://developer.android.com/topic/libraries/architecture/lifecycle
-[13]: https://developer.android.com/topic/libraries/architecture/livedata
-[14]: https://developer.android.com/topic/libraries/architecture/navigation/
-[16]: https://developer.android.com/topic/libraries/architecture/room
-[17]: https://developer.android.com/topic/libraries/architecture/viewmodel
-[18]: https://developer.android.com/topic/libraries/architecture/workmanager
-[30]: https://developer.android.com/guide/topics/ui
-[31]: https://developer.android.com/training/animation/
-[34]: https://developer.android.com/guide/components/fragments
-[35]: https://developer.android.com/guide/topics/ui/declaring-layout
-[90]: https://bumptech.github.io/glide/
-[91]: https://kotlinlang.org/docs/reference/coroutines-overview.html
-[92]: https://developer.android.com/training/dependency-injection/hilt-android
-[93]: https://developer.android.com/training/dependency-injection
-
-Upcoming features
------------------
-Updates will include incorporating additional Jetpack components and updating existing components
-as the component libraries evolve.
-
-Interested in seeing a particular feature of the Android Framework or Jetpack implemented in this
-app? Please open a new [issue](https://github.com/android/sunflower/issues).
 
 Android Studio IDE setup
 ------------------------
@@ -140,15 +76,17 @@ Check out these Wiki pages to learn more about Android Sunflower:
 
 Non-Goals
 ---------
-The focus of this project is on Android Jetpack and the Android framework.
-Thus, there are no immediate plans to implement features outside of this scope.
+Previously, this sample app was focused on demonstrating best practices for
+multiple Jetpack libraries. However, this is no longer the case and development
+will instead be focused on how to adopt Compose in an existing View-based app.
+So, there are no plans to implement features outside of this scope. Keep this
+in mind when making contributions to this library.
 
 Support
 -------
 
 - Stack Overflow:
-  - https://stackoverflow.com/questions/tagged/android
-  - https://stackoverflow.com/questions/tagged/android-jetpack
+  - https://stackoverflow.com/questions/tagged/android-jetpack-compose
 
 If you've found an error in this sample, please file an issue:
 https://github.com/android/sunflower/issues
@@ -177,7 +115,7 @@ the License at
   https://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
-License for the specific language governing permissions and limitations under
-the License.
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

@@ -48,6 +48,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image" translation_description="Accessibility text for each of the plant images shown in the 'My garden' and 'Plant list' screens.">Picture of plant</string>
+    <string name="a11y_back" translatable="false">Navigate up</string>
     <string name="gallery_content_description" translation_description="Content description for the clickable image to navigate to the gallery screen">Navigate to gallery screen</string>
     <string name="plant_detail_image_content_description" translation_description="Content description for the header / hero image that is show at the top of the plant detail screen.">Image of plant</string>
 
