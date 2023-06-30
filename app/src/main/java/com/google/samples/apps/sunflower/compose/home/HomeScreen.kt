@@ -75,6 +75,7 @@ enum class SunflowerPage(
     PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -84,6 +85,7 @@ fun HomeScreen(
     plantListViewModel: PlantListViewModel = hiltViewModel()
 ) {
     val activity = (LocalContext.current as AppCompatActivity)
+    val pagerState = rememberPagerState()
 
     AndroidViewBinding(factory = HomeScreenBinding::inflate, modifier = modifier) {
         onAttached(toolbar)
@@ -92,7 +94,8 @@ fun HomeScreen(
             HomePagerScreen(
                 onPlantClick = onPlantClick,
                 onPageChange = onPageChange,
-                plantListViewModel = plantListViewModel
+                plantListViewModel = plantListViewModel,
+                    pagerState = pagerState
             )
         }
     }
@@ -107,6 +110,7 @@ fun HomePagerScreen(
     pages: Array<SunflowerPage> = SunflowerPage.values(),
     gardenPlantingListViewModel: GardenPlantingListViewModel = hiltViewModel(),
     plantListViewModel: PlantListViewModel = hiltViewModel(),
+    pagerState: PagerState
 ) {
     val gardenPlants by gardenPlantingListViewModel.plantAndGardenPlantings.collectAsState(initial = emptyList())
     val plants by plantListViewModel.plants.observeAsState(initial = emptyList())
@@ -116,7 +120,9 @@ fun HomePagerScreen(
         modifier = modifier,
         pages = pages,
         gardenPlants = gardenPlants,
-        plants = plants
+        plants = plants,
+            pagerState = pagerState
+
     )
 }
 
@@ -129,8 +135,8 @@ fun HomePagerScreen(
     pages: Array<SunflowerPage> = SunflowerPage.values(),
     gardenPlants: List<PlantAndGardenPlantings>,
     plants: List<Plant>,
+    pagerState: PagerState
 ) {
-    val pagerState = rememberPagerState()
 
     LaunchedEffect(pagerState.currentPage) {
         onPageChange(pages[pagerState.currentPage])
@@ -231,17 +237,20 @@ private fun HomeTopAppBar(
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
 private fun HomeScreenPreview(
     @PreviewParameter(HomeScreenPreviewParamProvider::class) param: HomePreviewParam
 ) {
     MdcTheme {
+        val pagerState = rememberPagerState()
         HomePagerScreen(
             onPlantClick = {},
             onPageChange = {},
             gardenPlants = param.gardenPlants,
-            plants = param.plants
+            plants = param.plants,
+            pagerState = pagerState
         )
     }
 }
