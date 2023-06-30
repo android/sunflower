@@ -200,7 +200,7 @@ fun PlantDetails(
     Box(
         modifier
             .fillMaxSize()
-            .systemBarsPadding()
+//            .systemBarsPadding()
             // attach as a parent to the nested scroll system
             .nestedScroll(nestedScrollConnection)
     ) {
