@@ -95,7 +95,7 @@ fun HomeScreen(
                 onPlantClick = onPlantClick,
                 onPageChange = onPageChange,
                 plantListViewModel = plantListViewModel,
-                    pagerState = pagerState
+                pagerState = pagerState
             )
         }
     }
@@ -121,7 +121,7 @@ fun HomePagerScreen(
         pages = pages,
         gardenPlants = gardenPlants,
         plants = plants,
-            pagerState = pagerState
+        pagerState = pagerState
 
     )
 }
