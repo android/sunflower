@@ -32,7 +32,8 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
         return
     }
     Glide.with(view)
-        .load(imageUrl).placeholder(android.R.drawable.progress_indeterminate_horizontal)
+        .load(imageUrl)
+        .placeholder(android.R.drawable.progress_indeterminate_horizontal)
         .into(view)
 }
 
