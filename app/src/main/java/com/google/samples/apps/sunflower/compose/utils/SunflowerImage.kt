@@ -18,10 +18,9 @@ package com.google.samples.apps.sunflower.compose.utils
 
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +30,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.RequestBuilderTransform
@@ -65,13 +65,11 @@ fun SunflowerImage(
         alpha = alpha,
         colorFilter = colorFilter,
         requestBuilderTransform = requestBuilderTransform,
-            loading = placeholder {
-                Column(modifier=modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                        CircularProgressIndicator()
-                }
+        loading = placeholder {
+            Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(Modifier.size(40.dp)
+                )
             }
+        }
     )
 }
