@@ -46,6 +46,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -200,7 +201,6 @@ fun PlantDetails(
     Box(
         modifier
             .fillMaxSize()
-//            .systemBarsPadding()
             // attach as a parent to the nested scroll system
             .nestedScroll(nestedScrollConnection)
     ) {
@@ -409,7 +409,9 @@ private fun PlantDetailsToolbar(
 ) {
     Surface {
         TopAppBar(
-            modifier = modifier.statusBarsPadding().background(color = MaterialTheme.colorScheme.surface),
+            modifier = modifier
+                .statusBarsPadding()
+                .background(color = MaterialTheme.colorScheme.surface),
             title = {
                 Row {
                     IconButton(
