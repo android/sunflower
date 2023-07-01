@@ -31,6 +31,7 @@
     <dimen name="margin_extra_small">4dp</dimen>
 
     <dimen name="padding_large">48dp</dimen>
+    <dimen name="min_height_collapse_plant_details">750dp</dimen>
 
     <dimen name="plant_item_image_height">95dp</dimen>
 
