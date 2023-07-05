@@ -146,6 +146,7 @@ dependencies {
   implementation(libs.androidx.compose.runtime.livedata)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.glide)
+  implementation(libs.accompanist.systemuicontroller)
   debugImplementation(libs.androidx.compose.ui.tooling)
 
   // Testing dependencies
