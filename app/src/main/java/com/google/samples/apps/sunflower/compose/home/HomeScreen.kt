@@ -21,6 +21,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -170,6 +171,7 @@ fun HomePagerScreen(
 
         // Pages
         HorizontalPager(
+            modifier = Modifier.background(MaterialTheme.colors.background),
             pageCount = pages.size,
             state = pagerState,
             verticalAlignment = Alignment.Top
