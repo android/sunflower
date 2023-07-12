@@ -67,8 +67,7 @@ fun SunflowerImage(
         requestBuilderTransform = requestBuilderTransform,
         loading = placeholder {
             Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(Modifier.size(40.dp)
-                )
+                CircularProgressIndicator(Modifier.size(40.dp))
             }
         }
     )
