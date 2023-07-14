@@ -17,7 +17,7 @@
 accessibilityTestFramework = "4.0.0"
 accompanist = "0.28.0"
 activityCompose = "1.7.2"
-androidGradlePlugin = "7.3.1"
+androidGradlePlugin = "8.0.2"
 appcompat = "1.6.1"
 benchmark = "1.1.0"
 # @keep
