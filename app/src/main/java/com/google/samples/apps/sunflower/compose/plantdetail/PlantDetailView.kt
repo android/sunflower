@@ -359,7 +359,7 @@ private fun PlantFab(
         onClick = onFabClick,
         shape = MaterialTheme.shapes.small,
         containerColor = MaterialTheme.colorScheme.tertiary,
-        contentColor = MaterialTheme.colorScheme.onSurface,
+        contentColor = MaterialTheme.colorScheme.onTertiary,
         // Semantics in parent due to https://issuetracker.google.com/184825850
         modifier = modifier.semantics {
             contentDescription = addPlantContentDescription
