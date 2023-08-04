@@ -47,7 +47,7 @@ class PlantDaoTest {
         plantDao = database.plantDao()
 
         // Insert plants in non-alphabetical order to test that results are sorted by name
-        plantDao.insertAll(listOf(plantB, plantC, plantA))
+        plantDao.upsertAll(listOf(plantB, plantC, plantA))
     }
 
     @After fun closeDb() {
