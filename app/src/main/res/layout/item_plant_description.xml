@@ -21,6 +21,7 @@
         android:id="@+id/plant_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/min_height_collapse_plant_details"
         android:textAppearance="?attr/textAppearanceBody1"
         android:paddingBottom="@dimen/padding_large"
         tools:text="Details about the plant" />

@@ -26,4 +26,5 @@ fun bindIsGone(view: View, isGone: Boolean) {
     } else {
         View.VISIBLE
     }
+    /////////////
 }
