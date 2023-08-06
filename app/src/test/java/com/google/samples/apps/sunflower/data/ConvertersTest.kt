@@ -24,7 +24,7 @@ import java.util.Calendar.MONTH
 import java.util.Calendar.SEPTEMBER
 import java.util.Calendar.YEAR
 
-class ConvertersTest {
+internal class ConvertersTest {
 
     private val cal = Calendar.getInstance().apply {
         set(YEAR, 1998)
