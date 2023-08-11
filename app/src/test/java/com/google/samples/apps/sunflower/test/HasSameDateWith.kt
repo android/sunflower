@@ -30,7 +30,7 @@ import java.util.Calendar.YEAR
  * Calendar matcher.
  * Only Year/Month/Day precision is needed for comparing GardenPlanting Calendar entries
  */
-internal class HasSameDateWIth(
+internal class HasSameDateWith(
     private val expected: Calendar
 ) : TypeSafeDiagnosingMatcher<Calendar>() {
     private val formatter = SimpleDateFormat("dd.MM.yyyy")
@@ -51,7 +51,16 @@ internal class HasSameDateWIth(
     }
 
     companion object {
+        /**
+         * Creates a matcher for [Calendar]s that only matches when year, month and day of
+         * actual calendar are equal to year, month and day of expected calendar.
+         *
+         * For example:
+         * <code>assertThat(someDate, hasSameDateWith(Calendar.getInstance()))</code>
+         *
+         * @param expected calendar that has expected year, month and day [Calendar]
+         */
         @Factory
-        fun hasSameDateWith(expected: Calendar): Matcher<Calendar> = HasSameDateWIth(expected)
+        fun hasSameDateWith(expected: Calendar): Matcher<Calendar> = HasSameDateWith(expected)
     }
 }
