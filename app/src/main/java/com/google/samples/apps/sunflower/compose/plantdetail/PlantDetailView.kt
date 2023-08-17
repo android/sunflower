@@ -358,8 +358,6 @@ private fun PlantFab(
     FloatingActionButton(
         onClick = onFabClick,
         shape = MaterialTheme.shapes.small,
-        containerColor = MaterialTheme.colorScheme.tertiary,
-        contentColor = MaterialTheme.colorScheme.onSurface,
         // Semantics in parent due to https://issuetracker.google.com/184825850
         modifier = modifier.semantics {
             contentDescription = addPlantContentDescription
@@ -520,7 +518,7 @@ private fun PlantInformation(
     Column(modifier = modifier.padding(Dimens.PaddingLarge)) {
         Text(
             text = name,
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.displaySmall,
             modifier = Modifier
                 .padding(
                     start = Dimens.PaddingSmall,
@@ -543,7 +541,6 @@ private fun PlantInformation(
             Column(Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(id = R.string.watering_needs_prefix),
-                    color = MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(horizontal = Dimens.PaddingSmall)

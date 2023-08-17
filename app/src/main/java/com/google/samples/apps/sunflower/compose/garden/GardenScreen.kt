@@ -30,6 +30,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -136,7 +138,8 @@ private fun GardenListItem(
             end = cardSideMargin,
             bottom = dimensionResource(id = R.dimen.card_bottom_margin)
         ),
-        shape = MaterialTheme.shapes.medium
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(Modifier.fillMaxWidth()) {
             SunflowerImage(
@@ -162,7 +165,6 @@ private fun GardenListItem(
                 text = stringResource(id = R.string.plant_date_header),
                 Modifier.align(Alignment.CenterHorizontally),
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.titleSmall
             )
             Text(
@@ -178,7 +180,6 @@ private fun GardenListItem(
                     .align(Alignment.CenterHorizontally)
                     .padding(top = marginNormal),
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.titleSmall
             )
             Text(
@@ -216,12 +217,10 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
             style = MaterialTheme.typography.headlineSmall
         )
         Button(
-            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.tertiary),
             shape = MaterialTheme.shapes.medium,
             onClick = onAddPlantClick
         ) {
             Text(
-                color = MaterialTheme.colorScheme.onSurface,
                 text = stringResource(id = R.string.add_plant)
             )
         }

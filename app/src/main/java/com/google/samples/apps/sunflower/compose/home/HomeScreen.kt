@@ -110,8 +110,7 @@ fun HomePagerScreen(
 
         // Tab Row
         TabRow(
-            selectedTabIndex = pagerState.currentPage,
-            containerColor = MaterialTheme.colorScheme.background,
+            selectedTabIndex = pagerState.currentPage
         ) {
             pages.forEachIndexed { index, page ->
                 val title = stringResource(id = page.titleResId)
@@ -125,8 +124,7 @@ fun HomePagerScreen(
                             contentDescription = title
                         )
                     },
-                    unselectedContentColor = MaterialTheme.colorScheme.secondary,
-                    selectedContentColor = MaterialTheme.colorScheme.tertiary,
+                    unselectedContentColor = MaterialTheme.colorScheme.secondary
                 )
             }
         }
@@ -177,7 +175,8 @@ private fun HomeTopAppBar(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = stringResource(id = R.string.app_name)
+                    text = stringResource(id = R.string.app_name),
+                    style = MaterialTheme.typography.displaySmall
                 )
             }
         },
@@ -189,8 +188,7 @@ private fun HomeTopAppBar(
                         painter = painterResource(id = R.drawable.ic_filter_list_24dp),
                         contentDescription = stringResource(
                             id = R.string.menu_filter_by_grow_zone
-                        ),
-                        tint = MaterialTheme.colorScheme.onSurface
+                        )
                     )
                 }
             }
