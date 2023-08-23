@@ -32,7 +32,6 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.gallery.GalleryScreen
 import com.google.samples.apps.sunflower.compose.home.HomeScreen
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
-import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 
 @Composable
 fun SunflowerApp() {
