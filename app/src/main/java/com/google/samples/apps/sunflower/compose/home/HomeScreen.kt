@@ -131,7 +131,7 @@ fun HomePagerScreen(
 
         // Pages
         HorizontalPager(
-            modifier = Modifier.background(MaterialTheme.colors.background),
+            modifier = Modifier.background(MaterialTheme.colorScheme.background),
             pageCount = pages.size,
             state = pagerState,
             verticalAlignment = Alignment.Top
