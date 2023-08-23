@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower.compose.home
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -101,7 +102,6 @@ fun HomePagerScreen(
     modifier: Modifier = Modifier,
     pages: Array<SunflowerPage> = SunflowerPage.values()
 ) {
-
     // Use Modifier.nestedScroll + rememberNestedScrollInteropConnection() here so that this
     // composable participates in the nested scroll hierarchy so that HomeScreen can be used in
     // use cases like a collapsing toolbar
@@ -131,6 +131,7 @@ fun HomePagerScreen(
 
         // Pages
         HorizontalPager(
+            modifier = Modifier.background(MaterialTheme.colors.background),
             pageCount = pages.size,
             state = pagerState,
             verticalAlignment = Alignment.Top

@@ -60,13 +60,13 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
 
   kotlinOptions {
     // work-runtime-ktx 2.1.0 and above now requires Java 8
-    jvmTarget = "1.8"
+    jvmTarget = JavaVersion.VERSION_17.toString()
 
     // Enable Coroutines and Flow APIs
     freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
@@ -75,6 +75,7 @@ android {
   buildFeatures {
     compose = true
     dataBinding = true
+    buildConfig = true
   }
   composeOptions {
     kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
@@ -97,6 +98,7 @@ android {
       }
     }
   }
+  namespace = "com.google.samples.apps.sunflower"
 }
 
 androidComponents {

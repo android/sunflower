@@ -32,11 +32,11 @@ class GardenActivity : ComponentActivity() {
 
         // Displaying edge-to-edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
         setContent {
             SunflowerTheme {
                 SunflowerApp()
             }
         }
+        
     }
 }
