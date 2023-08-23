@@ -29,8 +29,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -164,13 +162,12 @@ private fun GardenListItem(
             Text(
                 text = stringResource(id = R.string.plant_date_header),
                 Modifier.align(Alignment.CenterHorizontally),
-                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleSmall
             )
             Text(
                 text = vm.plantDateString,
                 Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.labelSmall
             )
 
             // Last Watered
@@ -179,13 +176,12 @@ private fun GardenListItem(
                 Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(top = marginNormal),
-                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleSmall
             )
             Text(
                 text = vm.waterDateString,
                 Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.labelSmall
             )
             Text(
                 text = pluralStringResource(
@@ -196,7 +192,7 @@ private fun GardenListItem(
                 Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(bottom = marginNormal),
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.labelSmall
             )
         }
     }
@@ -221,7 +217,8 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
             onClick = onAddPlantClick
         ) {
             Text(
-                text = stringResource(id = R.string.add_plant)
+                text = stringResource(id = R.string.add_plant),
+                style = MaterialTheme.typography.titleSmall
             )
         }
     }
