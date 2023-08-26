@@ -1,31 +1,19 @@
 # Android Sunflower with Compose
 
-A gardening app illustrating Android development best practices with migrating
-a View-based app to Jetpack Compose.
-
-**To learn about how Sunflower was migrated to Compose, see the [migration journey](docs/MigrationJourney.md) document.**
-
-This sample showcases:
-* Compose working in an existing app: including integration with strings, resources, and themes and styles.
-* Integration with an existing architecture based on Jetpack libraries.
-* `CollapsingToolbarLayout` behavior implemented manually with Compose.
-* Showing [Snackbars](https://material.io/components/snackbars) with Compose.
-* Using Compose within a `RecyclerView` ([#766](https://github.com/android/sunflower/pull/766))
+A gardening app illustrating Android development best practices with migrating a View-based app to
+Jetpack Compose. To learn about how Sunflower was migrated to Compose, see the 
+[migration journey](docs/MigrationJourney.md) document.
 
 **Note**: To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
 
 ## Screenshots
 
-<img src="screenshots/screenshots.png"/>
+<img src="screenshots/SunflowerM3Screenshots.png"/>
 
 ## Features
 
-Sunflower's [plant details screen](app/src/main/java/com/google/samples/apps/sunflower/PlantDetailFragment.kt)
-is built with Compose as well as the [plant list item](app/src/main/java/com/google/samples/apps/sunflower/compose/plantlist/PlantListItemView.kt)
-view within a `RecyclerView`.
-
-All Compose code can be found in the `compose`
-[folder](app/src/main/java/com/google/samples/apps/sunflower/compose).
+This sample showcases how to migrate an existing View-based app (Material 2) to Compose (Material 3). 
+See the linked migration journey doc above to learn more.
 
 **Note**: As Compose cannot render HTML code in `Text` yet. The 
 `AndroidViewBinding` API is used to embed a `TextView` in Compose. See the 
@@ -99,4 +87,3 @@ Third Party Content
 Select text used for describing the plants (in `plants.json`) are used from Wikipedia via CC BY-SA 3.0 US (license in `ASSETS_LICENSE`).
 
 "[seed](https://thenounproject.com/search/?q=seed&i=1585971)" by [Aisyah](https://thenounproject.com/aisyahalmasyira/) is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/us/legalcode)
-

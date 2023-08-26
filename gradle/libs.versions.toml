@@ -15,13 +15,13 @@
 ##
 [versions]
 accessibilityTestFramework = "4.0.0"
-accompanist = "0.28.0"
 activityCompose = "1.7.2"
 androidGradlePlugin = "8.0.2"
 appcompat = "1.6.1"
 benchmark = "1.1.0"
 # @keep
 compileSdk = "33"
+composeLatest = "1.4.0-alpha03"
 composeBom = "2023.06.01"
 compose-compiler = "1.4.6"
 constraintLayoutCompose = "1.0.1"
@@ -38,9 +38,10 @@ hiltNavigationCompose = "1.0.0"
 junit = "4.13.2"
 kotlin = "1.8.20"
 ktlint = "0.40.0"
-ktx = "1.10.0"
-lifecycle = "2.6.1"
-material = "1.8.0"
+ktx = "1.7.0"
+lifecycle = "2.6.0-alpha04"
+material = "1.8.0-rc01"
+material3 = "1.0.1"
 # @keep
 minSdk = "23"
 monitor = "1.6.0"
@@ -60,23 +61,24 @@ tracing = "1.1.0"
 uiAutomator = "2.2.0"
 viewModelCompose = "2.5.1"
 work = "2.7.1"
+systemuicontroller = "0.30.1"
 
 [libraries]
 accessibility-test-framework = { module = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework", version.ref = "accessibilityTestFramework" }
-accompanist-themeadapter-material = { module = "com.google.accompanist:accompanist-themeadapter-material", version.ref = "accompanist" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "benchmark" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
-androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
-androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
-androidx-compose-material = { module = "androidx.compose.material:material" }
-androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
-androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
-androidx-compose-ui = { module = "androidx.compose.ui:ui" }
-androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeLatest" }
+androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "composeLatest" }
+androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "composeLatest" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeLatest" }
+androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeLatest" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "composeLatest" }
+androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeLatest" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding" }
@@ -117,6 +119,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-guava = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "systemuicontroller" }
 okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttpLogging" }
 retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
