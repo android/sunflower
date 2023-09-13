@@ -16,9 +16,7 @@
 
 package com.google.samples.apps.sunflower.utilities
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.widget.Toolbar
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import com.google.samples.apps.sunflower.data.GardenPlanting
@@ -57,12 +55,6 @@ val testGardenPlanting = GardenPlanting(testPlant.plantId, testCalendar, testCal
  * [PlantAndGardenPlantings] object used for tests.
  */
 val testPlantAndGardenPlanting = PlantAndGardenPlantings(testPlant, listOf(testGardenPlanting))
-
-/**
- * Returns the content description for the navigation button view in the toolbar.
- */
-fun getToolbarNavigationContentDescription(activity: Activity, toolbarId: Int) =
-    activity.findViewById<Toolbar>(toolbarId).navigationContentDescription as String
 
 /**
  * Simplify testing Intents with Chooser
