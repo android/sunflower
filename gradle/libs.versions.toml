@@ -17,7 +17,6 @@
 accessibilityTestFramework = "4.0.0"
 activityCompose = "1.7.2"
 androidGradlePlugin = "8.0.2"
-appcompat = "1.6.1"
 benchmark = "1.1.0"
 # @keep
 compileSdk = "33"
@@ -67,7 +66,6 @@ systemuicontroller = "0.30.1"
 accessibility-test-framework = { module = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework", version.ref = "accessibilityTestFramework" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "benchmark" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
