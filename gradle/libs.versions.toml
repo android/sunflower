@@ -16,7 +16,7 @@
 [versions]
 accessibilityTestFramework = "4.0.0"
 activityCompose = "1.7.2"
-androidGradlePlugin = "8.0.2"
+androidGradlePlugin = "8.1.1"
 benchmark = "1.1.0"
 # @keep
 compileSdk = "33"

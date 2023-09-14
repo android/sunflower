@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
-import com.google.samples.apps.sunflower.test.HasSameDateWith.Companion.hasSameDateWith
+import com.google.samples.apps.sunflower.test.CalendarMatcher.Companion.equalTo
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
@@ -28,8 +28,8 @@ internal class GardenPlantingTest {
     fun testDefaultValues() {
         val gardenPlanting = GardenPlanting("1")
         val calendar = Calendar.getInstance()
-        assertThat(gardenPlanting.plantDate, hasSameDateWith(calendar))
-        assertThat(gardenPlanting.lastWateringDate, hasSameDateWith(calendar))
+        assertThat(gardenPlanting.plantDate, equalTo(calendar))
+        assertThat(gardenPlanting.lastWateringDate, equalTo(calendar))
         assertThat(gardenPlanting.gardenPlantingId, `is`(0L))
     }
 }

@@ -30,7 +30,7 @@ import java.util.Calendar.YEAR
  * Calendar matcher.
  * Only Year/Month/Day precision is needed for comparing GardenPlanting Calendar entries
  */
-internal class HasSameDateWith(
+internal class CalendarMatcher(
     private val expected: Calendar
 ) : TypeSafeDiagnosingMatcher<Calendar>() {
     private val formatter = SimpleDateFormat("dd.MM.yyyy")
@@ -40,13 +40,14 @@ internal class HasSameDateWith(
     }
 
     override fun matchesSafely(actual: Calendar?, mismatchDescription: Description?): Boolean {
-        return (actual?.let {
-            actual.get(YEAR) == expected.get(YEAR) &&
-                    actual.get(MONTH) == expected.get(MONTH) &&
-                    actual.get(DAY_OF_MONTH) == expected.get(DAY_OF_MONTH)
-        } ?: false).also { _ ->
+        return if (actual != null && actual.get(YEAR) == expected.get(YEAR) &&
+            actual.get(MONTH) == expected.get(MONTH) &&
+            actual.get(DAY_OF_MONTH) == expected.get(DAY_OF_MONTH)
+        ) true
+        else {
             mismatchDescription?.appendText("was ")
                 ?.appendText(actual?.time?.let { formatter.format(it) } ?: "null")
+            false
         }
     }
 
@@ -61,6 +62,6 @@ internal class HasSameDateWith(
          * @param expected calendar that has expected year, month and day [Calendar]
          */
         @Factory
-        fun hasSameDateWith(expected: Calendar): Matcher<Calendar> = HasSameDateWith(expected)
+        fun equalTo(expected: Calendar): Matcher<Calendar> = CalendarMatcher(expected)
     }
 }
