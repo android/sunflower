@@ -112,7 +112,6 @@ androidComponents {
 dependencies {
   kapt(libs.androidx.room.compiler)
   kapt(libs.hilt.android.compiler)
-  implementation(libs.androidx.appcompat)
   implementation(libs.androidx.constraintlayout)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.livedata.ktx)
