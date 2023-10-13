@@ -18,7 +18,7 @@ plugins {
   id("com.android.application")
   id("kotlin-android")
   id("kotlin-parcelize")
-  id("kotlin-kapt")
+  id("com.google.devtools.ksp")
   id("dagger.hilt.android.plugin")
 }
 
@@ -110,8 +110,8 @@ androidComponents {
 }
 
 dependencies {
-  kapt(libs.androidx.room.compiler)
-  kapt(libs.hilt.android.compiler)
+  ksp(libs.androidx.room.compiler)
+  ksp(libs.hilt.android.compiler)
   implementation(libs.androidx.constraintlayout)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -152,7 +152,7 @@ dependencies {
 
   // Testing dependencies
   debugImplementation(libs.androidx.monitor)
-  kaptAndroidTest(libs.hilt.android.compiler)
+  kspAndroidTest(libs.hilt.android.compiler)
   androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.arch.core.testing)
   androidTestImplementation(libs.androidx.espresso.contrib)
