@@ -112,13 +112,11 @@ androidComponents {
 dependencies {
   ksp(libs.androidx.room.compiler)
   ksp(libs.hilt.android.compiler)
-  implementation(libs.androidx.constraintlayout)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.livedata.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
   implementation(libs.androidx.navigation.compose)
   implementation(libs.androidx.paging.compose)
-  implementation(libs.androidx.paging.runtime.ktx)
   implementation(libs.androidx.room.ktx)
   implementation(libs.androidx.work.runtime.ktx)
   implementation(libs.material)
@@ -131,7 +129,6 @@ dependencies {
   implementation(libs.hilt.android)
   implementation(libs.hilt.navigation.compose)
   implementation(libs.androidx.profileinstaller)
-  implementation(libs.androidx.tracing.ktx)
 
   // Compose
   implementation(platform(libs.androidx.compose.bom))
