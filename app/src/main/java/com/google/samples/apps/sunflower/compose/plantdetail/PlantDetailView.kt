@@ -18,6 +18,8 @@ package com.google.samples.apps.sunflower.compose.plantdetail
 
 import android.graphics.drawable.Drawable
 import android.text.method.LinkMovementMethod
+import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
@@ -82,6 +84,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
@@ -96,7 +99,6 @@ import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
-import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
@@ -573,7 +575,10 @@ private fun PlantInformation(
 @Composable
 private fun PlantDescription(description: String) {
     // This remains using AndroidViewBinding because this feature is not in Compose yet
-    AndroidViewBinding(ItemPlantDescriptionBinding::inflate) {
+    AndroidView(factory = {
+        LayoutInflater.from(it).inflate(R.layout.item_plant_description, null)
+    }) {
+        val plantDescription = it.findViewById<TextView>(R.id.plant_description)
         plantDescription.text = HtmlCompat.fromHtml(
             description,
             HtmlCompat.FROM_HTML_MODE_COMPACT
