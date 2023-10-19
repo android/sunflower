@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
+@file:NoLiveLiterals
 package com.google.samples.apps.sunflower.compose.garden
+
+import androidx.compose.runtime.NoLiveLiterals
 
 import androidx.activity.compose.ReportDrawn
 import androidx.activity.compose.ReportDrawnWhen

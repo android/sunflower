@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+@file:NoLiveLiterals
 package com.google.samples.apps.sunflower.compose.utils
 
 import android.graphics.drawable.Drawable
@@ -23,6 +24,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color

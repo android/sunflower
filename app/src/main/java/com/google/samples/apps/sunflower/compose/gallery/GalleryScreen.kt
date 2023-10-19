@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+@file:NoLiveLiterals
 package com.google.samples.apps.sunflower.compose.gallery
+
+import androidx.compose.runtime.NoLiveLiterals
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding

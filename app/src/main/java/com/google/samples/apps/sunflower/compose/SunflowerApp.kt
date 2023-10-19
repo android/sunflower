@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+@file:NoLiveLiterals
 package com.google.samples.apps.sunflower.compose
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
 import androidx.navigation.NavHostController

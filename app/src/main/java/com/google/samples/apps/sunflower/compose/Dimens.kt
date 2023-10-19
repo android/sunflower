@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
+@file:NoLiveLiterals
 package com.google.samples.apps.sunflower.compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
