@@ -40,15 +40,17 @@ internal class CalendarMatcher(
     }
 
     override fun matchesSafely(actual: Calendar?, mismatchDescription: Description?): Boolean {
-        return if (actual != null && actual.get(YEAR) == expected.get(YEAR) &&
+        if (actual == null) {
+            mismatchDescription?.appendText("was null")
+            return false
+        }
+        if (actual.get(YEAR) == expected.get(YEAR) &&
             actual.get(MONTH) == expected.get(MONTH) &&
             actual.get(DAY_OF_MONTH) == expected.get(DAY_OF_MONTH)
-        ) true
-        else {
-            mismatchDescription?.appendText("was ")
-                ?.appendText(actual?.time?.let { formatter.format(it) } ?: "null")
-            false
-        }
+        )
+            return true
+        mismatchDescription?.appendText("was ")?.appendText(formatter.format(actual.time))
+        return false
     }
 
     companion object {
