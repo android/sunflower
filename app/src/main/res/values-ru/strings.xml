@@ -47,7 +47,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Изображение растения</string>
-    <string name="gallery_title">(translate me) Photos by Unsplash</string>
-    <string name="gallery_content_description">(translate me) Navigate to gallery screen</string>
+    <string name="gallery_title">Фотографии от Unsplash</string>
+    <string name="gallery_content_description">Перейти на экран галереи</string>
 
 </resources>
