@@ -15,10 +15,10 @@
  */
 
 plugins {
-  id("com.android.application")
-  id("kotlin-android")
-  id("com.google.devtools.ksp")
-  id("dagger.hilt.android.plugin")
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.ksp)
+  alias(libs.plugins.hilt)
 }
 
 android {
