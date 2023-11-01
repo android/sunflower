@@ -16,13 +16,20 @@
 
 package com.google.samples.apps.sunflower.compose.gallery
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.PullRefreshState
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,6 +37,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -49,6 +57,7 @@ import com.google.samples.apps.sunflower.viewmodels.GalleryViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun GalleryScreen(
     viewModel: GalleryViewModel = hiltViewModel(),
@@ -57,15 +66,19 @@ fun GalleryScreen(
 ) {
     GalleryScreen(
         plantPictures = viewModel.plantPictures,
+        isRefreshing = viewModel.isRefreshing,
+        pullRefreshState = rememberPullRefreshState(viewModel.isRefreshing, { viewModel.plantPictures }),
         onPhotoClick = onPhotoClick,
         onUpClick = onUpClick,
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun GalleryScreen(
     plantPictures: Flow<PagingData<UnsplashPhoto>>,
+    isRefreshing: Boolean,
+    pullRefreshState: PullRefreshState,
     onPhotoClick: (UnsplashPhoto) -> Unit = {},
     onUpClick: () -> Unit = {},
 ) {
@@ -75,25 +88,39 @@ private fun GalleryScreen(
         },
     ) { padding ->
         val pagingItems: LazyPagingItems<UnsplashPhoto> = plantPictures.collectAsLazyPagingItems()
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(padding),
-            contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
-        ) {
-            // TODO update this implementation once paging Compose supports LazyGridScope
-            // See: https://issuetracker.google.com/issues/178087310
-            items(
-                count = pagingItems.itemCount,
-                key = { index ->
-                    val photo = pagingItems[index]
-                    "${ photo?.id ?: ""}${index}"
-                }
-            ) { index ->
-                val photo = pagingItems[index] ?: return@items
-                PhotoListItem(photo = photo) {
-                    onPhotoClick(photo)
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .pullRefresh(pullRefreshState)
+        ){
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.padding(padding),
+                contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
+            ) {
+                // TODO update this implementation once paging Compose supports LazyGridScope
+                // See: https://issuetracker.google.com/issues/178087310
+                items(
+                    count = pagingItems.itemCount,
+                    key = { index ->
+                        val photo = pagingItems[index]
+                        "${ photo?.id ?: ""}${index}"
+                    }
+                ) { index ->
+                    val photo = pagingItems[index] ?: return@items
+                    PhotoListItem(photo = photo) {
+                        onPhotoClick(photo)
+                    }
                 }
             }
+
+            // adding pull refresh
+            PullRefreshComponent(
+                isRefreshing = isRefreshing,
+                state = pullRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }
@@ -120,12 +147,17 @@ private fun GalleryTopBar(
     )
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Preview
 @Composable
 private fun GalleryScreenPreview(
     @PreviewParameter(GalleryScreenPreviewParamProvider::class) plantPictures: Flow<PagingData<UnsplashPhoto>>
 ) {
-    GalleryScreen(plantPictures = plantPictures)
+    GalleryScreen(
+        plantPictures = plantPictures,
+        isRefreshing = false,
+        pullRefreshState = rememberPullRefreshState(false, { plantPictures }),
+    )
 }
 
 private class GalleryScreenPreviewParamProvider :
@@ -150,4 +182,19 @@ private class GalleryScreenPreviewParamProvider :
                 )
             ),
         )
+}
+
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun PullRefreshComponent(
+    modifier: Modifier = Modifier,
+    isRefreshing: Boolean,
+    state: PullRefreshState
+) {
+    PullRefreshIndicator(
+        modifier = modifier,
+        refreshing = isRefreshing,
+        state = state
+    )
 }

@@ -32,6 +32,8 @@ class GalleryViewModel @Inject constructor(
 
     private var queryString: String? = savedStateHandle["plantName"]
 
+    val isRefreshing: Boolean = false
+
     val plantPictures =
         repository.getSearchResultStream(queryString ?: "").cachedIn(viewModelScope)
 }

@@ -145,6 +145,8 @@ dependencies {
   implementation(libs.glide)
   implementation(libs.accompanist.systemuicontroller)
   debugImplementation(libs.androidx.compose.ui.tooling)
+  //added
+  implementation(libs.androidx.compose.material)
 
   // Testing dependencies
   debugImplementation(libs.androidx.monitor)
