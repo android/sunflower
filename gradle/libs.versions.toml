@@ -125,5 +125,21 @@ android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin"}
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+[bundles]
+androidx-impl = ["androidx-core-ktx", "androidx-profileinstaller"]
+coroutines = ["kotlinx-coroutines-android", "kotlinx-coroutines-core"]
+hilt = ["hilt-android", "hilt-navigation-compose"]
+room = ["androidx-room-ktx", "androidx-room-runtime"]
+retrofit = ["retrofit2", "retrofit2-converter-gson"]
+compose = ["androidx-compose-foundation", "androidx-compose-foundation-layout", "androidx-compose-material",
+    "androidx-compose-material3", "androidx-compose-runtime", "androidx-compose-runtime-livedata",
+    "androidx-compose-ui", "androidx-compose-ui-tooling-preview",
+    "androidx-compose-ui-viewbinding", "androidx-constraintlayout-compose",
+    "accompanist-systemuicontroller", "androidx-activity-compose", "androidx-navigation-compose"]
+lifecycle = ["androidx-lifecycle-viewmodel-compose", "androidx-lifecycle-livedata-ktx", "androidx-lifecycle-viewmodel-ktx"]
+espresso = ["androidx-espresso-contrib", "androidx-espresso-core", "androidx-espresso-intents"]
+androidx-test = ["androidx-arch-core-testing", "androidx-test-ext-junit", "androidx-test-uiautomator",
+    "androidx-work-testing", "androidx-compose-ui-test-junit4"]
