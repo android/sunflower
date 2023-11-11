@@ -145,6 +145,11 @@ private class GalleryScreenPreviewParamProvider :
                             id = "2",
                             urls = UnsplashPhotoUrls("https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max"),
                             user = UnsplashUser("Sally Smith", "sallysmith")
+                        ),
+                        UnsplashPhoto(
+                            id = "3",
+                            urls = UnsplashPhotoUrls("https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max"),
+                            user = UnsplashUser("Shubham Kamlapuri", "shubhamkamlapuri")
                         )
                     )
                 )
