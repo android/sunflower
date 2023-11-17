@@ -50,7 +50,7 @@ fun SunFlowerNavHost(
             HomeScreen(
                 onPlantClick = {
                     navController.navigate(
-                        Screen.PlantDetail.passPlantId(
+                        Screen.PlantDetail.createRoute(
                             plantId = it.plantId
                         )
                     )
@@ -59,7 +59,7 @@ fun SunFlowerNavHost(
         }
         composable(
             route = Screen.PlantDetail.route,
-            arguments = Screen.PlantDetail.arguments
+            arguments = Screen.PlantDetail.navArguments
         ) {
             PlantDetailsScreen(
                 onBackClick = { navController.navigateUp() },
@@ -68,7 +68,7 @@ fun SunFlowerNavHost(
                 },
                 onGalleryClick = {
                     navController.navigate(
-                        Screen.Gallery.passPlantName(
+                        Screen.Gallery.createRoute(
                             plantName = it.name
                         )
                     )
@@ -77,7 +77,7 @@ fun SunFlowerNavHost(
         }
         composable(
             route = Screen.Gallery.route,
-            arguments = Screen.Gallery.arguments
+            arguments = Screen.Gallery.navArguments
         ) {
             GalleryScreen(
                 onPhotoClick = {
