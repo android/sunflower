@@ -47,7 +47,7 @@ class GardenPlantingDaoTest {
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         gardenPlantingDao = database.gardenPlantingDao()
 
-        database.plantDao().insertAll(testPlants)
+        database.plantDao().upsertAll(testPlants)
         testGardenPlantingId = gardenPlantingDao.insertGardenPlanting(testGardenPlanting)
     }
 

@@ -16,13 +16,12 @@
 
 package com.google.samples.apps.sunflower.utilities
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.widget.Toolbar
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
@@ -53,10 +52,9 @@ val testCalendar: Calendar = Calendar.getInstance().apply {
 val testGardenPlanting = GardenPlanting(testPlant.plantId, testCalendar, testCalendar)
 
 /**
- * Returns the content description for the navigation button view in the toolbar.
+ * [PlantAndGardenPlantings] object used for tests.
  */
-fun getToolbarNavigationContentDescription(activity: Activity, toolbarId: Int) =
-    activity.findViewById<Toolbar>(toolbarId).navigationContentDescription as String
+val testPlantAndGardenPlanting = PlantAndGardenPlantings(testPlant, listOf(testGardenPlanting))
 
 /**
  * Simplify testing Intents with Chooser

@@ -22,9 +22,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -47,7 +47,7 @@ class PlantDaoTest {
         plantDao = database.plantDao()
 
         // Insert plants in non-alphabetical order to test that results are sorted by name
-        plantDao.insertAll(listOf(plantB, plantC, plantA))
+        plantDao.upsertAll(listOf(plantB, plantC, plantA))
     }
 
     @After fun closeDb() {

@@ -21,18 +21,16 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * The ViewModel for [PlantListFragment].
+ * The ViewModel for plant list.
  */
 @HiltViewModel
 class PlantListViewModel @Inject internal constructor(
@@ -85,6 +83,14 @@ class PlantListViewModel @Inject internal constructor(
             growZone.collect { newGrowZone ->
                 savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, newGrowZone)
             }
+        }
+    }
+
+    fun updateData() {
+        if (isFiltered()) {
+            clearGrowZoneNumber()
+        } else {
+            setGrowZoneNumber(9)
         }
     }
 

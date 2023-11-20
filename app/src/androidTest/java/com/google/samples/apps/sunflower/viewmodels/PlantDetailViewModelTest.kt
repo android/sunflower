@@ -29,6 +29,7 @@ import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testPlant
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.flow.first
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Before
@@ -48,7 +49,7 @@ class PlantDetailViewModelTest {
     private val coroutineRule = MainCoroutineRule()
 
     @get:Rule
-    val rule = RuleChain
+    val rule: RuleChain = RuleChain
             .outerRule(hiltRule)
             .around(instantTaskExecutorRule)
             .around(coroutineRule)
@@ -57,7 +58,7 @@ class PlantDetailViewModelTest {
     lateinit var plantRepository: PlantRepository
 
     @Inject
-    lateinit var gardenPlantRepository: GardenPlantingRepository
+    lateinit var gardenPlantingRepository: GardenPlantingRepository
 
     @Before
     fun setUp() {
@@ -69,7 +70,7 @@ class PlantDetailViewModelTest {
         val savedStateHandle: SavedStateHandle = SavedStateHandle().apply {
             set("plantId", testPlant.plantId)
         }
-        viewModel = PlantDetailViewModel(savedStateHandle, plantRepository, gardenPlantRepository)
+        viewModel = PlantDetailViewModel(savedStateHandle, plantRepository, gardenPlantingRepository)
     }
 
     @After
@@ -81,6 +82,6 @@ class PlantDetailViewModelTest {
     @Test
     @Throws(InterruptedException::class)
     fun testDefaultValues() = coroutineRule.runBlockingTest {
-        assertFalse(getValue(viewModel.isPlanted))
+        assertFalse(viewModel.isPlanted.first())
     }
 }

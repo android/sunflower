@@ -24,7 +24,7 @@ import org.junit.Test
 import java.util.Calendar
 import java.util.Calendar.DAY_OF_YEAR
 
-class PlantTest {
+internal class PlantTest {
 
     private lateinit var plant: Plant
 
