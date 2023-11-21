@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.utilities
+package com.google.samples.apps.sunflower.compose
 
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
