@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -26,7 +27,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -85,11 +85,11 @@ fun HomeScreen(
                 scrollBehavior = scrollBehavior
             )
         }
-    ) {
+    ) { contentPadding ->
         HomePagerScreen(
             onPlantClick = onPlantClick,
             pagerState = pagerState,
-            modifier = Modifier.padding(it)
+            Modifier.padding(top = contentPadding.calculateTopPadding())
         )
     }
 }
@@ -102,9 +102,6 @@ fun HomePagerScreen(
     modifier: Modifier = Modifier,
     pages: Array<SunflowerPage> = SunflowerPage.values()
 ) {
-    // Use Modifier.nestedScroll + rememberNestedScrollInteropConnection() here so that this
-    // composable participates in the nested scroll hierarchy so that HomeScreen can be used in
-    // use cases like a collapsing toolbar
     Column(modifier) {
         val coroutineScope = rememberCoroutineScope()
 
@@ -181,7 +178,7 @@ private fun HomeTopAppBar(
                 )
             }
         },
-        modifier = modifier.statusBarsPadding(),
+        modifier = modifier,
         actions = {
             if (pagerState.currentPage == SunflowerPage.PLANT_LIST.ordinal) {
                 IconButton(onClick = onFilterClick) {

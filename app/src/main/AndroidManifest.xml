@@ -31,6 +31,7 @@
         android:theme="@style/Theme.Sunflower">
         <activity
             android:name=".GardenActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
