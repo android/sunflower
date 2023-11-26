@@ -16,21 +16,27 @@
 
 package com.google.samples.apps.sunflower.compose.gallery
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,41 +65,74 @@ fun GalleryScreen(
         plantPictures = viewModel.plantPictures,
         onPhotoClick = onPhotoClick,
         onUpClick = onUpClick,
+        onPullToRefresh = viewModel::refreshData,
+        isRefreshing = viewModel.isRefreshing.value
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GalleryScreen(
     plantPictures: Flow<PagingData<UnsplashPhoto>>,
     onPhotoClick: (UnsplashPhoto) -> Unit = {},
     onUpClick: () -> Unit = {},
+    onPullToRefresh: () -> Unit,
+    isRefreshing: Boolean
 ) {
     Scaffold(
         topBar = {
             GalleryTopBar(onUpClick = onUpClick)
         },
     ) { padding ->
-        val pagingItems: LazyPagingItems<UnsplashPhoto> = plantPictures.collectAsLazyPagingItems()
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(padding),
-            contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
-        ) {
-            // TODO update this implementation once paging Compose supports LazyGridScope
-            // See: https://issuetracker.google.com/issues/178087310
-            items(
-                count = pagingItems.itemCount,
-                key = { index ->
-                    val photo = pagingItems[index]
-                    "${ photo?.id ?: ""}${index}"
-                }
-            ) { index ->
-                val photo = pagingItems[index] ?: return@items
-                PhotoListItem(photo = photo) {
-                    onPhotoClick(photo)
-                }
+
+        val pullToRefreshState = rememberPullToRefreshState()
+
+        if (pullToRefreshState.isRefreshing){
+            LaunchedEffect(Unit){
+                onPullToRefresh()
             }
         }
+        LaunchedEffect(isRefreshing){
+            if (!isRefreshing){
+                pullToRefreshState.endRefresh()
+            }
+        }
+
+
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .nestedScroll(pullToRefreshState.nestedScrollConnection)
+        ) {
+            val pagingItems: LazyPagingItems<UnsplashPhoto> =
+                plantPictures.collectAsLazyPagingItems()
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
+            ) {
+                // TODO update this implementation once paging Compose supports LazyGridScope
+                // See: https://issuetracker.google.com/issues/178087310
+                items(
+                    count = pagingItems.itemCount,
+                    key = { index ->
+                        val photo = pagingItems[index]
+                        "${photo?.id ?: ""}${index}"
+                    }
+                ) { index ->
+                    val photo = pagingItems[index] ?: return@items
+                    PhotoListItem(photo = photo) {
+                        onPhotoClick(photo)
+                    }
+                }
+            }
+
+            PullToRefreshContainer(
+                modifier = Modifier.align(Alignment.TopCenter),
+                state = pullToRefreshState
+            )
+        }
+
+
     }
 }
 
@@ -111,7 +150,7 @@ private fun GalleryTopBar(
         navigationIcon = {
             IconButton(onClick = onUpClick) {
                 Icon(
-                    Icons.Filled.ArrowBack,
+                    Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = null
                 )
             }
@@ -124,7 +163,7 @@ private fun GalleryTopBar(
 private fun GalleryScreenPreview(
     @PreviewParameter(GalleryScreenPreviewParamProvider::class) plantPictures: Flow<PagingData<UnsplashPhoto>>
 ) {
-    GalleryScreen(plantPictures = plantPictures)
+    GalleryScreen(plantPictures = plantPictures, onPullToRefresh = {}, isRefreshing = false)
 }
 
 private class GalleryScreenPreviewParamProvider :
