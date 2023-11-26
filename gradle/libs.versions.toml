@@ -15,11 +15,11 @@
 ##
 [versions]
 accessibilityTestFramework = "4.0.0"
-activityCompose = "1.7.2"
+activityCompose = "1.8.1"
 androidGradlePlugin = "8.1.2"
 benchmark = "1.1.0"
 # @keep
-compileSdk = "33"
+compileSdk = "34"
 composeLatest = "1.4.0-alpha03"
 composeBom = "2023.06.01"
 compose-compiler = "1.5.3"
@@ -52,7 +52,7 @@ retrofit = "2.9.0"
 room = "2.5.2"
 runner = "1.0.1"
 # @keep
-targetSdk = "33"
+targetSdk = "34"
 testExtJunit = "1.1.5"
 uiAutomator = "2.2.0"
 viewModelCompose = "2.5.1"
