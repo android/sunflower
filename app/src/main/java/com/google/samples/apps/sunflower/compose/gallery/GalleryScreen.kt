@@ -34,6 +34,10 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -43,6 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -66,10 +71,8 @@ fun GalleryScreen(
         onPhotoClick = onPhotoClick,
         onUpClick = onUpClick,
         onPullToRefresh = viewModel::refreshData,
-        isRefreshing = viewModel.isRefreshing.value
     )
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GalleryScreen(
@@ -77,7 +80,6 @@ private fun GalleryScreen(
     onPhotoClick: (UnsplashPhoto) -> Unit = {},
     onUpClick: () -> Unit = {},
     onPullToRefresh: () -> Unit,
-    isRefreshing: Boolean
 ) {
     Scaffold(
         topBar = {
@@ -85,11 +87,13 @@ private fun GalleryScreen(
         },
     ) { padding ->
 
+        var isRefreshing by remember { mutableStateOf(false) }
         val pullToRefreshState = rememberPullToRefreshState()
 
         if (pullToRefreshState.isRefreshing){
             LaunchedEffect(Unit){
                 onPullToRefresh()
+                isRefreshing = true
             }
         }
         LaunchedEffect(isRefreshing){
@@ -98,14 +102,26 @@ private fun GalleryScreen(
             }
         }
 
+        val pagingItems: LazyPagingItems<UnsplashPhoto> =
+            plantPictures.collectAsLazyPagingItems()
+
+        LaunchedEffect(pagingItems.loadState) {
+            when (pagingItems.loadState.refresh) {
+                is  LoadState.Loading -> Unit
+                is LoadState.Error,is LoadState.NotLoading -> {
+                    isRefreshing = false
+                }
+            }
+        }
+
+
 
         Box(
             modifier = Modifier
                 .padding(padding)
                 .nestedScroll(pullToRefreshState.nestedScrollConnection)
         ) {
-            val pagingItems: LazyPagingItems<UnsplashPhoto> =
-                plantPictures.collectAsLazyPagingItems()
+
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
@@ -163,7 +179,7 @@ private fun GalleryTopBar(
 private fun GalleryScreenPreview(
     @PreviewParameter(GalleryScreenPreviewParamProvider::class) plantPictures: Flow<PagingData<UnsplashPhoto>>
 ) {
-    GalleryScreen(plantPictures = plantPictures, onPullToRefresh = {}, isRefreshing = false)
+    GalleryScreen(plantPictures = plantPictures, onPullToRefresh = {})
 }
 
 private class GalleryScreenPreviewParamProvider :
