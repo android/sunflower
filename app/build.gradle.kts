@@ -109,7 +109,6 @@ androidComponents {
 }
 
 dependencies {
-    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
 
     implementation(libs.bundles.lifecycle)
@@ -129,7 +128,6 @@ dependencies {
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.androidx.profileinstaller)
-    implementation(libs.androidx.tracing.ktx)
 
     // Compose
     implementation(platform(libs.androidx.compose.bom))

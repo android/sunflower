@@ -15,16 +15,15 @@
 ##
 [versions]
 accessibilityTestFramework = "4.0.0"
-activityCompose = "1.7.2"
-android-gradle-plugin = "8.0.2"
+activityCompose = "1.8.1"
+android-gradle-plugin = "8.2.0"
 benchmark = "1.1.1"
 # @keep
 compileSdk = "34"
 composeLatest = "1.6.0-alpha05"
 composeBom = "2023.09.00"
-compose-compiler = "1.5.3"
+compose-compiler = "1.5.4"
 constraintLayoutCompose = "1.0.1"
-constraintLayout = "2.1.4"
 coreTesting = "2.2.0"
 coroutines = "1.7.3"
 espresso = "3.5.1"
@@ -32,7 +31,7 @@ glide = "1.0.0-alpha.3"
 gradle = "7.2.0"
 gson = "2.9.0"
 guava = "31.1-android"
-hilt = "2.47"
+hilt = "2.49"
 hiltNavigationCompose = "1.0.0"
 junit = "4.13.2"
 kotlin = "1.9.20"
@@ -54,14 +53,14 @@ retrofit = "2.9.0"
 room = "2.5.2"
 runner = "1.0.1"
 # @keep
-targetSdk = "33"
+targetSdk = "34"
 testExtJunit = "1.1.5"
-tracing = "1.1.0"
 uiAutomator = "2.2.0"
 viewModelCompose = "2.6.2"
 work = "2.8.1"
 systemuicontroller = "0.30.1"
 ksp = "1.9.20-1.0.14"
+spotless = "6.4.1"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "ktx" }
@@ -70,7 +69,7 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "benchmark" }
 
-androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
+#androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintLayoutCompose" }
 
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
@@ -108,7 +107,6 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 
 androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "testExtJunit" }
 androidx-test-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiAutomator" }
-androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version.ref = "tracing" }
 androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "work" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 
@@ -166,9 +164,12 @@ androidx-test = [
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-test = { id = "com.android.test", version.ref = "android-gradle-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }

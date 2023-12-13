@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -26,10 +27,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,7 +39,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -87,11 +87,11 @@ fun HomeScreen(
                 scrollBehavior = scrollBehavior
             )
         }
-    ) {
+    ) { contentPadding ->
         HomePagerScreen(
             onPlantClick = onPlantClick,
             pagerState = pagerState,
-            modifier = Modifier.padding(it)
+            Modifier.padding(top = contentPadding.calculateTopPadding())
         )
     }
 }
@@ -104,9 +104,6 @@ fun HomePagerScreen(
     modifier: Modifier = Modifier,
     pages: Array<SunflowerPage> = SunflowerPage.values()
 ) {
-    // Use Modifier.nestedScroll + rememberNestedScrollInteropConnection() here so that this
-    // composable participates in the nested scroll hierarchy so that HomeScreen can be used in
-    // use cases like a collapsing toolbar
     Column(modifier) {
         val coroutineScope = rememberCoroutineScope()
 
@@ -170,7 +167,7 @@ private fun HomeTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         title = {
             Row(
                 Modifier.fillMaxWidth(),
@@ -182,7 +179,7 @@ private fun HomeTopAppBar(
                 )
             }
         },
-        modifier = modifier.statusBarsPadding(),
+        modifier = modifier,
         actions = {
             if (pagerState.currentPage == SunflowerPage.PLANT_LIST.ordinal) {
                 IconButton(onClick = onFilterClick) {

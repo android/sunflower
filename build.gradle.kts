@@ -25,9 +25,11 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.android.test) apply false
     alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.hilt) apply false
     alias(libs.plugins.ksp) apply false
-    id("com.diffplug.spotless") version "6.4.1"
+    alias(libs.plugins.spotless)
 }
 
 spotless {

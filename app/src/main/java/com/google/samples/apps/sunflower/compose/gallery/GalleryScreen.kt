@@ -62,7 +62,6 @@ fun GalleryScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun GalleryScreen(
     plantPictures: Flow<PagingData<UnsplashPhoto>>,
