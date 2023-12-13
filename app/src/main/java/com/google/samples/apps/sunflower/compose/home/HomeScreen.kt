@@ -66,6 +66,8 @@ enum class SunflowerPage(
     PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
 }
 
+fun funTest(): Int = 0
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
@@ -73,7 +75,7 @@ fun HomeScreen(
     onPlantClick: (Plant) -> Unit = {},
     viewModel: PlantListViewModel = hiltViewModel()
 ) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { SunflowerPage.values().size })
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
@@ -132,7 +134,6 @@ fun HomePagerScreen(
         // Pages
         HorizontalPager(
             modifier = Modifier.background(MaterialTheme.colorScheme.background),
-            pageCount = pages.size,
             state = pagerState,
             verticalAlignment = Alignment.Top
         ) { index ->
@@ -205,7 +206,11 @@ private fun HomeScreenPreview() {
     SunflowerTheme {
         HomePagerScreen(
             onPlantClick = {},
-            pagerState = PagerState(),
+            pagerState = object : PagerState() {
+                override val pageCount: Int
+                    get() = 5
+
+            },
         )
     }
 }
