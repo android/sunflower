@@ -19,7 +19,7 @@ package com.google.samples.apps.sunflower
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.view.WindowCompat
+import androidx.activity.enableEdgeToEdge
 import com.google.samples.apps.sunflower.compose.SunflowerApp
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +31,7 @@ class GardenActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Displaying edge-to-edge
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        enableEdgeToEdge()
         setContent {
             SunflowerTheme {
                 SunflowerApp()

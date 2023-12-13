@@ -15,11 +15,10 @@
  */
 
 plugins {
-  id("com.android.application")
-  id("kotlin-android")
-  id("kotlin-parcelize")
-  id("kotlin-kapt")
-  id("dagger.hilt.android.plugin")
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.ksp)
+  alias(libs.plugins.hilt)
 }
 
 android {
@@ -110,15 +109,13 @@ androidComponents {
 }
 
 dependencies {
-  kapt(libs.androidx.room.compiler)
-  kapt(libs.hilt.android.compiler)
-  implementation(libs.androidx.constraintlayout)
+  ksp(libs.androidx.room.compiler)
+  ksp(libs.hilt.android.compiler)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.livedata.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
   implementation(libs.androidx.navigation.compose)
   implementation(libs.androidx.paging.compose)
-  implementation(libs.androidx.paging.runtime.ktx)
   implementation(libs.androidx.room.ktx)
   implementation(libs.androidx.work.runtime.ktx)
   implementation(libs.material)
@@ -131,7 +128,6 @@ dependencies {
   implementation(libs.hilt.android)
   implementation(libs.hilt.navigation.compose)
   implementation(libs.androidx.profileinstaller)
-  implementation(libs.androidx.tracing.ktx)
 
   // Compose
   implementation(platform(libs.androidx.compose.bom))
@@ -152,7 +148,7 @@ dependencies {
 
   // Testing dependencies
   debugImplementation(libs.androidx.monitor)
-  kaptAndroidTest(libs.hilt.android.compiler)
+  kspAndroidTest(libs.hilt.android.compiler)
   androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.arch.core.testing)
   androidTestImplementation(libs.androidx.espresso.contrib)
