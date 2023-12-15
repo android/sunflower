@@ -219,7 +219,7 @@ fun PlantDetails(
             hasValidUnsplashKey = hasValidUnsplashKey,
             imageHeight = with(LocalDensity.current) {
                 val candidateHeight =
-                    Dimens.PlantDetailAppBarHeight + toolbarOffsetHeightPx.value.toDp()
+                    Dimens.PlantDetailAppBarHeight
                 // FIXME: Remove this workaround when https://github.com/bumptech/glide/issues/4952
                 // is released
                 maxOf(candidateHeight, 1.dp)
