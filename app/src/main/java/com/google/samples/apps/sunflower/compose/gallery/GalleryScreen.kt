@@ -87,19 +87,10 @@ private fun GalleryScreen(
         },
     ) { padding ->
 
-        var isRefreshing by remember { mutableStateOf(false) }
         val pullToRefreshState = rememberPullToRefreshState()
 
         if (pullToRefreshState.isRefreshing){
-            LaunchedEffect(Unit){
                 onPullToRefresh()
-                isRefreshing = true
-            }
-        }
-        LaunchedEffect(isRefreshing){
-            if (!isRefreshing){
-                pullToRefreshState.endRefresh()
-            }
         }
 
         val pagingItems: LazyPagingItems<UnsplashPhoto> =
@@ -109,12 +100,10 @@ private fun GalleryScreen(
             when (pagingItems.loadState.refresh) {
                 is  LoadState.Loading -> Unit
                 is LoadState.Error,is LoadState.NotLoading -> {
-                    isRefreshing = false
+                    pullToRefreshState.endRefresh()
                 }
             }
         }
-
-
 
         Box(
             modifier = Modifier
