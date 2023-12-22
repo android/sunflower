@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ Copyright 2021 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,5 +45,8 @@
         <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">بعد از %d روز آبیاری کنید.</item>
     </plurals>
 
+
+    <!-- Accessibility -->
+    <string name="a11y_back" translatable="false">بازگشت</string>
 
 </resources>
