@@ -89,7 +89,7 @@ private fun GalleryScreen(
 
         val pullToRefreshState = rememberPullToRefreshState()
 
-        if (pullToRefreshState.isRefreshing){
+        if (pullToRefreshState.isRefreshing) {
                 onPullToRefresh()
         }
 
