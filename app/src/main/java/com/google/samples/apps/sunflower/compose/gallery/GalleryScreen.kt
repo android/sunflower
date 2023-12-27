@@ -90,8 +90,8 @@ private fun GalleryScreen(
 
         val pullToRefreshState = rememberPullToRefreshState()
 
-        if (pullToRefreshState.isRefreshing){
-                onPullToRefresh()
+        if (pullToRefreshState.isRefreshing) {
+            onPullToRefresh()
         }
 
         val pagingItems: LazyPagingItems<UnsplashPhoto> =
