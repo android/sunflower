@@ -19,7 +19,7 @@ package com.google.samples.apps.sunflower.utilities
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class GrowZoneUtilTest {
+internal class GrowZoneUtilTest {
 
     @Test fun getZoneForLatitude() {
         assertEquals(13, getZoneForLatitude(0.0))

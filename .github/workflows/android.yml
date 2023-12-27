@@ -24,14 +24,15 @@ jobs:
 
   build:
     name: Build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v1
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@v3
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          java-version: 1.8
+          java-version: '17'
+          distribution: 'temurin'
       - name: Build project
         run: .github/scripts/gradlew_recursive.sh assembleDebug
       - name: Zip artifacts
@@ -41,3 +42,34 @@ jobs:
         with:
           name: assemble
           path: assemble.zip
+#
+#  Disabling androidTest temporarily due to the stability issue b/251319989
+#  androidTest:
+#    needs: build
+#    runs-on: macOS-latest
+#    timeout-minutes: 45
+#
+#    steps:
+#      - uses: actions/setup-java@v3
+#        with:
+#          distribution: 'temurin'
+#          java-version: '11'
+#      - uses: actions/checkout@v3
+#
+#      - name: Setup Android SDK
+#        uses: android-actions/setup-android@v2
+#
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Run instrumented tests with GMD
+#        run: ./gradlew pixel2api27DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.experimental.testOptions.managedDevices.setupTimeoutMinutes=20 -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true --info
+#
+#      - name: Upload test reports
+#        if: always()
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: test-reports
+#          path: |
+#            '*/build/outputs/androidTest-results/'
+#            '!**/*"*' # Couldn't exclude a file with double quotation. Revisit the path once b/242988834 is fixed
