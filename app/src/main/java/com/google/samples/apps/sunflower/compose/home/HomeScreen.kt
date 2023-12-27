@@ -102,7 +102,6 @@ fun HomePagerScreen(
     pagerState: PagerState,
     pages: Array<SunflowerPage>,
     modifier: Modifier = Modifier,
-    pages: Array<SunflowerPage>
 ) {
     Column(modifier) {
         val coroutineScope = rememberCoroutineScope()
