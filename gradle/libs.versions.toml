@@ -39,7 +39,7 @@ ktlint = "0.40.0"
 ktx = "1.7.0"
 lifecycle = "2.6.0-alpha04"
 material = "1.8.0-rc01"
-material3 = "1.0.1"
+material3 = "1.2.0-alpha11"
 # @keep
 minSdk = "23"
 monitor = "1.6.0"
