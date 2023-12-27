@@ -43,6 +43,7 @@
 
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Hình ảnh của cây</string>
+    <string name="a11y_back">Trở lại</string>
     <string name="gallery_content_description">Đi đến thư viện</string>
     <string name="plant_detail_image_content_description">Hình của cây</string>
 
