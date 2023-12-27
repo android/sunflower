@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi

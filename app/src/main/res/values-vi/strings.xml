@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2021 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="menu_filter_by_grow_zone">Lọc theo vùng phát triển</string>
+    <string name="my_garden_title">Vườn của tôi</string>
+    <string name="plant_list_title">Danh sách cây</string>
+    <string name="available">Cây Hiện Có</string>
+    <string name="plant_details_title">Chi tiết cây</string>
+    <string name="add_plant">Thêm cây</string>
+    <string name="added_plant_to_garden">Đã thêm cây vào vườn</string>
+    <string name="garden_empty">Vườn của bạn đang trống</string>
+    <string name="plant_date_header">Đã trồng</string>
+    <string name="watered_date_header">Lần cuối tưới</string>
+    <string name="menu_item_share_plant">Chia sẻ</string>
+    <string name="share_text_plant">Xem cây %s tại ứng dụng Android Sunflower</string>
+    <string name="gallery_title">Hình ảnh từ Unsplash</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">Cần tưới</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">hàng ngày</item>
+        <item quantity="other">mỗi %d ngày</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one">tưới vào ngày mai.</item>
+        <item quantity="other">tưới trong %d ngày.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">Hình ảnh của cây</string>
+    <string name="a11y_back">Trở lại</string>
+    <string name="gallery_content_description">Đi đến thư viện</string>
+    <string name="plant_detail_image_content_description">Hình của cây</string>
+
+
+</resources>
