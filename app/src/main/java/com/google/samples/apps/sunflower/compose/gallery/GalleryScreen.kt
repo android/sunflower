@@ -51,6 +51,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.plantlist.PhotoListItem
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
@@ -115,14 +116,9 @@ private fun GalleryScreen(
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
             ) {
-                // TODO update this implementation once paging Compose supports LazyGridScope
-                // See: https://issuetracker.google.com/issues/178087310
                 items(
                     count = pagingItems.itemCount,
-                    key = { index ->
-                        val photo = pagingItems[index]
-                        "${photo?.id ?: ""}${index}"
-                    }
+                    key = pagingItems.itemKey { it }
                 ) { index ->
                     val photo = pagingItems[index] ?: return@items
                     PhotoListItem(photo = photo) {
@@ -136,8 +132,6 @@ private fun GalleryScreen(
                 state = pullToRefreshState
             )
         }
-
-
     }
 }
 

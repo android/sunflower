@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -70,10 +71,10 @@ enum class SunflowerPage(
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onPlantClick: (Plant) -> Unit = {},
-    viewModel: PlantListViewModel = hiltViewModel()
+    viewModel: PlantListViewModel = hiltViewModel(),
+    pages: Array<SunflowerPage> = SunflowerPage.values()
 ) {
-    val pages : Array<SunflowerPage> = SunflowerPage.values()
-    val pagerState = rememberPagerState(pageCount = {pages.count()})
+    val pagerState = rememberPagerState(pageCount = { pages.size })
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
@@ -89,8 +90,8 @@ fun HomeScreen(
         HomePagerScreen(
             onPlantClick = onPlantClick,
             pagerState = pagerState,
-            Modifier.padding(top = contentPadding.calculateTopPadding()),
-            pages = pages
+            pages = pages,
+            Modifier.padding(top = contentPadding.calculateTopPadding())
         )
     }
 }
@@ -100,8 +101,8 @@ fun HomeScreen(
 fun HomePagerScreen(
     onPlantClick: (Plant) -> Unit,
     pagerState: PagerState,
+    pages: Array<SunflowerPage>,
     modifier: Modifier = Modifier,
-    pages: Array<SunflowerPage>
 ) {
     Column(modifier) {
         val coroutineScope = rememberCoroutineScope()
@@ -200,10 +201,11 @@ private fun HomeTopAppBar(
 @Composable
 private fun HomeScreenPreview() {
     SunflowerTheme {
+        val pages = SunflowerPage.values()
         HomePagerScreen(
             onPlantClick = {},
-            pagerState = rememberPagerState(pageCount = {2}),
-            pages = SunflowerPage.values()
+            pagerState = rememberPagerState(pageCount = { pages.size }),
+            pages = pages
         )
     }
 }
