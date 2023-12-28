@@ -107,14 +107,13 @@ private fun GalleryScreen(
                 .padding(padding)
                 .nestedScroll(pullToRefreshState.nestedScrollConnection)
         ) {
-
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.card_side_margin))
             ) {
                 items(
                     count = pagingItems.itemCount,
-                    key = pagingItems.itemKey { it }
+                    key = pagingItems.itemKey { it.id }
                 ) { index ->
                     val photo = pagingItems[index] ?: return@items
                     PhotoListItem(photo = photo) {
