@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,8 +32,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
 
@@ -48,7 +48,7 @@ fun PhotoListItem(photo: UnsplashPhoto, onClick: () -> Unit) {
     ImageListItem(name = photo.user.name, imageUrl = photo.urls.small, onClick = onClick)
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
     Card(
@@ -59,7 +59,7 @@ fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
             .padding(bottom = dimensionResource(id = R.dimen.card_bottom_margin))
     ) {
         Column(Modifier.fillMaxWidth()) {
-            SunflowerImage(
+            GlideImage(
                 model = imageUrl,
                 contentDescription = stringResource(R.string.a11y_plant_item_image),
                 Modifier
