@@ -64,11 +64,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -178,31 +174,7 @@ fun PlantDetails(
         if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
     }
 
-    val toolbarHeightPx = with(LocalDensity.current) {
-        Dimens.PlantDetailAppBarHeight.roundToPx().toFloat()
-    }
-    val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
-    val nestedScrollConnection = remember {
-        object : NestedScrollConnection {
-            override fun onPreScroll(
-                available: Offset,
-                source: NestedScrollSource
-            ): Offset {
-                val delta = available.y
-                val newOffset = toolbarOffsetHeightPx.value + delta
-                toolbarOffsetHeightPx.value =
-                    newOffset.coerceIn(-toolbarHeightPx, 0f)
-                return Offset.Zero
-            }
-        }
-    }
-
-    Box(
-        modifier
-            .fillMaxSize()
-            // attach as a parent to the nested scroll system
-            .nestedScroll(nestedScrollConnection)
-    ) {
+    Box(modifier.fillMaxSize()) {
         PlantDetailsContent(
             scrollState = scrollState,
             toolbarState = toolbarState,
