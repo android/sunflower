@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 
 // Value obtained empirically so that the header buttons don't surpass the header container
-private val HeaderTransitionOffset = 190.dp
+private val HeaderTransitionOffset = 125.dp
 
 /**
  * Class that contains derived state for when the toolbar should be shown
