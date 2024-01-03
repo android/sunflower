@@ -29,12 +29,14 @@ coroutines = "1.6.4"
 espresso = "3.4.0"
 glide = "1.0.0-beta01"
 gradle = "7.2.0"
+gradle-versions = "0.49.0"
 gson = "2.9.0"
 guava = "31.1-android"
 hilt = "2.48"
 hiltNavigationCompose = "1.0.0"
 junit = "4.13.2"
 kotlin = "1.9.10"
+ksp = "1.9.10-1.0.13"
 ktlint = "0.40.0"
 ktx = "1.7.0"
 lifecycle = "2.6.0-alpha04"
@@ -53,13 +55,13 @@ room = "2.5.2"
 runner = "1.0.1"
 # @keep
 targetSdk = "34"
+spotless = "6.4.1"
+systemuicontroller = "0.30.1"
 testExtJunit = "1.1.5"
 uiAutomator = "2.2.0"
+version-catalog-update = "0.8.1"
 viewModelCompose = "2.5.1"
 work = "2.7.1"
-systemuicontroller = "0.30.1"
-ksp = "1.9.10-1.0.13"
-spotless = "6.4.1"
 
 [libraries]
 accessibility-test-framework = { module = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework", version.ref = "accessibilityTestFramework" }
@@ -122,8 +124,10 @@ retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", v
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin"}
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
