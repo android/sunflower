@@ -33,10 +33,3 @@ plugins {
 }
 
 apply("${project.rootDir}/buildscripts/toml-updater-config.gradle")
-
-spotless {
-    kotlin {
-        target("**/*.kt")
-        ktlint(libs.versions.ktlint.get()).userData(mapOf("max_line_length" to "100"))
-    }
-}
