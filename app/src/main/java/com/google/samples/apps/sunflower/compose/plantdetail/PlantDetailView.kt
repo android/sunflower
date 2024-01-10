@@ -43,8 +43,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -82,13 +82,14 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
-import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
@@ -118,7 +119,7 @@ fun PlantDetailsScreen(
     val isPlanted = plantDetailsViewModel.isPlanted.collectAsState(initial = false).value
     val showSnackbar = plantDetailsViewModel.showSnackbar.observeAsState().value
 
-    if (plant != null && isPlanted != null && showSnackbar != null) {
+    if (plant != null && showSnackbar != null) {
         Surface {
             TextSnackbarContainer(
                 snackbarText = stringResource(R.string.added_plant_to_garden),
@@ -265,6 +266,7 @@ private fun PlantDetailsContent(
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun PlantImage(
     imageUrl: String,
@@ -287,7 +289,7 @@ private fun PlantImage(
                     .background(placeholderColor)
             )
         }
-        SunflowerImage(
+        GlideImage(
             model = imageUrl,
             contentDescription = null,
             modifier = Modifier
@@ -388,7 +390,7 @@ private fun PlantDetailsToolbar(
                         Modifier.align(Alignment.CenterVertically)
                     ) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.a11y_back)
                         )
                     }
@@ -451,7 +453,7 @@ private fun PlantHeaderActions(
                 .then(iconModifier)
         ) {
             Icon(
-                Icons.Filled.ArrowBack,
+                Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = stringResource(id = R.string.a11y_back)
             )
         }
