@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.macrobenchmark
 
-import androidx.benchmark.macro.ExperimentalBaselineProfilesApi
 import androidx.benchmark.macro.junit4.BaselineProfileRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
@@ -25,7 +24,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@OptIn(ExperimentalBaselineProfilesApi::class)
 @RunWith(AndroidJUnit4::class)
 class BaselineProfileGenerator {
 
@@ -34,7 +32,7 @@ class BaselineProfileGenerator {
 
     @Test
     fun startPlantListPlantDetail() {
-        rule.collectBaselineProfile(PACKAGE_NAME) {
+        rule.collect(PACKAGE_NAME) {
             // start the app flow
             pressHome()
             startActivityAndWait()
