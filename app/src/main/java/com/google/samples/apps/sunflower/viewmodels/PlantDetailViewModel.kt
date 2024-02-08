@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * The ViewModel used in [PlantDetailFragment].
+ * The ViewModel used in [PlantDetailsScreen].
  */
 @HiltViewModel
 class PlantDetailViewModel @Inject constructor(
