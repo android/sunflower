@@ -41,7 +41,7 @@ jobs:
       id: cpr
       uses: peter-evans/create-pull-request@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT }}
         commit-message: 🤖 Update Dependencies
         committer: compose-devrel-github-bot <compose-devrel-github-bot@google.com>
         author: compose-devrel-github-bot <compose-devrel-github-bot@google.com>
