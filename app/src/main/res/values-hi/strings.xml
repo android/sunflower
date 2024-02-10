@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright 2020 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <!-- Translatable resources -->
+    <string name="menu_filter_by_grow_zone">ग्रो ज़ोन द्वारा फ़िल्टर करें</string>
+    <string name="plant_detail_image_content_description">पेड़ों की तस्वीरें</string>
+    <string name="my_garden_title">मेरा बाग</string>
+    <string name="plant_list_title">पेड़ों की सूची</string>
+    <string name="available">स्टॉक रोपण</string>
+    <string name="plant_details_title">वृक्ष विवरण </string>
+    <string name="add_plant">पेड़ लगाओ</string>
+    <string name="added_plant_to_garden">यह पेड़ बगीचे में लगाया गया है</string>
+    <string name="garden_empty">आपके बगीचे में कोई पेड़ नहीं हैं</string>
+    <string name="plant_date_header">बुवाई पूर्ण</string>
+    <string name="watered_date_header">ताजा पानी दो</string>
+    <string name="menu_item_share_plant">शेयर</string>
+    <string name="share_text_plant">Android Sunflower ऐप में %s ट्री देखें</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">पानी की जरूरत</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one">रोज रोज</item>
+        <item quantity="other">हर %d दिन</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one">कल पानी की जरूरत है</item>
+        <item quantity="other">%d दिनों के बाद पानी की जरूरत है।</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image">पेड़ों की तस्वीरें</string>
+
+</resources>
