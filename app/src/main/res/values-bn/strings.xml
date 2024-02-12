@@ -29,16 +29,18 @@
     <string name="watered_date_header">সর্বশেষ জল দেত্তয়া</string>
     <string name="menu_item_share_plant">শেয়ার</string>
     <string name="share_text_plant">অ্যানড্রয়েড সানফ্লাওয়ার অ্যাপে আমার %s গাছ টি দেখুন</string>
+    <string name="gallery_title" >আনস্প্ল্যাশ দ্বারা ফটো</string>
+    <string name="gallery_content_description" >গ্যালারী স্ক্রিনে নেভিগেট করুন</string>
 
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix">জল দেয়া প্রয়োজন</string>
     <plurals name="watering_needs_suffix">
-        <item quantity="one">প্রতি দিন</item>
+        <item quantity="one">প্রতি %d দিন</item>
         <item quantity="other">প্রতি %d দিন</item>
     </plurals>
 
     <plurals name="watering_next">
-        <item quantity="one">আগামী কাল জল দিন।</item>
+        <item quantity="one">আগামী কাল %d জল দিন।</item>
         <item quantity="other">জল দিন %d দিন পর।</item>
     </plurals>
 
