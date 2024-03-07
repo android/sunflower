@@ -18,35 +18,36 @@ package com.google.samples.apps.sunflower.workers
 
 import android.content.Context
 import android.util.Log
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.google.gson.stream.JsonReader
-import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.PlantDao
+import com.google.samples.apps.sunflower.utilities.AssetManager
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.InputStream
 
-class SeedDatabaseWorker(
-        context: Context,
-        workerParams: WorkerParameters
+@HiltWorker
+class SeedDatabaseWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted workerParams: WorkerParameters,
+    private val plantDao: PlantDao,
+    private val jsonAssetManager: AssetManager,
 ) : CoroutineWorker(context, workerParams) {
+
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
-            val filename = inputData.getString(KEY_FILENAME)
-            if (filename != null) {
-                applicationContext.assets.open(filename).use { inputStream ->
-                    JsonReader(inputStream.reader()).use { jsonReader ->
-                        val plantType = object : TypeToken<List<Plant>>() {}.type
-                        val plantList: List<Plant> = Gson().fromJson(jsonReader, plantType)
+            val fileName = inputData.getString(KEY_FILENAME)
+            if (fileName != null) {
+                val plantList: List<Plant> = jsonAssetManager.open(fileName).use(Gson()::fromJson)
 
-                        val database = AppDatabase.getInstance(applicationContext)
-                        database.plantDao().upsertAll(plantList)
-
-                        Result.success()
-                    }
-                }
+                plantDao.upsertAll(plantList)
+                Result.success()
             } else {
                 Log.e(TAG, "Error seeding database - no valid filename")
                 Result.failure()
@@ -62,3 +63,8 @@ class SeedDatabaseWorker(
         const val KEY_FILENAME = "PLANT_DATA_FILENAME"
     }
 }
+
+private inline fun <reified T> Gson.fromJson(inputStream: InputStream): T =
+    inputStream.reader().use { jsonReader ->
+        fromJson(jsonReader, object : TypeToken<T>() {}.type)
+    }
