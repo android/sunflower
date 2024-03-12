@@ -111,6 +111,7 @@ androidComponents {
 dependencies {
   ksp(libs.androidx.room.compiler)
   ksp(libs.hilt.android.compiler)
+  ksp(libs.hilt.ext.compiler)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.livedata.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -127,6 +128,7 @@ dependencies {
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.hilt.android)
   implementation(libs.hilt.navigation.compose)
+  implementation(libs.hilt.ext.work)
   implementation(libs.androidx.profileinstaller)
 
   // Compose

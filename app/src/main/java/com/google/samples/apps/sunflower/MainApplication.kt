@@ -17,13 +17,19 @@
 package com.google.samples.apps.sunflower
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 @HiltAndroidApp
 class MainApplication : Application(), Configuration.Provider {
+
+  @Inject lateinit var workFactory: HiltWorkerFactory
+
   override val workManagerConfiguration: Configuration
     get() = Configuration.Builder()
       .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
+      .setWorkerFactory(workFactory)
       .build()
 }
