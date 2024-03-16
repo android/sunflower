@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.repositories
 
+import com.google.samples.apps.sunflower.data.local.dao.GardenPlantingDao
+import com.google.samples.apps.sunflower.data.models.GardenPlanting
 import javax.inject.Inject
 import javax.inject.Singleton
 

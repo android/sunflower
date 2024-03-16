@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.models
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.google.samples.apps.sunflower.data.models.GardenPlanting
+import com.google.samples.apps.sunflower.data.models.Plant
 
 /**
  * This class captures the relationship between a [Plant] and a user's [GardenPlanting], which is

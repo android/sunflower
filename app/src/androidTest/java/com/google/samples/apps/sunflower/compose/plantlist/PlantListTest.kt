@@ -21,7 +21,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.samples.apps.sunflower.compose.plantdetail.plantForTesting
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.models.Plant
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
