@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.local.database
 
 import android.content.Context
 import androidx.room.Database
@@ -25,6 +25,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
+import com.google.samples.apps.sunflower.data.Converters
+import com.google.samples.apps.sunflower.data.models.GardenPlanting
+import com.google.samples.apps.sunflower.data.local.dao.GardenPlantingDao
+import com.google.samples.apps.sunflower.data.models.Plant
+import com.google.samples.apps.sunflower.data.local.dao.PlantDao
 import com.google.samples.apps.sunflower.utilities.DATABASE_NAME
 import com.google.samples.apps.sunflower.utilities.PLANT_DATA_FILENAME
 import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
