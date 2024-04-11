@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower.compose.plantdetail
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.ScrollState
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 // Value obtained empirically so that the header buttons don't surpass the header container
@@ -29,7 +30,7 @@ private val HeaderTransitionOffset = 190.dp
  */
 data class PlantDetailsScroller(
     val scrollState: ScrollState,
-    val namePosition: Float
+    val detailAppbarHeight: Dp,
 ) {
     val toolbarTransitionState = MutableTransitionState(ToolbarState.HIDDEN)
 
