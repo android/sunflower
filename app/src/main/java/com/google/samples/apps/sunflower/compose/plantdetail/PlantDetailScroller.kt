@@ -37,8 +37,8 @@ data class PlantDetailsScroller(
     fun getToolbarState(density: Density): ToolbarState {
         // When the namePosition is placed correctly on the screen (position > 1f) and it's
         // position is close to the header, then show the toolbar.
-        return if (namePosition > 1f &&
-            scrollState.value > (namePosition - getTransitionOffset(density))
+        return if (scrollState.value > 0 &&
+            scrollState.value > getTransitionOffset(density, detailAppbarHeight)
         ) {
             toolbarTransitionState.targetState = ToolbarState.SHOWN
             ToolbarState.SHOWN
