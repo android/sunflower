@@ -48,9 +48,10 @@ data class PlantDetailsScroller(
         }
     }
 
-    private fun getTransitionOffset(density: Density): Float = with(density) {
-        HeaderTransitionOffset.toPx()
-    }
+    private fun getTransitionOffset(density: Density, detailAppbarHeight: Dp): Float =
+        with(density) {
+            (detailAppbarHeight - HeaderTransitionOffset).toPx()
+        }
 }
 
 // Toolbar state related classes and functions to achieve the CollapsingToolbarLayout animation
