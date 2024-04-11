@@ -151,10 +151,11 @@ fun PlantDetails(
     callbacks: PlantDetailsCallbacks,
     modifier: Modifier = Modifier
 ) {
+    val detailAppbarHeight = Dimens.PlantDetailAppBarHeight
     // PlantDetails owns the scrollerPosition to simulate CollapsingToolbarLayout's behavior
     val scrollState = rememberScrollState()
-    var plantScroller by remember {
-        mutableStateOf(PlantDetailsScroller(scrollState, Float.MIN_VALUE))
+    val plantScroller by remember {
+        mutableStateOf(PlantDetailsScroller(scrollState, detailAppbarHeight))
     }
     val transitionState =
         remember(plantScroller) { plantScroller.toolbarTransitionState }
