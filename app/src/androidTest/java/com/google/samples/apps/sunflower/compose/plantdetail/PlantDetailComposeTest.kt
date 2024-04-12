@@ -22,13 +22,16 @@ import androidx.annotation.RawRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeUp
 import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetails
-import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsCallbacks
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.test.R
 import org.junit.Rule
@@ -65,6 +68,23 @@ class PlantDetailComposeTest {
     fun plantDetails_checkGalleryIsShown() {
         startPlantDetails(isPlanted = true, hasUnsplashKey = true)
         composeTestRule.onNodeWithContentDescription("Gallery Icon").assertIsDisplayed()
+    }
+
+    @Test
+    fun plantDetails_scrollDown_visibleToolbar() {
+        startPlantDetails(isPlanted = false)
+        val headerAction = composeTestRule.onNodeWithTag("Header Action")
+        val detailToolbar = composeTestRule.onNodeWithTag("Detail Toolbar")
+
+        headerAction.assertIsDisplayed()
+        detailToolbar.assertIsNotDisplayed()
+
+        composeTestRule.onRoot().performTouchInput {
+            swipeUp()
+        }
+
+        headerAction.assertIsNotDisplayed()
+        detailToolbar.assertIsDisplayed()
     }
 
     private fun startPlantDetails(isPlanted: Boolean, hasUnsplashKey: Boolean = false) {
