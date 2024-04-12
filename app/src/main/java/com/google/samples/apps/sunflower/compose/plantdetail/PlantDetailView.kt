@@ -67,6 +67,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -348,13 +349,17 @@ private fun PlantToolbar(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
             onShareClick = onShareClick,
-            modifier = Modifier.alpha(toolbarAlpha())
+            modifier = Modifier
+                .alpha(toolbarAlpha())
+                .testTag("Detail Toolbar")
         )
     } else {
         PlantHeaderActions(
             onBackClick = callbacks.onBackClick,
             onShareClick = onShareClick,
-            modifier = Modifier.alpha(contentAlpha())
+            modifier = Modifier
+                .alpha(contentAlpha())
+                .testTag("Header Action")
         )
     }
 }
