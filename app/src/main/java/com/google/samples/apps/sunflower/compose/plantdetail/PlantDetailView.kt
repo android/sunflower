@@ -77,7 +77,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
@@ -190,13 +189,7 @@ fun PlantDetails(
             plant = plant,
             isPlanted = isPlanted,
             hasValidUnsplashKey = hasValidUnsplashKey,
-            imageHeight = with(LocalDensity.current) {
-                val candidateHeight =
-                    Dimens.PlantDetailAppBarHeight
-                // FIXME: Remove this workaround when https://github.com/bumptech/glide/issues/4952
-                // is released
-                maxOf(candidateHeight, 1.dp)
-            },
+            imageHeight = Dimens.PlantDetailAppBarHeight,
             onFabClick = callbacks.onFabClick,
             onGalleryClick = { callbacks.onGalleryClick(plant) },
             contentAlpha = { contentAlpha.value }
