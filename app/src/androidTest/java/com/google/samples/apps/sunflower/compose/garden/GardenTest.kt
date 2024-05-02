@@ -20,7 +20,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.data.models.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.utilities.testPlantAndGardenPlanting
 import org.junit.Rule
 import org.junit.Test

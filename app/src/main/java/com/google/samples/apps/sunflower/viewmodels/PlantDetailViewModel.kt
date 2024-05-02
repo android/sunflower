@@ -23,8 +23,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.BuildConfig
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.PlantRepository
+import com.google.samples.apps.sunflower.data.repositories.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.repositories.PlantRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -17,9 +17,7 @@
 package com.google.samples.apps.sunflower.compose.plantlist
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -35,7 +33,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.data.Plant
+import com.google.samples.apps.sunflower.data.models.Plant
 
 @Composable
 fun PlantListScreen(
