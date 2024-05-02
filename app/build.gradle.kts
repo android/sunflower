@@ -23,9 +23,7 @@ plugins {
 
 android {
   compileSdk = libs.versions.compileSdk.get().toInt()
-  buildFeatures {
-    dataBinding = true
-  }
+
   defaultConfig {
     applicationId = "com.google.samples.apps.sunflower"
     minSdk = libs.versions.minSdk.get().toInt()
