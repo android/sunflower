@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2020 Google LLC
  *
@@ -18,47 +19,67 @@ package com.google.samples.apps.sunflower.api
 
 import com.google.samples.apps.sunflower.BuildConfig
 import com.google.samples.apps.sunflower.data.UnsplashSearchResponse
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.SIMPLE
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.logging.HttpLoggingInterceptor.Level
-import retrofit2.Retrofit
-import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 /**
  * Used to connect to the Unsplash API to fetch photos
  */
 interface UnsplashService {
 
-    @GET("search/photos")
     suspend fun searchPhotos(
-        @Query("query") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int,
-        @Query("client_id") clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY
+        query: String,
+        page: Int,
+        perPage: Int,
+        clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY
     ): UnsplashSearchResponse
 
     companion object {
         private const val BASE_URL = "https://api.unsplash.com/"
 
         fun create(): UnsplashService {
-            val logger = HttpLoggingInterceptor().apply { level = Level.BASIC }
+            return Impl(CIO.create())
+        }
+    }
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
+    private class Impl(engine: HttpClientEngine) : UnsplashService {
+        private val client = HttpClient(engine) {
+            defaultRequest {
+                url(BASE_URL)
+            }
+            install(ContentNegotiation) {
+                json(Json { ignoreUnknownKeys = true })
+            }
+            install(Logging) {
+                logger = Logger.SIMPLE
+                level = LogLevel.INFO
+            }
+        }
 
-            return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(
-                    Json.asConverterFactory( "application/json; charset=UTF8".toMediaType())
-                )
-                .build()
-                .create(UnsplashService::class.java)
+        override suspend fun searchPhotos(
+                query: String,
+                page: Int,
+                perPage: Int,
+                clientId: String
+        ): UnsplashSearchResponse {
+            return client.get("search/photos") {
+                parameter("query", query)
+                parameter("page", page)
+                parameter("per_page", perPage)
+                parameter("client_id", clientId)
+            }.body()
         }
     }
 }

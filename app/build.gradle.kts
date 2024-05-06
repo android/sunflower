@@ -121,14 +121,16 @@ dependencies {
   implementation(libs.androidx.work.runtime.ktx)
   implementation(libs.material)
   implementation(libs.okhttp3.logging.interceptor)
-  implementation(libs.retrofit2.converter.kotlinx.serialization)
-  implementation(libs.retrofit2)
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.hilt.android)
   implementation(libs.hilt.navigation.compose)
   implementation(libs.androidx.profileinstaller)
   implementation(libs.kotlinx.serialization.json)
+  implementation(libs.ktor.client.cio)
+  implementation(libs.ktor.client.logging)
+  implementation(libs.ktor.client.content.negotiation)
+  implementation(libs.ktor.serialization.kotlinx.json)
 
   // Compose
   implementation(platform(libs.androidx.compose.bom))
