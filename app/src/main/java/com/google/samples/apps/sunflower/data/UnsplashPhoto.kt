@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 /**
  * Data class that represents a photo from Unsplash.
@@ -25,8 +25,9 @@ import com.google.gson.annotations.SerializedName
  * project are listed below. For a full list of fields, consult the API documentation
  * [here](https://unsplash.com/documentation#get-a-photo).
  */
+@Serializable
 data class UnsplashPhoto(
-    @field:SerializedName("id") val id: String,
-    @field:SerializedName("urls") val urls: UnsplashPhotoUrls,
-    @field:SerializedName("user") val user: UnsplashUser
+    val id: String,
+    val urls: UnsplashPhotoUrls,
+    val user: UnsplashUser
 )

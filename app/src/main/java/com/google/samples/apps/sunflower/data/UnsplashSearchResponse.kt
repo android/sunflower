@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 /**
  * Data class that represents a photo search response from Unsplash.
@@ -25,7 +25,8 @@ import com.google.gson.annotations.SerializedName
  * project are listed below. For a full list of fields, consult the API documentation
  * [here](https://unsplash.com/documentation#search-photos).
  */
+@Serializable
 data class UnsplashSearchResponse(
-    @field:SerializedName("results") val results: List<UnsplashPhoto>,
-    @field:SerializedName("total_pages") val totalPages: Int
+    val results: List<UnsplashPhoto>,
+    val totalPages: Int
 )
