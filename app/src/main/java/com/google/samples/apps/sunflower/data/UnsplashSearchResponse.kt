@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -28,5 +29,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UnsplashSearchResponse(
     val results: List<UnsplashPhoto>,
+    @SerialName("total_pages")
     val totalPages: Int
 )
