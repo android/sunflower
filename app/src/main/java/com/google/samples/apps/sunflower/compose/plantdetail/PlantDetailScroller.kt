@@ -19,6 +19,7 @@ package com.google.samples.apps.sunflower.compose.plantdetail
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.ScrollState
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 // Value obtained empirically so that the header buttons don't surpass the header container
@@ -29,15 +30,15 @@ private val HeaderTransitionOffset = 190.dp
  */
 data class PlantDetailsScroller(
     val scrollState: ScrollState,
-    val namePosition: Float
+    val detailAppbarHeight: Dp,
 ) {
     val toolbarTransitionState = MutableTransitionState(ToolbarState.HIDDEN)
 
     fun getToolbarState(density: Density): ToolbarState {
         // When the namePosition is placed correctly on the screen (position > 1f) and it's
         // position is close to the header, then show the toolbar.
-        return if (namePosition > 1f &&
-            scrollState.value > (namePosition - getTransitionOffset(density))
+        return if (scrollState.value > 0 &&
+            scrollState.value > getTransitionOffset(density, detailAppbarHeight)
         ) {
             toolbarTransitionState.targetState = ToolbarState.SHOWN
             ToolbarState.SHOWN
@@ -47,9 +48,10 @@ data class PlantDetailsScroller(
         }
     }
 
-    private fun getTransitionOffset(density: Density): Float = with(density) {
-        HeaderTransitionOffset.toPx()
-    }
+    private fun getTransitionOffset(density: Density, detailAppbarHeight: Dp): Float =
+        with(density) {
+            (detailAppbarHeight - HeaderTransitionOffset).toPx()
+        }
 }
 
 // Toolbar state related classes and functions to achieve the CollapsingToolbarLayout animation

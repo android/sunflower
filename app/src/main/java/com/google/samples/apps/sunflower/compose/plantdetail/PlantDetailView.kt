@@ -66,9 +66,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -153,10 +152,11 @@ fun PlantDetails(
     callbacks: PlantDetailsCallbacks,
     modifier: Modifier = Modifier
 ) {
+    val detailAppbarHeight = Dimens.PlantDetailAppBarHeight
     // PlantDetails owns the scrollerPosition to simulate CollapsingToolbarLayout's behavior
     val scrollState = rememberScrollState()
-    var plantScroller by remember {
-        mutableStateOf(PlantDetailsScroller(scrollState, Float.MIN_VALUE))
+    val plantScroller by remember {
+        mutableStateOf(PlantDetailsScroller(scrollState, detailAppbarHeight))
     }
     val transitionState =
         remember(plantScroller) { plantScroller.toolbarTransitionState }
@@ -179,14 +179,6 @@ fun PlantDetails(
         PlantDetailsContent(
             scrollState = scrollState,
             toolbarState = toolbarState,
-            onNamePosition = { newNamePosition ->
-                // Comparing to Float.MIN_VALUE as we are just interested on the original
-                // position of name on the screen
-                if (plantScroller.namePosition == Float.MIN_VALUE) {
-                    plantScroller =
-                        plantScroller.copy(namePosition = newNamePosition)
-                }
-            },
             plant = plant,
             isPlanted = isPlanted,
             hasValidUnsplashKey = hasValidUnsplashKey,
@@ -217,7 +209,6 @@ private fun PlantDetailsContent(
     isPlanted: Boolean,
     hasValidUnsplashKey: Boolean,
     imageHeight: Dp,
-    onNamePosition: (Float) -> Unit,
     onFabClick: () -> Unit,
     onGalleryClick: () -> Unit,
     contentAlpha: () -> Float,
@@ -255,7 +246,6 @@ private fun PlantDetailsContent(
                 wateringInterval = plant.wateringInterval,
                 description = plant.description,
                 hasValidUnsplashKey = hasValidUnsplashKey,
-                onNamePosition = { onNamePosition(it) },
                 toolbarState = toolbarState,
                 onGalleryClick = onGalleryClick,
                 modifier = Modifier.constrainAs(info) {
@@ -359,13 +349,17 @@ private fun PlantToolbar(
             plantName = plantName,
             onBackClick = callbacks.onBackClick,
             onShareClick = onShareClick,
-            modifier = Modifier.alpha(toolbarAlpha())
+            modifier = Modifier
+                .alpha(toolbarAlpha())
+                .testTag("Detail Toolbar")
         )
     } else {
         PlantHeaderActions(
             onBackClick = callbacks.onBackClick,
             onShareClick = onShareClick,
-            modifier = Modifier.alpha(contentAlpha())
+            modifier = Modifier
+                .alpha(contentAlpha())
+                .testTag("Header Action")
         )
     }
 }
@@ -483,7 +477,6 @@ private fun PlantInformation(
     wateringInterval: Int,
     description: String,
     hasValidUnsplashKey: Boolean,
-    onNamePosition: (Float) -> Unit,
     toolbarState: ToolbarState,
     onGalleryClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -499,7 +492,6 @@ private fun PlantInformation(
                     bottom = Dimens.PaddingNormal
                 )
                 .align(Alignment.CenterHorizontally)
-                .onGloballyPositioned { onNamePosition(it.positionInWindow().y) }
                 .visible { toolbarState == ToolbarState.HIDDEN }
         )
         Box(
