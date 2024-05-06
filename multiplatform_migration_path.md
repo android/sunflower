@@ -4,7 +4,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
 ## Migration path
 - [x] Migrate XML views to Compose
 - [ ] Migrate non-KMP libraries to KMP
-    - [ ] Migrate Gson to kotlinx.serialization
+    - [x] Migrate Gson to kotlinx.serialization
     - [ ] Migrate Retrofit to Ktor
     - [ ] Migrate Glide to Coil
     - [ ] Migrate Room to SQLDelight
