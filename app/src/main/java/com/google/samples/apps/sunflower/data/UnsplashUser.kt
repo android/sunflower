@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 /**
  * Data class that represents a user from Unsplash.
@@ -25,9 +25,10 @@ import com.google.gson.annotations.SerializedName
  * project are listed below. For a full list of fields, consult the API documentation
  * [here](https://unsplash.com/documentation#get-a-users-public-profile).
  */
+@Serializable
 data class UnsplashUser(
-    @field:SerializedName("name") val name: String,
-    @field:SerializedName("username") val username: String
+    val name: String,
+    val username: String
 ) {
     val attributionUrl: String
         get() {
