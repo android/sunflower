@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2024 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <!-- Translatable resources -->
+    <string name="menu_filter_by_grow_zone">성장 영역으로 필터</string>
+    <string name="my_garden_title">내 정원</string>
+    <string name="plant_list_title">식물 목록</string>
+    <string name="available">심을 수 있는 식물</string>
+    <string name="plant_details_title">식물 상세 정보</string>
+    <string name="add_plant">식물 추가</string>
+    <string name="added_plant_to_garden">정원에 식물이 추가되었습니다</string>
+    <string name="garden_empty">정원에 식물이 없습니다</string>
+    <string name="plant_date_header">심은 날짜</string>
+    <string name="watered_date_header">마지막 물 준 날짜</string>
+    <string name="menu_item_share_plant">공유</string>
+    <string name="share_text_plant">안드로이드 Sunflower 앱의 %s 식물을 확인해 보세요</string>
+    <string name="gallery_title">사진출처: Unsplash</string>
+
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix">물 주는 주기</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered, plural. Used in combination with watering_needs_prefix: 'Watering needs: every 8 days'.">%d일마다</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">%d일 안에 물 주세요.</item>
+    </plurals>
+
+    <string name="a11y_plant_item_image">식물 사진</string>
+    <string name="gallery_content_description">식물 목록 화면으로 이동</string>
+    <string name="plant_detail_image_content_description">식물 그림</string>
+</resources>
