@@ -1,0 +1,55 @@
+<!--
+  ~ Copyright 2018 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Resources that do not require translation -->
+    <string name="app_name" translatable="false">Sunflower</string>
+
+    <!-- Translatable resources -->
+    <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">تصفية حسب منطقة النمو</string>
+    <string name="my_garden_title" translation_description="Title for the 'My garden' screen where the user can see the list of plants that have been added to their garden.">حديقتي</string>
+    <string name="plant_list_title" translation_description="Title for the plant list screen where the user can see a list of plants available to add to their garden.">المزروعات</string>
+    <string name="available" translation_description="Text for the header of the plant list page indicating the available plants for users to choose from.">المزروعات المتاحة</string>
+    <string name="plant_details_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">تفاصيل الزرعة</string>
+    <string name="add_plant" translation_description="Button text that prompts user to navigate to the Plant List to add plants to their empty garden.">إضافة زرعة</string>
+    <string name="added_plant_to_garden" translation_description="Confirmation text that is shown when a user adds a plant to their empty garden.">تم اضافة الزرعة الى حديقتك</string>
+    <string name="garden_empty" translation_description="Text that is shown on the 'My Garden' screen when no plants have been added to the user's garden">حديقتك فارغة</string>
+    <string name="plant_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Planted to show date of planting below">تمت الزراعة في</string>
+    <string name="watered_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Last Watered to show date of last watering below">اخر سقاية</string>
+    <string name="menu_item_share_plant" translation_description="The label for the Share menu item">مشاركة</string>
+    <string name="share_text_plant" translation_description="The default messaged used when sharing a plant on SNS, etc.">تحقق من زرعة %s على تطبيق اندرويد دوار الشمس</string>
+    <string name="gallery_title" translation_description="Title for the photo gallery screen">الصور بواسطة Unsplash</string>
+
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix" translation_description="Prefix for the text describing how often a plant should be watered. Used in combination with watering_needs_suffix.">تحتاج للماء</string>
+    <plurals name="watering_needs_suffix" tools:ignore="MissingQuantity">
+        <item quantity="one" translation_description="Suffix for the text describing how often a plant should be watered, singular. Used in combination with watering_needs_prefix: 'Watering needs: every day'.">كل يوم</item>
+        <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered, plural. Used in combination with watering_needs_prefix: 'Watering needs: every 8 days'.">كل %d ايام</item>
+    </plurals>
+
+    <plurals name="watering_next" tools:ignore="MissingQuantity">
+        <item quantity="one" translation_description="Text indicating when the the plant should next be watered, singular. Used in conjunction with last watered date. 'May 24, 2018 - water tomorrow.'.">تحتاج للماء غداً</item>
+        <item quantity="many" translation_description="Text indicating when the the plant should next be watered, many. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">تحتاج للماء خلال %d يوم</item>
+        <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">تحتاج للماء خلال %d أيام</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="a11y_plant_item_image" translation_description="Accessibility text for each of the plant images shown in the 'My garden' and 'Plant list' screens.">صورة للزرعة</string>
+    <string name="gallery_content_description" translation_description="Content description for the clickable image to navigate to the gallery screen">الأنتقال الى الأستوديو</string>
+    <string name="plant_detail_image_content_description" translation_description="Content description for the header / hero image that is show at the top of the plant detail screen.">صورة للزرعة</string>
+
+</resources>
