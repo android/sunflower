@@ -43,8 +43,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -64,11 +64,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -86,13 +82,14 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
-import com.google.samples.apps.sunflower.compose.utils.SunflowerImage
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
 import com.google.samples.apps.sunflower.compose.visible
 import com.google.samples.apps.sunflower.data.Plant
@@ -122,7 +119,7 @@ fun PlantDetailsScreen(
     val isPlanted = plantDetailsViewModel.isPlanted.collectAsState(initial = false).value
     val showSnackbar = plantDetailsViewModel.showSnackbar.observeAsState().value
 
-    if (plant != null && isPlanted != null && showSnackbar != null) {
+    if (plant != null && showSnackbar != null) {
         Surface {
             TextSnackbarContainer(
                 snackbarText = stringResource(R.string.added_plant_to_garden),
@@ -178,31 +175,7 @@ fun PlantDetails(
         if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
     }
 
-    val toolbarHeightPx = with(LocalDensity.current) {
-        Dimens.PlantDetailAppBarHeight.roundToPx().toFloat()
-    }
-    val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
-    val nestedScrollConnection = remember {
-        object : NestedScrollConnection {
-            override fun onPreScroll(
-                available: Offset,
-                source: NestedScrollSource
-            ): Offset {
-                val delta = available.y
-                val newOffset = toolbarOffsetHeightPx.value + delta
-                toolbarOffsetHeightPx.value =
-                    newOffset.coerceIn(-toolbarHeightPx, 0f)
-                return Offset.Zero
-            }
-        }
-    }
-
-    Box(
-        modifier
-            .fillMaxSize()
-            // attach as a parent to the nested scroll system
-            .nestedScroll(nestedScrollConnection)
-    ) {
+    Box(modifier.fillMaxSize()) {
         PlantDetailsContent(
             scrollState = scrollState,
             toolbarState = toolbarState,
@@ -219,7 +192,7 @@ fun PlantDetails(
             hasValidUnsplashKey = hasValidUnsplashKey,
             imageHeight = with(LocalDensity.current) {
                 val candidateHeight =
-                    Dimens.PlantDetailAppBarHeight + toolbarOffsetHeightPx.value.toDp()
+                    Dimens.PlantDetailAppBarHeight
                 // FIXME: Remove this workaround when https://github.com/bumptech/glide/issues/4952
                 // is released
                 maxOf(candidateHeight, 1.dp)
@@ -293,6 +266,7 @@ private fun PlantDetailsContent(
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun PlantImage(
     imageUrl: String,
@@ -315,7 +289,7 @@ private fun PlantImage(
                     .background(placeholderColor)
             )
         }
-        SunflowerImage(
+        GlideImage(
             model = imageUrl,
             contentDescription = null,
             modifier = Modifier
@@ -326,7 +300,7 @@ private fun PlantImage(
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: Target<Drawable>?,
+                    target: Target<Drawable>,
                     isFirstResource: Boolean
                 ): Boolean {
                     isLoading = false
@@ -334,10 +308,10 @@ private fun PlantImage(
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
+                    resource: Drawable,
+                    model: Any,
                     target: Target<Drawable>?,
-                    dataSource: DataSource?,
+                    dataSource: DataSource,
                     isFirstResource: Boolean
                 ): Boolean {
                     isLoading = false
@@ -416,7 +390,7 @@ private fun PlantDetailsToolbar(
                         Modifier.align(Alignment.CenterVertically)
                     ) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.a11y_back)
                         )
                     }
@@ -479,7 +453,7 @@ private fun PlantHeaderActions(
                 .then(iconModifier)
         ) {
             Icon(
-                Icons.Filled.ArrowBack,
+                Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = stringResource(id = R.string.a11y_back)
             )
         }
