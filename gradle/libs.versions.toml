@@ -36,8 +36,8 @@ guava = "33.1.0-jre"
 hilt = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 junit = "4.13.2"
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.20"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.21"
 # @keep
 ktlint = "0.40.0"
 ktx = "1.13.1"
@@ -123,3 +123,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
