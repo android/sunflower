@@ -19,6 +19,7 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.ksp)
   alias(libs.plugins.hilt)
+  alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -73,9 +74,6 @@ android {
     compose = true
     dataBinding = true
     buildConfig = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
   packagingOptions {
     // Multiple dependency bring these files in. Exclude them to enable
