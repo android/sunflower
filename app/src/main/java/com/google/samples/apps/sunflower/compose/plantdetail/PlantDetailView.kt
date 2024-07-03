@@ -55,7 +55,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -82,6 +82,7 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.DataSource
@@ -116,7 +117,7 @@ fun PlantDetailsScreen(
     onGalleryClick: (Plant) -> Unit,
 ) {
     val plant = plantDetailsViewModel.plant.observeAsState().value
-    val isPlanted = plantDetailsViewModel.isPlanted.collectAsState(initial = false).value
+    val isPlanted = plantDetailsViewModel.isPlanted.collectAsStateWithLifecycle().value
     val showSnackbar = plantDetailsViewModel.showSnackbar.observeAsState().value
 
     if (plant != null && showSnackbar != null) {
