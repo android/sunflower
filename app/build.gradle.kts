@@ -19,13 +19,12 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.ksp)
   alias(libs.plugins.hilt)
+  alias(libs.plugins.compose.compiler)
 }
 
 android {
   compileSdk = libs.versions.compileSdk.get().toInt()
-  buildFeatures {
-    dataBinding = true
-  }
+
   defaultConfig {
     applicationId = "com.google.samples.apps.sunflower"
     minSdk = libs.versions.minSdk.get().toInt()
@@ -75,9 +74,6 @@ android {
     compose = true
     dataBinding = true
     buildConfig = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
   packagingOptions {
     // Multiple dependency bring these files in. Exclude them to enable
@@ -142,6 +138,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.compose.runtime.livedata)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
+  implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.glide)
   implementation(libs.accompanist.systemuicontroller)
   debugImplementation(libs.androidx.compose.ui.tooling)

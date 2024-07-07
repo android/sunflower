@@ -28,11 +28,9 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.android.test) apply false
+    alias(libs.plugins.gradle.versions)
+    alias(libs.plugins.version.catalog.update)
+    alias(libs.plugins.compose.compiler)
 }
 
-spotless {
-    kotlin {
-        target("**/*.kt")
-        ktlint(libs.versions.ktlint.get()).userData(mapOf("max_line_length" to "100"))
-    }
-}
+apply("${project.rootDir}/buildscripts/toml-updater-config.gradle")
