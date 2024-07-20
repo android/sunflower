@@ -18,6 +18,7 @@ package com.google.samples.apps.sunflower.compose.home
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +42,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -166,6 +170,7 @@ private fun HomeTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier
 ) {
+    val currentPageState by remember(pagerState.currentPage) { mutableStateOf (pagerState.currentPage == SunflowerPage.PLANT_LIST.ordinal) }
     CenterAlignedTopAppBar(
         title = {
             Row(
@@ -180,7 +185,7 @@ private fun HomeTopAppBar(
         },
         modifier = modifier,
         actions = {
-            if (pagerState.currentPage == SunflowerPage.PLANT_LIST.ordinal) {
+            AnimatedVisibility (currentPageState) {
                 IconButton(onClick = onFilterClick) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_filter_list_24dp),
