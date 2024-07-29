@@ -17,16 +17,25 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class GardenPlantingListViewModel @Inject internal constructor(
     gardenPlantingRepository: GardenPlantingRepository
 ) : ViewModel() {
-    val plantAndGardenPlantings: Flow<List<PlantAndGardenPlantings>> =
-        gardenPlantingRepository.getPlantedGardens()
+    val plantAndGardenPlantings: StateFlow<List<PlantAndGardenPlantings>> =
+        gardenPlantingRepository
+            .getPlantedGardens()
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                emptyList()
+            )
 }
