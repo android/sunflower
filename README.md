@@ -4,7 +4,8 @@ A gardening app illustrating Android development best practices with migrating a
 Jetpack Compose. To learn about how Sunflower was migrated to Compose, see the 
 [migration journey](https://github.com/android/sunflower/blob/main/docs/MigrationJourney.md) document.
 
-**Note**: To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
+> [!Note]
+> To see the original View implementation of Sunflower, checkout the [`views`](https://github.com/android/sunflower/tree/views) branch.
 
 ## Screenshots
 
@@ -15,10 +16,11 @@ Jetpack Compose. To learn about how Sunflower was migrated to Compose, see the
 This sample showcases how to migrate an existing View-based app (Material 2) to Compose (Material 3). 
 See the linked migration journey doc above to learn more.
 
-**Note**: As Compose cannot render HTML code in `Text` yet. The 
-`AndroidViewBinding` API is used to embed a `TextView` in Compose. See the 
-`PlantDescription` composable in the
-[PlantDetailView file](app/src/main/java/com/google/samples/apps/sunflower/compose/plantdetail/PlantDetailView.kt).
+> [!Note]
+> As Compose cannot render HTML code in `Text` yet. The 
+> `AndroidViewBinding` API is used to embed a `TextView` in Compose. See the 
+> `PlantDescription` composable in the
+> [PlantDetailView file](app/src/main/java/com/google/samples/apps/sunflower/compose/plantdetail/PlantDetailView.kt).
 
 ## Requirements
 
