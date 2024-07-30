@@ -33,7 +33,7 @@ screen. To use the API, you will need to obtain a free developer API key. See th
 Once you have the key, add this line to the `gradle.properties` file, either in your user home
 directory (usually `~/.gradle/gradle.properties` on Linux and Mac) or in the project's root folder:
 
-```
+```.properties
 unsplash_access_key=<your Unsplash access key>
 ```
 
