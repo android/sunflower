@@ -27,6 +27,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,13 +60,19 @@ import androidx.compose.runtime.Composable
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -77,6 +85,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -276,14 +285,58 @@ private fun PlantImage(
     placeholderColor: Color = MaterialTheme.colorScheme.onSurface.copy(0.2f)
 ) {
     var isLoading by remember { mutableStateOf(true) }
+    var scale by remember { mutableFloatStateOf(1f) }
+    var imageSize by remember { mutableStateOf(IntSize.Zero) }
+    var offset by remember { mutableStateOf(Offset.Zero) }
+
     Box(
         modifier
+            .clip(RectangleShape) // Clip the box content
             .fillMaxWidth()
             .height(imageHeight)
+            .pointerInput(Unit) {
+                detectTransformGestures { _, pan, zoom, _ ->
+                    // Calculate the new scale value, ensuring it stays within the allowed range
+                    scale = (scale * zoom).coerceIn(1f, 3f)
+
+                    // Calculate the new offset by adding the pan gesture delta to the current offset
+                    val newOffset = offset + pan
+
+
+                    // Calculate max movement within the box
+                    val maxX = if (imageSize.width * scale > size.width) {
+                        (imageSize.width * scale - size.width) / 2
+                    } else {
+                        0f
+                    }
+
+                    val maxY = if (imageSize.height * scale > size.height) {
+                        (imageSize.height * scale - size.height) / 2
+                    } else {
+                        0f
+                    }
+
+                    // Update the offset, clamping it to the calculated bounds
+                    offset = Offset(
+                        x = newOffset.x.coerceIn(-maxX, maxX),
+                        y = newOffset.y.coerceIn(-maxY, maxY)
+                    )
+                }
+            }
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        if (scale > 1f) {
+                            scale = 1f
+                            offset = Offset.Zero
+                        } else {
+                            scale = 2f
+                        }
+                    }
+                )
+            }
     ) {
         if (isLoading) {
-            // TODO: Update this implementation once Glide releases a version
-            // that contains this feature: https://github.com/bumptech/glide/pull/4934
             Box(
                 Modifier
                     .fillMaxSize()
@@ -294,7 +347,17 @@ private fun PlantImage(
             model = imageUrl,
             contentDescription = null,
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .graphicsLayer(
+                    // Set the horizontal scaling factor, limiting zoom between 50% and 300%
+                    scaleX = maxOf(0.5f, minOf(3f, scale)),
+                    // Set the vertical scaling factor, limiting zoom between 50% and 300%
+                    scaleY = maxOf(0.5f, minOf(3f, scale)),
+                    //Set the horizontal translation (panning) based on the calculated offset
+                    translationX = offset.x,
+                    // Set the vertical translation (panning) based on the calculated offset
+                    translationY = offset.y
+                ),
             contentScale = ContentScale.Crop,
         ) {
             it.addListener(object : RequestListener<Drawable> {
@@ -316,6 +379,7 @@ private fun PlantImage(
                     isFirstResource: Boolean
                 ): Boolean {
                     isLoading = false
+                    imageSize = IntSize(resource.intrinsicWidth, resource.intrinsicHeight)
                     return false
                 }
             })
