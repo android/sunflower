@@ -15,38 +15,38 @@
 ##
 [versions]
 accessibilityTestFramework = "4.1.1"
-activityCompose = "1.9.0"
-androidGradlePlugin = "8.4.0"
+activityCompose = "1.9.1"
+androidGradlePlugin = "8.5.1"
 benchmark = "1.2.4"
 # @keep
 compileSdk = "34"
 # @keep
 compose-compiler = "1.5.13"
-composeBom = "2024.05.00"
+composeBom = "2024.06.00"
 composeLatest = "1.7.0-alpha01"
 constraintLayoutCompose = "1.0.1"
 coreTesting = "2.2.0"
-coroutines = "1.8.0"
-espresso = "3.5.1"
+coroutines = "1.8.1"
+espresso = "3.6.1"
 glide = "1.0.0-beta01"
 gradle = "7.2.0"
 gradle-versions = "0.51.0"
-gson = "2.10.1"
+gson = "2.11.0"
 guava = "33.1.0-jre"
 hilt = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 junit = "4.13.2"
 kotlin = "2.0.0"
-ksp = "2.0.0-1.0.21"
+ksp = "2.0.0-1.0.24"
 # @keep
 ktlint = "0.40.0"
 ktx = "1.13.1"
-lifecycle = "2.7.0"
+lifecycle = "2.8.4"
 material = "1.13.0-alpha01"
 material3 = "1.2.1"
 # @keep
 minSdk = "24"
-monitor = "1.6.1"
+monitor = "1.7.1"
 navigation = "2.7.7"
 okhttpLogging = "4.12.0"
 pagingCompose = "3.3.0-rc01"
@@ -57,10 +57,10 @@ spotless = "6.25.0"
 systemuicontroller = "0.34.0"
 # @keep
 targetSdk = "34"
-testExtJunit = "1.1.5"
+testExtJunit = "1.2.1"
 uiAutomator = "2.3.0"
 version-catalog-update = "0.8.4"
-viewModelCompose = "2.7.0"
+viewModelCompose = "2.8.4"
 work = "2.9.0"
 
 [libraries]
@@ -86,8 +86,8 @@ androidx-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib"
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espresso" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewModelCompose" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "viewModelCompose" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewModelCompose" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-monitor = { module = "androidx.test:monitor", version.ref = "monitor" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
@@ -107,7 +107,7 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 junit = { module = "junit:junit", version.ref = "junit" }
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0"
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -118,10 +118,10 @@ retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", v
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
