@@ -1,5 +1,7 @@
 # Android Sunflower with Compose
 
+Warning: The Sunflower repository is no longer under maintenance, We are prioritizing https://github.com/android/compose-samples as the up-to-date source of truth for Compose best practises. Please use that repository and sample set to continue learning about Jetpack Compose. If you'd like to continue using Sunflower, we encourage you to maintain your own fork of the sample. 
+
 A gardening app illustrating Android development best practices with migrating a View-based app to
 Jetpack Compose. To learn about how Sunflower was migrated to Compose, see the 
 [migration journey](https://github.com/android/sunflower/blob/main/docs/MigrationJourney.md) document.
